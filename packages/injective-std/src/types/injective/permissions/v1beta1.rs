@@ -252,8 +252,8 @@ pub struct QueryParamsResponse {
     #[prost(message, optional, tag = "1")]
     pub params: ::core::option::Option<Params>,
 }
-/// QueryNamespaceDenomsRequest is the request type for the Query/NamespaceDenoms RPC
-/// method.
+/// QueryNamespaceDenomsRequest is the request type for the Query/NamespaceDenoms
+/// RPC method.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryNamespaceDenomsRequest")]
@@ -262,8 +262,8 @@ pub struct QueryParamsResponse {
     response_type = QueryNamespaceDenomsResponse
 )]
 pub struct QueryNamespaceDenomsRequest {}
-/// QueryNamespaceDenomsResponse is the response type for the Query/NamespaceDenoms
-/// RPC method.
+/// QueryNamespaceDenomsResponse is the response type for the
+/// Query/NamespaceDenoms RPC method.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryNamespaceDenomsResponse")]
@@ -428,8 +428,8 @@ pub struct QueryPolicyStatusesResponse {
     #[prost(message, repeated, tag = "1")]
     pub policy_statuses: ::prost::alloc::vec::Vec<PolicyStatus>,
 }
-/// QueryPolicyManagerCapabilitiesRequest is the request type for the Query/PolicyManagerCapabilities
-/// RPC method.
+/// QueryPolicyManagerCapabilitiesRequest is the request type for the
+/// Query/PolicyManagerCapabilities RPC method.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryPolicyManagerCapabilitiesRequest")]
@@ -488,8 +488,8 @@ pub struct QueryVoucherResponse {
     #[prost(message, optional, tag = "1")]
     pub voucher: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
-/// QueryModuleStateRequest is the request type for the Query/PermissionsModuleState
-/// RPC method.
+/// QueryModuleStateRequest is the request type for the
+/// Query/PermissionsModuleState RPC method.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryModuleStateRequest")]
@@ -498,8 +498,8 @@ pub struct QueryVoucherResponse {
     response_type = QueryModuleStateResponse
 )]
 pub struct QueryModuleStateRequest {}
-/// QueryModuleStateResponse is the response type for the Query/PermissionsModuleState
-/// RPC method.
+/// QueryModuleStateResponse is the response type for the
+/// Query/PermissionsModuleState RPC method.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryModuleStateResponse")]
