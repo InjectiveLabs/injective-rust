@@ -1,2 +1,16 @@
 [workspace]
 members = [ "packages/*" ]
+
+[workspace.dependencies]
+chrono               = { version = "0.4.27", default-features = false }
+cosmwasm-std         = { version = "2.1.0", features = [ "abort", "cosmwasm_1_2", "cosmwasm_1_3", "cosmwasm_1_4", "cosmwasm_2_0", "iterator", "stargate" ] }
+injective-std-derive = { version = "1.13.4", path = "./packages/injective-std-derive" }
+prost                = { version = "0.13.4", features = [ "prost-derive" ] }
+prost-types          = { version = "0.13.4", default-features = false }
+quote                = { version = "1.0.20" }
+rand                 = { version = "0.4.6" }
+regex                = { version = "1.11.1" }
+schemars             = { version = "0.8.16" }
+secp256k1            = { version = "0.30.0", features = [ "rand" ] }
+serde                = { version = "1.0.196", default-features = false, features = [ "derive" ] }
+serde-cw-value       = { version = "0.7.0" }

@@ -25,4 +25,3 @@ node_modules
 
 # tmp
 packages/proto-build-injective/tmp
-packages/proto-build-injective/src
