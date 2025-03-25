@@ -19,7 +19,7 @@ pub struct SendAuthorization {
 /// Params defines the parameters for the bank module.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.ParamsParams")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.Params")]
 pub struct Params {
     /// Deprecated: Use of SendEnabled in params is deprecated.
     /// For genesis, use the newly added send_enabled field in the genesis object.
@@ -36,7 +36,7 @@ pub struct Params {
 /// sendable).
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.SendEnabledSendEnabled")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.SendEnabled")]
 pub struct SendEnabled {
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
@@ -46,7 +46,7 @@ pub struct SendEnabled {
 /// Input models transaction input.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.InputInput")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.Input")]
 pub struct Input {
     #[prost(string, tag = "1")]
     pub address: ::prost::alloc::string::String,
@@ -56,7 +56,7 @@ pub struct Input {
 /// Output models transaction outputs.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.OutputOutput")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.Output")]
 pub struct Output {
     #[prost(string, tag = "1")]
     pub address: ::prost::alloc::string::String,
@@ -68,7 +68,7 @@ pub struct Output {
 /// This message is deprecated now that supply is indexed by denom.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.SupplySupply")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.Supply")]
 #[deprecated]
 pub struct Supply {
     #[prost(message, repeated, tag = "1")]
@@ -78,7 +78,7 @@ pub struct Supply {
 /// denomination unit of the basic token.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.DenomUnitDenomUnit")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.DenomUnit")]
 pub struct DenomUnit {
     /// denom represents the string name of the given denom unit (e.g uatom).
     #[prost(string, tag = "1")]
@@ -102,7 +102,7 @@ pub struct DenomUnit {
 /// a basic token.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.MetadataMetadata")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.Metadata")]
 pub struct Metadata {
     #[prost(string, tag = "1")]
     pub description: ::prost::alloc::string::String,

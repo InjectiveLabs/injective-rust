@@ -35,11 +35,7 @@ pub fn copy_and_transform_all(from_dir: &Path, to_dir: &Path, descriptor: &FileD
         .map(|e| {
             let filename = e.file_name().to_os_string().to_str().unwrap().to_string();
             filenames.push(filename.clone());
-            copy_and_transform(
-                e.path(),
-                format!("{}/{}", to_dir.display(), &filename),
-                descriptor,
-            )
+            copy_and_transform(e.path(), format!("{}/{}", to_dir.display(), &filename), descriptor)
         })
         .filter_map(|e| e.err())
         .collect::<Vec<_>>();
@@ -53,11 +49,7 @@ pub fn copy_and_transform_all(from_dir: &Path, to_dir: &Path, descriptor: &FileD
     }
 }
 
-fn copy_and_transform(
-    src: &Path,
-    dest: impl AsRef<Path>,
-    descriptor: &FileDescriptorSet,
-) -> io::Result<()> {
+fn copy_and_transform(src: &Path, dest: impl AsRef<Path>, descriptor: &FileDescriptorSet) -> io::Result<()> {
     // Skip proto files belonging to `EXCLUDED_PROTO_PACKAGES`
     for package in EXCLUDED_PROTO_PACKAGES {
         if let Some(filename) = src.file_name().and_then(OsStr::to_str) {
@@ -92,13 +84,7 @@ fn copy_and_transform(
     fs::write(dest, &*contents)
 }
 
-fn transform_module(
-    items: Vec<Item>,
-    src: &Path,
-    ancestors: &[String],
-    descriptor: &FileDescriptorSet,
-    nested_mod: bool,
-) -> Vec<Item> {
+fn transform_module(items: Vec<Item>, src: &Path, ancestors: &[String], descriptor: &FileDescriptorSet, nested_mod: bool) -> Vec<Item> {
     let items = transform_items(items, src, ancestors, descriptor);
     let items = prepend(items);
 
@@ -116,21 +102,11 @@ fn prepend(items: Vec<Item>) -> Vec<Item> {
     items
 }
 
-fn append(
-    items: Vec<Item>,
-    src: &Path,
-    descriptor: &FileDescriptorSet,
-    nested_mod: bool,
-) -> Vec<Item> {
+fn append(items: Vec<Item>, src: &Path, descriptor: &FileDescriptorSet, nested_mod: bool) -> Vec<Item> {
     transformers::append_querier(items, src, nested_mod, descriptor)
 }
 
-fn transform_items(
-    items: Vec<Item>,
-    src: &Path,
-    ancestors: &[String],
-    descriptor: &FileDescriptorSet,
-) -> Vec<Item> {
+fn transform_items(items: Vec<Item>, src: &Path, ancestors: &[String], descriptor: &FileDescriptorSet) -> Vec<Item> {
     // TODO: Remove this temporary hack when cosmos & tendermint code gen is supported
     let remove_struct_fields_that_depends_on_tendermint_proto = |i: Item| match i.clone() {
         Item::Struct(s) => {
@@ -180,25 +156,14 @@ fn transform_items(
         .collect::<Vec<Item>>()
 }
 
-fn transform_nested_mod(
-    i: Item,
-    src: &Path,
-    ancestors: &[String],
-    descriptor: &FileDescriptorSet,
-) -> Item {
+fn transform_nested_mod(i: Item, src: &Path, ancestors: &[String], descriptor: &FileDescriptorSet) -> Item {
     match i.clone() {
         Item::Mod(m) => {
             let parent = &m.ident.to_string().to_upper_camel_case();
             let content = m.content.map(|(brace, items)| {
                 (
                     brace,
-                    transform_module(
-                        items,
-                        src,
-                        &[ancestors, &[parent.to_string()]].concat(),
-                        descriptor,
-                        true,
-                    ),
+                    transform_module(items, src, &[ancestors, &[parent.to_string()]].concat(), descriptor, true),
                 )
             });
 
