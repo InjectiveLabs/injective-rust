@@ -554,7 +554,7 @@ pub struct MsgIbcCloseChannel {
 /// a v1 governance proposal.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.StoreCodeProposalStoreCodeProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.StoreCodeProposal")]
 #[deprecated]
 pub struct StoreCodeProposal {
     /// Title is a short summary
@@ -593,7 +593,7 @@ pub struct StoreCodeProposal {
 /// a v1 governance proposal.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.InstantiateContractProposalInstantiateContractProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.InstantiateContractProposal")]
 #[deprecated]
 pub struct InstantiateContractProposal {
     /// Title is a short summary
@@ -632,7 +632,7 @@ pub struct InstantiateContractProposal {
 /// a v1 governance proposal.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.InstantiateContract2ProposalInstantiateContract2Proposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.InstantiateContract2Proposal")]
 #[deprecated]
 pub struct InstantiateContract2Proposal {
     /// Title is a short summary
@@ -678,7 +678,7 @@ pub struct InstantiateContract2Proposal {
 /// a v1 governance proposal.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.MigrateContractProposalMigrateContractProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.MigrateContractProposal")]
 #[deprecated]
 pub struct MigrateContractProposal {
     /// Title is a short summary
@@ -710,7 +710,7 @@ pub struct MigrateContractProposal {
 /// a v1 governance proposal.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.SudoContractProposalSudoContractProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.SudoContractProposal")]
 #[deprecated]
 pub struct SudoContractProposal {
     /// Title is a short summary
@@ -732,7 +732,7 @@ pub struct SudoContractProposal {
 /// a v1 governance proposal.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.ExecuteContractProposalExecuteContractProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.ExecuteContractProposal")]
 #[deprecated]
 pub struct ExecuteContractProposal {
     /// Title is a short summary
@@ -760,7 +760,7 @@ pub struct ExecuteContractProposal {
 /// a v1 governance proposal.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.UpdateAdminProposalUpdateAdminProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.UpdateAdminProposal")]
 #[deprecated]
 pub struct UpdateAdminProposal {
     /// Title is a short summary
@@ -782,7 +782,7 @@ pub struct UpdateAdminProposal {
 /// a v1 governance proposal.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.ClearAdminProposalClearAdminProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.ClearAdminProposal")]
 #[deprecated]
 pub struct ClearAdminProposal {
     /// Title is a short summary
@@ -801,7 +801,7 @@ pub struct ClearAdminProposal {
 /// a v1 governance proposal.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.PinCodesProposalPinCodesProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.PinCodesProposal")]
 #[deprecated]
 pub struct PinCodesProposal {
     /// Title is a short summary
@@ -821,7 +821,7 @@ pub struct PinCodesProposal {
 /// a v1 governance proposal.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.UnpinCodesProposalUnpinCodesProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.UnpinCodesProposal")]
 #[deprecated]
 pub struct UnpinCodesProposal {
     /// Title is a short summary

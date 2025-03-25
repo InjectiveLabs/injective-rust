@@ -227,8 +227,8 @@ pub struct MsgCreateDenomResponse {
     #[prost(string, tag = "1")]
     pub new_token_denom: ::prost::alloc::string::String,
 }
-/// MsgMint is the sdk.Msg type for allowing an admin account or other permitted accounts to mint
-/// more of a token.
+/// MsgMint is the sdk.Msg type for allowing an admin account or other permitted
+/// accounts to mint more of a token.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgMint")]
