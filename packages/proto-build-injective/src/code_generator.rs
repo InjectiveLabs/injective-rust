@@ -62,10 +62,7 @@ impl CodeGenerator {
         self.compile_proto();
         println!("proto compiled");
 
-        info!(
-            "🧪 [{}] Embellishing modules to expose nice API for library user...",
-            self.project.name
-        );
+        info!("🧪 [{}] Embellishing modules to expose nice API for library user...", self.project.name);
 
         self.exclude_unsupported_module();
         println!("unsupported modules excluded");
@@ -76,10 +73,7 @@ impl CodeGenerator {
         self.fmt();
         println!("fmt");
 
-        info!(
-            "✨  [{}] Library is successfully generated!",
-            self.project.name
-        );
+        info!("✨  [{}] Library is successfully generated!", self.project.name);
     }
 
     fn prepare_dir(&self) {
@@ -87,11 +81,7 @@ impl CodeGenerator {
             remove_dir_all(self.tmp_build_dir.clone()).unwrap();
         }
         create_dir_all(self.tmp_namespaced_dir()).unwrap();
-        output_version_file(
-            &self.project.name,
-            &self.project.version,
-            &self.tmp_namespaced_dir(),
-        );
+        output_version_file(&self.project.name, &self.project.version, &self.tmp_namespaced_dir());
     }
 
     fn exclude_unsupported_module(&self) {
@@ -99,16 +89,8 @@ impl CodeGenerator {
             // println!("entry {:?}", entry);
             let entry = entry.unwrap();
             if entry.file_type().is_file() {
-                let filename = entry
-                    .file_name()
-                    .to_os_string()
-                    .to_str()
-                    .unwrap()
-                    .to_string();
-                if UNSUPPORTED_MODULE
-                    .iter()
-                    .any(|module| filename.contains(module))
-                {
+                let filename = entry.file_name().to_os_string().to_str().unwrap().to_string();
+                if UNSUPPORTED_MODULE.iter().any(|module| filename.contains(module)) {
                     fs::remove_file(entry.path()).unwrap();
                 }
             }
@@ -120,11 +102,7 @@ impl CodeGenerator {
     }
 
     fn transform(&self) {
-        transform::copy_and_transform_all(
-            &self.tmp_namespaced_dir(),
-            &self.absolute_out_dir(),
-            &self.file_descriptor_set(),
-        );
+        transform::copy_and_transform_all(&self.tmp_namespaced_dir(), &self.absolute_out_dir(), &self.file_descriptor_set());
     }
 
     fn absolute_out_dir(&self) -> PathBuf {
@@ -144,10 +122,7 @@ impl CodeGenerator {
             .unwrap();
 
         if !exit_status.success() {
-            panic!(
-                "unable to format with: cargo fmt --manifest-path {}",
-                manifest_path.to_string_lossy()
-            );
+            panic!("unable to format with: cargo fmt --manifest-path {}", manifest_path.to_string_lossy());
         }
     }
 
@@ -156,10 +131,7 @@ impl CodeGenerator {
 
         let all_related_projects = vec![self.deps.clone(), vec![self.project.clone()]].concat();
 
-        info!(
-            "🧪 [{}] Compiling types from protobuf definitions...",
-            self.project.name
-        );
+        info!("🧪 [{}] Compiling types from protobuf definitions...", self.project.name);
 
         // Compile proto files for each file in `protos` variable
         // `buf generate —template {<buf_gen_template} <proto_file>`
@@ -170,10 +142,7 @@ impl CodeGenerator {
                 .filter_map(|e| e.ok())
                 .find(|e| {
                     println!("File Names {:?}", e);
-                    e.file_name()
-                        .to_str()
-                        .map(|s| s == "buf.yaml" || s == "buf.yml")
-                        .unwrap_or(false)
+                    e.file_name().to_str().map(|s| s == "buf.yaml" || s == "buf.yml").unwrap_or(false)
                 })
                 .map(|e| {
                     println!("Bug Path: {:?}", e.path().parent().unwrap().to_path_buf());
@@ -197,8 +166,7 @@ impl CodeGenerator {
 
             if !project.include_mods.is_empty() {
                 for include_mod in project.include_mods.clone() {
-                    cmd.arg("--path")
-                        .arg(proto_path.join(project.name.clone()).join(include_mod));
+                    cmd.arg("--path").arg(proto_path.join(project.name.clone()).join(include_mod));
                 }
             }
 
@@ -207,19 +175,14 @@ impl CodeGenerator {
             let exit_status = cmd.spawn().unwrap().wait().unwrap();
 
             if !exit_status.success() {
-                panic!(
-                    "unable to generate with: {:?}",
-                    cmd.get_args().collect::<Vec<_>>()
-                );
+                panic!("unable to generate with: {:?}", cmd.get_args().collect::<Vec<_>>());
             }
 
             let mut cmd = Command::new("tree");
             cmd.arg("-L").arg("3").arg(self.tmp_namespaced_dir());
             cmd.spawn().unwrap().wait().unwrap();
 
-            let descriptor_file = self
-                .tmp_namespaced_dir()
-                .join(format!("descriptor_{}.bin", project.name));
+            let descriptor_file = self.tmp_namespaced_dir().join(format!("descriptor_{}.bin", project.name));
 
             // generate descriptor file with `buf build buf.yaml --as-file-descriptor-set -o {descriptor_file}`
             let mut cmd = Command::new("buf");
@@ -231,8 +194,7 @@ impl CodeGenerator {
 
             if !project.include_mods.is_empty() {
                 for include_mod in project.include_mods {
-                    cmd.arg("--path")
-                        .arg(proto_path.join(project.name.clone()).join(include_mod));
+                    cmd.arg("--path").arg(proto_path.join(project.name.clone()).join(include_mod));
                 }
             }
 
@@ -241,10 +203,7 @@ impl CodeGenerator {
             cmd.spawn().unwrap().wait().unwrap();
 
             if !exit_status.success() {
-                panic!(
-                    "unable to build with: {:?}",
-                    cmd.get_args().collect::<Vec<_>>()
-                );
+                panic!("unable to build with: {:?}", cmd.get_args().collect::<Vec<_>>());
             }
 
             let mut cmd = Command::new("tree");
@@ -252,10 +211,7 @@ impl CodeGenerator {
             cmd.spawn().unwrap().wait().unwrap();
         }
 
-        info!(
-            "✨  [{}] Types from protobuf definitions is compiled successfully!",
-            self.project.name
-        );
+        info!("✨  [{}] Types from protobuf definitions is compiled successfully!", self.project.name);
     }
 
     pub fn file_descriptor_set(&self) -> FileDescriptorSet {
@@ -269,13 +225,7 @@ impl CodeGenerator {
         // filter only files that match "descriptor_*.bin"
         let descriptor_files = files
             .iter()
-            .filter(|f| {
-                f.file_name()
-                    .unwrap()
-                    .to_str()
-                    .unwrap()
-                    .starts_with("descriptor_")
-            })
+            .filter(|f| f.file_name().unwrap().to_str().unwrap().starts_with("descriptor_"))
             .collect::<Vec<_>>();
 
         // read all files and merge them into one FileDescriptorSet
@@ -283,9 +233,7 @@ impl CodeGenerator {
         for descriptor_file in descriptor_files {
             let descriptor_bytes = &fs::read(descriptor_file).unwrap()[..];
             let mut file_descriptor_set_tmp = FileDescriptorSet::decode(descriptor_bytes).unwrap();
-            file_descriptor_set
-                .file
-                .append(&mut file_descriptor_set_tmp.file);
+            file_descriptor_set.file.append(&mut file_descriptor_set_tmp.file);
         }
 
         file_descriptor_set

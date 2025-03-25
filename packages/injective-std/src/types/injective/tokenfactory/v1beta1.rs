@@ -3,16 +3,7 @@ use injective_std_derive::CosmwasmExt;
 /// capabilities over a token factory denom. Right now there is only one Admin
 /// permission, but is planned to be extended to the future.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.DenomAuthorityMetadata")]
 pub struct DenomAuthorityMetadata {
     /// Can be empty for no admin, or a valid injective address
@@ -23,16 +14,7 @@ pub struct DenomAuthorityMetadata {
     pub admin_burn_allowed: bool,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.EventCreateDenom")]
 pub struct EventCreateDenom {
     #[prost(string, tag = "1")]
@@ -41,16 +23,7 @@ pub struct EventCreateDenom {
     pub denom: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.EventMint")]
 pub struct EventMint {
     #[prost(string, tag = "1")]
@@ -61,16 +34,7 @@ pub struct EventMint {
     pub receiver: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.EventBurn")]
 pub struct EventBurn {
     #[prost(string, tag = "1")]
@@ -81,16 +45,7 @@ pub struct EventBurn {
     pub burn_from: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.EventChangeAdmin")]
 pub struct EventChangeAdmin {
     #[prost(string, tag = "1")]
@@ -99,16 +54,7 @@ pub struct EventChangeAdmin {
     pub new_admin_address: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.EventSetDenomMetadata")]
 pub struct EventSetDenomMetadata {
     #[prost(string, tag = "1")]
@@ -118,34 +64,15 @@ pub struct EventSetDenomMetadata {
 }
 /// Params defines the parameters for the tokenfactory module.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.Params")]
 pub struct Params {
     #[prost(message, repeated, tag = "1")]
-    pub denom_creation_fee:
-        ::prost::alloc::vec::Vec<super::super::super::cosmos::base::v1beta1::Coin>,
+    pub denom_creation_fee: ::prost::alloc::vec::Vec<super::super::super::cosmos::base::v1beta1::Coin>,
 }
 /// GenesisState defines the tokenfactory module's genesis state.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.GenesisState")]
 pub struct GenesisState {
     /// params defines the parameters of the module.
@@ -158,16 +85,7 @@ pub struct GenesisState {
 /// state. The structure contains DenomAuthorityMetadata which defines the
 /// denom's admin.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.GenesisDenom")]
 pub struct GenesisDenom {
     #[prost(string, tag = "1")]
@@ -187,17 +105,7 @@ pub struct GenesisDenom {
 }
 /// QueryParamsRequest is the request type for the Query/Params RPC method.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.QueryParamsRequest")]
 #[proto_query(
     path = "/injective.tokenfactory.v1beta1.Query/Params",
@@ -206,16 +114,7 @@ pub struct GenesisDenom {
 pub struct QueryParamsRequest {}
 /// QueryParamsResponse is the response type for the Query/Params RPC method.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.QueryParamsResponse")]
 pub struct QueryParamsResponse {
     /// params defines the parameters of the module.
@@ -225,16 +124,7 @@ pub struct QueryParamsResponse {
 /// QueryDenomAuthorityMetadataRequest defines the request structure for the
 /// DenomAuthorityMetadata gRPC query.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.QueryDenomAuthorityMetadataRequest")]
 #[proto_query(
     path = "/injective.tokenfactory.v1beta1.Query/DenomAuthorityMetadata",
@@ -249,16 +139,7 @@ pub struct QueryDenomAuthorityMetadataRequest {
 /// QueryDenomAuthorityMetadataResponse defines the response structure for the
 /// DenomAuthorityMetadata gRPC query.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.QueryDenomAuthorityMetadataResponse")]
 pub struct QueryDenomAuthorityMetadataResponse {
     #[prost(message, optional, tag = "1")]
@@ -267,16 +148,7 @@ pub struct QueryDenomAuthorityMetadataResponse {
 /// QueryDenomsFromCreatorRequest defines the request structure for the
 /// DenomsFromCreator gRPC query.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.QueryDenomsFromCreatorRequest")]
 #[proto_query(
     path = "/injective.tokenfactory.v1beta1.Query/DenomsFromCreator",
@@ -289,16 +161,7 @@ pub struct QueryDenomsFromCreatorRequest {
 /// QueryDenomsFromCreatorRequest defines the response structure for the
 /// DenomsFromCreator gRPC query.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.QueryDenomsFromCreatorResponse")]
 pub struct QueryDenomsFromCreatorResponse {
     #[prost(string, repeated, tag = "1")]
@@ -307,17 +170,7 @@ pub struct QueryDenomsFromCreatorResponse {
 /// QueryModuleStateRequest is the request type for the
 /// Query/TokenfactoryModuleState RPC method.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.QueryModuleStateRequest")]
 #[proto_query(
     path = "/injective.tokenfactory.v1beta1.Query/TokenfactoryModuleState",
@@ -327,16 +180,7 @@ pub struct QueryModuleStateRequest {}
 /// QueryModuleStateResponse is the response type for the
 /// Query/TokenfactoryModuleState RPC method.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.QueryModuleStateResponse")]
 pub struct QueryModuleStateResponse {
     #[prost(message, optional, tag = "1")]
@@ -352,16 +196,7 @@ pub struct QueryModuleStateResponse {
 /// originally set to be the creator, but this can be changed later. The token
 /// denom does not indicate the current admin.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgCreateDenom")]
 pub struct MsgCreateDenom {
     #[prost(string, tag = "1")]
@@ -386,16 +221,7 @@ pub struct MsgCreateDenom {
 /// MsgCreateDenomResponse is the return value of MsgCreateDenom
 /// It returns the full string of the newly created denom
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgCreateDenomResponse")]
 pub struct MsgCreateDenomResponse {
     #[prost(string, tag = "1")]
@@ -404,16 +230,7 @@ pub struct MsgCreateDenomResponse {
 /// MsgMint is the sdk.Msg type for allowing an admin account or other permitted accounts to mint
 /// more of a token.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgMint")]
 pub struct MsgMint {
     #[prost(string, tag = "1")]
@@ -424,32 +241,13 @@ pub struct MsgMint {
     pub receiver: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgMintResponse")]
 pub struct MsgMintResponse {}
 /// MsgBurn is the sdk.Msg type for allowing an admin account to burn
 /// a token.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgBurn")]
 pub struct MsgBurn {
     #[prost(string, tag = "1")]
@@ -460,32 +258,13 @@ pub struct MsgBurn {
     pub burn_from_address: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgBurnResponse")]
 pub struct MsgBurnResponse {}
 /// MsgChangeAdmin is the sdk.Msg type for allowing an admin account to reassign
 /// adminship of a denom to a new account
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgChangeAdmin")]
 pub struct MsgChangeAdmin {
     #[prost(string, tag = "1")]
@@ -498,32 +277,13 @@ pub struct MsgChangeAdmin {
 /// MsgChangeAdminResponse defines the response structure for an executed
 /// MsgChangeAdmin message.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgChangeAdminResponse")]
 pub struct MsgChangeAdminResponse {}
 /// MsgSetDenomMetadata is the sdk.Msg type for allowing an admin account to set
 /// the denom's bank metadata
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgSetDenomMetadata")]
 pub struct MsgSetDenomMetadata {
     #[prost(string, tag = "1")]
@@ -537,20 +297,8 @@ pub struct MsgSetDenomMetadata {
 pub mod msg_set_denom_metadata {
     use injective_std_derive::CosmwasmExt;
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(
-        Clone,
-        Copy,
-        PartialEq,
-        Eq,
-        ::prost::Message,
-        ::serde::Serialize,
-        ::serde::Deserialize,
-        ::schemars::JsonSchema,
-        CosmwasmExt,
-    )]
-    #[proto_message(
-        type_url = "/injective.tokenfactory.v1beta1.MsgSetDenomMetadata.AdminBurnDisabled"
-    )]
+    #[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+    #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgSetDenomMetadata.AdminBurnDisabled")]
     pub struct AdminBurnDisabled {
         /// true if the admin burn capability should be disabled
         #[prost(bool, tag = "1")]
@@ -560,30 +308,11 @@ pub mod msg_set_denom_metadata {
 /// MsgSetDenomMetadataResponse defines the response structure for an executed
 /// MsgSetDenomMetadata message.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgSetDenomMetadataResponse")]
 pub struct MsgSetDenomMetadataResponse {}
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgUpdateParams")]
 pub struct MsgUpdateParams {
     /// authority is the address of the governance account.
@@ -596,17 +325,7 @@ pub struct MsgUpdateParams {
     pub params: ::core::option::Option<Params>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    ::prost::Message,
-    ::serde::Serialize,
-    ::serde::Deserialize,
-    ::schemars::JsonSchema,
-    CosmwasmExt,
-)]
+#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.tokenfactory.v1beta1.MsgUpdateParamsResponse")]
 pub struct MsgUpdateParamsResponse {}
 pub struct TokenfactoryQuerier<'a, Q: cosmwasm_std::CustomQuery> {
@@ -626,15 +345,10 @@ impl<'a, Q: cosmwasm_std::CustomQuery> TokenfactoryQuerier<'a, Q> {
     ) -> Result<QueryDenomAuthorityMetadataResponse, cosmwasm_std::StdError> {
         QueryDenomAuthorityMetadataRequest { creator, sub_denom }.query(self.querier)
     }
-    pub fn denoms_from_creator(
-        &self,
-        creator: ::prost::alloc::string::String,
-    ) -> Result<QueryDenomsFromCreatorResponse, cosmwasm_std::StdError> {
+    pub fn denoms_from_creator(&self, creator: ::prost::alloc::string::String) -> Result<QueryDenomsFromCreatorResponse, cosmwasm_std::StdError> {
         QueryDenomsFromCreatorRequest { creator }.query(self.querier)
     }
-    pub fn tokenfactory_module_state(
-        &self,
-    ) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
+    pub fn tokenfactory_module_state(&self) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
         QueryModuleStateRequest {}.query(self.querier)
     }
 }

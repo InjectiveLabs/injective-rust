@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use proc_macro2::{TokenStream as TokenStream2};
+use proc_macro2::TokenStream as TokenStream2;
 use quote::{format_ident, quote};
 use std::ffi::OsStr;
 use std::fs;
@@ -15,10 +15,7 @@ pub fn generate_mod_file(for_dir: &Path) {
         .filter_map(|d| {
             let f = d.expect("[error] Unable to get dir entry");
             if f.path().extension() == Some(OsStr::new("rs")) {
-                f.path()
-                    .file_stem()
-                    .and_then(|s| s.to_str())
-                    .map(|s| s.to_string())
+                f.path().file_stem().and_then(|s| s.to_str()).map(|s| s.to_string())
             } else {
                 None
             }
@@ -45,10 +42,7 @@ fn recur_gen_mod(for_dir: &Path, start_dir: &Path, paths: Vec<Vec<String>>, incl
     // base case
     if uniq_keys.is_empty() {
         let from = start_dir.join(format!("{}.rs", include_file.replace('/', ".")));
-        let to = for_dir
-            .parent()
-            .unwrap()
-            .join(format!("{}.rs", include_file.split('.').last().unwrap()));
+        let to = for_dir.parent().unwrap().join(format!("{}.rs", include_file.split('.').last().unwrap()));
         fs::rename(from, to).unwrap();
     } else {
         let ts = uniq_keys.iter().map(|k| {
@@ -58,10 +52,7 @@ fn recur_gen_mod(for_dir: &Path, start_dir: &Path, paths: Vec<Vec<String>>, incl
 
         let additional_mod_content = if paths.iter().any(|p| p.is_empty()) && paths.len() > 1 {
             let src_file = start_dir.join(format!("{}.rs", include_file));
-            let tk = fs::read_to_string(src_file.clone())
-                .unwrap()
-                .parse::<TokenStream2>()
-                .unwrap();
+            let tk = fs::read_to_string(src_file.clone()).unwrap().parse::<TokenStream2>().unwrap();
 
             fs::remove_file(src_file).unwrap();
 
@@ -93,19 +84,13 @@ fn recur_gen_mod(for_dir: &Path, start_dir: &Path, paths: Vec<Vec<String>>, incl
                 format!("{include_file}.{k}")
             };
 
-            recur_gen_mod(
-                &for_dir.join(k.clone()),
-                start_dir,
-                paths.clone(),
-                &include_file,
-            );
+            recur_gen_mod(&for_dir.join(k.clone()), start_dir, paths.clone(), &include_file);
         }
     }
 }
 
 fn create_mod_rs(ts: TokenStream2, path: &Path) {
-    let file = syn::parse_file(ts.to_string().as_str())
-        .expect("[error] Unable to parse generated content as file while genrating mod.rs");
+    let file = syn::parse_file(ts.to_string().as_str()).expect("[error] Unable to parse generated content as file while genrating mod.rs");
 
     let write = fs::write(path.join("mod.rs"), prettyplease::unparse(&file));
 

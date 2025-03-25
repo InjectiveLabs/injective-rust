@@ -82,12 +82,7 @@ pub fn generate() {
         include_mods: vec!["wasm".to_string()],
     };
 
-    let injective_code_generator = CodeGenerator::new(
-        out_dir,
-        tmp_build_dir,
-        injective_project,
-        vec![cosmos_project, wasmd_project],
-    );
+    let injective_code_generator = CodeGenerator::new(out_dir, tmp_build_dir, injective_project, vec![cosmos_project, wasmd_project]);
 
     injective_code_generator.generate();
 }

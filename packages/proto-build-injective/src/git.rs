@@ -23,11 +23,5 @@ pub fn update_submodule(dir: &str, rev: &str) {
     info!("Updating {} submodule...", dir);
     run_git(["submodule", "update", "--init"]);
     run_git(["-C", full_path(dir).to_str().unwrap(), "fetch"]);
-    run_git([
-        "-C",
-        full_path(dir).to_str().unwrap(),
-        "reset",
-        "--hard",
-        rev,
-    ]);
+    run_git(["-C", full_path(dir).to_str().unwrap(), "reset", "--hard", rev]);
 }
