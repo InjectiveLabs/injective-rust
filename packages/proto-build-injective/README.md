@@ -6,15 +6,18 @@ It is based on the proto-compiler code in github.com/informalsystems/ibc-rs.
 
 ## Usage
 
-```bash
-cargo run
-```
-
 ## Update Git Submodules
+
+Run this command first from the root of injective-rust:
 
 ```bash
 git submodule update --init --recursive
 ```
+
+```bash
+cargo run
+```
+
 
 ### Debugging - `buf.yaml`
 
