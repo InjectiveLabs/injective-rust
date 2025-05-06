@@ -4,8 +4,6 @@ This is a tool to build the protobuf files for the Injective project.
 
 It is based on the proto-compiler code in github.com/informalsystems/ibc-rs.
 
-## Usage
-
 ## Update Git Submodules
 
 Run this command first from the root of injective-rust:
@@ -13,6 +11,8 @@ Run this command first from the root of injective-rust:
 ```bash
 git submodule update --init --recursive
 ```
+
+## Usage
 
 ```bash
 cargo run
