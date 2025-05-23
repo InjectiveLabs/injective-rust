@@ -129,7 +129,7 @@ impl CodeGenerator {
     fn compile_proto(&self) {
         let buf_gen_template = self.root.join("buf.gen.yaml");
 
-        let all_related_projects = vec![self.deps.clone(), vec![self.project.clone()]].concat();
+        let all_related_projects = [self.deps.clone(), vec![self.project.clone()]].concat();
 
         info!("🧪 [{}] Compiling types from protobuf definitions...", self.project.name);
 
@@ -137,12 +137,26 @@ impl CodeGenerator {
         // `buf generate —template {<buf_gen_template} <proto_file>`
         for project in all_related_projects {
             println!("\n=========================\nProject {:?}\n", project);
-            let buf_root = WalkDir::new(&self.root.join(&project.project_dir))
+
+            let buf_root = WalkDir::new(self.root.join(&project.project_dir))
                 .into_iter()
                 .filter_map(|e| e.ok())
                 .find(|e| {
                     println!("File Names {:?}", e);
-                    e.file_name().to_str().map(|s| s == "buf.yaml" || s == "buf.yml").unwrap_or(false)
+                    e.file_name()
+                        .to_str()
+                        .map(|s| {
+                            (s == "buf.yaml" || s == "buf.yml")
+                                && !e
+                                    .path()
+                                    .parent()
+                                    .unwrap()
+                                    .to_path_buf()
+                                    .to_str()
+                                    .unwrap_or_default()
+                                    .contains("dependencies/cosmos-sdk/core/internal")
+                        })
+                        .unwrap_or(false)
                 })
                 .map(|e| {
                     println!("Bug Path: {:?}", e.path().parent().unwrap().to_path_buf());

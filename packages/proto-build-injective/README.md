@@ -12,12 +12,25 @@ Run this command first from the root of injective-rust:
 git submodule update --init --recursive
 ```
 
+## Requirements
+
+Install tree
+
+```bash
+brew install tree
+```
+
+Install buf
+
+```bash
+brew install buf
+```
+
 ## Usage
 
 ```bash
 cargo run
 ```
-
 
 ### Debugging - `buf.yaml`
 
