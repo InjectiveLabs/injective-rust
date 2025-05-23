@@ -1,9 +1,17 @@
 use injective_std_derive::CosmwasmExt;
-/// NOTE: The following type is not implemented due to current limitations of code generator
-/// which currently has issue with tendermint_proto.
-/// This will be fixed in the upcoming release.
-#[allow(dead_code)]
-struct HistoricalInfo {}
+/// HistoricalInfo contains header and validator information for a given block.
+/// It is stored as part of staking module's state, which persists the `n` most
+/// recent HistoricalInfo
+/// (`n` is set by the staking module's `historical_entries` parameter).
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/cosmos.staking.v1beta1.HistoricalInfo")]
+pub struct HistoricalInfo {
+    #[prost(message, optional, tag = "1")]
+    pub header: ::core::option::Option<super::super::super::cometbft::types::v1::Header>,
+    #[prost(message, repeated, tag = "2")]
+    pub valset: ::prost::alloc::vec::Vec<Validator>,
+}
 /// CommissionRates defines the initial commission rates to be used for creating
 /// a validator.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -383,11 +391,15 @@ pub struct Pool {
     #[prost(string, tag = "2")]
     pub bonded_tokens: ::prost::alloc::string::String,
 }
-/// NOTE: The following type is not implemented due to current limitations of code generator
-/// which currently has issue with tendermint_proto.
-/// This will be fixed in the upcoming release.
-#[allow(dead_code)]
-struct ValidatorUpdates {}
+/// ValidatorUpdates defines an array of abci.ValidatorUpdate objects.
+/// TODO: explore moving this to proto/cosmos/base to separate modules from tendermint dependence
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/cosmos.staking.v1beta1.ValidatorUpdates")]
+pub struct ValidatorUpdates {
+    #[prost(message, repeated, tag = "1")]
+    pub updates: ::prost::alloc::vec::Vec<super::super::super::cometbft::abci::v1::ValidatorUpdate>,
+}
 /// BondStatus is the status of a validator.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -491,6 +503,10 @@ pub struct GenesisState {
     /// exported defines a bool to identify whether the chain dealing with exported or initialized genesis.
     #[prost(bool, tag = "8")]
     pub exported: bool,
+    /// allowed_delegation_transfer_receivers defines the list of addresses that are allowed to receive delegation
+    /// transfers.
+    #[prost(string, repeated, tag = "9")]
+    pub allowed_delegation_transfer_receivers: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// LastValidatorPower required for validator set update logic.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -578,6 +594,26 @@ pub struct MsgDelegate {
 #[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgDelegateResponse")]
 pub struct MsgDelegateResponse {}
+/// MsgTransferDelegation defines a SDK message for transferring a delegation of coins
+/// from a delegator to another address.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/cosmos.staking.v1beta1.MsgTransferDelegation")]
+pub struct MsgTransferDelegation {
+    #[prost(string, tag = "1")]
+    pub delegator_address: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub validator_address: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub receiver_address: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "4")]
+    pub amount: ::core::option::Option<super::super::base::v1beta1::Coin>,
+}
+/// MsgTransferDelegationResponse defines the Msg/TransferDelegation response type.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/cosmos.staking.v1beta1.MsgTransferDelegationResponse")]
+pub struct MsgTransferDelegationResponse {}
 /// MsgBeginRedelegate defines a SDK message for performing a redelegation
 /// of coins from a delegator and source validator to a destination validator.
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -179,12 +179,12 @@ pub struct QueryCurrentAuctionBasketResponse {
     )]
     pub auction_round: u64,
     /// auctionClosingTime describes auction close time for the round
-    #[prost(int64, tag = "3")]
+    #[prost(uint64, tag = "3")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
-    pub auction_closing_time: i64,
+    pub auction_closing_time: u64,
     /// highestBidder describes highest bidder on current round
     #[prost(string, tag = "4")]
     pub highest_bidder: ::prost::alloc::string::String,

@@ -10,3 +10,6 @@
 	path = dependencies/wasmd
 	url = https://github.com/InjectiveLabs/wasmd.git
 	branch = v0.53.2-inj-1
+[submodule "dependencies/cometbft"]
+	path = dependencies/cometbft
+	url = https://github.com/cometbft/cometbft
