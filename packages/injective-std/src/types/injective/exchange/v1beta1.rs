@@ -5927,8 +5927,8 @@ pub struct QueryMarketBalanceRequest {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.QueryMarketBalanceResponse")]
 pub struct QueryMarketBalanceResponse {
-    #[prost(string, tag = "1")]
-    pub balance: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "1")]
+    pub balance: ::core::option::Option<MarketBalance>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
