@@ -107,7 +107,7 @@ pub struct ProtocolVersion {
 /// p2p handshake.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.p2p.v1.DefaultNodeInfoDefaultNodeInfo")]
+#[proto_message(type_url = "/cometbft.p2p.v1.DefaultNodeInfo")]
 pub struct DefaultNodeInfo {
     #[prost(message, optional, tag = "1")]
     pub protocol_version: ::core::option::Option<ProtocolVersion>,
