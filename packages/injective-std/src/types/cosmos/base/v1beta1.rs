@@ -18,7 +18,7 @@ pub struct Coin {
 /// signatures required by gogoproto.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.base.v1beta1.DecCoinDec")]
+#[proto_message(type_url = "/cosmos.base.v1beta1.DecCoin")]
 pub struct DecCoin {
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
