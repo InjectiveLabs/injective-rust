@@ -13,9 +13,10 @@ use proto_build_injective::{
 /// The Cosmos SDK commit or tag to be cloned and used to build the proto files
 const COSMOS_SDK_REV: &str = "v0.47.1";
 const WASMD_REV: &str = "v0.45.1";
+const COMET_BFT_REV: &str = "v1.0.1";
 
 /// The injective-core commit or tag to be cloned and used to build the proto files
-const INJECTIVE_REV: &str = "v1.14.0";
+const INJECTIVE_REV: &str = "v1.16.0-beta.2";
 
 // All paths must end with a / and either be absolute or include a ./ to reference the current
 // working directory.
@@ -28,6 +29,8 @@ const COSMOS_SDK_DIR: &str = "../../dependencies/cosmos-sdk/";
 const INJECTIVE_DIR: &str = "../../dependencies/injective-core/";
 /// Directory where the wasmd submodule is located
 const WASMD_DIR: &str = "../../dependencies/wasmd/";
+/// Directory where the cometbft submodule is located
+const COMET_BFT_DIR: &str = "../../dependencies/cometbft/";
 
 /// A temporary directory for proto building
 const TMP_BUILD_DIR: &str = "./tmp/tmp-protobuf/";
@@ -81,8 +84,18 @@ pub fn generate() {
         project_dir: WASMD_DIR.to_string(),
         include_mods: vec!["wasm".to_string()],
     };
-
-    let injective_code_generator = CodeGenerator::new(out_dir, tmp_build_dir, injective_project, vec![cosmos_project, wasmd_project]);
+    let cometbft_project = CosmosProject {
+        name: "cometbft".to_string(),
+        version: COMET_BFT_REV.to_string(),
+        project_dir: COMET_BFT_DIR.to_string(),
+        include_mods: vec![],
+    };
+    let injective_code_generator = CodeGenerator::new(
+        out_dir,
+        tmp_build_dir,
+        injective_project,
+        vec![cosmos_project, wasmd_project, cometbft_project],
+    );
 
     injective_code_generator.generate();
 }

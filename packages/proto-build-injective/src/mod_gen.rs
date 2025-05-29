@@ -33,7 +33,7 @@ pub fn generate_mod_file(for_dir: &Path) {
 fn recur_gen_mod(for_dir: &Path, start_dir: &Path, paths: Vec<Vec<String>>, include_file: &str) {
     let uniq_keys = paths
         .iter()
-        .filter_map(|p| (*p).get(0))
+        .filter_map(|p| (*p).first())
         .map(|s| s.to_owned())
         .unique()
         .sorted()
@@ -74,7 +74,7 @@ fn recur_gen_mod(for_dir: &Path, start_dir: &Path, paths: Vec<Vec<String>>, incl
             let paths: Vec<Vec<String>> = paths
                 .iter()
                 // only if head = k
-                .filter(|p| (**p).get(0) == Some(&k))
+                .filter(|p| (**p).first() == Some(&k))
                 // get tail
                 .map(|p| p.split_at(1).1.to_vec())
                 .collect();
@@ -90,7 +90,7 @@ fn recur_gen_mod(for_dir: &Path, start_dir: &Path, paths: Vec<Vec<String>>, incl
 }
 
 fn create_mod_rs(ts: TokenStream2, path: &Path) {
-    let file = syn::parse_file(ts.to_string().as_str()).expect("[error] Unable to parse generated content as file while genrating mod.rs");
+    let file = syn::parse_file(ts.to_string().as_str()).expect("[error] Unable to parse generated content as file while generating mod.rs");
 
     let write = fs::write(path.join("mod.rs"), prettyplease::unparse(&file));
 
