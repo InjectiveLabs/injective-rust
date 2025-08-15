@@ -65,7 +65,7 @@ pub struct AuthSigMessage {
 /// NetAddress represents a peer's network address.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.p2p.v1.NetAddress")]
+#[proto_message(type_url = "/cometbft.p2p.v1.NetAddressNetAddress")]
 pub struct NetAddress {
     #[prost(string, tag = "1")]
     #[serde(alias = "ID")]
@@ -82,7 +82,7 @@ pub struct NetAddress {
 /// ProtocolVersion represents the current p2p protocol version.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.p2p.v1.ProtocolVersion")]
+#[proto_message(type_url = "/cometbft.p2p.v1.ProtocolVersionProtocolVersion")]
 pub struct ProtocolVersion {
     #[prost(uint64, tag = "1")]
     #[serde(
@@ -107,7 +107,7 @@ pub struct ProtocolVersion {
 /// p2p handshake.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.p2p.v1.DefaultNodeInfo")]
+#[proto_message(type_url = "/cometbft.p2p.v1.DefaultNodeInfoDefaultNodeInfo")]
 pub struct DefaultNodeInfo {
     #[prost(message, optional, tag = "1")]
     pub protocol_version: ::core::option::Option<ProtocolVersion>,
@@ -130,7 +130,7 @@ pub struct DefaultNodeInfo {
 /// DefaultNodeInfoOther is the misc. application specific data.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.p2p.v1.DefaultNodeInfoOther")]
+#[proto_message(type_url = "/cometbft.p2p.v1.DefaultNodeInfoOtherDefaultNodeInfoOther")]
 pub struct DefaultNodeInfoOther {
     #[prost(string, tag = "1")]
     pub tx_index: ::prost::alloc::string::String,

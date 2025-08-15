@@ -4,9 +4,11 @@ use injective_std_derive::CosmwasmExt;
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.CreateSpotLimitOrderAuthz")]
 pub struct CreateSpotLimitOrderAuthz {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market IDs
     #[prost(string, repeated, tag = "2")]
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -15,9 +17,11 @@ pub struct CreateSpotLimitOrderAuthz {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.CreateSpotMarketOrderAuthz")]
 pub struct CreateSpotMarketOrderAuthz {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market IDs
     #[prost(string, repeated, tag = "2")]
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -26,9 +30,11 @@ pub struct CreateSpotMarketOrderAuthz {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.BatchCreateSpotLimitOrdersAuthz")]
 pub struct BatchCreateSpotLimitOrdersAuthz {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market IDs
     #[prost(string, repeated, tag = "2")]
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -37,9 +43,11 @@ pub struct BatchCreateSpotLimitOrdersAuthz {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.CancelSpotOrderAuthz")]
 pub struct CancelSpotOrderAuthz {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market IDs
     #[prost(string, repeated, tag = "2")]
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -48,9 +56,11 @@ pub struct CancelSpotOrderAuthz {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.BatchCancelSpotOrdersAuthz")]
 pub struct BatchCancelSpotOrdersAuthz {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market IDs
     #[prost(string, repeated, tag = "2")]
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -60,9 +70,11 @@ pub struct BatchCancelSpotOrdersAuthz {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.CreateDerivativeLimitOrderAuthz")]
 pub struct CreateDerivativeLimitOrderAuthz {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market IDs
     #[prost(string, repeated, tag = "2")]
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -71,9 +83,11 @@ pub struct CreateDerivativeLimitOrderAuthz {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.CreateDerivativeMarketOrderAuthz")]
 pub struct CreateDerivativeMarketOrderAuthz {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market IDs
     #[prost(string, repeated, tag = "2")]
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -82,9 +96,11 @@ pub struct CreateDerivativeMarketOrderAuthz {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.BatchCreateDerivativeLimitOrdersAuthz")]
 pub struct BatchCreateDerivativeLimitOrdersAuthz {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market IDs
     #[prost(string, repeated, tag = "2")]
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -116,11 +132,14 @@ pub struct BatchCancelDerivativeOrdersAuthz {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.BatchUpdateOrdersAuthz")]
 pub struct BatchUpdateOrdersAuthz {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the spot market IDs
     #[prost(string, repeated, tag = "2")]
     pub spot_markets: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// the derivative market IDs
     #[prost(string, repeated, tag = "3")]
     pub derivative_markets: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
@@ -356,15 +375,15 @@ pub struct DerivativeMarket {
     )]
     pub status: i32,
     /// min_price_tick_size defines the minimum tick size that the price and margin
-    /// required for orders in the market
+    /// required for orders in the market (in chain format)
     #[prost(string, tag = "15")]
     pub min_price_tick_size: ::prost::alloc::string::String,
     /// min_quantity_tick_size defines the minimum tick size of the quantity
-    /// required for orders in the market
+    /// required for orders in the market (in chain format)
     #[prost(string, tag = "16")]
     pub min_quantity_tick_size: ::prost::alloc::string::String,
     /// min_notional defines the minimum notional (in quote asset) required for
-    /// orders in the market
+    /// orders in the market (in chain format)
     #[prost(string, tag = "17")]
     pub min_notional: ::prost::alloc::string::String,
     /// current market admin
@@ -511,11 +530,11 @@ pub struct ExpiryFuturesMarketInfo {
     )]
     pub twap_start_timestamp: i64,
     /// expiration_twap_start_price_cumulative defines the cumulative price for the
-    /// start of the TWAP window
+    /// start of the TWAP window (in chain format)
     #[prost(string, tag = "4")]
     pub expiration_twap_start_price_cumulative: ::prost::alloc::string::String,
     /// settlement_price defines the settlement price for a time expiry futures
-    /// market.
+    /// market (in chain format)
     #[prost(string, tag = "5")]
     pub settlement_price: ::prost::alloc::string::String,
 }
@@ -558,10 +577,12 @@ pub struct PerpetualMarketFunding {
     /// cumulative_funding defines the cumulative funding of a perpetual market.
     #[prost(string, tag = "1")]
     pub cumulative_funding: ::prost::alloc::string::String,
-    /// cumulative_price defines the cumulative price for the current hour up to
-    /// the last timestamp
+    /// cumulative_price defines the running time-integral of the perp premium
+    /// ((VWAP - mark_price) / mark_price) i.e., sum(premium * seconds)
+    /// used to compute the interval’s average premium for funding
     #[prost(string, tag = "2")]
     pub cumulative_price: ::prost::alloc::string::String,
+    /// the last timestamp in seconds
     #[prost(int64, tag = "3")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
@@ -596,13 +617,13 @@ pub struct NextFundingTimestamp {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MidPriceAndTOB")]
 pub struct MidPriceAndTob {
-    /// mid price of the market
+    /// mid price of the market (in chain format)
     #[prost(string, tag = "1")]
     pub mid_price: ::prost::alloc::string::String,
-    /// best buy price of the market
+    /// best buy price of the market (in chain format)
     #[prost(string, tag = "2")]
     pub best_buy_price: ::prost::alloc::string::String,
-    /// best sell price of the market
+    /// best sell price of the market (in chain format)
     #[prost(string, tag = "3")]
     pub best_sell_price: ::prost::alloc::string::String,
 }
@@ -643,15 +664,15 @@ pub struct SpotMarket {
     )]
     pub status: i32,
     /// min_price_tick_size defines the minimum tick size that the price required
-    /// for orders in the market
+    /// for orders in the market (in chain format)
     #[prost(string, tag = "9")]
     pub min_price_tick_size: ::prost::alloc::string::String,
     /// min_quantity_tick_size defines the minimum tick size of the quantity
-    /// required for orders in the market
+    /// required for orders in the market (in chain format)
     #[prost(string, tag = "10")]
     pub min_quantity_tick_size: ::prost::alloc::string::String,
     /// min_notional defines the minimum notional (in quote asset) required for
-    /// orders in the market
+    /// orders in the market (in chain format)
     #[prost(string, tag = "11")]
     pub min_notional: ::prost::alloc::string::String,
     /// current market admin
@@ -818,32 +839,36 @@ pub struct DerivativeOrder {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.SubaccountOrderbookMetadata")]
 pub struct SubaccountOrderbookMetadata {
+    /// The number of vanilla limit orders
     #[prost(uint32, tag = "1")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub vanilla_limit_order_count: u32,
+    /// The number of reduce-only limit orders
     #[prost(uint32, tag = "2")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub reduce_only_limit_order_count: u32,
-    /// AggregateReduceOnlyQuantity is the aggregate fillable quantity of the
-    /// subaccount's reduce-only limit orders in the given direction.
+    /// The aggregate quantity of the subaccount's reduce-only limit orders (in
+    /// chain format)
     #[prost(string, tag = "3")]
     pub aggregate_reduce_only_quantity: ::prost::alloc::string::String,
-    /// AggregateVanillaQuantity is the aggregate fillable quantity of the
-    /// subaccount's vanilla limit orders in the given direction.
+    /// The aggregate quantity of the subaccount's vanilla limit orders (in chain
+    /// format)
     #[prost(string, tag = "4")]
     pub aggregate_vanilla_quantity: ::prost::alloc::string::String,
+    /// The number of vanilla conditional orders
     #[prost(uint32, tag = "5")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub vanilla_conditional_order_count: u32,
+    /// The number of reduce-only conditional orders
     #[prost(uint32, tag = "6")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
@@ -931,14 +956,19 @@ pub struct DerivativeMarketOrder {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.Position")]
 pub struct Position {
+    /// True if the position is long. False if the position is short.
     #[prost(bool, tag = "1")]
     pub is_long: bool,
+    /// The quantity of the position (in chain format)
     #[prost(string, tag = "2")]
     pub quantity: ::prost::alloc::string::String,
+    /// The entry price of the position (in chain format)
     #[prost(string, tag = "3")]
     pub entry_price: ::prost::alloc::string::String,
+    /// The margin of the position (in chain format)
     #[prost(string, tag = "4")]
     pub margin: ::prost::alloc::string::String,
+    /// The cumulative funding
     #[prost(string, tag = "5")]
     pub cumulative_funding_entry: ::prost::alloc::string::String,
 }
@@ -1103,12 +1133,16 @@ pub struct TradingRewardCampaignInfo {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.FeeDiscountTierInfo")]
 pub struct FeeDiscountTierInfo {
+    /// the maker discount rate
     #[prost(string, tag = "1")]
     pub maker_discount_rate: ::prost::alloc::string::String,
+    /// the taker discount rate
     #[prost(string, tag = "2")]
     pub taker_discount_rate: ::prost::alloc::string::String,
+    /// the staked amount required to qualify for the discount (in chain format)
     #[prost(string, tag = "3")]
     pub staked_amount: ::prost::alloc::string::String,
+    /// the volume required to qualify for the discount (in chain format)
     #[prost(string, tag = "4")]
     pub volume: ::prost::alloc::string::String,
 }
@@ -1198,14 +1232,17 @@ pub struct SubaccountIDs {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.TradeRecord")]
 pub struct TradeRecord {
+    /// the timestamp of the trade
     #[prost(int64, tag = "1")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub timestamp: i64,
+    /// the price of the trade (in chain format)
     #[prost(string, tag = "2")]
     pub price: ::prost::alloc::string::String,
+    /// the quantity of the trade (in chain format)
     #[prost(string, tag = "3")]
     pub quantity: ::prost::alloc::string::String,
 }
@@ -1213,10 +1250,10 @@ pub struct TradeRecord {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.Level")]
 pub struct Level {
-    /// price
+    /// price (in chain format)
     #[prost(string, tag = "1")]
     pub p: ::prost::alloc::string::String,
-    /// quantity
+    /// quantity (in chain format)
     #[prost(string, tag = "2")]
     pub q: ::prost::alloc::string::String,
 }
@@ -1224,9 +1261,11 @@ pub struct Level {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.AggregateSubaccountVolumeRecord")]
 pub struct AggregateSubaccountVolumeRecord {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the subaccount volumes for each market
     #[prost(message, repeated, tag = "2")]
     pub market_volumes: ::prost::alloc::vec::Vec<MarketVolume>,
 }
@@ -1295,8 +1334,10 @@ pub struct EffectiveGrant {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.DenomMinNotional")]
 pub struct DenomMinNotional {
+    /// the denom of the token
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
+    /// the minimum notional value for the token (in chain format)
     #[prost(string, tag = "2")]
     pub min_notional: ::prost::alloc::string::String,
 }
@@ -2763,13 +2804,15 @@ pub struct MsgUpdateParamsResponse {}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgDeposit")]
 pub struct MsgDeposit {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
     /// (Optional) bytes32 subaccount ID to deposit funds into. If empty, the coin
-    /// will be deposited to the sender's default subaccount address.
+    /// will be deposited to the sender's default subaccount address
     #[prost(string, tag = "2")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the amount of the deposit (in chain format)
     #[prost(message, optional, tag = "3")]
     pub amount: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
@@ -2784,12 +2827,14 @@ pub struct MsgDepositResponse {}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgWithdraw")]
 pub struct MsgWithdraw {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
-    /// bytes32 subaccount ID to withdraw funds from
+    /// the subaccount ID to withdraw funds from
     #[prost(string, tag = "2")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the amount of the withdrawal (in chain format)
     #[prost(message, optional, tag = "3")]
     pub amount: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
@@ -2804,8 +2849,10 @@ pub struct MsgWithdrawResponse {}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgCreateSpotLimitOrder")]
 pub struct MsgCreateSpotLimitOrder {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
+    /// the spot order to create
     #[prost(message, optional, tag = "2")]
     pub order: ::core::option::Option<SpotOrder>,
 }
@@ -2815,8 +2862,10 @@ pub struct MsgCreateSpotLimitOrder {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgCreateSpotLimitOrderResponse")]
 pub struct MsgCreateSpotLimitOrderResponse {
+    /// the order hash
     #[prost(string, tag = "1")]
     pub order_hash: ::prost::alloc::string::String,
+    /// the client order ID
     #[prost(string, tag = "2")]
     pub cid: ::prost::alloc::string::String,
 }
@@ -2826,8 +2875,10 @@ pub struct MsgCreateSpotLimitOrderResponse {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgBatchCreateSpotLimitOrders")]
 pub struct MsgBatchCreateSpotLimitOrders {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
+    /// the spot orders details
     #[prost(message, repeated, tag = "2")]
     pub orders: ::prost::alloc::vec::Vec<SpotOrder>,
 }
@@ -2837,10 +2888,13 @@ pub struct MsgBatchCreateSpotLimitOrders {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgBatchCreateSpotLimitOrdersResponse")]
 pub struct MsgBatchCreateSpotLimitOrdersResponse {
+    /// the order hashes
     #[prost(string, repeated, tag = "1")]
     pub order_hashes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// the client order IDs
     #[prost(string, repeated, tag = "2")]
     pub created_orders_cids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// the failed client order IDs
     #[prost(string, repeated, tag = "3")]
     pub failed_orders_cids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
@@ -2850,12 +2904,13 @@ pub struct MsgBatchCreateSpotLimitOrdersResponse {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgInstantSpotMarketLaunch")]
 pub struct MsgInstantSpotMarketLaunch {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
-    /// Ticker for the spot market.
+    /// the ticker for the spot market
     #[prost(string, tag = "2")]
     pub ticker: ::prost::alloc::string::String,
-    /// type of coin to use as the base currency
+    /// the type of coin to use as the base currency
     #[prost(string, tag = "3")]
     pub base_denom: ::prost::alloc::string::String,
     /// type of coin to use as the quote currency
@@ -2899,15 +2954,16 @@ pub struct MsgInstantSpotMarketLaunchResponse {}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgInstantBinaryOptionsMarketLaunch")]
 pub struct MsgInstantBinaryOptionsMarketLaunch {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
-    /// Ticker for the derivative contract.
+    /// the ticker for the derivative contract
     #[prost(string, tag = "2")]
     pub ticker: ::prost::alloc::string::String,
-    /// Oracle symbol
+    /// the oracle symbol
     #[prost(string, tag = "3")]
     pub oracle_symbol: ::prost::alloc::string::String,
-    /// Oracle Provider
+    /// the oracle provider
     #[prost(string, tag = "4")]
     pub oracle_provider: ::prost::alloc::string::String,
     /// Oracle type
@@ -3138,32 +3194,42 @@ pub struct MsgBatchCancelBinaryOptionsOrdersResponse {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgBatchUpdateOrders")]
 pub struct MsgBatchUpdateOrders {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
-    /// subaccount_id only used for the spot_market_ids_to_cancel_all and
-    /// derivative_market_ids_to_cancel_all.
+    /// the subaccount ID only used for the spot_market_ids_to_cancel_all and
+    /// derivative_market_ids_to_cancel_all
     #[prost(string, tag = "2")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the spot market IDs to cancel all
     #[prost(string, repeated, tag = "3")]
     #[serde(alias = "spot_marketIDs_to_cancel_all")]
     pub spot_market_ids_to_cancel_all: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// the derivative market IDs to cancel all
     #[prost(string, repeated, tag = "4")]
     #[serde(alias = "derivative_marketIDs_to_cancel_all")]
     pub derivative_market_ids_to_cancel_all: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// the spot orders to cancel
     #[prost(message, repeated, tag = "5")]
     pub spot_orders_to_cancel: ::prost::alloc::vec::Vec<OrderData>,
+    /// the derivative orders to cancel
     #[prost(message, repeated, tag = "6")]
     pub derivative_orders_to_cancel: ::prost::alloc::vec::Vec<OrderData>,
+    /// the spot orders to create
     #[prost(message, repeated, tag = "7")]
     pub spot_orders_to_create: ::prost::alloc::vec::Vec<SpotOrder>,
+    /// the derivative orders to create
     #[prost(message, repeated, tag = "8")]
     pub derivative_orders_to_create: ::prost::alloc::vec::Vec<DerivativeOrder>,
+    /// the binary options orders to cancel
     #[prost(message, repeated, tag = "9")]
     pub binary_options_orders_to_cancel: ::prost::alloc::vec::Vec<OrderData>,
+    /// the binary options market IDs to cancel all
     #[prost(string, repeated, tag = "10")]
     #[serde(alias = "binary_options_marketIDs_to_cancel_all")]
     pub binary_options_market_ids_to_cancel_all: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// the binary options orders to create
     #[prost(message, repeated, tag = "11")]
     pub binary_options_orders_to_create: ::prost::alloc::vec::Vec<DerivativeOrder>,
 }
@@ -3263,16 +3329,22 @@ pub struct MsgCreateBinaryOptionsMarketOrderResponse {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgCancelDerivativeOrder")]
 pub struct MsgCancelDerivativeOrder {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
+    /// the market ID
     #[prost(string, tag = "2")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
+    /// the subaccount ID
     #[prost(string, tag = "3")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the order hash
     #[prost(string, tag = "4")]
     pub order_hash: ::prost::alloc::string::String,
+    /// the order mask
+    ///
     /// bitwise combination of OrderMask enum values
     #[prost(int32, tag = "5")]
     #[serde(
@@ -3280,6 +3352,7 @@ pub struct MsgCancelDerivativeOrder {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub order_mask: i32,
+    /// the client order ID
     #[prost(string, tag = "6")]
     pub cid: ::prost::alloc::string::String,
 }
@@ -3295,23 +3368,28 @@ pub struct MsgCancelDerivativeOrderResponse {}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgCancelBinaryOptionsOrder")]
 pub struct MsgCancelBinaryOptionsOrder {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
+    /// the market ID
     #[prost(string, tag = "2")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
+    /// the subaccount ID
     #[prost(string, tag = "3")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the order hash
     #[prost(string, tag = "4")]
     pub order_hash: ::prost::alloc::string::String,
-    /// bitwise combination of OrderMask enum values
+    /// the order mask (bitwise combination of OrderMask enum values)
     #[prost(int32, tag = "5")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub order_mask: i32,
+    /// the client order ID
     #[prost(string, tag = "6")]
     pub cid: ::prost::alloc::string::String,
 }
@@ -3325,21 +3403,25 @@ pub struct MsgCancelBinaryOptionsOrderResponse {}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.OrderData")]
 pub struct OrderData {
+    /// the market ID
     #[prost(string, tag = "1")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
+    /// the subaccount ID
     #[prost(string, tag = "2")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the order hash
     #[prost(string, tag = "3")]
     pub order_hash: ::prost::alloc::string::String,
-    /// bitwise combination of OrderMask enum values
+    /// the order mask (bitwise combination of OrderMask enum values)
     #[prost(int32, tag = "4")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub order_mask: i32,
+    /// the client order ID
     #[prost(string, tag = "5")]
     pub cid: ::prost::alloc::string::String,
 }
@@ -3349,8 +3431,10 @@ pub struct OrderData {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgBatchCancelDerivativeOrders")]
 pub struct MsgBatchCancelDerivativeOrders {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
+    /// orders details
     #[prost(message, repeated, tag = "2")]
     pub data: ::prost::alloc::vec::Vec<OrderData>,
 }
@@ -3368,14 +3452,18 @@ pub struct MsgBatchCancelDerivativeOrdersResponse {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgSubaccountTransfer")]
 pub struct MsgSubaccountTransfer {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
+    /// the source subaccount ID
     #[prost(string, tag = "2")]
     #[serde(alias = "source_subaccountID")]
     pub source_subaccount_id: ::prost::alloc::string::String,
+    /// the destination subaccount ID
     #[prost(string, tag = "3")]
     #[serde(alias = "destination_subaccountID")]
     pub destination_subaccount_id: ::prost::alloc::string::String,
+    /// the amount of the transfer
     #[prost(message, optional, tag = "4")]
     pub amount: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
@@ -3411,11 +3499,14 @@ pub struct MsgExternalTransferResponse {}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgLiquidatePosition")]
 pub struct MsgLiquidatePosition {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
+    /// the subaccount ID
     #[prost(string, tag = "2")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market ID
     #[prost(string, tag = "3")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
@@ -3433,11 +3524,14 @@ pub struct MsgLiquidatePositionResponse {}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgEmergencySettleMarket")]
 pub struct MsgEmergencySettleMarket {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
+    /// the subaccount ID
     #[prost(string, tag = "2")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market ID
     #[prost(string, tag = "3")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
@@ -3453,18 +3547,23 @@ pub struct MsgEmergencySettleMarketResponse {}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgIncreasePositionMargin")]
 pub struct MsgIncreasePositionMargin {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
+    /// the subaccount ID sending the funds
     #[prost(string, tag = "2")]
     #[serde(alias = "source_subaccountID")]
     pub source_subaccount_id: ::prost::alloc::string::String,
+    /// the subaccount ID the position belongs to
     #[prost(string, tag = "3")]
     #[serde(alias = "destination_subaccountID")]
     pub destination_subaccount_id: ::prost::alloc::string::String,
+    /// the market ID
     #[prost(string, tag = "4")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
-    /// amount defines the amount of margin to add to the position
+    /// amount defines the amount of margin to add to the position (in chain
+    /// format)
     #[prost(string, tag = "5")]
     pub amount: ::prost::alloc::string::String,
 }
@@ -3479,18 +3578,23 @@ pub struct MsgIncreasePositionMarginResponse {}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MsgDecreasePositionMargin")]
 pub struct MsgDecreasePositionMargin {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
+    /// the subaccount ID sending the funds
     #[prost(string, tag = "2")]
     #[serde(alias = "source_subaccountID")]
     pub source_subaccount_id: ::prost::alloc::string::String,
+    /// the subaccount ID the position belongs to
     #[prost(string, tag = "3")]
     #[serde(alias = "destination_subaccountID")]
     pub destination_subaccount_id: ::prost::alloc::string::String,
+    /// the market ID
     #[prost(string, tag = "4")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
-    /// amount defines the amount of margin to withdraw from the position
+    /// amount defines the amount of margin to withdraw from the position (in chain
+    /// format)
     #[prost(string, tag = "5")]
     pub amount: ::prost::alloc::string::String,
 }
@@ -3901,11 +4005,14 @@ pub struct ConditionalDerivativeOrderBook {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.Balance")]
 pub struct Balance {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the denom of the balance
     #[prost(string, tag = "2")]
     pub denom: ::prost::alloc::string::String,
+    /// the token deposits details
     #[prost(message, optional, tag = "3")]
     pub deposits: ::core::option::Option<Deposit>,
 }
@@ -3913,12 +4020,15 @@ pub struct Balance {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.DerivativePosition")]
 pub struct DerivativePosition {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market ID
     #[prost(string, tag = "2")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
+    /// the position details
     #[prost(message, optional, tag = "3")]
     pub position: ::core::option::Option<Position>,
 }
@@ -3926,9 +4036,11 @@ pub struct DerivativePosition {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.SubaccountNonce")]
 pub struct SubaccountNonce {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the subaccount trade nonce
     #[prost(message, optional, tag = "2")]
     pub subaccount_trade_nonce: ::core::option::Option<SubaccountTradeNonce>,
 }
@@ -3999,9 +4111,11 @@ pub struct Subaccount {
     response_type = QuerySubaccountOrdersResponse
 )]
 pub struct QuerySubaccountOrdersRequest {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market ID
     #[prost(string, tag = "2")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
@@ -4019,11 +4133,14 @@ pub struct QuerySubaccountOrdersResponse {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.SubaccountOrderbookMetadataWithMarket")]
 pub struct SubaccountOrderbookMetadataWithMarket {
+    /// the subaccount orderbook metadata
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<SubaccountOrderbookMetadata>,
+    /// the market ID
     #[prost(string, tag = "2")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
+    /// true if the order is for buy orders
     #[prost(bool, tag = "3")]
     pub is_buy: bool,
 }
@@ -4056,9 +4173,11 @@ pub struct QueryExchangeParamsResponse {
     response_type = QuerySubaccountDepositsResponse
 )]
 pub struct QuerySubaccountDepositsRequest {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// subaccount details
     #[prost(message, optional, tag = "2")]
     pub subaccount: ::core::option::Option<Subaccount>,
 }
@@ -4250,9 +4369,11 @@ pub struct QueryAggregateMarketVolumesResponse {
     response_type = QuerySubaccountDepositResponse
 )]
 pub struct QuerySubaccountDepositRequest {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the denom of the balance
     #[prost(string, tag = "2")]
     pub denom: ::prost::alloc::string::String,
 }
@@ -4330,20 +4451,26 @@ pub struct QuerySpotOrderbookRequest {
     #[prost(string, tag = "1")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
+    /// the maximum number of orderbook entries to return per side (optional)
     #[prost(uint64, tag = "2")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub limit: u64,
+    /// the order side to return the orderbook entries for (optional)
     #[prost(enumeration = "OrderSide", tag = "3")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub order_side: i32,
+    /// limits the number of entries to return per side based on the cumulative
+    /// notional (in chain format)
     #[prost(string, tag = "4")]
     pub limit_cumulative_notional: ::prost::alloc::string::String,
+    /// limits the number of entries to return per side based on the cumulative
+    /// quantity (in chain format)
     #[prost(string, tag = "5")]
     pub limit_cumulative_quantity: ::prost::alloc::string::String,
 }
@@ -4500,20 +4627,22 @@ pub struct QueryAccountAddressSpotOrdersRequest {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.TrimmedSpotLimitOrder")]
 pub struct TrimmedSpotLimitOrder {
-    /// price of the order
+    /// price of the order (in chain format)
     #[prost(string, tag = "1")]
     pub price: ::prost::alloc::string::String,
-    /// quantity of the order
+    /// quantity of the order (in chain format)
     #[prost(string, tag = "2")]
     pub quantity: ::prost::alloc::string::String,
-    /// the amount of the quantity remaining fillable
+    /// the amount of the quantity remaining fillable (in chain format)
     #[prost(string, tag = "3")]
     pub fillable: ::prost::alloc::string::String,
     /// true if the order is a buy
     #[prost(bool, tag = "4")]
     pub is_buy: bool,
+    /// the order hash (optional)
     #[prost(string, tag = "5")]
     pub order_hash: ::prost::alloc::string::String,
+    /// the client order ID (optional)
     #[prost(string, tag = "6")]
     pub cid: ::prost::alloc::string::String,
 }
@@ -4556,13 +4685,13 @@ pub struct QuerySpotMidPriceAndTobRequest {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.QuerySpotMidPriceAndTOBResponse")]
 pub struct QuerySpotMidPriceAndTobResponse {
-    /// mid price of the market
+    /// mid price of the market (in chain format)
     #[prost(string, tag = "1")]
     pub mid_price: ::prost::alloc::string::String,
-    /// best buy price of the market
+    /// best buy price of the market (in chain format)
     #[prost(string, tag = "2")]
     pub best_buy_price: ::prost::alloc::string::String,
-    /// best sell price of the market
+    /// best sell price of the market (in chain format)
     #[prost(string, tag = "3")]
     pub best_sell_price: ::prost::alloc::string::String,
 }
@@ -4733,25 +4862,25 @@ pub struct QueryAccountAddressDerivativeOrdersRequest {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.TrimmedDerivativeLimitOrder")]
 pub struct TrimmedDerivativeLimitOrder {
-    /// price of the order
+    /// price of the order (in chain format)
     #[prost(string, tag = "1")]
     pub price: ::prost::alloc::string::String,
-    /// quantity of the order
+    /// quantity of the order (in chain format)
     #[prost(string, tag = "2")]
     pub quantity: ::prost::alloc::string::String,
-    /// margin of the order
+    /// margin of the order (in chain format)
     #[prost(string, tag = "3")]
     pub margin: ::prost::alloc::string::String,
-    /// the amount of the quantity remaining fillable
+    /// the amount of the quantity remaining fillable (in chain format)
     #[prost(string, tag = "4")]
     pub fillable: ::prost::alloc::string::String,
     /// true if the order is a buy
-    ///
-    /// ensure omitempty is not in jsontag
     #[prost(bool, tag = "5")]
     pub is_buy: bool,
+    /// the order hash (optional)
     #[prost(string, tag = "6")]
     pub order_hash: ::prost::alloc::string::String,
+    /// the client order ID (optional)
     #[prost(string, tag = "7")]
     pub cid: ::prost::alloc::string::String,
 }
@@ -4849,25 +4978,31 @@ pub struct PerpetualMarketState {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.FullDerivativeMarket")]
 pub struct FullDerivativeMarket {
+    /// derivative market details
     #[prost(message, optional, tag = "1")]
     pub market: ::core::option::Option<DerivativeMarket>,
+    /// mark price (in chain format)
     #[prost(string, tag = "4")]
     pub mark_price: ::prost::alloc::string::String,
     /// mid_price_and_tob defines the mid price for this market and the best ask
     /// and bid orders
     #[prost(message, optional, tag = "5")]
     pub mid_price_and_tob: ::core::option::Option<MidPriceAndTob>,
+    /// perpetual market state or expiry futures market state
     #[prost(oneof = "full_derivative_market::Info", tags = "2, 3")]
     pub info: ::core::option::Option<full_derivative_market::Info>,
 }
 /// Nested message and enum types in `FullDerivativeMarket`.
 pub mod full_derivative_market {
     use injective_std_derive::CosmwasmExt;
+    /// perpetual market state or expiry futures market state
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Info {
+        /// perpetual market info
         #[prost(message, tag = "2")]
         PerpetualInfo(super::PerpetualMarketState),
+        /// expiry futures market info
         #[prost(message, tag = "3")]
         FuturesInfo(super::ExpiryFuturesMarketInfo),
     }
@@ -4944,6 +5079,7 @@ pub struct QueryDerivativeMarketAddressResponse {
     response_type = QuerySubaccountTradeNonceResponse
 )]
 pub struct QuerySubaccountTradeNonceRequest {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
@@ -4958,6 +5094,7 @@ pub struct QuerySubaccountTradeNonceRequest {
     response_type = QuerySubaccountPositionsResponse
 )]
 pub struct QuerySubaccountPositionsRequest {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
@@ -4972,9 +5109,11 @@ pub struct QuerySubaccountPositionsRequest {
     response_type = QuerySubaccountPositionInMarketResponse
 )]
 pub struct QuerySubaccountPositionInMarketRequest {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market ID
     #[prost(string, tag = "2")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
@@ -4989,9 +5128,11 @@ pub struct QuerySubaccountPositionInMarketRequest {
     response_type = QuerySubaccountEffectivePositionInMarketResponse
 )]
 pub struct QuerySubaccountEffectivePositionInMarketRequest {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market ID
     #[prost(string, tag = "2")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
@@ -5006,6 +5147,7 @@ pub struct QuerySubaccountEffectivePositionInMarketRequest {
     response_type = QuerySubaccountOrderMetadataResponse
 )]
 pub struct QuerySubaccountOrderMetadataRequest {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
@@ -5032,12 +5174,16 @@ pub struct QuerySubaccountPositionInMarketResponse {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.EffectivePosition")]
 pub struct EffectivePosition {
+    /// whether the position is long or short
     #[prost(bool, tag = "1")]
     pub is_long: bool,
+    /// the quantity of the position (in chain format)
     #[prost(string, tag = "2")]
     pub quantity: ::prost::alloc::string::String,
+    /// the entry price of the position (in chain format)
     #[prost(string, tag = "3")]
     pub entry_price: ::prost::alloc::string::String,
+    /// the effective margin of the position (in chain format)
     #[prost(string, tag = "4")]
     pub effective_margin: ::prost::alloc::string::String,
 }
@@ -5344,19 +5490,26 @@ pub struct QueryBalanceMismatchesRequest {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.BalanceMismatch")]
 pub struct BalanceMismatch {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the denom of the balance
     #[prost(string, tag = "2")]
     pub denom: ::prost::alloc::string::String,
+    /// the available balance
     #[prost(string, tag = "3")]
     pub available: ::prost::alloc::string::String,
+    /// the total balance
     #[prost(string, tag = "4")]
     pub total: ::prost::alloc::string::String,
+    /// the balance hold
     #[prost(string, tag = "5")]
     pub balance_hold: ::prost::alloc::string::String,
+    /// the expected total balance
     #[prost(string, tag = "6")]
     pub expected_total: ::prost::alloc::string::String,
+    /// the difference between the total balance and the expected total balance
     #[prost(string, tag = "7")]
     pub difference: ::prost::alloc::string::String,
 }
@@ -5383,15 +5536,20 @@ pub struct QueryBalanceWithBalanceHoldsRequest {}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.BalanceWithMarginHold")]
 pub struct BalanceWithMarginHold {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the denom of the balance
     #[prost(string, tag = "2")]
     pub denom: ::prost::alloc::string::String,
+    /// the available balance
     #[prost(string, tag = "3")]
     pub available: ::prost::alloc::string::String,
+    /// the total balance
     #[prost(string, tag = "4")]
     pub total: ::prost::alloc::string::String,
+    /// the balance on hold
     #[prost(string, tag = "5")]
     pub balance_hold: ::prost::alloc::string::String,
 }
@@ -5456,12 +5614,16 @@ pub struct MitoVaultInfosRequest {}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.MitoVaultInfosResponse")]
 pub struct MitoVaultInfosResponse {
+    /// list of master addresses
     #[prost(string, repeated, tag = "1")]
     pub master_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// list of derivative addresses
     #[prost(string, repeated, tag = "2")]
     pub derivative_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// list of spot addresses
     #[prost(string, repeated, tag = "3")]
     pub spot_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// list of cw20 addresses
     #[prost(string, repeated, tag = "4")]
     pub cw20_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
@@ -5600,9 +5762,11 @@ pub struct QueryBinaryMarketsResponse {
     response_type = QueryTraderDerivativeConditionalOrdersResponse
 )]
 pub struct QueryTraderDerivativeConditionalOrdersRequest {
+    /// the subaccount ID
     #[prost(string, tag = "1")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
+    /// the market ID
     #[prost(string, tag = "2")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
@@ -5611,27 +5775,28 @@ pub struct QueryTraderDerivativeConditionalOrdersRequest {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.TrimmedDerivativeConditionalOrder")]
 pub struct TrimmedDerivativeConditionalOrder {
-    /// price of the order
+    /// price of the order (in chain format)
     #[prost(string, tag = "1")]
     pub price: ::prost::alloc::string::String,
-    /// quantity of the order
+    /// quantity of the order (in chain format)
     #[prost(string, tag = "2")]
     pub quantity: ::prost::alloc::string::String,
-    /// margin of the order
+    /// margin of the order (in chain format)
     #[prost(string, tag = "3")]
     pub margin: ::prost::alloc::string::String,
-    /// price to trigger the order
+    /// price to trigger the order (in chain format)
     #[prost(string, tag = "4")]
     pub trigger_price: ::prost::alloc::string::String,
     /// true if the order is a buy
-    ///
-    /// ensure omitempty is not in jsontag
     #[prost(bool, tag = "5")]
     pub is_buy: bool,
+    /// true if the order is a limit order
     #[prost(bool, tag = "6")]
     pub is_limit: bool,
+    /// the order hash
     #[prost(string, tag = "7")]
     pub order_hash: ::prost::alloc::string::String,
+    /// the client ID
     #[prost(string, tag = "8")]
     pub cid: ::prost::alloc::string::String,
 }
@@ -5692,13 +5857,16 @@ pub struct QueryFullDerivativeOrderbookResponse {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.TrimmedLimitOrder")]
 pub struct TrimmedLimitOrder {
+    /// the price of the order (in chain format)
     #[prost(string, tag = "1")]
     pub price: ::prost::alloc::string::String,
-    /// quantity of the order
+    /// the quantity of the order (in chain format)
     #[prost(string, tag = "2")]
     pub quantity: ::prost::alloc::string::String,
+    /// the order hash
     #[prost(string, tag = "3")]
     pub order_hash: ::prost::alloc::string::String,
+    /// the subaccount ID
     #[prost(string, tag = "4")]
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
@@ -5711,6 +5879,7 @@ pub struct TrimmedLimitOrder {
     response_type = QueryMarketAtomicExecutionFeeMultiplierResponse
 )]
 pub struct QueryMarketAtomicExecutionFeeMultiplierRequest {
+    /// the market ID
     #[prost(string, tag = "1")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
@@ -5842,6 +6011,7 @@ pub struct QueryDenomMinNotionalRequest {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.QueryDenomMinNotionalResponse")]
 pub struct QueryDenomMinNotionalResponse {
+    /// the minimum notional amount for the denom (in chain format)
     #[prost(string, tag = "1")]
     pub amount: ::prost::alloc::string::String,
 }

@@ -160,7 +160,7 @@ where
             let kv_groups = group
                 .stream()
                 .into_iter()
-                .group_by(|t| if let TokenTree::Punct(punct) = t { punct.as_char() != ',' } else { true });
+                .chunk_by(|t| if let TokenTree::Punct(punct) = t { punct.as_char() != ',' } else { true });
             let mut key_values: Vec<Vec<TokenTree>> = vec![];
 
             for (non_sep, g) in &kv_groups {
