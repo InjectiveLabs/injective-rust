@@ -1,5 +1,5 @@
 use injective_std_derive::CosmwasmExt;
-/// RequestPing is a request to confirm that the connection is alive.
+/// PingRequest is a request to confirm that the connection is alive.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.rpc.grpc.v1beta1.RequestPing")]
@@ -12,7 +12,7 @@ pub struct RequestBroadcastTx {
     #[prost(bytes = "vec", tag = "1")]
     pub tx: ::prost::alloc::vec::Vec<u8>,
 }
-/// ResponsePing is a response to confirm that the connection is alive.
+/// PingResponse is a response to confirm that the connection is alive.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.rpc.grpc.v1beta1.ResponsePing")]

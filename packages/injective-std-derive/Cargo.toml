@@ -3,7 +3,7 @@ description = "Procedural macro for injective-std"
 edition     = "2021"
 license     = "MIT OR Apache-2.0"
 name        = "injective-std-derive"
-version     = "1.13.4"
+version     = "1.16.3"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -11,13 +11,13 @@ version     = "1.13.4"
 proc-macro = true
 
 [dependencies]
-cosmwasm-std = { version = "2.1.0", features = [ "abort", "cosmwasm_1_2", "cosmwasm_1_3", "cosmwasm_1_4", "cosmwasm_2_0", "iterator", "stargate" ] }
-itertools    = { version = "0.10.3" }
+cosmwasm-std = { version = "2.2.2", features = [ "abort", "cosmwasm_1_2", "cosmwasm_1_3", "cosmwasm_1_4", "cosmwasm_2_0", "iterator", "stargate" ] }
+itertools    = { version = "0.14.0" }
 proc-macro2  = { version = "1.0.40" }
 quote        = { version = "1.0.20" }
 syn          = { version = "1.0.98" }
 
 [dev-dependencies]
-prost    = { version = "0.13.4", features = [ "prost-derive" ] }
+prost    = { version = "0.14.1", features = [ "derive" ] }
 serde    = { version = "1.0.196", default-features = false, features = [ "derive" ] }
 trybuild = { version = "1.0.63", features = [ "diff" ] }

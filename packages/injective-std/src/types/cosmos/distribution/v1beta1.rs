@@ -133,7 +133,7 @@ pub struct CommunityPoolSpendProposal {
     #[prost(message, repeated, tag = "4")]
     pub amount: ::prost::alloc::vec::Vec<super::super::base::v1beta1::Coin>,
 }
-/// DelegatorStartingInfo represents the starting info for a delegator reward
+/// DelegatorStartingInfo represents the starting info for a delegator's delegation reward
 /// period. It tracks the previous validator period, the delegation's amount of
 /// staking token, and the creation height (to check later on if any slashes have
 /// occurred). NOTE: Even though validators are slashed to whole staking tokens,

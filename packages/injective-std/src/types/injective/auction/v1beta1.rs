@@ -231,6 +231,7 @@ pub struct QueryLastAuctionResultResponse {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.auction.v1beta1.MsgBid")]
 pub struct MsgBid {
+    /// the sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
     /// amount of the bid in INJ tokens

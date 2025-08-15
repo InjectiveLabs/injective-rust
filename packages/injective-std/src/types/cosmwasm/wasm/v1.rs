@@ -300,7 +300,7 @@ impl ContractCodeHistoryOperationType {
 /// Since: wasmd 0.42
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.StoreCodeAuthorizationStoreCodeAuthorization")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.StoreCodeAuthorization")]
 pub struct StoreCodeAuthorization {
     /// Grants for code upload
     #[prost(message, repeated, tag = "1")]
@@ -386,6 +386,7 @@ pub struct MaxFundsLimit {
 }
 /// CombinedLimit defines the maximal amounts that can be sent to a contract and
 /// the maximal number of calls executable. Both need to remain >0 to be valid.
+/// Both need to remain >0 to be valid.
 /// Since: wasmd 0.30
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]

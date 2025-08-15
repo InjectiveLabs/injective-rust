@@ -674,10 +674,6 @@ pub struct FinalizeBlockResponse {
     /// It is up to the application to decide which algorithm to use.
     #[prost(bytes = "vec", tag = "5")]
     pub app_hash: ::prost::alloc::vec::Vec<u8>,
-    /// delay between the time when this block is committed and the next height is started.
-    /// previously `timeout_commit` in config.toml
-    #[prost(message, optional, tag = "6")]
-    pub next_block_delay: ::core::option::Option<crate::shim::Duration>,
 }
 /// CommitInfo contains votes for the particular round.
 #[allow(clippy::derive_partial_eq_without_eq)]

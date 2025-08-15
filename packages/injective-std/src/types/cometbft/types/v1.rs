@@ -95,7 +95,7 @@ pub struct ValidatorParams {
 /// VersionParams contain the version of specific components of CometBFT.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.types.v1.VersionParamsVersionParams")]
+#[proto_message(type_url = "/cometbft.types.v1.VersionParams")]
 pub struct VersionParams {
     /// The ABCI application version.
     ///
@@ -311,7 +311,7 @@ pub struct PartSetHeader {
 /// Part of the block.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.types.v1.PartPart")]
+#[proto_message(type_url = "/cometbft.types.v1.Part")]
 pub struct Part {
     #[prost(uint32, tag = "1")]
     #[serde(
@@ -327,7 +327,7 @@ pub struct Part {
 /// BlockID defines the unique ID of a block as its hash and its `PartSetHeader`.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.types.v1.BlockIDBlockID")]
+#[proto_message(type_url = "/cometbft.types.v1.BlockID")]
 pub struct BlockId {
     #[prost(bytes = "vec", tag = "1")]
     pub hash: ::prost::alloc::vec::Vec<u8>,
@@ -397,7 +397,7 @@ pub struct Header {
 #[proto_message(type_url = "/cometbft.types.v1.Data")]
 pub struct Data {
     /// Txs that will be applied by state @ block.Height+1.
-    /// NOTE: not all txs here are valid.  We're just agreeing on the order first.
+    /// NOTE: not all txs here are valid. We're just agreeing on the order first.
     /// This means that block.AppHash does not include these txs.
     #[prost(bytes = "vec", repeated, tag = "1")]
     pub txs: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
@@ -406,7 +406,7 @@ pub struct Data {
 /// consensus.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.types.v1.VoteVote")]
+#[proto_message(type_url = "/cometbft.types.v1.Vote")]
 pub struct Vote {
     #[prost(enumeration = "SignedMsgType", tag = "1")]
     #[serde(
@@ -524,7 +524,7 @@ pub struct ExtendedCommit {
 /// That is the digest of the original signature is still the same in prior versions
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.types.v1.ExtendedCommitSigExtendedCommitSig")]
+#[proto_message(type_url = "/cometbft.types.v1.ExtendedCommitSig")]
 pub struct ExtendedCommitSig {
     #[prost(enumeration = "BlockIdFlag", tag = "1")]
     #[serde(alias = "blockID_flag")]
@@ -757,7 +757,7 @@ pub struct EvidenceList {
 /// Block defines the structure of a block in the CometBFT blockchain.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.types.v1.BlockBlock")]
+#[proto_message(type_url = "/cometbft.types.v1.Block")]
 pub struct Block {
     #[prost(message, optional, tag = "1")]
     pub header: ::core::option::Option<Header>,
