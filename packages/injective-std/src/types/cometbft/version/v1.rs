@@ -4,7 +4,7 @@ use injective_std_derive::CosmwasmExt;
 /// updated in ResponseEndBlock.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.version.v1.App")]
+#[proto_message(type_url = "/cometbft.version.v1.AppApp")]
 pub struct App {
     #[prost(uint64, tag = "1")]
     #[serde(
@@ -20,7 +20,7 @@ pub struct App {
 /// state transition machine.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.version.v1.Consensus")]
+#[proto_message(type_url = "/cometbft.version.v1.ConsensusConsensus")]
 pub struct Consensus {
     #[prost(uint64, tag = "1")]
     #[serde(

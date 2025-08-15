@@ -2,7 +2,7 @@ use injective_std_derive::CosmwasmExt;
 /// Params defines the set of params for the distribution module.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.Params")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ParamsParams")]
 pub struct Params {
     #[prost(string, tag = "1")]
     pub community_tax: ::prost::alloc::string::String,
@@ -33,7 +33,7 @@ pub struct Params {
 ///   + one per validator for the zeroeth period, set on initialization
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorHistoricalRewards")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorHistoricalRewardsValidatorHistoricalRewards")]
 pub struct ValidatorHistoricalRewards {
     #[prost(message, repeated, tag = "1")]
     pub cumulative_reward_ratio: ::prost::alloc::vec::Vec<super::super::base::v1beta1::DecCoin>,
@@ -49,7 +49,7 @@ pub struct ValidatorHistoricalRewards {
 /// each block as long as the validator's tokens remain constant.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorCurrentRewards")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorCurrentRewardsValidatorCurrentRewards")]
 pub struct ValidatorCurrentRewards {
     #[prost(message, repeated, tag = "1")]
     pub rewards: ::prost::alloc::vec::Vec<super::super::base::v1beta1::DecCoin>,
@@ -64,7 +64,7 @@ pub struct ValidatorCurrentRewards {
 /// for a validator kept as a running counter, can be withdrawn at any time.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorAccumulatedCommission")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionValidatorAccumulatedCommission")]
 pub struct ValidatorAccumulatedCommission {
     #[prost(message, repeated, tag = "1")]
     pub commission: ::prost::alloc::vec::Vec<super::super::base::v1beta1::DecCoin>,
@@ -73,7 +73,7 @@ pub struct ValidatorAccumulatedCommission {
 /// for a validator inexpensive to track, allows simple sanity checks.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorOutstandingRewards")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorOutstandingRewardsValidatorOutstandingRewards")]
 pub struct ValidatorOutstandingRewards {
     #[prost(message, repeated, tag = "1")]
     pub rewards: ::prost::alloc::vec::Vec<super::super::base::v1beta1::DecCoin>,
@@ -84,7 +84,7 @@ pub struct ValidatorOutstandingRewards {
 /// for delegations which are withdrawn after a slash has occurred.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorSlashEvent")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorSlashEventValidatorSlashEvent")]
 pub struct ValidatorSlashEvent {
     #[prost(uint64, tag = "1")]
     #[serde(
@@ -98,7 +98,7 @@ pub struct ValidatorSlashEvent {
 /// ValidatorSlashEvents is a collection of ValidatorSlashEvent messages.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorSlashEvents")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorSlashEventsValidatorSlashEvents")]
 pub struct ValidatorSlashEvents {
     #[prost(message, repeated, tag = "1")]
     pub validator_slash_events: ::prost::alloc::vec::Vec<ValidatorSlashEvent>,
@@ -121,7 +121,7 @@ pub struct FeePool {
 /// module via a v1 governance proposal.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposalCommunityPoolSpendProposal")]
 #[deprecated]
 pub struct CommunityPoolSpendProposal {
     #[prost(string, tag = "1")]
@@ -141,7 +141,7 @@ pub struct CommunityPoolSpendProposal {
 /// thus sdk.Dec is used.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.DelegatorStartingInfo")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.DelegatorStartingInfoDelegatorStartingInfo")]
 pub struct DelegatorStartingInfo {
     #[prost(uint64, tag = "1")]
     #[serde(
@@ -162,7 +162,7 @@ pub struct DelegatorStartingInfo {
 /// of a delegator's delegation reward.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.DelegationDelegatorReward")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.DelegationDelegatorRewardDelegationDelegatorReward")]
 pub struct DelegationDelegatorReward {
     #[prost(string, tag = "1")]
     pub validator_address: ::prost::alloc::string::String,
@@ -173,7 +173,7 @@ pub struct DelegationDelegatorReward {
 /// with a deposit
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposalWithDeposit")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposalWithDepositCommunityPoolSpendProposalWithDeposit")]
 pub struct CommunityPoolSpendProposalWithDeposit {
     #[prost(string, tag = "1")]
     pub title: ::prost::alloc::string::String,
