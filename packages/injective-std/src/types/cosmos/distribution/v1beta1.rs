@@ -106,7 +106,7 @@ pub struct ValidatorSlashEvents {
 /// FeePool is the global fee pool for distribution.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.FeePool")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.FeePoolFeePool")]
 pub struct FeePool {
     #[prost(message, repeated, tag = "1")]
     pub community_pool: ::prost::alloc::vec::Vec<super::super::base::v1beta1::DecCoin>,
