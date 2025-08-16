@@ -386,6 +386,7 @@ pub struct MaxFundsLimit {
 }
 /// CombinedLimit defines the maximal amounts that can be sent to a contract and
 /// the maximal number of calls executable. Both need to remain >0 to be valid.
+/// Both need to remain >0 to be valid.
 /// Since: wasmd 0.30
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
