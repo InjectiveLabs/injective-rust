@@ -3,7 +3,7 @@ description = "Procedural macro for injective-std"
 edition     = "2021"
 license     = "MIT OR Apache-2.0"
 name        = "injective-std-derive"
-version     = "1.16.3"
+version     = "1.16.3-1"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -18,6 +18,6 @@ quote        = { version = "1.0.20" }
 syn          = { version = "1.0.98" }
 
 [dev-dependencies]
-prost    = { version = "0.14.1", features = [ "derive" ] }
+prost    = { version = "0.13.5", features = [ "prost-derive" ] }
 serde    = { version = "1.0.196", default-features = false, features = [ "derive" ] }
 trybuild = { version = "1.0.63", features = [ "diff" ] }
