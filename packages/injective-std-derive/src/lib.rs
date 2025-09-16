@@ -26,13 +26,11 @@ macro_rules! match_kv_attr {
 pub fn derive_cosmwasm_ext(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let ident = input.ident;
-
     let type_url = get_type_url(&input.attrs);
 
     // `EncodeError` always indicates that a message failed to encode because the
     // provided buffer had insufficient capacity. Message encoding is otherwise
     // infallible.
-
     let (query_request_conversion, cosmwasm_query) = if get_attr("proto_query", &input.attrs).is_some() {
         let path = get_query_attrs(&input.attrs, match_kv_attr!("path", Literal));
         let res = get_query_attrs(&input.attrs, match_kv_attr!("response_type", Ident));
@@ -53,7 +51,6 @@ pub fn derive_cosmwasm_ext(input: TokenStream) -> TokenStream {
                 querier.query::<#res>(&self.into())
             }
         };
-
         (query_request_conversion, cosmwasm_query)
     } else {
         (quote!(), quote!())
@@ -72,7 +69,6 @@ pub fn derive_cosmwasm_ext(input: TokenStream) -> TokenStream {
                 let mut bytes = Vec::new();
                 prost::Message::encode(&msg, &mut bytes)
                     .expect("Message encoding must be infallible");
-
                 cosmwasm_std::Binary::new(bytes)
             }
         }
@@ -88,34 +84,30 @@ pub fn derive_cosmwasm_ext(input: TokenStream) -> TokenStream {
 
         impl TryFrom<cosmwasm_std::Binary> for #ident {
             type Error = cosmwasm_std::StdError;
-
             fn try_from(binary: cosmwasm_std::Binary) -> Result<Self, Self::Error> {
                 use ::prost::Message;
                 Self::decode(&binary[..]).map_err(|e| {
-                    cosmwasm_std::StdError::parse_err(
-                        stringify!(#ident).to_string(),
-                        format!(
-                            "Unable to decode binary: \n  - base64: {}\n  - bytes array: {:?}\n\n{:?}",
-                            binary,
-                            binary.to_vec(),
-                            e
-                        ),
-                    )
+                    cosmwasm_std::StdError::msg(format!(
+                        "Unable to decode binary for {}: base64: {}, bytes: {:?}, error: {:?}",
+                        stringify!(#ident),
+                        binary,
+                        binary.to_vec(),
+                        e
+                    ))
                 })
             }
         }
 
         impl TryFrom<cosmwasm_std::SubMsgResult> for #ident {
             type Error = cosmwasm_std::StdError;
-
             fn try_from(result: cosmwasm_std::SubMsgResult) -> Result<Self, Self::Error> {
                 result
                     .into_result()
-                    .map_err(|e| cosmwasm_std::StdError::generic_err(e))?
+                    .map_err(|e| cosmwasm_std::StdError::msg(format!("SubMsgResult error: {}", e)))?
                     .data
-                    .ok_or_else(|| cosmwasm_std::StdError::not_found(
-                        "cosmwasm_std::SubMsgResult::<T>".to_string()
-                    ))?
+                    .ok_or_else(|| {
+                        cosmwasm_std::StdError::msg("No data found in SubMsgResult".to_string())
+                    })?
                     .try_into()
             }
         }
@@ -125,7 +117,6 @@ pub fn derive_cosmwasm_ext(input: TokenStream) -> TokenStream {
 
 fn get_type_url(attrs: &[syn::Attribute]) -> proc_macro2::TokenStream {
     let proto_message = get_attr("proto_message", attrs).and_then(|a| a.parse_meta().ok());
-
     if let Some(syn::Meta::List(meta)) = proto_message.clone() {
         match meta.nested[0].clone() {
             syn::NestedMeta::Meta(syn::Meta::NameValue(meta)) => {
@@ -150,28 +141,23 @@ where
     F: FnMut(&Vec<TokenTree>) -> Option<proc_macro2::TokenStream>,
 {
     let proto_query = get_attr("proto_query", attrs);
-
     if let Some(attr) = proto_query {
         if attr.tokens.clone().into_iter().count() != 1 {
             return proto_query_attr_error(proto_query);
         }
-
         if let Some(TokenTree::Group(group)) = attr.tokens.clone().into_iter().next() {
             let kv_groups = group
                 .stream()
                 .into_iter()
                 .chunk_by(|t| if let TokenTree::Punct(punct) = t { punct.as_char() != ',' } else { true });
             let mut key_values: Vec<Vec<TokenTree>> = vec![];
-
             for (non_sep, g) in &kv_groups {
                 if non_sep {
                     key_values.push(g.collect());
                 }
             }
-
             return key_values.iter().find_map(f).unwrap_or_else(|| proto_query_attr_error(proto_query));
         }
-
         proto_query_attr_error(proto_query)
     } else {
         proto_query_attr_error(proto_query)
