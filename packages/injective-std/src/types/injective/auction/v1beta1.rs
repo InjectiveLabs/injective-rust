@@ -17,6 +17,11 @@ pub struct Params {
     /// basket
     #[prost(string, tag = "3")]
     pub inj_basket_max_cap: ::prost::alloc::string::String,
+    /// bidders_whitelist defines the list of addresses that are allowed to bid
+    /// if empty, any address can bid; if populated, only whitelisted addresses can
+    /// bid
+    #[prost(string, repeated, tag = "4")]
+    pub bidders_whitelist: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]

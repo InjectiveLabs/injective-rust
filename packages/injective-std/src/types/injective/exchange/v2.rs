@@ -1098,14 +1098,28 @@ pub struct Params {
     /// new derivative market
     #[prost(string, tag = "31")]
     pub default_reduce_margin_ratio: ::prost::alloc::string::String,
-    /// human_readable_upgrade_block_height defines the block height at which the
-    /// human readable upgrade took place
+    /// DO NOT USE THIS FIELD. It was introduced for a temporary bug fix.
+    #[deprecated]
     #[prost(int64, tag = "32")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub human_readable_upgrade_block_height: i64,
+    /// post_only_mode_blocks_amount defines the amount of blocks the post only
+    /// mode will be enabled
+    #[prost(uint64, tag = "33")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub post_only_mode_blocks_amount: u64,
+    /// min_post_only_mode_downtime_duration defines the minimum downtime duration
+    /// that must pass before the post only mode is automatically enabled. The
+    /// accepted values are the Downtime enum values from the downtime_duration
+    /// module
+    #[prost(string, tag = "34")]
+    pub min_post_only_mode_downtime_duration: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -4453,6 +4467,20 @@ pub struct MsgSetDelegationTransferReceivers {
 #[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgSetDelegationTransferReceiversResponse")]
 pub struct MsgSetDelegationTransferReceiversResponse {}
+/// MsgCancelPostOnlyMode defines a message for canceling post-only mode
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgCancelPostOnlyMode")]
+pub struct MsgCancelPostOnlyMode {
+    /// the sender's Injective address
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+}
+/// MsgCancelPostOnlyModeResponse defines the response for MsgCancelPostOnlyMode
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgCancelPostOnlyModeResponse")]
+pub struct MsgCancelPostOnlyModeResponse {}
 /// GenesisState defines the exchange module's genesis state.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]

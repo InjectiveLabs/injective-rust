@@ -5,10 +5,10 @@ use injective_std_derive::CosmwasmExt;
 /// Kept for backwards compatibility for versions prior to v0.38
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.state.v1.LegacyABCIResponses")]
+#[proto_message(type_url = "/cometbft.state.v2.LegacyABCIResponses")]
 pub struct LegacyAbciResponses {
     #[prost(message, repeated, tag = "1")]
-    pub deliver_txs: ::prost::alloc::vec::Vec<super::super::abci::v1::ExecTxResult>,
+    pub deliver_txs: ::prost::alloc::vec::Vec<super::super::abci::v2::ExecTxResult>,
     #[prost(message, optional, tag = "2")]
     pub end_block: ::core::option::Option<ResponseEndBlock>,
     #[prost(message, optional, tag = "3")]
@@ -18,10 +18,10 @@ pub struct LegacyAbciResponses {
 /// as it was then defined in the cometbft.abci packages.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.state.v1.ResponseBeginBlock")]
+#[proto_message(type_url = "/cometbft.state.v2.ResponseBeginBlock")]
 pub struct ResponseBeginBlock {
     #[prost(message, repeated, tag = "1")]
-    pub events: ::prost::alloc::vec::Vec<super::super::abci::v1::Event>,
+    pub events: ::prost::alloc::vec::Vec<super::super::abci::v2::Event>,
 }
 /// ResponseEndBlock is kept for backward compatibility for versions prior to v0.38,
 /// its earlier revisions were defined in the cometbft.abci packages.
@@ -29,22 +29,22 @@ pub struct ResponseBeginBlock {
 /// generated data types interoperable with the latest protocol.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.state.v1.ResponseEndBlock")]
+#[proto_message(type_url = "/cometbft.state.v2.ResponseEndBlock")]
 pub struct ResponseEndBlock {
     #[prost(message, repeated, tag = "1")]
-    pub validator_updates: ::prost::alloc::vec::Vec<super::super::abci::v1::ValidatorUpdate>,
+    pub validator_updates: ::prost::alloc::vec::Vec<super::super::abci::v2::ValidatorUpdate>,
     #[prost(message, optional, tag = "2")]
-    pub consensus_param_updates: ::core::option::Option<super::super::types::v1::ConsensusParams>,
+    pub consensus_param_updates: ::core::option::Option<super::super::types::v2::ConsensusParams>,
     #[prost(message, repeated, tag = "3")]
-    pub events: ::prost::alloc::vec::Vec<super::super::abci::v1::Event>,
+    pub events: ::prost::alloc::vec::Vec<super::super::abci::v2::Event>,
 }
 /// ValidatorsInfo represents the latest validator set, or the last height it changed
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.state.v1.ValidatorsInfo")]
+#[proto_message(type_url = "/cometbft.state.v2.ValidatorsInfo")]
 pub struct ValidatorsInfo {
     #[prost(message, optional, tag = "1")]
-    pub validator_set: ::core::option::Option<super::super::types::v1::ValidatorSet>,
+    pub validator_set: ::core::option::Option<super::super::types::v2::ValidatorSet>,
     #[prost(int64, tag = "2")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
@@ -55,10 +55,10 @@ pub struct ValidatorsInfo {
 /// ConsensusParamsInfo represents the latest consensus params, or the last height it changed
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.state.v1.ConsensusParamsInfo")]
+#[proto_message(type_url = "/cometbft.state.v2.ConsensusParamsInfo")]
 pub struct ConsensusParamsInfo {
     #[prost(message, optional, tag = "1")]
-    pub consensus_params: ::core::option::Option<super::super::types::v1::ConsensusParams>,
+    pub consensus_params: ::core::option::Option<super::super::types::v2::ConsensusParams>,
     #[prost(int64, tag = "2")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
@@ -69,7 +69,7 @@ pub struct ConsensusParamsInfo {
 /// ABCIResponsesInfo retains the responses of the ABCI calls during block processing.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.state.v1.ABCIResponsesInfo")]
+#[proto_message(type_url = "/cometbft.state.v2.ABCIResponsesInfo")]
 pub struct AbciResponsesInfo {
     /// Retains the responses of the legacy ABCI calls during block processing.
     #[prost(message, optional, tag = "1")]
@@ -81,12 +81,12 @@ pub struct AbciResponsesInfo {
     )]
     pub height: i64,
     #[prost(message, optional, tag = "3")]
-    pub finalize_block: ::core::option::Option<super::super::abci::v1::FinalizeBlockResponse>,
+    pub finalize_block: ::core::option::Option<super::super::abci::v2::FinalizeBlockResponse>,
 }
 /// Version is a message for storing versioning information.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.state.v1.Version")]
+#[proto_message(type_url = "/cometbft.state.v2.Version")]
 pub struct Version {
     #[prost(message, optional, tag = "1")]
     pub consensus: ::core::option::Option<super::super::version::v1::Consensus>,
@@ -96,7 +96,7 @@ pub struct Version {
 /// State represents the state of the blockchain.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cometbft.state.v1.State")]
+#[proto_message(type_url = "/cometbft.state.v2.State")]
 pub struct State {
     #[prost(message, optional, tag = "1")]
     pub version: ::core::option::Option<Version>,
@@ -119,7 +119,7 @@ pub struct State {
     pub last_block_height: i64,
     #[prost(message, optional, tag = "4")]
     #[serde(alias = "last_blockID")]
-    pub last_block_id: ::core::option::Option<super::super::types::v1::BlockId>,
+    pub last_block_id: ::core::option::Option<super::super::types::v2::BlockId>,
     #[prost(message, optional, tag = "5")]
     pub last_block_time: ::core::option::Option<crate::shim::Timestamp>,
     /// LastValidators is used to validate block.LastCommit.
@@ -129,11 +129,11 @@ pub struct State {
     /// we set s.LastHeightValidatorsChanged = s.LastBlockHeight + 1 + 1
     /// Extra +1 due to nextValSet delay.
     #[prost(message, optional, tag = "6")]
-    pub next_validators: ::core::option::Option<super::super::types::v1::ValidatorSet>,
+    pub next_validators: ::core::option::Option<super::super::types::v2::ValidatorSet>,
     #[prost(message, optional, tag = "7")]
-    pub validators: ::core::option::Option<super::super::types::v1::ValidatorSet>,
+    pub validators: ::core::option::Option<super::super::types::v2::ValidatorSet>,
     #[prost(message, optional, tag = "8")]
-    pub last_validators: ::core::option::Option<super::super::types::v1::ValidatorSet>,
+    pub last_validators: ::core::option::Option<super::super::types::v2::ValidatorSet>,
     #[prost(int64, tag = "9")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
@@ -143,7 +143,7 @@ pub struct State {
     /// Consensus parameters used for validating blocks.
     /// Changes returned by EndBlock and updated after Commit.
     #[prost(message, optional, tag = "10")]
-    pub consensus_params: ::core::option::Option<super::super::types::v1::ConsensusParams>,
+    pub consensus_params: ::core::option::Option<super::super::types::v2::ConsensusParams>,
     #[prost(int64, tag = "11")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
