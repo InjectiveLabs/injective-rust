@@ -328,7 +328,7 @@ impl TryFrom<crate::types::cosmos::base::v1beta1::Coin> for cosmwasm_std::Coin {
     }
 }
 
-/// Convert a list of `Coin` from osmosis proto generated proto `Coin` type to cosmwasm `Coin` type
+/// Convert a list of `Coin` from injective proto generated proto `Coin` type to cosmwasm `Coin` type
 pub fn try_proto_to_cosmwasm_coins(coins: impl IntoIterator<Item = crate::types::cosmos::base::v1beta1::Coin>) -> StdResult<Vec<cosmwasm_std::Coin>> {
     coins.into_iter().map(|c| c.try_into()).collect()
 }
@@ -340,7 +340,7 @@ pub fn cosmwasm_to_proto_coins(coins: impl IntoIterator<Item = cosmwasm_std::Coi
 
 #[cfg(test)]
 mod tests {
-    use cosmwasm_std::Uint128;
+    use cosmwasm_std::{Uint128, Uint256};
 
     use super::*;
 
@@ -349,11 +349,11 @@ mod tests {
         let coins = vec![
             cosmwasm_std::Coin {
                 denom: "uatom".to_string(),
-                amount: Uint128::new(100),
+                amount: Uint256::new(100),
             },
             cosmwasm_std::Coin {
                 denom: "uosmo".to_string(),
-                amount: Uint128::new(200),
+                amount: Uint256::new(200),
             },
         ];
 

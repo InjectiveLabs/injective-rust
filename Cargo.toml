@@ -3,8 +3,8 @@ members = [ "packages/*" ]
 
 [workspace.dependencies]
 chrono               = { version = "0.4.27", default-features = false }
-cosmwasm-std         = { version = "2.2.2", features = [ "abort", "cosmwasm_1_2", "cosmwasm_1_3", "cosmwasm_1_4", "cosmwasm_2_0", "iterator", "stargate" ] }
-injective-std-derive = { version = "1.16.3-1", path = "./packages/injective-std-derive" }
+cosmwasm-std         = { version = "3.0.2", features = ["cosmwasm_1_2", "cosmwasm_1_3", "cosmwasm_1_4", "cosmwasm_2_0", "iterator", "stargate" ] }
+injective-std-derive = { version = "1.16.4-1"}
 prost                = { version = "0.13.5", features = [ "prost-derive" ] }
 prost-types          = { version = "0.13.5"}
 quote                = { version = "1.0.20" }
