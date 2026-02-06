@@ -94,10 +94,6 @@ pub struct GenesisDenom {
     pub symbol: ::prost::alloc::string::String,
     /// The number of decimals
     #[prost(uint32, tag = "5")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub decimals: u32,
 }
 /// QueryParamsRequest is the request type for the Query/Params RPC method.
@@ -207,10 +203,6 @@ pub struct MsgCreateDenom {
     pub symbol: ::prost::alloc::string::String,
     /// The number of decimals
     #[prost(uint32, tag = "5")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub decimals: u32,
     /// true if admins are allowed to burn tokens from other addresses
     #[prost(bool, tag = "6")]

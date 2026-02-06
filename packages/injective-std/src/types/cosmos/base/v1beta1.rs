@@ -4,7 +4,7 @@ use injective_std_derive::CosmwasmExt;
 /// NOTE: The amount field is an Int which implements the custom method
 /// signatures required by gogoproto.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.base.v1beta1.CoinCoinCoin")]
+#[proto_message(type_url = "/cosmos.base.v1beta1.Coin")]
 pub struct Coin {
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,

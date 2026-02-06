@@ -17,7 +17,7 @@ pub struct SendAuthorization {
 }
 /// Params defines the parameters for the bank module.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.ParamsParams")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.Params")]
 pub struct Params {
     /// Deprecated: Use of SendEnabled in params is deprecated.
     /// For genesis, use the newly added send_enabled field in the genesis object.
@@ -33,7 +33,7 @@ pub struct Params {
 /// SendEnabled maps coin denom to a send_enabled status (whether a denom is
 /// sendable).
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.SendEnabledSendEnabled")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.SendEnabled")]
 pub struct SendEnabled {
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
@@ -42,7 +42,7 @@ pub struct SendEnabled {
 }
 /// Input models transaction input.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.InputInput")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.Input")]
 pub struct Input {
     #[prost(string, tag = "1")]
     pub address: ::prost::alloc::string::String,
@@ -51,7 +51,7 @@ pub struct Input {
 }
 /// Output models transaction outputs.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.OutputOutput")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.Output")]
 pub struct Output {
     #[prost(string, tag = "1")]
     pub address: ::prost::alloc::string::String,
@@ -62,7 +62,7 @@ pub struct Output {
 /// amounts in the network.
 /// This message is deprecated now that supply is indexed by denom.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.SupplySupply")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.Supply")]
 #[deprecated]
 pub struct Supply {
     #[prost(message, repeated, tag = "1")]
@@ -71,7 +71,7 @@ pub struct Supply {
 /// DenomUnit represents a struct that describes a given
 /// denomination unit of the basic token.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.DenomUnitDenomUnit")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.DenomUnit")]
 pub struct DenomUnit {
     /// denom represents the string name of the given denom unit (e.g uatom).
     #[prost(string, tag = "1")]
@@ -82,10 +82,6 @@ pub struct DenomUnit {
     /// (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
     /// exponent = 6, thus: 1 atom = 10^6 uatom).
     #[prost(uint32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub exponent: u32,
     /// aliases is a list of string aliases for the given denom
     #[prost(string, repeated, tag = "3")]
@@ -94,7 +90,7 @@ pub struct DenomUnit {
 /// Metadata represents a struct that describes
 /// a basic token.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.bank.v1beta1.MetadataMetadata")]
+#[proto_message(type_url = "/cosmos.bank.v1beta1.Metadata")]
 pub struct Metadata {
     #[prost(string, tag = "1")]
     pub description: ::prost::alloc::string::String,
@@ -134,10 +130,6 @@ pub struct Metadata {
     ///
     /// Since: cosmos-sdk 0.50
     #[prost(uint32, tag = "9")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub decimals: u32,
 }
 /// EventSetBalance is an event that tracks the latest bank balance.

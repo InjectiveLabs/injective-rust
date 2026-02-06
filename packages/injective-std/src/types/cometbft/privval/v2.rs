@@ -4,10 +4,6 @@ use injective_std_derive::CosmwasmExt;
 #[proto_message(type_url = "/cometbft.privval.v2.RemoteSignerError")]
 pub struct RemoteSignerError {
     #[prost(int32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub code: i32,
     #[prost(string, tag = "2")]
     pub description: ::prost::alloc::string::String,

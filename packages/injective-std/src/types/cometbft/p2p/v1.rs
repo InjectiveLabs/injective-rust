@@ -14,10 +14,6 @@ pub struct PacketPong {}
 pub struct PacketMsg {
     #[prost(int32, tag = "1")]
     #[serde(alias = "channelID")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub channel_id: i32,
     #[prost(bool, tag = "2")]
     pub eof: bool,
@@ -66,10 +62,6 @@ pub struct NetAddress {
     #[prost(string, tag = "2")]
     pub ip: ::prost::alloc::string::String,
     #[prost(uint32, tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub port: u32,
 }
 /// ProtocolVersion represents the current p2p protocol version.

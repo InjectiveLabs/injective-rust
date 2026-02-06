@@ -287,10 +287,6 @@ impl BlockIdFlag {
 #[proto_message(type_url = "/cometbft.types.v1.PartSetHeader")]
 pub struct PartSetHeader {
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub total: u32,
     #[prost(bytes = "vec", tag = "2")]
     pub hash: ::prost::alloc::vec::Vec<u8>,
@@ -300,10 +296,6 @@ pub struct PartSetHeader {
 #[proto_message(type_url = "/cometbft.types.v1.Part")]
 pub struct Part {
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub index: u32,
     #[prost(bytes = "vec", tag = "2")]
     pub bytes: ::prost::alloc::vec::Vec<u8>,
@@ -391,10 +383,6 @@ pub struct Data {
 #[proto_message(type_url = "/cometbft.types.v1.Vote")]
 pub struct Vote {
     #[prost(enumeration = "SignedMsgType", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub r#type: i32,
     #[prost(int64, tag = "2")]
     #[serde(
@@ -403,10 +391,6 @@ pub struct Vote {
     )]
     pub height: i64,
     #[prost(int32, tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     /// zero if vote is nil.
     #[prost(message, optional, tag = "4")]
@@ -417,10 +401,6 @@ pub struct Vote {
     #[prost(bytes = "vec", tag = "6")]
     pub validator_address: ::prost::alloc::vec::Vec<u8>,
     #[prost(int32, tag = "7")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub validator_index: i32,
     /// Vote signature by the validator if they participated in consensus for the
     /// associated block.
@@ -447,10 +427,6 @@ pub struct Commit {
     )]
     pub height: i64,
     #[prost(int32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(message, optional, tag = "3")]
     #[serde(alias = "blockID")]
@@ -464,10 +440,6 @@ pub struct Commit {
 pub struct CommitSig {
     #[prost(enumeration = "BlockIdFlag", tag = "1")]
     #[serde(alias = "blockID_flag")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub block_id_flag: i32,
     #[prost(bytes = "vec", tag = "2")]
     pub validator_address: ::prost::alloc::vec::Vec<u8>,
@@ -487,10 +459,6 @@ pub struct ExtendedCommit {
     )]
     pub height: i64,
     #[prost(int32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(message, optional, tag = "3")]
     #[serde(alias = "blockID")]
@@ -506,10 +474,6 @@ pub struct ExtendedCommit {
 pub struct ExtendedCommitSig {
     #[prost(enumeration = "BlockIdFlag", tag = "1")]
     #[serde(alias = "blockID_flag")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub block_id_flag: i32,
     #[prost(bytes = "vec", tag = "2")]
     pub validator_address: ::prost::alloc::vec::Vec<u8>,
@@ -529,10 +493,6 @@ pub struct ExtendedCommitSig {
 #[proto_message(type_url = "/cometbft.types.v1.Proposal")]
 pub struct Proposal {
     #[prost(enumeration = "SignedMsgType", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub r#type: i32,
     #[prost(int64, tag = "2")]
     #[serde(
@@ -541,16 +501,8 @@ pub struct Proposal {
     )]
     pub height: i64,
     #[prost(int32, tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(int32, tag = "4")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub pol_round: i32,
     #[prost(message, optional, tag = "5")]
     #[serde(alias = "blockID")]
@@ -746,10 +698,6 @@ pub struct EventDataRoundState {
     )]
     pub height: i64,
     #[prost(int32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(string, tag = "3")]
     pub step: ::prost::alloc::string::String,
@@ -770,10 +718,6 @@ pub struct CanonicalBlockId {
 #[proto_message(type_url = "/cometbft.types.v1.CanonicalPartSetHeader")]
 pub struct CanonicalPartSetHeader {
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub total: u32,
     #[prost(bytes = "vec", tag = "2")]
     pub hash: ::prost::alloc::vec::Vec<u8>,
@@ -785,10 +729,6 @@ pub struct CanonicalPartSetHeader {
 pub struct CanonicalProposal {
     /// type alias for byte
     #[prost(enumeration = "SignedMsgType", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub r#type: i32,
     /// canonicalization requires fixed size encoding here
     #[prost(sfixed64, tag = "2")]
@@ -826,10 +766,6 @@ pub struct CanonicalProposal {
 pub struct CanonicalVote {
     /// type alias for byte
     #[prost(enumeration = "SignedMsgType", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub r#type: i32,
     /// canonicalization requires fixed size encoding here
     #[prost(sfixed64, tag = "2")]

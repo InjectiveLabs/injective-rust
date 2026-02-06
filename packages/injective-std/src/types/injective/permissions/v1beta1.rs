@@ -90,10 +90,6 @@ pub struct RoleManager {
 pub struct PolicyStatus {
     /// The action code number
     #[prost(enumeration = "Action", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub action: i32,
     /// Whether the policy is disabled
     #[prost(bool, tag = "2")]
@@ -112,18 +108,10 @@ pub struct Role {
     /// The role ID
     #[prost(uint32, tag = "2")]
     #[serde(alias = "roleID")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub role_id: u32,
     /// Integer representing the bitwise combination of all actions assigned to the
     /// role
     #[prost(uint32, tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub permissions: u32,
 }
 /// PolicyManagerCapability defines the capabilities of a manager for a policy
@@ -135,10 +123,6 @@ pub struct PolicyManagerCapability {
     pub manager: ::prost::alloc::string::String,
     /// The action code number
     #[prost(enumeration = "Action", tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub action: i32,
     /// Whether the manager can disable the policy
     #[prost(bool, tag = "3")]

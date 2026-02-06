@@ -1,44 +1,32 @@
 use injective_std_derive::CosmwasmExt;
 /// AccessTypeParam
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.AccessTypeParamAccessTypeParam")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.AccessTypeParam")]
 pub struct AccessTypeParam {
     #[prost(enumeration = "AccessType", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub value: i32,
 }
 /// AccessConfig access control type.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.AccessConfigAccessConfig")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.AccessConfig")]
 pub struct AccessConfig {
     #[prost(enumeration = "AccessType", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub permission: i32,
     #[prost(string, repeated, tag = "3")]
     pub addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Params defines the set of wasm parameters.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.ParamsParams")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.Params")]
 pub struct Params {
     #[prost(message, optional, tag = "1")]
     pub code_upload_access: ::core::option::Option<AccessConfig>,
     #[prost(enumeration = "AccessType", tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub instantiate_default_permission: i32,
 }
 /// CodeInfo is data for the uploaded contract WASM code
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.CodeInfoCodeInfo")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.CodeInfo")]
 pub struct CodeInfo {
     /// CodeHash is the unique identifier created by wasmvm
     #[prost(bytes = "vec", tag = "1")]
@@ -52,7 +40,7 @@ pub struct CodeInfo {
 }
 /// ContractInfo stores a WASM contract instance
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.ContractInfoContractInfo")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.ContractInfo")]
 pub struct ContractInfo {
     /// CodeID is the reference to the stored Wasm code
     #[prost(uint64, tag = "1")]
@@ -84,13 +72,9 @@ pub struct ContractInfo {
 }
 /// ContractCodeHistoryEntry metadata to a contract.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.ContractCodeHistoryEntryContractCodeHistoryEntry")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.ContractCodeHistoryEntry")]
 pub struct ContractCodeHistoryEntry {
     #[prost(enumeration = "ContractCodeHistoryOperationType", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub operation: i32,
     /// CodeID is the reference to the stored WASM code
     #[prost(uint64, tag = "2")]
@@ -109,7 +93,7 @@ pub struct ContractCodeHistoryEntry {
 /// AbsoluteTxPosition is a unique transaction position that allows for global
 /// ordering of transactions.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.AbsoluteTxPositionAbsoluteTxPosition")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.AbsoluteTxPosition")]
 pub struct AbsoluteTxPosition {
     /// BlockHeight is the block the contract was created at
     #[prost(uint64, tag = "1")]
@@ -129,7 +113,7 @@ pub struct AbsoluteTxPosition {
 }
 /// Model is a struct that holds a KV pair
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.ModelModel")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.Model")]
 pub struct Model {
     /// hex-encode key to read it better (this is often ascii)
     #[prost(bytes = "vec", tag = "1")]
@@ -287,7 +271,7 @@ impl ContractCodeHistoryOperationType {
 /// StoreCodeAuthorization defines authorization for wasm code upload.
 /// Since: wasmd 0.42
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.StoreCodeAuthorizationStoreCodeAuthorization")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.StoreCodeAuthorization")]
 pub struct StoreCodeAuthorization {
     /// Grants for code upload
     #[prost(message, repeated, tag = "1")]
@@ -296,7 +280,7 @@ pub struct StoreCodeAuthorization {
 /// ContractExecutionAuthorization defines authorization for wasm execute.
 /// Since: wasmd 0.30
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.ContractExecutionAuthorizationContractExecutionAuthorization")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.ContractExecutionAuthorization")]
 pub struct ContractExecutionAuthorization {
     /// Grants for contract executions
     #[prost(message, repeated, tag = "1")]
@@ -305,7 +289,7 @@ pub struct ContractExecutionAuthorization {
 /// ContractMigrationAuthorization defines authorization for wasm contract
 /// migration. Since: wasmd 0.30
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.ContractMigrationAuthorizationContractMigrationAuthorization")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.ContractMigrationAuthorization")]
 pub struct ContractMigrationAuthorization {
     /// Grants for contract migrations
     #[prost(message, repeated, tag = "1")]
@@ -313,7 +297,7 @@ pub struct ContractMigrationAuthorization {
 }
 /// CodeGrant a granted permission for a single code
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.CodeGrantCodeGrant")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.CodeGrant")]
 pub struct CodeGrant {
     /// CodeHash is the unique identifier created by wasmvm
     /// Wildcard "*" is used to specify any kind of grant.
@@ -328,7 +312,7 @@ pub struct CodeGrant {
 /// ContractGrant a granted permission for a single contract
 /// Since: wasmd 0.30
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.ContractGrantContractGrant")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.ContractGrant")]
 pub struct ContractGrant {
     /// Contract is the bech32 address of the smart contract
     #[prost(string, tag = "1")]
@@ -346,7 +330,7 @@ pub struct ContractGrant {
 /// MaxCallsLimit limited number of calls to the contract. No funds transferable.
 /// Since: wasmd 0.30
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.MaxCallsLimitMaxCallsLimit")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.MaxCallsLimit")]
 pub struct MaxCallsLimit {
     /// Remaining number that is decremented on each execution
     #[prost(uint64, tag = "1")]
@@ -359,7 +343,7 @@ pub struct MaxCallsLimit {
 /// MaxFundsLimit defines the maximal amounts that can be sent to the contract.
 /// Since: wasmd 0.30
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.MaxFundsLimitMaxFundsLimit")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.MaxFundsLimit")]
 pub struct MaxFundsLimit {
     /// Amounts is the maximal amount of tokens transferable to the contract.
     #[prost(message, repeated, tag = "1")]
@@ -369,7 +353,7 @@ pub struct MaxFundsLimit {
 /// the maximal number of calls executable. Both need to remain >0 to be valid.
 /// Since: wasmd 0.30
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.CombinedLimitCombinedLimit")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.CombinedLimit")]
 pub struct CombinedLimit {
     /// Remaining number that is decremented on each execution
     #[prost(uint64, tag = "1")]
@@ -386,13 +370,13 @@ pub struct CombinedLimit {
 /// message.
 /// Since: wasmd 0.30
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.AllowAllMessagesFilterAllowAllMessagesFilter")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.AllowAllMessagesFilter")]
 pub struct AllowAllMessagesFilter {}
 /// AcceptedMessageKeysFilter accept only the specific contract message keys in
 /// the json object to be executed.
 /// Since: wasmd 0.30
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.AcceptedMessageKeysFilterAcceptedMessageKeysFilter")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.AcceptedMessageKeysFilter")]
 pub struct AcceptedMessageKeysFilter {
     /// Messages is the list of unique keys
     #[prost(string, repeated, tag = "1")]
@@ -402,7 +386,7 @@ pub struct AcceptedMessageKeysFilter {
 /// executed.
 /// Since: wasmd 0.30
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.AcceptedMessagesFilterAcceptedMessagesFilter")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.AcceptedMessagesFilter")]
 pub struct AcceptedMessagesFilter {
     /// Messages is the list of raw contract messages
     #[prost(bytes = "vec", repeated, tag = "1")]
@@ -522,7 +506,7 @@ pub struct MsgIbcCloseChannel {
 /// a simple MsgStoreCode can be invoked from the x/gov module via
 /// a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.StoreCodeProposalStoreCodeProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.StoreCodeProposal")]
 #[deprecated]
 pub struct StoreCodeProposal {
     /// Title is a short summary
@@ -560,7 +544,7 @@ pub struct StoreCodeProposal {
 /// a simple MsgInstantiateContract can be invoked from the x/gov module via
 /// a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.InstantiateContractProposalInstantiateContractProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.InstantiateContractProposal")]
 #[deprecated]
 pub struct InstantiateContractProposal {
     /// Title is a short summary
@@ -643,7 +627,7 @@ pub struct InstantiateContract2Proposal {
 /// a simple MsgMigrateContract can be invoked from the x/gov module via
 /// a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.MigrateContractProposalMigrateContractProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.MigrateContractProposal")]
 #[deprecated]
 pub struct MigrateContractProposal {
     /// Title is a short summary
@@ -674,7 +658,7 @@ pub struct MigrateContractProposal {
 /// a simple MsgSudoContract can be invoked from the x/gov module via
 /// a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.SudoContractProposalSudoContractProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.SudoContractProposal")]
 #[deprecated]
 pub struct SudoContractProposal {
     /// Title is a short summary
@@ -695,7 +679,7 @@ pub struct SudoContractProposal {
 /// a simple MsgExecuteContract can be invoked from the x/gov module via
 /// a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.ExecuteContractProposalExecuteContractProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.ExecuteContractProposal")]
 #[deprecated]
 pub struct ExecuteContractProposal {
     /// Title is a short summary
@@ -722,7 +706,7 @@ pub struct ExecuteContractProposal {
 /// a simple MsgUpdateAdmin can be invoked from the x/gov module via
 /// a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.UpdateAdminProposalUpdateAdminProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.UpdateAdminProposal")]
 #[deprecated]
 pub struct UpdateAdminProposal {
     /// Title is a short summary
@@ -743,7 +727,7 @@ pub struct UpdateAdminProposal {
 /// a simple MsgClearAdmin can be invoked from the x/gov module via
 /// a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.ClearAdminProposalClearAdminProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.ClearAdminProposal")]
 #[deprecated]
 pub struct ClearAdminProposal {
     /// Title is a short summary
@@ -761,7 +745,7 @@ pub struct ClearAdminProposal {
 /// cache, a simple MsgPinCodes can be invoked from the x/gov module via
 /// a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.PinCodesProposalPinCodesProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.PinCodesProposal")]
 #[deprecated]
 pub struct PinCodesProposal {
     /// Title is a short summary
@@ -780,7 +764,7 @@ pub struct PinCodesProposal {
 /// cache, a simple MsgUnpinCodes can be invoked from the x/gov module via
 /// a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.UnpinCodesProposalUnpinCodesProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.UnpinCodesProposal")]
 #[deprecated]
 pub struct UnpinCodesProposal {
     /// Title is a short summary
@@ -797,7 +781,7 @@ pub struct UnpinCodesProposal {
 /// AccessConfigUpdate contains the code id and the access config to be
 /// applied.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.AccessConfigUpdateAccessConfigUpdate")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.AccessConfigUpdate")]
 pub struct AccessConfigUpdate {
     /// CodeID is the reference to the stored WASM code to be updated
     #[prost(uint64, tag = "1")]
@@ -816,7 +800,7 @@ pub struct AccessConfigUpdate {
 /// to a set of code ids, a simple MsgUpdateInstantiateConfig can be invoked from
 /// the x/gov module via a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.UpdateInstantiateConfigProposalUpdateInstantiateConfigProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.UpdateInstantiateConfigProposal")]
 #[deprecated]
 pub struct UpdateInstantiateConfigProposal {
     /// Title is a short summary
@@ -835,7 +819,7 @@ pub struct UpdateInstantiateConfigProposal {
 /// the contract, a simple MsgStoreAndInstantiateContract can be invoked from
 /// the x/gov module via a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.StoreAndInstantiateContractProposalStoreAndInstantiateContractProposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.StoreAndInstantiateContractProposal")]
 #[deprecated]
 pub struct StoreAndInstantiateContractProposal {
     /// Title is a short summary

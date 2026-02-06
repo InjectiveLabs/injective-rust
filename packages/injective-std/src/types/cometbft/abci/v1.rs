@@ -125,10 +125,6 @@ pub struct CheckTxRequest {
     #[prost(bytes = "vec", tag = "1")]
     pub tx: ::prost::alloc::vec::Vec<u8>,
     #[prost(enumeration = "CheckTxType", tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub r#type: i32,
 }
 /// CommitRequest is a request to commit the pending application state.
@@ -161,16 +157,8 @@ pub struct LoadSnapshotChunkRequest {
     )]
     pub height: u64,
     #[prost(uint32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub format: u32,
     #[prost(uint32, tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub chunk: u32,
 }
 /// Request to apply a snapshot chunk.
@@ -178,10 +166,6 @@ pub struct LoadSnapshotChunkRequest {
 #[proto_message(type_url = "/cometbft.abci.v1.ApplySnapshotChunkRequest")]
 pub struct ApplySnapshotChunkRequest {
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub index: u32,
     #[prost(bytes = "vec", tag = "2")]
     pub chunk: ::prost::alloc::vec::Vec<u8>,
@@ -445,10 +429,6 @@ pub struct InitChainResponse {
 #[proto_message(type_url = "/cometbft.abci.v1.QueryResponse")]
 pub struct QueryResponse {
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub code: u32,
     /// bytes data = 2; // use "value" instead.
     ///
@@ -485,10 +465,6 @@ pub struct QueryResponse {
 #[proto_message(type_url = "/cometbft.abci.v1.CheckTxResponse")]
 pub struct CheckTxResponse {
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub code: u32,
     #[prost(bytes = "vec", tag = "2")]
     pub data: ::prost::alloc::vec::Vec<u8>,
@@ -543,10 +519,6 @@ pub struct ListSnapshotsResponse {
 #[proto_message(type_url = "/cometbft.abci.v1.OfferSnapshotResponse")]
 pub struct OfferSnapshotResponse {
     #[prost(enumeration = "OfferSnapshotResult", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub result: i32,
 }
 /// LoadSnapshotChunkResponse returns a snapshot's chunk.
@@ -561,10 +533,6 @@ pub struct LoadSnapshotChunkResponse {
 #[proto_message(type_url = "/cometbft.abci.v1.ApplySnapshotChunkResponse")]
 pub struct ApplySnapshotChunkResponse {
     #[prost(enumeration = "ApplySnapshotChunkResult", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub result: i32,
     /// Chunks to refetch and reapply
     #[prost(uint32, repeated, tag = "2")]
@@ -586,10 +554,6 @@ pub struct PrepareProposalResponse {
 #[proto_message(type_url = "/cometbft.abci.v1.ProcessProposalResponse")]
 pub struct ProcessProposalResponse {
     #[prost(enumeration = "ProcessProposalStatus", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub status: i32,
 }
 /// ExtendVoteResponse contains the vote extension that the application would like to
@@ -606,10 +570,6 @@ pub struct ExtendVoteResponse {
 #[proto_message(type_url = "/cometbft.abci.v1.VerifyVoteExtensionResponse")]
 pub struct VerifyVoteExtensionResponse {
     #[prost(enumeration = "VerifyVoteExtensionStatus", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub status: i32,
 }
 /// FinalizeBlockResponse contains the result of executing the block.
@@ -647,10 +607,6 @@ pub struct FinalizeBlockResponse {
 #[proto_message(type_url = "/cometbft.abci.v1.CommitInfo")]
 pub struct CommitInfo {
     #[prost(int32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(message, repeated, tag = "2")]
     pub votes: ::prost::alloc::vec::Vec<VoteInfo>,
@@ -663,10 +619,6 @@ pub struct CommitInfo {
 pub struct ExtendedCommitInfo {
     /// The round at which the block proposer decided in the previous height.
     #[prost(int32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     /// List of validators' addresses in the last validator set with their voting
     /// information, including vote extensions.
@@ -705,10 +657,6 @@ pub struct EventAttribute {
 #[proto_message(type_url = "/cometbft.abci.v1.ExecTxResult")]
 pub struct ExecTxResult {
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub code: u32,
     #[prost(bytes = "vec", tag = "2")]
     pub data: ::prost::alloc::vec::Vec<u8>,
@@ -749,10 +697,6 @@ pub struct TxResult {
     )]
     pub height: i64,
     #[prost(uint32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub index: u32,
     #[prost(bytes = "vec", tag = "3")]
     pub tx: ::prost::alloc::vec::Vec<u8>,
@@ -799,10 +743,6 @@ pub struct VoteInfo {
     pub validator: ::core::option::Option<Validator>,
     #[prost(enumeration = "super::super::types::v1::BlockIdFlag", tag = "3")]
     #[serde(alias = "blockID_flag")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub block_id_flag: i32,
 }
 /// ExtendedVoteInfo extends VoteInfo with the vote extensions (non-deterministic).
@@ -821,10 +761,6 @@ pub struct ExtendedVoteInfo {
     /// block_id_flag indicates whether the validator voted for a block, nil, or did not vote at all
     #[prost(enumeration = "super::super::types::v1::BlockIdFlag", tag = "5")]
     #[serde(alias = "blockID_flag")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub block_id_flag: i32,
 }
 /// Misbehavior is a type of misbehavior committed by a validator.
@@ -832,10 +768,6 @@ pub struct ExtendedVoteInfo {
 #[proto_message(type_url = "/cometbft.abci.v1.Misbehavior")]
 pub struct Misbehavior {
     #[prost(enumeration = "MisbehaviorType", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub r#type: i32,
     /// The offending validator
     #[prost(message, optional, tag = "2")]
@@ -873,17 +805,9 @@ pub struct Snapshot {
     pub height: u64,
     /// The application-specific snapshot format
     #[prost(uint32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub format: u32,
     /// Number of chunks in the snapshot
     #[prost(uint32, tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub chunks: u32,
     /// Arbitrary snapshot hash, equal only if identical
     #[prost(bytes = "vec", tag = "4")]

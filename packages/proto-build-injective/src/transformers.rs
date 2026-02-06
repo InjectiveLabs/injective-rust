@@ -144,19 +144,12 @@ pub fn allow_serde_int_as_str(s: ItemStruct) -> ItemStruct {
         .clone()
         .into_iter()
         .map(|mut field| {
+            // Only apply string serialization to 64-bit (or larger) integers.
             let int_types = vec![
-                parse_quote!(i8),
-                parse_quote!(i16),
-                parse_quote!(i32),
                 parse_quote!(i64),
                 parse_quote!(i128),
-                parse_quote!(isize),
-                parse_quote!(u8),
-                parse_quote!(u16),
-                parse_quote!(u32),
                 parse_quote!(u64),
                 parse_quote!(u128),
-                parse_quote!(usize),
             ];
 
             if int_types.contains(&field.ty) {

@@ -21,10 +21,6 @@ pub struct OracleInfo {
     #[prost(string, tag = "1")]
     pub symbol: ::prost::alloc::string::String,
     #[prost(enumeration = "OracleType", tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_type: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -327,10 +323,6 @@ pub struct BandIbcParams {
 #[proto_message(type_url = "/injective.oracle.v1beta1.SymbolPriceTimestamp")]
 pub struct SymbolPriceTimestamp {
     #[prost(enumeration = "OracleType", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle: i32,
     #[prost(string, tag = "2")]
     #[serde(alias = "symbolID")]
@@ -352,10 +344,6 @@ pub struct LastPriceTimestamps {
 #[proto_message(type_url = "/injective.oracle.v1beta1.PriceRecords")]
 pub struct PriceRecords {
     #[prost(enumeration = "OracleType", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle: i32,
     #[prost(string, tag = "2")]
     #[serde(alias = "symbolID")]
@@ -383,17 +371,9 @@ pub struct MetadataStatistics {
     /// GroupCount refers to the number of groups used. Equals RecordsSampleSize if
     /// no grouping is used
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub group_count: u32,
     /// RecordsSampleSize refers to the total number of records used.
     #[prost(uint32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub records_sample_size: u32,
     /// Mean refers to the arithmetic mean
     /// For trades, the mean is the VWAP computed over the grouped trade records ∑
@@ -449,10 +429,6 @@ pub struct PriceAttestation {
     )]
     pub conf: u64,
     #[prost(int32, tag = "4")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub expo: i32,
     #[prost(int64, tag = "5")]
     #[serde(
@@ -467,10 +443,6 @@ pub struct PriceAttestation {
     )]
     pub ema_conf: u64,
     #[prost(int32, tag = "7")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub ema_expo: i32,
     #[prost(int64, tag = "8")]
     #[serde(
@@ -1198,10 +1170,6 @@ pub struct QueryModuleStateResponse {
 )]
 pub struct QueryHistoricalPriceRecordsRequest {
     #[prost(enumeration = "OracleType", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle: i32,
     #[prost(string, tag = "2")]
     #[serde(alias = "symbolID")]
@@ -1298,16 +1266,8 @@ pub struct QueryOracleProviderPricesResponse {
 #[proto_message(type_url = "/injective.oracle.v1beta1.ScalingOptions")]
 pub struct ScalingOptions {
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub base_decimals: u32,
     #[prost(uint32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub quote_decimals: u32,
 }
 /// QueryOraclePriceRequest is the request type for the Query/OraclePrice RPC
@@ -1320,10 +1280,6 @@ pub struct ScalingOptions {
 )]
 pub struct QueryOraclePriceRequest {
     #[prost(enumeration = "OracleType", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_type: i32,
     #[prost(string, tag = "2")]
     pub base: ::prost::alloc::string::String,

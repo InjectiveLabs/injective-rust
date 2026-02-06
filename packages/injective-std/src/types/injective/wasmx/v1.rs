@@ -83,10 +83,6 @@ pub struct ContractRegistrationRequest {
     pub granter_address: ::prost::alloc::string::String,
     /// Specifies how the contract will fund its execution
     #[prost(enumeration = "FundingMode", tag = "9")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub funding_mode: i32,
 }
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -204,10 +200,6 @@ pub struct RegisteredContract {
     pub granter_address: ::prost::alloc::string::String,
     /// funding mode
     #[prost(enumeration = "FundingMode", tag = "7")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub fund_mode: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -249,10 +241,6 @@ pub struct EventContractRegistered {
     #[prost(string, tag = "8")]
     pub granter_address: ::prost::alloc::string::String,
     #[prost(enumeration = "FundingMode", tag = "9")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub funding_mode: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]

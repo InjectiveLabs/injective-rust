@@ -1,7 +1,7 @@
 use injective_std_derive::CosmwasmExt;
 /// Params defines the set of params for the distribution module.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ParamsParams")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.Params")]
 pub struct Params {
     #[prost(string, tag = "1")]
     pub community_tax: ::prost::alloc::string::String,
@@ -31,22 +31,18 @@ pub struct Params {
 ///   read that record)
 ///   + one per validator for the zeroeth period, set on initialization
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorHistoricalRewardsValidatorHistoricalRewards")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorHistoricalRewards")]
 pub struct ValidatorHistoricalRewards {
     #[prost(message, repeated, tag = "1")]
     pub cumulative_reward_ratio: ::prost::alloc::vec::Vec<super::super::base::v1beta1::DecCoin>,
     #[prost(uint32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub reference_count: u32,
 }
 /// ValidatorCurrentRewards represents current rewards and current
 /// period for a validator kept as a running counter and incremented
 /// each block as long as the validator's tokens remain constant.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorCurrentRewardsValidatorCurrentRewards")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorCurrentRewards")]
 pub struct ValidatorCurrentRewards {
     #[prost(message, repeated, tag = "1")]
     pub rewards: ::prost::alloc::vec::Vec<super::super::base::v1beta1::DecCoin>,
@@ -60,7 +56,7 @@ pub struct ValidatorCurrentRewards {
 /// ValidatorAccumulatedCommission represents accumulated commission
 /// for a validator kept as a running counter, can be withdrawn at any time.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionValidatorAccumulatedCommission")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorAccumulatedCommission")]
 pub struct ValidatorAccumulatedCommission {
     #[prost(message, repeated, tag = "1")]
     pub commission: ::prost::alloc::vec::Vec<super::super::base::v1beta1::DecCoin>,
@@ -68,7 +64,7 @@ pub struct ValidatorAccumulatedCommission {
 /// ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards
 /// for a validator inexpensive to track, allows simple sanity checks.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorOutstandingRewardsValidatorOutstandingRewards")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorOutstandingRewards")]
 pub struct ValidatorOutstandingRewards {
     #[prost(message, repeated, tag = "1")]
     pub rewards: ::prost::alloc::vec::Vec<super::super::base::v1beta1::DecCoin>,
@@ -78,7 +74,7 @@ pub struct ValidatorOutstandingRewards {
 /// This is needed to calculate appropriate amount of staking tokens
 /// for delegations which are withdrawn after a slash has occurred.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorSlashEventValidatorSlashEvent")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorSlashEvent")]
 pub struct ValidatorSlashEvent {
     #[prost(uint64, tag = "1")]
     #[serde(
@@ -91,14 +87,14 @@ pub struct ValidatorSlashEvent {
 }
 /// ValidatorSlashEvents is a collection of ValidatorSlashEvent messages.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorSlashEventsValidatorSlashEvents")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.ValidatorSlashEvents")]
 pub struct ValidatorSlashEvents {
     #[prost(message, repeated, tag = "1")]
     pub validator_slash_events: ::prost::alloc::vec::Vec<ValidatorSlashEvent>,
 }
 /// FeePool is the global fee pool for distribution.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.FeePoolFeePool")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.FeePool")]
 pub struct FeePool {
     #[prost(message, repeated, tag = "1")]
     pub community_pool: ::prost::alloc::vec::Vec<super::super::base::v1beta1::DecCoin>,
@@ -112,7 +108,7 @@ pub struct FeePool {
 /// pool funds, a simple MsgCommunityPoolSpend can be invoked from the x/gov
 /// module via a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposalCommunityPoolSpendProposal")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal")]
 #[deprecated]
 pub struct CommunityPoolSpendProposal {
     #[prost(string, tag = "1")]
@@ -131,7 +127,7 @@ pub struct CommunityPoolSpendProposal {
 /// the delegators within the validator may be left with less than a full token,
 /// thus sdk.Dec is used.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.DelegatorStartingInfoDelegatorStartingInfo")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.DelegatorStartingInfo")]
 pub struct DelegatorStartingInfo {
     #[prost(uint64, tag = "1")]
     #[serde(
@@ -151,7 +147,7 @@ pub struct DelegatorStartingInfo {
 /// DelegationDelegatorReward represents the properties
 /// of a delegator's delegation reward.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.DelegationDelegatorRewardDelegationDelegatorReward")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.DelegationDelegatorReward")]
 pub struct DelegationDelegatorReward {
     #[prost(string, tag = "1")]
     pub validator_address: ::prost::alloc::string::String,
@@ -161,7 +157,7 @@ pub struct DelegationDelegatorReward {
 /// CommunityPoolSpendProposalWithDeposit defines a CommunityPoolSpendProposal
 /// with a deposit
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposalWithDepositCommunityPoolSpendProposalWithDeposit")]
+#[proto_message(type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposalWithDeposit")]
 pub struct CommunityPoolSpendProposalWithDeposit {
     #[prost(string, tag = "1")]
     pub title: ::prost::alloc::string::String,

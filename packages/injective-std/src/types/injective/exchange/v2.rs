@@ -151,10 +151,6 @@ pub struct GenericExchangeAuthorization {
 #[proto_message(type_url = "/injective.exchange.v2.ForcePausedInfo")]
 pub struct ForcePausedInfo {
     #[prost(enumeration = "ForcePausedReason", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub reason: i32,
     #[prost(string, tag = "2")]
     pub mark_price_at_pausing: ::prost::alloc::string::String,
@@ -224,10 +220,6 @@ pub struct SpotMarket {
     pub market_id: ::prost::alloc::string::String,
     /// Status of the market
     #[prost(enumeration = "MarketStatus", tag = "8")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub status: i32,
     /// min_price_tick_size defines the minimum tick size that the price required
     /// for orders in the market (in human readable format)
@@ -246,24 +238,12 @@ pub struct SpotMarket {
     pub admin: ::prost::alloc::string::String,
     /// level of admin permissions
     #[prost(uint32, tag = "13")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub admin_permissions: u32,
     /// base token decimals
     #[prost(uint32, tag = "14")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub base_decimals: u32,
     /// quote token decimals
     #[prost(uint32, tag = "15")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub quote_decimals: u32,
     /// has_disabled_minimal_protocol_fee indicates whether the minimal protocol
     /// fee is disabled for the market
@@ -285,17 +265,9 @@ pub struct BinaryOptionsMarket {
     pub oracle_provider: ::prost::alloc::string::String,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "4")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_type: i32,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "5")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_scale_factor: u32,
     /// expiration timestamp
     #[prost(int64, tag = "6")]
@@ -333,10 +305,6 @@ pub struct BinaryOptionsMarket {
     pub relayer_fee_share_rate: ::prost::alloc::string::String,
     /// Status of the market
     #[prost(enumeration = "MarketStatus", tag = "14")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub status: i32,
     /// min_price_tick_size defines the minimum tick size that the price and margin
     /// required for orders in the market (in human readable format)
@@ -356,17 +324,9 @@ pub struct BinaryOptionsMarket {
     pub min_notional: ::prost::alloc::string::String,
     /// level of admin permissions
     #[prost(uint32, tag = "19")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub admin_permissions: u32,
     /// quote token decimals
     #[prost(uint32, tag = "20")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub quote_decimals: u32,
     /// open_notional_cap defines the maximum open notional for the market
     #[prost(message, optional, tag = "21")]
@@ -395,17 +355,9 @@ pub struct DerivativeMarket {
     pub oracle_quote: ::prost::alloc::string::String,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "4")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_type: i32,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "5")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_scale_factor: u32,
     /// Address of the quote currency denomination for the derivative contract
     #[prost(string, tag = "6")]
@@ -438,10 +390,6 @@ pub struct DerivativeMarket {
     pub is_perpetual: bool,
     /// Status of the market
     #[prost(enumeration = "MarketStatus", tag = "14")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub status: i32,
     /// min_price_tick_size defines the minimum tick size that the price and margin
     /// required for orders in the market (in human readable format)
@@ -460,17 +408,9 @@ pub struct DerivativeMarket {
     pub admin: ::prost::alloc::string::String,
     /// level of admin permissions
     #[prost(uint32, tag = "19")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub admin_permissions: u32,
     /// quote token decimals
     #[prost(uint32, tag = "20")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub quote_decimals: u32,
     /// reduce_margin_ratio defines the ratio of the margin that is reduced
     #[prost(string, tag = "21")]
@@ -730,10 +670,6 @@ pub struct SpotOrder {
     pub order_info: ::core::option::Option<OrderInfo>,
     /// order types
     #[prost(enumeration = "OrderType", tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub order_type: i32,
     /// trigger_price is the trigger price used by stop/take orders (in human
     /// readable format) (optional)
@@ -760,10 +696,6 @@ pub struct SpotMarketOrder {
     pub order_hash: ::prost::alloc::vec::Vec<u8>,
     /// order types
     #[prost(enumeration = "OrderType", tag = "4")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub order_type: i32,
     /// trigger_price is the trigger price used by stop/take orders
     #[prost(string, tag = "5")]
@@ -778,10 +710,6 @@ pub struct SpotLimitOrder {
     pub order_info: ::core::option::Option<OrderInfo>,
     /// order types
     #[prost(enumeration = "OrderType", tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub order_type: i32,
     /// the amount of the quantity remaining fillable
     #[prost(string, tag = "3")]
@@ -812,10 +740,6 @@ pub struct DerivativeOrder {
     pub order_info: ::core::option::Option<OrderInfo>,
     /// order types
     #[prost(enumeration = "OrderType", tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub order_type: i32,
     /// margin is the margin used by the limit order (in human readable format)
     #[prost(string, tag = "4")]
@@ -841,10 +765,6 @@ pub struct DerivativeMarketOrder {
     pub order_info: ::core::option::Option<OrderInfo>,
     /// order types
     #[prost(enumeration = "OrderType", tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub order_type: i32,
     #[prost(string, tag = "3")]
     pub margin: ::prost::alloc::string::String,
@@ -865,10 +785,6 @@ pub struct DerivativeLimitOrder {
     pub order_info: ::core::option::Option<OrderInfo>,
     /// order types
     #[prost(enumeration = "OrderType", tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub order_type: i32,
     /// margin is the margin used by the limit order
     #[prost(string, tag = "3")]
@@ -1102,10 +1018,6 @@ pub struct Params {
     /// max_derivative_order_side_count defines the maximum number of derivative
     /// active orders a subaccount can have for a given orderbook side
     #[prost(uint32, tag = "14")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub max_derivative_order_side_count: u32,
     /// inj_reward_staked_requirement_threshold defines the threshold on INJ
     /// rewards after which one also needs staked INJ to receive more
@@ -1130,10 +1042,6 @@ pub struct Params {
     /// atomic_market_order_access_level defines the required access permissions
     /// for executing atomic market orders
     #[prost(enumeration = "AtomicMarketOrderAccessLevel", tag = "19")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub atomic_market_order_access_level: i32,
     /// spot_atomic_market_order_fee_multiplier defines the default multiplier for
     /// executing atomic market orders in spot markets
@@ -1252,10 +1160,6 @@ pub struct Deposit {
 #[proto_message(type_url = "/injective.exchange.v2.SubaccountTradeNonce")]
 pub struct SubaccountTradeNonce {
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub nonce: u32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -1720,10 +1624,6 @@ pub struct EventBatchSpotExecution {
     #[prost(bool, tag = "2")]
     pub is_buy: bool,
     #[prost(enumeration = "ExecutionType", tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub execution_type: i32,
     #[prost(message, repeated, tag = "4")]
     pub trades: ::prost::alloc::vec::Vec<TradeLog>,
@@ -1742,10 +1642,6 @@ pub struct EventBatchDerivativeExecution {
     #[prost(string, tag = "4")]
     pub cumulative_funding: ::prost::alloc::string::String,
     #[prost(enumeration = "ExecutionType", tag = "5")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub execution_type: i32,
     #[prost(message, repeated, tag = "6")]
     pub trades: ::prost::alloc::vec::Vec<DerivativeTradeLog>,
@@ -2288,17 +2184,9 @@ pub struct ConditionalDerivativeOrderBook {
 pub struct SubaccountOrderbookMetadata {
     /// The number of vanilla limit orders
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub vanilla_limit_order_count: u32,
     /// The number of reduce-only limit orders
     #[prost(uint32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub reduce_only_limit_order_count: u32,
     /// The aggregate quantity of the subaccount's reduce-only limit orders (in
     /// human readable format)
@@ -2310,17 +2198,9 @@ pub struct SubaccountOrderbookMetadata {
     pub aggregate_vanilla_quantity: ::prost::alloc::string::String,
     /// The number of vanilla conditional orders
     #[prost(uint32, tag = "5")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub vanilla_conditional_order_count: u32,
     /// The number of reduce-only conditional orders
     #[prost(uint32, tag = "6")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub reduce_only_conditional_order_count: u32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2352,10 +2232,6 @@ pub struct SpotMarketParamUpdateProposal {
     #[prost(string, tag = "8")]
     pub min_quantity_tick_size: ::prost::alloc::string::String,
     #[prost(enumeration = "MarketStatus", tag = "9")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub status: i32,
     #[prost(string, tag = "10")]
     pub ticker: ::prost::alloc::string::String,
@@ -2367,25 +2243,13 @@ pub struct SpotMarketParamUpdateProposal {
     pub admin_info: ::core::option::Option<AdminInfo>,
     /// base token decimals
     #[prost(uint32, tag = "13")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub base_decimals: u32,
     /// quote token decimals
     #[prost(uint32, tag = "14")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub quote_decimals: u32,
     /// has_disabled_minimal_protocol_fee defines whether the minimal protocol fee
     /// is disabled for the market
     #[prost(enumeration = "DisableMinimalProtocolFeeUpdate", tag = "15")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub has_disabled_minimal_protocol_fee: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2396,10 +2260,6 @@ pub struct ExchangeEnableProposal {
     #[prost(string, tag = "2")]
     pub description: ::prost::alloc::string::String,
     #[prost(enumeration = "ExchangeType", tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub exchange_type: i32,
 }
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2472,17 +2332,9 @@ pub struct SpotMarketLaunchProposal {
     pub admin_info: ::core::option::Option<AdminInfo>,
     /// base token decimals
     #[prost(uint32, tag = "14")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub base_decimals: u32,
     /// quote token decimals
     #[prost(uint32, tag = "15")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub quote_decimals: u32,
 }
 /// PerpetualMarketLaunchProposal defines a SDK message for proposing a new
@@ -2508,17 +2360,9 @@ pub struct PerpetualMarketLaunchProposal {
     pub oracle_quote: ::prost::alloc::string::String,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "7")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_scale_factor: u32,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "8")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_type: i32,
     /// initial_margin_ratio defines the initial margin ratio for the derivative
     /// market
@@ -2575,17 +2419,9 @@ pub struct BinaryOptionsMarketLaunchProposal {
     pub oracle_provider: ::prost::alloc::string::String,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "6")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_type: i32,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "7")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_scale_factor: u32,
     /// expiration timestamp
     #[prost(int64, tag = "8")]
@@ -2626,10 +2462,6 @@ pub struct BinaryOptionsMarketLaunchProposal {
     #[prost(string, tag = "16")]
     pub min_notional: ::prost::alloc::string::String,
     #[prost(uint32, tag = "17")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub admin_permissions: u32,
     /// open_notional_cap defines the maximum open notional for the market
     #[prost(message, optional, tag = "18")]
@@ -2658,17 +2490,9 @@ pub struct ExpiryFuturesMarketLaunchProposal {
     pub oracle_quote: ::prost::alloc::string::String,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "7")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_scale_factor: u32,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "8")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_type: i32,
     /// Expiration time of the market
     #[prost(int64, tag = "9")]
@@ -2760,10 +2584,6 @@ pub struct DerivativeMarketParamUpdateProposal {
     #[prost(string, tag = "12")]
     pub hourly_funding_rate_cap: ::prost::alloc::string::String,
     #[prost(enumeration = "MarketStatus", tag = "13")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub status: i32,
     #[prost(message, optional, tag = "14")]
     pub oracle_params: ::core::option::Option<OracleParams>,
@@ -2784,10 +2604,6 @@ pub struct DerivativeMarketParamUpdateProposal {
     /// has_disabled_minimal_protocol_fee defines whether the minimal protocol fee
     /// is disabled for the market
     #[prost(enumeration = "DisableMinimalProtocolFeeUpdate", tag = "20")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub has_disabled_minimal_protocol_fee: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2796,10 +2612,6 @@ pub struct AdminInfo {
     #[prost(string, tag = "1")]
     pub admin: ::prost::alloc::string::String,
     #[prost(uint32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub admin_permissions: u32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2876,10 +2688,6 @@ pub struct BinaryOptionsMarketParamUpdateProposal {
     #[prost(string, tag = "12")]
     pub admin: ::prost::alloc::string::String,
     #[prost(enumeration = "MarketStatus", tag = "13")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub status: i32,
     #[prost(message, optional, tag = "14")]
     pub oracle_params: ::core::option::Option<ProviderOracleParams>,
@@ -2895,10 +2703,6 @@ pub struct BinaryOptionsMarketParamUpdateProposal {
     /// has_disabled_minimal_protocol_fee defines whether the minimal protocol fee
     /// is disabled for the market
     #[prost(enumeration = "DisableMinimalProtocolFeeUpdate", tag = "18")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub has_disabled_minimal_protocol_fee: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2912,17 +2716,9 @@ pub struct ProviderOracleParams {
     pub provider: ::prost::alloc::string::String,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_scale_factor: u32,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "4")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_type: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2936,17 +2732,9 @@ pub struct OracleParams {
     pub oracle_quote: ::prost::alloc::string::String,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_scale_factor: u32,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "4")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_type: i32,
 }
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -3297,17 +3085,9 @@ pub struct MsgInstantSpotMarketLaunch {
     pub min_notional: ::prost::alloc::string::String,
     /// base token decimals
     #[prost(uint32, tag = "8")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub base_decimals: u32,
     /// quote token decimals
     #[prost(uint32, tag = "9")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub quote_decimals: u32,
 }
 /// MsgInstantSpotMarketLaunchResponse defines the Msg/InstantSpotMarketLaunch
@@ -3337,17 +3117,9 @@ pub struct MsgInstantPerpetualMarketLaunch {
     pub oracle_quote: ::prost::alloc::string::String,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "6")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_scale_factor: u32,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "7")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_type: i32,
     /// maker_fee_rate defines the trade fee rate for makers on the perpetual
     /// market
@@ -3407,17 +3179,9 @@ pub struct MsgInstantBinaryOptionsMarketLaunch {
     pub oracle_provider: ::prost::alloc::string::String,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "5")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_type: i32,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "6")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_scale_factor: u32,
     /// maker_fee_rate defines the trade fee rate for makers on the perpetual
     /// market
@@ -3489,17 +3253,9 @@ pub struct MsgInstantExpiryFuturesMarketLaunch {
     pub oracle_quote: ::prost::alloc::string::String,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "6")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_type: i32,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "7")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub oracle_scale_factor: u32,
     /// Expiration time of the market
     #[prost(int64, tag = "8")]
@@ -3887,10 +3643,6 @@ pub struct MsgCancelDerivativeOrder {
     pub order_hash: ::prost::alloc::string::String,
     /// the order mask (bitwise combination of OrderMask enum values) (optional)
     #[prost(int32, tag = "5")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub order_mask: i32,
     /// the client order ID (optional)
     #[prost(string, tag = "6")]
@@ -3922,10 +3674,6 @@ pub struct MsgCancelBinaryOptionsOrder {
     pub order_hash: ::prost::alloc::string::String,
     /// the order mask (bitwise combination of OrderMask enum values) (optional)
     #[prost(int32, tag = "5")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub order_mask: i32,
     /// the client order ID (optional)
     #[prost(string, tag = "6")]
@@ -3953,10 +3701,6 @@ pub struct OrderData {
     pub order_hash: ::prost::alloc::string::String,
     /// the order mask (bitwise combination of OrderMask enum values)
     #[prost(int32, tag = "4")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub order_mask: i32,
     /// the client order ID (optional - either the order_hash or the cid should be
     /// provided)
@@ -4255,10 +3999,6 @@ pub struct MsgAdminUpdateBinaryOptionsMarket {
     pub settlement_timestamp: i64,
     /// Status of the market
     #[prost(enumeration = "MarketStatus", tag = "6")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub status: i32,
 }
 /// MsgAdminUpdateBinaryOptionsMarketResponse is the response for
@@ -4508,10 +4248,6 @@ pub struct MsgActivatePostOnlyMode {
     pub sender: ::prost::alloc::string::String,
     /// the number of blocks to activate post-only mode for
     #[prost(uint32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub blocks_amount: u32,
 }
 /// MsgActivatePostOnlyModeResponse defines the response for
@@ -4746,10 +4482,6 @@ pub struct Subaccount {
     pub trader: ::prost::alloc::string::String,
     /// the subaccount's nonce number
     #[prost(uint32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub subaccount_nonce: u32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -5081,10 +4813,6 @@ pub struct QuerySpotOrderbookRequest {
     pub limit: u64,
     /// the order side to return the orderbook entries for (optional)
     #[prost(enumeration = "OrderSide", tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub order_side: i32,
     /// limits the number of entries to return per side based on the cumulative
     /// notional (in human readable format)
@@ -5398,10 +5126,6 @@ pub struct QueryTraderSpotOrdersToCancelUpToAmountRequest {
     pub quote_amount: ::prost::alloc::string::String,
     /// The cancellation strategy
     #[prost(enumeration = "CancellationStrategy", tag = "5")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub strategy: i32,
     /// The reference price for the cancellation strategy, e.g. mid price or mark
     /// price
@@ -5426,10 +5150,6 @@ pub struct QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
     pub quote_amount: ::prost::alloc::string::String,
     /// The cancellation strategy
     #[prost(enumeration = "CancellationStrategy", tag = "4")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub strategy: i32,
     /// The reference price for the cancellation strategy, e.g. mid price or mark
     /// price
@@ -5883,10 +5603,6 @@ pub struct QuerySubaccountOrderMetadataResponse {
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountTradeNonceResponse")]
 pub struct QuerySubaccountTradeNonceResponse {
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub nonce: u32,
 }
 /// QueryModuleStateRequest is the request type for the Query/ExchangeModuleState

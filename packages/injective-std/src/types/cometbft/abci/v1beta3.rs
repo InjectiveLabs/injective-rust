@@ -273,10 +273,6 @@ pub struct ResponseInitChain {
 #[proto_message(type_url = "/cometbft.abci.v1beta3.ResponseCheckTx")]
 pub struct ResponseCheckTx {
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub code: u32,
     #[prost(bytes = "vec", tag = "2")]
     pub data: ::prost::alloc::vec::Vec<u8>,
@@ -326,10 +322,6 @@ pub struct ResponseExtendVote {
 #[proto_message(type_url = "/cometbft.abci.v1beta3.ResponseVerifyVoteExtension")]
 pub struct ResponseVerifyVoteExtension {
     #[prost(enumeration = "response_verify_vote_extension::VerifyStatus", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub status: i32,
 }
 /// Nested message and enum types in `ResponseVerifyVoteExtension`.
@@ -405,10 +397,6 @@ pub struct VoteInfo {
     pub validator: ::core::option::Option<super::v1beta1::Validator>,
     #[prost(enumeration = "super::super::types::v1beta1::BlockIdFlag", tag = "3")]
     #[serde(alias = "blockID_flag")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub block_id_flag: i32,
 }
 /// ExtendedVoteInfo extends VoteInfo with the vote extensions (non-deterministic).
@@ -427,10 +415,6 @@ pub struct ExtendedVoteInfo {
     /// block_id_flag indicates whether the validator voted for a block, nil, or did not vote at all
     #[prost(enumeration = "super::super::types::v1beta1::BlockIdFlag", tag = "5")]
     #[serde(alias = "blockID_flag")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub block_id_flag: i32,
 }
 /// CommitInfo contains votes for the particular round.
@@ -438,10 +422,6 @@ pub struct ExtendedVoteInfo {
 #[proto_message(type_url = "/cometbft.abci.v1beta3.CommitInfo")]
 pub struct CommitInfo {
     #[prost(int32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(message, repeated, tag = "2")]
     pub votes: ::prost::alloc::vec::Vec<VoteInfo>,
@@ -454,10 +434,6 @@ pub struct CommitInfo {
 pub struct ExtendedCommitInfo {
     /// The round at which the block proposer decided in the previous height.
     #[prost(int32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     /// List of validators' addresses in the last validator set with their voting
     /// information, including vote extensions.
@@ -471,10 +447,6 @@ pub struct ExtendedCommitInfo {
 #[proto_message(type_url = "/cometbft.abci.v1beta3.ExecTxResult")]
 pub struct ExecTxResult {
     #[prost(uint32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub code: u32,
     #[prost(bytes = "vec", tag = "2")]
     pub data: ::prost::alloc::vec::Vec<u8>,
@@ -515,10 +487,6 @@ pub struct TxResult {
     )]
     pub height: i64,
     #[prost(uint32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub index: u32,
     #[prost(bytes = "vec", tag = "3")]
     pub tx: ::prost::alloc::vec::Vec<u8>,
