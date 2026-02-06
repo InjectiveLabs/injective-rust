@@ -1,8 +1,7 @@
 use injective_std_derive::CosmwasmExt;
 /// ConsensusParams contains consensus critical parameters that determine the
 /// validity of blocks.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.ConsensusParams")]
 pub struct ConsensusParams {
     #[prost(message, optional, tag = "1")]
@@ -15,8 +14,7 @@ pub struct ConsensusParams {
     pub version: ::core::option::Option<VersionParams>,
 }
 /// BlockParams contains limits on the block size.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.BlockParams")]
 pub struct BlockParams {
     /// Max block size, in bytes.
@@ -47,8 +45,7 @@ pub struct BlockParams {
     pub time_iota_ms: i64,
 }
 /// EvidenceParams determine how we handle evidence of malfeasance.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.EvidenceParams")]
 pub struct EvidenceParams {
     /// Max age of evidence, in blocks.
@@ -80,16 +77,14 @@ pub struct EvidenceParams {
 }
 /// ValidatorParams restrict the public key types validators can use.
 /// NOTE: uses ABCI pubkey naming, not Amino names.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.ValidatorParams")]
 pub struct ValidatorParams {
     #[prost(string, repeated, tag = "1")]
     pub pub_key_types: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// VersionParams contains the ABCI application version.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.VersionParams")]
 pub struct VersionParams {
     /// Was named app_version in Tendermint 0.34
@@ -103,8 +98,7 @@ pub struct VersionParams {
 /// HashedParams is a subset of ConsensusParams.
 ///
 /// It is hashed into the Header.ConsensusHash.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.HashedParams")]
 pub struct HashedParams {
     #[prost(int64, tag = "1")]
@@ -121,7 +115,6 @@ pub struct HashedParams {
     pub block_max_gas: i64,
 }
 /// ValidatorSet defines a set of validators.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.ValidatorSet")]
 pub struct ValidatorSet {
@@ -137,8 +130,7 @@ pub struct ValidatorSet {
     pub total_voting_power: i64,
 }
 /// Validator represents a node participating in the consensus protocol.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.Validator")]
 pub struct Validator {
     #[prost(bytes = "vec", tag = "1")]
@@ -161,8 +153,7 @@ pub struct Validator {
 /// SimpleValidator is a Validator, which is serialized and hashed in consensus.
 /// Address is removed because it's redundant with the pubkey.
 /// Proposer priority is removed because it changes every round.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.SimpleValidator")]
 pub struct SimpleValidator {
     #[prost(message, optional, tag = "1")]
@@ -195,10 +186,10 @@ impl BlockIdFlag {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            BlockIdFlag::Unknown => "BLOCK_ID_FLAG_UNKNOWN",
-            BlockIdFlag::Absent => "BLOCK_ID_FLAG_ABSENT",
-            BlockIdFlag::Commit => "BLOCK_ID_FLAG_COMMIT",
-            BlockIdFlag::Nil => "BLOCK_ID_FLAG_NIL",
+            Self::Unknown => "BLOCK_ID_FLAG_UNKNOWN",
+            Self::Absent => "BLOCK_ID_FLAG_ABSENT",
+            Self::Commit => "BLOCK_ID_FLAG_COMMIT",
+            Self::Nil => "BLOCK_ID_FLAG_NIL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -213,8 +204,7 @@ impl BlockIdFlag {
     }
 }
 /// Header of the parts set for a block.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.PartSetHeader")]
 pub struct PartSetHeader {
     #[prost(uint32, tag = "1")]
@@ -227,8 +217,7 @@ pub struct PartSetHeader {
     pub hash: ::prost::alloc::vec::Vec<u8>,
 }
 /// Part of the block.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.Part")]
 pub struct Part {
     #[prost(uint32, tag = "1")]
@@ -243,8 +232,7 @@ pub struct Part {
     pub proof: ::core::option::Option<super::super::crypto::v1::Proof>,
 }
 /// BlockID defines the unique ID of a block as its hash and its `PartSetHeader`.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.BlockID")]
 pub struct BlockId {
     #[prost(bytes = "vec", tag = "1")]
@@ -253,8 +241,7 @@ pub struct BlockId {
     pub part_set_header: ::core::option::Option<PartSetHeader>,
 }
 /// Header defines the structure of a block header.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.Header")]
 pub struct Header {
     /// basic block info
@@ -310,8 +297,7 @@ pub struct Header {
     pub proposer_address: ::prost::alloc::vec::Vec<u8>,
 }
 /// Data contains the set of transactions included in the block
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.Data")]
 pub struct Data {
     /// Txs that will be applied by state @ block.Height+1.
@@ -322,8 +308,7 @@ pub struct Data {
 }
 /// Vote represents a prevote or precommit vote from validators for
 /// consensus.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.Vote")]
 pub struct Vote {
     #[prost(enumeration = "SignedMsgType", tag = "1")]
@@ -362,7 +347,6 @@ pub struct Vote {
     pub signature: ::prost::alloc::vec::Vec<u8>,
 }
 /// Commit contains the evidence that a block was committed by a set of validators.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.Commit")]
 pub struct Commit {
@@ -385,8 +369,7 @@ pub struct Commit {
     pub signatures: ::prost::alloc::vec::Vec<CommitSig>,
 }
 /// CommitSig is a part of the Vote included in a Commit.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.CommitSig")]
 pub struct CommitSig {
     #[prost(enumeration = "BlockIdFlag", tag = "1")]
@@ -404,8 +387,7 @@ pub struct CommitSig {
     pub signature: ::prost::alloc::vec::Vec<u8>,
 }
 /// Block proposal.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.Proposal")]
 pub struct Proposal {
     #[prost(enumeration = "SignedMsgType", tag = "1")]
@@ -441,7 +423,6 @@ pub struct Proposal {
     pub signature: ::prost::alloc::vec::Vec<u8>,
 }
 /// SignedHeader contains a Header(H) and Commit(H+1) with signatures of validators who signed it.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.SignedHeader")]
 pub struct SignedHeader {
@@ -451,7 +432,6 @@ pub struct SignedHeader {
     pub commit: ::core::option::Option<Commit>,
 }
 /// LightBlock is a combination of SignedHeader and ValidatorSet. It is used by light clients.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.LightBlock")]
 pub struct LightBlock {
@@ -461,8 +441,7 @@ pub struct LightBlock {
     pub validator_set: ::core::option::Option<ValidatorSet>,
 }
 /// BlockMeta contains meta information about a block.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.BlockMeta")]
 pub struct BlockMeta {
     #[prost(message, optional, tag = "1")]
@@ -484,8 +463,7 @@ pub struct BlockMeta {
     pub num_txs: i64,
 }
 /// TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.TxProof")]
 pub struct TxProof {
     #[prost(bytes = "vec", tag = "1")]
@@ -516,10 +494,10 @@ impl SignedMsgType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            SignedMsgType::Unknown => "SIGNED_MSG_TYPE_UNKNOWN",
-            SignedMsgType::Prevote => "SIGNED_MSG_TYPE_PREVOTE",
-            SignedMsgType::Precommit => "SIGNED_MSG_TYPE_PRECOMMIT",
-            SignedMsgType::Proposal => "SIGNED_MSG_TYPE_PROPOSAL",
+            Self::Unknown => "SIGNED_MSG_TYPE_UNKNOWN",
+            Self::Prevote => "SIGNED_MSG_TYPE_PREVOTE",
+            Self::Precommit => "SIGNED_MSG_TYPE_PRECOMMIT",
+            Self::Proposal => "SIGNED_MSG_TYPE_PROPOSAL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -534,7 +512,6 @@ impl SignedMsgType {
     }
 }
 /// Evidence is a generic type for wrapping evidence of misbehavior by a validator.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.Evidence")]
 pub struct Evidence {
@@ -546,7 +523,6 @@ pub struct Evidence {
 pub mod evidence {
     use injective_std_derive::CosmwasmExt;
     /// The type of evidence.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Sum {
         #[prost(message, tag = "1")]
@@ -556,8 +532,7 @@ pub mod evidence {
     }
 }
 /// DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.DuplicateVoteEvidence")]
 pub struct DuplicateVoteEvidence {
     #[prost(message, optional, tag = "1")]
@@ -580,7 +555,6 @@ pub struct DuplicateVoteEvidence {
     pub timestamp: ::core::option::Option<crate::shim::Timestamp>,
 }
 /// LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.LightClientAttackEvidence")]
 pub struct LightClientAttackEvidence {
@@ -604,7 +578,6 @@ pub struct LightClientAttackEvidence {
     pub timestamp: ::core::option::Option<crate::shim::Timestamp>,
 }
 /// EvidenceList is a list of evidence.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.EvidenceList")]
 pub struct EvidenceList {
@@ -612,7 +585,6 @@ pub struct EvidenceList {
     pub evidence: ::prost::alloc::vec::Vec<Evidence>,
 }
 /// Block defines the structure of a block in the CometBFT blockchain.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.Block")]
 pub struct Block {
@@ -626,8 +598,7 @@ pub struct Block {
     pub last_commit: ::core::option::Option<Commit>,
 }
 /// EventDataRoundState is emitted with each new round step.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.EventDataRoundState")]
 pub struct EventDataRoundState {
     #[prost(int64, tag = "1")]
@@ -647,8 +618,7 @@ pub struct EventDataRoundState {
 }
 /// CanonicalBlockID is a canonical representation of a BlockID, which gets
 /// serialized and signed.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.CanonicalBlockID")]
 pub struct CanonicalBlockId {
     #[prost(bytes = "vec", tag = "1")]
@@ -658,8 +628,7 @@ pub struct CanonicalBlockId {
 }
 /// CanonicalPartSetHeader is a canonical representation of a PartSetHeader,
 /// which gets serialized and signed.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.CanonicalPartSetHeader")]
 pub struct CanonicalPartSetHeader {
     #[prost(uint32, tag = "1")]
@@ -673,8 +642,7 @@ pub struct CanonicalPartSetHeader {
 }
 /// CanonicalProposal is a canonical representation of a Proposal, which gets
 /// serialized and signed.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.CanonicalProposal")]
 pub struct CanonicalProposal {
     /// type alias for byte
@@ -715,8 +683,7 @@ pub struct CanonicalProposal {
 }
 /// CanonicalVote is a canonical representation of a Vote, which gets
 /// serialized and signed.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta1.CanonicalVote")]
 pub struct CanonicalVote {
     /// type alias for byte

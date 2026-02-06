@@ -1,7 +1,6 @@
 use injective_std_derive::CosmwasmExt;
 /// BlockStoreState represents the state of the block store.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.store.v1.BlockStoreState")]
 pub struct BlockStoreState {
     #[prost(int64, tag = "1")]

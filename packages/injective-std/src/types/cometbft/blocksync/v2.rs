@@ -1,7 +1,6 @@
 use injective_std_derive::CosmwasmExt;
 /// BlockRequest requests a block for a specific height
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.blocksync.v2.BlockRequest")]
 pub struct BlockRequest {
     #[prost(int64, tag = "1")]
@@ -12,8 +11,7 @@ pub struct BlockRequest {
     pub height: i64,
 }
 /// NoBlockResponse informs the node that the peer does not have block at the requested height
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.blocksync.v2.NoBlockResponse")]
 pub struct NoBlockResponse {
     #[prost(int64, tag = "1")]
@@ -24,13 +22,11 @@ pub struct NoBlockResponse {
     pub height: i64,
 }
 /// StatusRequest requests the status of a peer.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.blocksync.v2.StatusRequest")]
 pub struct StatusRequest {}
 /// StatusResponse is a peer response to inform their status.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.blocksync.v2.StatusResponse")]
 pub struct StatusResponse {
     #[prost(int64, tag = "1")]
@@ -47,7 +43,6 @@ pub struct StatusResponse {
     pub base: i64,
 }
 /// BlockResponse returns block to the requested
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.blocksync.v2.BlockResponse")]
 pub struct BlockResponse {
@@ -57,7 +52,6 @@ pub struct BlockResponse {
     pub ext_commit: ::core::option::Option<super::super::types::v2::ExtendedCommit>,
 }
 /// Message is an abstract blocksync message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.blocksync.v2.Message")]
 pub struct Message {
@@ -69,7 +63,6 @@ pub struct Message {
 pub mod message {
     use injective_std_derive::CosmwasmExt;
     /// Sum of all possible messages.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Sum {
         #[prost(message, tag = "1")]

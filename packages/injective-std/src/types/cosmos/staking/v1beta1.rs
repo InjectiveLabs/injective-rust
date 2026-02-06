@@ -3,7 +3,6 @@ use injective_std_derive::CosmwasmExt;
 /// It is stored as part of staking module's state, which persists the `n` most
 /// recent HistoricalInfo
 /// (`n` is set by the staking module's `historical_entries` parameter).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.HistoricalInfo")]
 pub struct HistoricalInfo {
@@ -14,8 +13,7 @@ pub struct HistoricalInfo {
 }
 /// CommissionRates defines the initial commission rates to be used for creating
 /// a validator.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.CommissionRates")]
 pub struct CommissionRates {
     /// rate is the commission rate charged to delegators, as a fraction.
@@ -29,8 +27,7 @@ pub struct CommissionRates {
     pub max_change_rate: ::prost::alloc::string::String,
 }
 /// Commission defines commission parameters for a given validator.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.Commission")]
 pub struct Commission {
     /// commission_rates defines the initial commission rates to be used for creating a validator.
@@ -41,8 +38,7 @@ pub struct Commission {
     pub update_time: ::core::option::Option<crate::shim::Timestamp>,
 }
 /// Description defines a validator description.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.Description")]
 pub struct Description {
     /// moniker defines a human-readable name for the validator.
@@ -69,8 +65,7 @@ pub struct Description {
 /// bond shares is based on the amount of coins delegated divided by the current
 /// exchange rate. Voting power can be calculated as total bonded shares
 /// multiplied by exchange rate.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.Validator")]
 pub struct Validator {
     /// operator_address defines the address of the validator's operator; bech encoded in JSON.
@@ -129,8 +124,7 @@ pub struct Validator {
     pub unbonding_ids: ::prost::alloc::vec::Vec<u64>,
 }
 /// ValAddresses defines a repeated set of validator addresses.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.ValAddresses")]
 pub struct ValAddresses {
     #[prost(string, repeated, tag = "1")]
@@ -139,8 +133,7 @@ pub struct ValAddresses {
 /// DVPair is struct that just has a delegator-validator pair with no other data.
 /// It is intended to be used as a marshalable pointer. For example, a DVPair can
 /// be used to construct the key to getting an UnbondingDelegation from state.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.DVPair")]
 pub struct DvPair {
     #[prost(string, tag = "1")]
@@ -149,7 +142,6 @@ pub struct DvPair {
     pub validator_address: ::prost::alloc::string::String,
 }
 /// DVPairs defines an array of DVPair objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.DVPairs")]
 pub struct DvPairs {
@@ -160,8 +152,7 @@ pub struct DvPairs {
 /// with no other data. It is intended to be used as a marshalable pointer. For
 /// example, a DVVTriplet can be used to construct the key to getting a
 /// Redelegation from state.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.DVVTriplet")]
 pub struct DvvTriplet {
     #[prost(string, tag = "1")]
@@ -172,7 +163,6 @@ pub struct DvvTriplet {
     pub validator_dst_address: ::prost::alloc::string::String,
 }
 /// DVVTriplets defines an array of DVVTriplet objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.DVVTriplets")]
 pub struct DvvTriplets {
@@ -182,8 +172,7 @@ pub struct DvvTriplets {
 /// Delegation represents the bond with tokens held by an account. It is
 /// owned by one delegator, and is associated with the voting power of one
 /// validator.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.Delegation")]
 pub struct Delegation {
     /// delegator_address is the encoded address of the delegator.
@@ -198,7 +187,6 @@ pub struct Delegation {
 }
 /// UnbondingDelegation stores all of a single delegator's unbonding bonds
 /// for a single validator in an time-ordered list.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.UnbondingDelegation")]
 pub struct UnbondingDelegation {
@@ -215,8 +203,7 @@ pub struct UnbondingDelegation {
     pub entries: ::prost::alloc::vec::Vec<UnbondingDelegationEntry>,
 }
 /// UnbondingDelegationEntry defines an unbonding object with relevant metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.UnbondingDelegationEntry")]
 pub struct UnbondingDelegationEntry {
     /// creation_height is the height which the unbonding took place.
@@ -252,8 +239,7 @@ pub struct UnbondingDelegationEntry {
     pub unbonding_on_hold_ref_count: i64,
 }
 /// RedelegationEntry defines a redelegation object with relevant metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.RedelegationEntry")]
 pub struct RedelegationEntry {
     /// creation_height  defines the height which the redelegation took place.
@@ -290,7 +276,6 @@ pub struct RedelegationEntry {
 }
 /// Redelegation contains the list of a particular delegator's redelegating bonds
 /// from a particular source validator to a particular destination validator.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.Redelegation")]
 pub struct Redelegation {
@@ -310,8 +295,7 @@ pub struct Redelegation {
     pub entries: ::prost::alloc::vec::Vec<RedelegationEntry>,
 }
 /// Params defines the parameters for the x/staking module.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.Params")]
 pub struct Params {
     /// unbonding_time is the time duration of unbonding.
@@ -347,8 +331,7 @@ pub struct Params {
 }
 /// DelegationResponse is equivalent to Delegation except that it contains a
 /// balance in addition to shares which is more suitable for client responses.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.DelegationResponse")]
 pub struct DelegationResponse {
     #[prost(message, optional, tag = "1")]
@@ -359,8 +342,7 @@ pub struct DelegationResponse {
 /// RedelegationEntryResponse is equivalent to a RedelegationEntry except that it
 /// contains a balance in addition to shares which is more suitable for client
 /// responses.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.RedelegationEntryResponse")]
 pub struct RedelegationEntryResponse {
     #[prost(message, optional, tag = "1")]
@@ -371,7 +353,6 @@ pub struct RedelegationEntryResponse {
 /// RedelegationResponse is equivalent to a Redelegation except that its entries
 /// contain a balance in addition to shares which is more suitable for client
 /// responses.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.RedelegationResponse")]
 pub struct RedelegationResponse {
@@ -382,8 +363,7 @@ pub struct RedelegationResponse {
 }
 /// Pool is used for tracking bonded and not-bonded token supply of the bond
 /// denomination.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.Pool")]
 pub struct Pool {
     #[prost(string, tag = "1")]
@@ -393,7 +373,6 @@ pub struct Pool {
 }
 /// ValidatorUpdates defines an array of abci.ValidatorUpdate objects.
 /// TODO: explore moving this to proto/cosmos/base to separate modules from tendermint dependence
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.ValidatorUpdates")]
 pub struct ValidatorUpdates {
@@ -421,10 +400,10 @@ impl BondStatus {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            BondStatus::Unspecified => "BOND_STATUS_UNSPECIFIED",
-            BondStatus::Unbonded => "BOND_STATUS_UNBONDED",
-            BondStatus::Unbonding => "BOND_STATUS_UNBONDING",
-            BondStatus::Bonded => "BOND_STATUS_BONDED",
+            Self::Unspecified => "BOND_STATUS_UNSPECIFIED",
+            Self::Unbonded => "BOND_STATUS_UNBONDED",
+            Self::Unbonding => "BOND_STATUS_UNBONDING",
+            Self::Bonded => "BOND_STATUS_BONDED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -457,9 +436,9 @@ impl Infraction {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            Infraction::Unspecified => "INFRACTION_UNSPECIFIED",
-            Infraction::DoubleSign => "INFRACTION_DOUBLE_SIGN",
-            Infraction::Downtime => "INFRACTION_DOWNTIME",
+            Self::Unspecified => "INFRACTION_UNSPECIFIED",
+            Self::DoubleSign => "INFRACTION_DOUBLE_SIGN",
+            Self::Downtime => "INFRACTION_DOWNTIME",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -473,7 +452,6 @@ impl Infraction {
     }
 }
 /// GenesisState defines the staking module's genesis state.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.GenesisState")]
 pub struct GenesisState {
@@ -509,8 +487,7 @@ pub struct GenesisState {
     pub allowed_delegation_transfer_receivers: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// LastValidatorPower required for validator set update logic.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.LastValidatorPower")]
 pub struct LastValidatorPower {
     /// address is the address of the validator.
@@ -525,8 +502,7 @@ pub struct LastValidatorPower {
     pub power: i64,
 }
 /// MsgCreateValidator defines a SDK message for creating a new validator.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgCreateValidator")]
 pub struct MsgCreateValidator {
     #[prost(message, optional, tag = "1")]
@@ -549,13 +525,11 @@ pub struct MsgCreateValidator {
     pub value: ::core::option::Option<super::super::base::v1beta1::Coin>,
 }
 /// MsgCreateValidatorResponse defines the Msg/CreateValidator response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgCreateValidatorResponse")]
 pub struct MsgCreateValidatorResponse {}
 /// MsgEditValidator defines a SDK message for editing an existing validator.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgEditValidator")]
 pub struct MsgEditValidator {
     #[prost(message, optional, tag = "1")]
@@ -572,14 +546,12 @@ pub struct MsgEditValidator {
     pub min_self_delegation: ::prost::alloc::string::String,
 }
 /// MsgEditValidatorResponse defines the Msg/EditValidator response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgEditValidatorResponse")]
 pub struct MsgEditValidatorResponse {}
 /// MsgDelegate defines a SDK message for performing a delegation of coins
 /// from a delegator to a validator.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgDelegate")]
 pub struct MsgDelegate {
     #[prost(string, tag = "1")]
@@ -590,14 +562,12 @@ pub struct MsgDelegate {
     pub amount: ::core::option::Option<super::super::base::v1beta1::Coin>,
 }
 /// MsgDelegateResponse defines the Msg/Delegate response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgDelegateResponse")]
 pub struct MsgDelegateResponse {}
 /// MsgTransferDelegation defines a SDK message for transferring a delegation of coins
 /// from a delegator to another address.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgTransferDelegation")]
 pub struct MsgTransferDelegation {
     #[prost(string, tag = "1")]
@@ -610,14 +580,12 @@ pub struct MsgTransferDelegation {
     pub amount: ::core::option::Option<super::super::base::v1beta1::Coin>,
 }
 /// MsgTransferDelegationResponse defines the Msg/TransferDelegation response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgTransferDelegationResponse")]
 pub struct MsgTransferDelegationResponse {}
 /// MsgBeginRedelegate defines a SDK message for performing a redelegation
 /// of coins from a delegator and source validator to a destination validator.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgBeginRedelegate")]
 pub struct MsgBeginRedelegate {
     #[prost(string, tag = "1")]
@@ -630,8 +598,7 @@ pub struct MsgBeginRedelegate {
     pub amount: ::core::option::Option<super::super::base::v1beta1::Coin>,
 }
 /// MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgBeginRedelegateResponse")]
 pub struct MsgBeginRedelegateResponse {
     #[prost(message, optional, tag = "1")]
@@ -639,8 +606,7 @@ pub struct MsgBeginRedelegateResponse {
 }
 /// MsgUndelegate defines a SDK message for performing an undelegation from a
 /// delegate and a validator.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgUndelegate")]
 pub struct MsgUndelegate {
     #[prost(string, tag = "1")]
@@ -651,8 +617,7 @@ pub struct MsgUndelegate {
     pub amount: ::core::option::Option<super::super::base::v1beta1::Coin>,
 }
 /// MsgUndelegateResponse defines the Msg/Undelegate response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgUndelegateResponse")]
 pub struct MsgUndelegateResponse {
     #[prost(message, optional, tag = "1")]
@@ -666,8 +631,7 @@ pub struct MsgUndelegateResponse {
 /// MsgCancelUnbondingDelegation defines the SDK message for performing a cancel unbonding delegation for delegator
 ///
 /// Since: cosmos-sdk 0.46
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgCancelUnbondingDelegation")]
 pub struct MsgCancelUnbondingDelegation {
     #[prost(string, tag = "1")]
@@ -688,15 +652,13 @@ pub struct MsgCancelUnbondingDelegation {
 /// MsgCancelUnbondingDelegationResponse
 ///
 /// Since: cosmos-sdk 0.46
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgCancelUnbondingDelegationResponse")]
 pub struct MsgCancelUnbondingDelegationResponse {}
 /// MsgUpdateParams is the Msg/UpdateParams request type.
 ///
 /// Since: cosmos-sdk 0.47
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgUpdateParams")]
 pub struct MsgUpdateParams {
     /// authority is the address that controls the module (defaults to x/gov unless overwritten).
@@ -712,7 +674,6 @@ pub struct MsgUpdateParams {
 /// MsgUpdateParams message.
 ///
 /// Since: cosmos-sdk 0.47
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.staking.v1beta1.MsgUpdateParamsResponse")]
 pub struct MsgUpdateParamsResponse {}

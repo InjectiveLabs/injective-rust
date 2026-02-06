@@ -1,7 +1,6 @@
 use injective_std_derive::CosmwasmExt;
 /// Message is the top-level message type for the statesync service.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.statesync.v1.Message")]
 pub struct Message {
     /// The message type.
@@ -12,8 +11,7 @@ pub struct Message {
 pub mod message {
     use injective_std_derive::CosmwasmExt;
     /// The message type.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+    #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Sum {
         #[prost(message, tag = "1")]
         SnapshotsRequest(super::SnapshotsRequest),
@@ -26,13 +24,11 @@ pub mod message {
     }
 }
 /// SnapshotsRequest is sent to request a snapshot.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.statesync.v1.SnapshotsRequest")]
 pub struct SnapshotsRequest {}
 /// SnapshotsResponse contains the snapshot metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.statesync.v1.SnapshotsResponse")]
 pub struct SnapshotsResponse {
     #[prost(uint64, tag = "1")]
@@ -59,8 +55,7 @@ pub struct SnapshotsResponse {
     pub metadata: ::prost::alloc::vec::Vec<u8>,
 }
 /// ChunkRequest is sent to request a chunk.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.statesync.v1.ChunkRequest")]
 pub struct ChunkRequest {
     #[prost(uint64, tag = "1")]
@@ -83,8 +78,7 @@ pub struct ChunkRequest {
     pub index: u32,
 }
 /// ChunkResponse contains a chunk of the snapshot.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.statesync.v1.ChunkResponse")]
 pub struct ChunkResponse {
     #[prost(uint64, tag = "1")]

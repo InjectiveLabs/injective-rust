@@ -1,6 +1,5 @@
 use injective_std_derive::CosmwasmExt;
 /// Request represents a request to the ABCI application.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.Request")]
 pub struct Request {
@@ -12,7 +11,6 @@ pub struct Request {
 pub mod request {
     use injective_std_derive::CosmwasmExt;
     /// Sum of all possible messages.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Value {
         #[prost(message, tag = "1")]
@@ -50,8 +48,7 @@ pub mod request {
     }
 }
 /// RequestInfo is a request for the ABCI application version.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.RequestInfo")]
 pub struct RequestInfo {
     #[prost(string, tag = "1")]
@@ -72,7 +69,6 @@ pub struct RequestInfo {
     pub abci_version: ::prost::alloc::string::String,
 }
 /// RequestInitChain is a request to initialize the blockchain.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.RequestInitChain")]
 pub struct RequestInitChain {
@@ -95,7 +91,6 @@ pub struct RequestInitChain {
     pub initial_height: i64,
 }
 /// RequestBeginBlock indicates the beginning of committing the block.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.RequestBeginBlock")]
 pub struct RequestBeginBlock {
@@ -110,7 +105,6 @@ pub struct RequestBeginBlock {
 }
 /// RequestPrepareProposal is a request for the ABCI application to prepare a new
 /// block proposal.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.RequestPrepareProposal")]
 pub struct RequestPrepareProposal {
@@ -144,7 +138,6 @@ pub struct RequestPrepareProposal {
     pub proposer_address: ::prost::alloc::vec::Vec<u8>,
 }
 /// RequestProcessProposal is a request for the ABCI application to process proposal.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.RequestProcessProposal")]
 pub struct RequestProcessProposal {
@@ -172,7 +165,6 @@ pub struct RequestProcessProposal {
     pub proposer_address: ::prost::alloc::vec::Vec<u8>,
 }
 /// Response represents a response from the ABCI application.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.Response")]
 pub struct Response {
@@ -184,7 +176,6 @@ pub struct Response {
 pub mod response {
     use injective_std_derive::CosmwasmExt;
     /// Sum of all possible messages.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Value {
         #[prost(message, tag = "1")]
@@ -225,7 +216,6 @@ pub mod response {
 }
 /// ResponseInitChain contains the ABCI application's hash and updates to the
 /// validator set and/or the consensus params, if any.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.ResponseInitChain")]
 pub struct ResponseInitChain {
@@ -237,7 +227,6 @@ pub struct ResponseInitChain {
     pub app_hash: ::prost::alloc::vec::Vec<u8>,
 }
 /// ResponseBeginBlock contains a list of block-level events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.ResponseBeginBlock")]
 pub struct ResponseBeginBlock {
@@ -246,7 +235,6 @@ pub struct ResponseBeginBlock {
 }
 /// ResponseCheckTx shows if the transaction was deemed valid by the ABCI
 /// application.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.ResponseCheckTx")]
 pub struct ResponseCheckTx {
@@ -295,7 +283,6 @@ pub struct ResponseCheckTx {
 }
 /// ResponseDeliverTx contains a result of committing the given transaction and a
 /// list of events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.ResponseDeliverTx")]
 pub struct ResponseDeliverTx {
@@ -332,7 +319,6 @@ pub struct ResponseDeliverTx {
     pub codespace: ::prost::alloc::string::String,
 }
 /// ResponseEndBlock contains updates to consensus params and/or validator set changes, if any.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.ResponseEndBlock")]
 pub struct ResponseEndBlock {
@@ -344,16 +330,14 @@ pub struct ResponseEndBlock {
     pub events: ::prost::alloc::vec::Vec<Event>,
 }
 /// ResponsePrepareProposal contains the list of transactions that will be included in the proposal.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.ResponsePrepareProposal")]
 pub struct ResponsePrepareProposal {
     #[prost(bytes = "vec", repeated, tag = "1")]
     pub txs: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// ResponseProcessProposal contains the result of processing a proposal.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.ResponseProcessProposal")]
 pub struct ResponseProcessProposal {
     #[prost(enumeration = "response_process_proposal::ProposalStatus", tag = "1")]
@@ -385,9 +369,9 @@ pub mod response_process_proposal {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ProposalStatus::Unknown => "UNKNOWN",
-                ProposalStatus::Accept => "ACCEPT",
-                ProposalStatus::Reject => "REJECT",
+                Self::Unknown => "UNKNOWN",
+                Self::Accept => "ACCEPT",
+                Self::Reject => "REJECT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -402,7 +386,6 @@ pub mod response_process_proposal {
     }
 }
 /// CommitInfo contains votes for the particular round.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.CommitInfo")]
 pub struct CommitInfo {
@@ -418,7 +401,6 @@ pub struct CommitInfo {
 /// ExtendedCommitInfo is similar to CommitInfo except that it is only used in
 /// the PrepareProposal request such that Tendermint can provide vote extensions
 /// to the application.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.ExtendedCommitInfo")]
 pub struct ExtendedCommitInfo {
@@ -439,7 +421,6 @@ pub struct ExtendedCommitInfo {
 /// Up to 0.37, this could also be used in ResponseBeginBlock, ResponseEndBlock,
 /// and ResponseDeliverTx.
 /// Later, transactions may be queried using these events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.Event")]
 pub struct Event {
@@ -449,8 +430,7 @@ pub struct Event {
     pub attributes: ::prost::alloc::vec::Vec<EventAttribute>,
 }
 /// EventAttribute is a single key-value pair, associated with an event.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.EventAttribute")]
 pub struct EventAttribute {
     #[prost(string, tag = "1")]
@@ -462,8 +442,7 @@ pub struct EventAttribute {
     pub index: bool,
 }
 /// ExtendedVoteInfo extends VoteInfo with the vote extensions (non-deterministic).
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.ExtendedVoteInfo")]
 pub struct ExtendedVoteInfo {
     /// The validator that sent the vote.
@@ -477,8 +456,7 @@ pub struct ExtendedVoteInfo {
     pub vote_extension: ::prost::alloc::vec::Vec<u8>,
 }
 /// Misbehavior is a type of misbehavior committed by a validator.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta2.Misbehavior")]
 pub struct Misbehavior {
     #[prost(enumeration = "MisbehaviorType", tag = "1")]
@@ -529,9 +507,9 @@ impl MisbehaviorType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            MisbehaviorType::Unknown => "UNKNOWN",
-            MisbehaviorType::DuplicateVote => "DUPLICATE_VOTE",
-            MisbehaviorType::LightClientAttack => "LIGHT_CLIENT_ATTACK",
+            Self::Unknown => "UNKNOWN",
+            Self::DuplicateVote => "DUPLICATE_VOTE",
+            Self::LightClientAttack => "LIGHT_CLIENT_ATTACK",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.

@@ -1,7 +1,6 @@
 use injective_std_derive::CosmwasmExt;
 /// GetBlockResults is a request for the BlockResults of a given height.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.services.block_results.v1.GetBlockResultsRequest")]
 pub struct GetBlockResultsRequest {
     #[prost(int64, tag = "1")]
@@ -12,7 +11,6 @@ pub struct GetBlockResultsRequest {
     pub height: i64,
 }
 /// GetBlockResultsResponse contains the block results for the given height.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.services.block_results.v1.GetBlockResultsResponse")]
 pub struct GetBlockResultsResponse {

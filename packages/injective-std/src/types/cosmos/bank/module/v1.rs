@@ -1,7 +1,6 @@
 use injective_std_derive::CosmwasmExt;
 /// Module is the config object of the bank module.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.bank.module.v1.Module")]
 pub struct Module {
     /// blocked_module_accounts_override configures exceptional module accounts which should be blocked from receiving

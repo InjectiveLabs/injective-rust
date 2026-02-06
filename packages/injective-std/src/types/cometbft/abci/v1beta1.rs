@@ -1,6 +1,5 @@
 use injective_std_derive::CosmwasmExt;
 /// Request represents a request to the ABCI application.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.Request")]
 pub struct Request {
@@ -12,7 +11,6 @@ pub struct Request {
 pub mod request {
     use injective_std_derive::CosmwasmExt;
     /// Sum of all possible messages.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Value {
         #[prost(message, tag = "1")]
@@ -48,21 +46,18 @@ pub mod request {
     }
 }
 /// RequestEcho is a request to "echo" the given string.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestEcho")]
 pub struct RequestEcho {
     #[prost(string, tag = "1")]
     pub message: ::prost::alloc::string::String,
 }
 /// RequestFlush is a request to flush the write buffer.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestFlush")]
 pub struct RequestFlush {}
 /// RequestInfo is a request for the ABCI application version.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestInfo")]
 pub struct RequestInfo {
     #[prost(string, tag = "1")]
@@ -81,8 +76,7 @@ pub struct RequestInfo {
     pub p2p_version: u64,
 }
 /// nondeterministic
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestSetOption")]
 pub struct RequestSetOption {
     #[prost(string, tag = "1")]
@@ -91,7 +85,6 @@ pub struct RequestSetOption {
     pub value: ::prost::alloc::string::String,
 }
 /// RequestInitChain is a request to initialize the blockchain.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestInitChain")]
 pub struct RequestInitChain {
@@ -114,8 +107,7 @@ pub struct RequestInitChain {
     pub initial_height: i64,
 }
 /// RequestQuery is a request to query the application state.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestQuery")]
 pub struct RequestQuery {
     #[prost(bytes = "vec", tag = "1")]
@@ -132,7 +124,6 @@ pub struct RequestQuery {
     pub prove: bool,
 }
 /// RequestBeginBlock indicates the beginning of committing the block.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestBeginBlock")]
 pub struct RequestBeginBlock {
@@ -146,8 +137,7 @@ pub struct RequestBeginBlock {
     pub byzantine_validators: ::prost::alloc::vec::Vec<Evidence>,
 }
 /// RequestCheckTx is a request to check the transaction.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestCheckTx")]
 pub struct RequestCheckTx {
     #[prost(bytes = "vec", tag = "1")]
@@ -160,16 +150,14 @@ pub struct RequestCheckTx {
     pub r#type: i32,
 }
 /// RequestDeliverTx is a request to apply the transaction.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestDeliverTx")]
 pub struct RequestDeliverTx {
     #[prost(bytes = "vec", tag = "1")]
     pub tx: ::prost::alloc::vec::Vec<u8>,
 }
 /// RequestEndBlock indicates the end of committing the block.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestEndBlock")]
 pub struct RequestEndBlock {
     #[prost(int64, tag = "1")]
@@ -180,18 +168,15 @@ pub struct RequestEndBlock {
     pub height: i64,
 }
 /// RequestCommit is a request to commit the pending application state.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestCommit")]
 pub struct RequestCommit {}
 /// lists available snapshots
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestListSnapshots")]
 pub struct RequestListSnapshots {}
 /// offers a snapshot to the application
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestOfferSnapshot")]
 pub struct RequestOfferSnapshot {
     /// snapshot offered by peers
@@ -202,8 +187,7 @@ pub struct RequestOfferSnapshot {
     pub app_hash: ::prost::alloc::vec::Vec<u8>,
 }
 /// loads a snapshot chunk
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestLoadSnapshotChunk")]
 pub struct RequestLoadSnapshotChunk {
     #[prost(uint64, tag = "1")]
@@ -226,8 +210,7 @@ pub struct RequestLoadSnapshotChunk {
     pub chunk: u32,
 }
 /// Applies a snapshot chunk
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.RequestApplySnapshotChunk")]
 pub struct RequestApplySnapshotChunk {
     #[prost(uint32, tag = "1")]
@@ -242,7 +225,6 @@ pub struct RequestApplySnapshotChunk {
     pub sender: ::prost::alloc::string::String,
 }
 /// Response represents a response from the ABCI application.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.Response")]
 pub struct Response {
@@ -254,7 +236,6 @@ pub struct Response {
 pub mod response {
     use injective_std_derive::CosmwasmExt;
     /// Sum of all possible messages.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Value {
         #[prost(message, tag = "1")]
@@ -292,29 +273,25 @@ pub mod response {
     }
 }
 /// nondeterministic
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseException")]
 pub struct ResponseException {
     #[prost(string, tag = "1")]
     pub error: ::prost::alloc::string::String,
 }
 /// ResponseEcho indicates that the connection is still alive.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseEcho")]
 pub struct ResponseEcho {
     #[prost(string, tag = "1")]
     pub message: ::prost::alloc::string::String,
 }
 /// ResponseFlush indicates that the ABCI application state was flushed?
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseFlush")]
 pub struct ResponseFlush {}
 /// ResponseInfo contains the ABCI application version information.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseInfo")]
 pub struct ResponseInfo {
     #[prost(string, tag = "1")]
@@ -337,8 +314,7 @@ pub struct ResponseInfo {
     pub last_block_app_hash: ::prost::alloc::vec::Vec<u8>,
 }
 /// nondeterministic
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseSetOption")]
 pub struct ResponseSetOption {
     #[prost(uint32, tag = "1")]
@@ -355,7 +331,6 @@ pub struct ResponseSetOption {
 }
 /// ResponseInitChain contains the ABCI application's hash and updates to the
 /// validator set and/or the consensus params, if any.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseInitChain")]
 pub struct ResponseInitChain {
@@ -367,7 +342,6 @@ pub struct ResponseInitChain {
     pub app_hash: ::prost::alloc::vec::Vec<u8>,
 }
 /// ResponseQuery contains the ABCI application data along with a proof.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseQuery")]
 pub struct ResponseQuery {
@@ -407,7 +381,6 @@ pub struct ResponseQuery {
     pub codespace: ::prost::alloc::string::String,
 }
 /// ResponseBeginBlock contains a list of block-level events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseBeginBlock")]
 pub struct ResponseBeginBlock {
@@ -416,7 +389,6 @@ pub struct ResponseBeginBlock {
 }
 /// ResponseCheckTx shows if the transaction was deemed valid by the ABCI
 /// application.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseCheckTx")]
 pub struct ResponseCheckTx {
@@ -465,7 +437,6 @@ pub struct ResponseCheckTx {
 }
 /// ResponseDeliverTx contains a result of committing the given transaction and a
 /// list of events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseDeliverTx")]
 pub struct ResponseDeliverTx {
@@ -502,7 +473,6 @@ pub struct ResponseDeliverTx {
     pub codespace: ::prost::alloc::string::String,
 }
 /// ResponseEndBlock contains updates to consensus params and/or validator set changes, if any.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseEndBlock")]
 pub struct ResponseEndBlock {
@@ -514,8 +484,7 @@ pub struct ResponseEndBlock {
     pub events: ::prost::alloc::vec::Vec<Event>,
 }
 /// ResponseCommit indicates how much blocks should CometBFT retain.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseCommit")]
 pub struct ResponseCommit {
     /// reserve 1
@@ -529,7 +498,6 @@ pub struct ResponseCommit {
     pub retain_height: i64,
 }
 /// ResponseListSnapshots contains the list of snapshots.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseListSnapshots")]
 pub struct ResponseListSnapshots {
@@ -538,8 +506,7 @@ pub struct ResponseListSnapshots {
 }
 /// ResponseOfferSnapshot indicates the ABCI application decision whenever to
 /// provide a snapshot to the requester or not.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseOfferSnapshot")]
 pub struct ResponseOfferSnapshot {
     #[prost(enumeration = "response_offer_snapshot::Result", tag = "1")]
@@ -577,12 +544,12 @@ pub mod response_offer_snapshot {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Result::Unknown => "UNKNOWN",
-                Result::Accept => "ACCEPT",
-                Result::Abort => "ABORT",
-                Result::Reject => "REJECT",
-                Result::RejectFormat => "REJECT_FORMAT",
-                Result::RejectSender => "REJECT_SENDER",
+                Self::Unknown => "UNKNOWN",
+                Self::Accept => "ACCEPT",
+                Self::Abort => "ABORT",
+                Self::Reject => "REJECT",
+                Self::RejectFormat => "REJECT_FORMAT",
+                Self::RejectSender => "REJECT_SENDER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -600,16 +567,14 @@ pub mod response_offer_snapshot {
     }
 }
 /// ResponseLoadSnapshotChunk returns a snapshot's chunk.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseLoadSnapshotChunk")]
 pub struct ResponseLoadSnapshotChunk {
     #[prost(bytes = "vec", tag = "1")]
     pub chunk: ::prost::alloc::vec::Vec<u8>,
 }
 /// ResponseApplySnapshotChunk returns a result of applying the specified chunk.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseApplySnapshotChunk")]
 pub struct ResponseApplySnapshotChunk {
     #[prost(enumeration = "response_apply_snapshot_chunk::Result", tag = "1")]
@@ -653,12 +618,12 @@ pub mod response_apply_snapshot_chunk {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Result::Unknown => "UNKNOWN",
-                Result::Accept => "ACCEPT",
-                Result::Abort => "ABORT",
-                Result::Retry => "RETRY",
-                Result::RetrySnapshot => "RETRY_SNAPSHOT",
-                Result::RejectSnapshot => "REJECT_SNAPSHOT",
+                Self::Unknown => "UNKNOWN",
+                Self::Accept => "ACCEPT",
+                Self::Abort => "ABORT",
+                Self::Retry => "RETRY",
+                Self::RetrySnapshot => "RETRY_SNAPSHOT",
+                Self::RejectSnapshot => "REJECT_SNAPSHOT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -677,8 +642,7 @@ pub mod response_apply_snapshot_chunk {
 }
 /// ConsensusParams contains all consensus-relevant parameters
 /// that can be adjusted by the abci app
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ConsensusParams")]
 pub struct ConsensusParams {
     #[prost(message, optional, tag = "1")]
@@ -691,8 +655,7 @@ pub struct ConsensusParams {
     pub version: ::core::option::Option<super::super::types::v1beta1::VersionParams>,
 }
 /// BlockParams contains limits on the block size.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.BlockParams")]
 pub struct BlockParams {
     /// Note: must be greater than 0
@@ -711,7 +674,6 @@ pub struct BlockParams {
     pub max_gas: i64,
 }
 /// LastCommitInfo contains votes for the particular round.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.LastCommitInfo")]
 pub struct LastCommitInfo {
@@ -727,7 +689,6 @@ pub struct LastCommitInfo {
 /// Event allows application developers to attach additional information to
 /// ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx.
 /// Later, transactions may be queried using these events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.Event")]
 pub struct Event {
@@ -737,8 +698,7 @@ pub struct Event {
     pub attributes: ::prost::alloc::vec::Vec<EventAttribute>,
 }
 /// EventAttribute is a single key-value pair, associated with an event.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.EventAttribute")]
 pub struct EventAttribute {
     #[prost(bytes = "vec", tag = "1")]
@@ -752,7 +712,6 @@ pub struct EventAttribute {
 /// TxResult contains results of executing the transaction.
 ///
 /// One usage is indexing transaction results.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.TxResult")]
 pub struct TxResult {
@@ -774,8 +733,7 @@ pub struct TxResult {
     pub result: ::core::option::Option<ResponseDeliverTx>,
 }
 /// Validator in the validator set.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.Validator")]
 pub struct Validator {
     /// The first 20 bytes of SHA256(public key)
@@ -792,8 +750,7 @@ pub struct Validator {
     pub power: i64,
 }
 /// ValidatorUpdate is a singular update to a validator set.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ValidatorUpdate")]
 pub struct ValidatorUpdate {
     #[prost(message, optional, tag = "1")]
@@ -806,8 +763,7 @@ pub struct ValidatorUpdate {
     pub power: i64,
 }
 /// VoteInfo contains the information about the vote.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.VoteInfo")]
 pub struct VoteInfo {
     #[prost(message, optional, tag = "1")]
@@ -816,8 +772,7 @@ pub struct VoteInfo {
     pub signed_last_block: bool,
 }
 /// Evidence of a misbehavior committed by a validator.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.Evidence")]
 pub struct Evidence {
     #[prost(enumeration = "EvidenceType", tag = "1")]
@@ -850,8 +805,7 @@ pub struct Evidence {
     pub total_voting_power: i64,
 }
 /// Snapshot of the ABCI application state.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.abci.v1beta1.Snapshot")]
 pub struct Snapshot {
     /// The height at which the snapshot was taken
@@ -899,8 +853,8 @@ impl CheckTxType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            CheckTxType::New => "NEW",
-            CheckTxType::Recheck => "RECHECK",
+            Self::New => "NEW",
+            Self::Recheck => "RECHECK",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -931,9 +885,9 @@ impl EvidenceType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            EvidenceType::Unknown => "UNKNOWN",
-            EvidenceType::DuplicateVote => "DUPLICATE_VOTE",
-            EvidenceType::LightClientAttack => "LIGHT_CLIENT_ATTACK",
+            Self::Unknown => "UNKNOWN",
+            Self::DuplicateVote => "DUPLICATE_VOTE",
+            Self::LightClientAttack => "LIGHT_CLIENT_ATTACK",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.

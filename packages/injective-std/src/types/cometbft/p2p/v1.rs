@@ -1,18 +1,15 @@
 use injective_std_derive::CosmwasmExt;
 /// PacketPing is a request to confirm that the connection is alive.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.p2p.v1.PacketPing")]
 pub struct PacketPing {}
 /// PacketPong is a response to confirm that the connection is alive.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.p2p.v1.PacketPong")]
 pub struct PacketPong {}
 /// PacketMsg contains data for the specified channel ID. EOF means the message
 /// is fully received.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.p2p.v1.PacketMsg")]
 pub struct PacketMsg {
     #[prost(int32, tag = "1")]
@@ -28,8 +25,7 @@ pub struct PacketMsg {
     pub data: ::prost::alloc::vec::Vec<u8>,
 }
 /// Packet is an abstract p2p message.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.p2p.v1.Packet")]
 pub struct Packet {
     /// Sum of all possible messages.
@@ -40,8 +36,7 @@ pub struct Packet {
 pub mod packet {
     use injective_std_derive::CosmwasmExt;
     /// Sum of all possible messages.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+    #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Sum {
         #[prost(message, tag = "1")]
         PacketPing(super::PacketPing),
@@ -53,8 +48,7 @@ pub mod packet {
 }
 /// AuthSigMessage is sent during the authentication and contains our/remote's
 /// signature along with the public key.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.p2p.v1.AuthSigMessage")]
 pub struct AuthSigMessage {
     #[prost(message, optional, tag = "1")]
@@ -63,8 +57,7 @@ pub struct AuthSigMessage {
     pub sig: ::prost::alloc::vec::Vec<u8>,
 }
 /// NetAddress represents a peer's network address.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.p2p.v1.NetAddress")]
 pub struct NetAddress {
     #[prost(string, tag = "1")]
@@ -80,8 +73,7 @@ pub struct NetAddress {
     pub port: u32,
 }
 /// ProtocolVersion represents the current p2p protocol version.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.p2p.v1.ProtocolVersion")]
 pub struct ProtocolVersion {
     #[prost(uint64, tag = "1")]
@@ -105,8 +97,7 @@ pub struct ProtocolVersion {
 }
 /// DefaultNodeInfo is a basic node's information sent to other peers during the
 /// p2p handshake.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.p2p.v1.DefaultNodeInfo")]
 pub struct DefaultNodeInfo {
     #[prost(message, optional, tag = "1")]
@@ -128,8 +119,7 @@ pub struct DefaultNodeInfo {
     pub other: ::core::option::Option<DefaultNodeInfoOther>,
 }
 /// DefaultNodeInfoOther is the misc. application specific data.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.p2p.v1.DefaultNodeInfoOther")]
 pub struct DefaultNodeInfoOther {
     #[prost(string, tag = "1")]
@@ -138,12 +128,10 @@ pub struct DefaultNodeInfoOther {
     pub rpc_address: ::prost::alloc::string::String,
 }
 /// PexRequest is a request for peer addresses.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.p2p.v1.PexRequest")]
 pub struct PexRequest {}
 /// PexAddrs is a response with peer addresses.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.p2p.v1.PexAddrs")]
 pub struct PexAddrs {
@@ -151,7 +139,6 @@ pub struct PexAddrs {
     pub addrs: ::prost::alloc::vec::Vec<NetAddress>,
 }
 /// Message is an abstract PEX message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.p2p.v1.Message")]
 pub struct Message {
@@ -163,7 +150,6 @@ pub struct Message {
 pub mod message {
     use injective_std_derive::CosmwasmExt;
     /// Sum of all possible messages.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Sum {
         #[prost(message, tag = "1")]

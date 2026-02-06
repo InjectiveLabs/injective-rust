@@ -1,7 +1,6 @@
 use injective_std_derive::CosmwasmExt;
 /// spot authz messages
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.CreateSpotLimitOrderAuthz")]
 pub struct CreateSpotLimitOrderAuthz {
     /// the subaccount ID
@@ -13,8 +12,7 @@ pub struct CreateSpotLimitOrderAuthz {
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.CreateSpotMarketOrderAuthz")]
 pub struct CreateSpotMarketOrderAuthz {
     /// the subaccount ID
@@ -26,8 +24,7 @@ pub struct CreateSpotMarketOrderAuthz {
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BatchCreateSpotLimitOrdersAuthz")]
 pub struct BatchCreateSpotLimitOrdersAuthz {
     /// the subaccount ID
@@ -39,8 +36,7 @@ pub struct BatchCreateSpotLimitOrdersAuthz {
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.CancelSpotOrderAuthz")]
 pub struct CancelSpotOrderAuthz {
     /// the subaccount ID
@@ -52,8 +48,7 @@ pub struct CancelSpotOrderAuthz {
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BatchCancelSpotOrdersAuthz")]
 pub struct BatchCancelSpotOrdersAuthz {
     /// the subaccount ID
@@ -66,8 +61,7 @@ pub struct BatchCancelSpotOrdersAuthz {
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// derivative authz messages
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.CreateDerivativeLimitOrderAuthz")]
 pub struct CreateDerivativeLimitOrderAuthz {
     /// the subaccount ID
@@ -79,8 +73,7 @@ pub struct CreateDerivativeLimitOrderAuthz {
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.CreateDerivativeMarketOrderAuthz")]
 pub struct CreateDerivativeMarketOrderAuthz {
     /// the subaccount ID
@@ -92,8 +85,7 @@ pub struct CreateDerivativeMarketOrderAuthz {
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BatchCreateDerivativeLimitOrdersAuthz")]
 pub struct BatchCreateDerivativeLimitOrdersAuthz {
     /// the subaccount ID
@@ -105,8 +97,7 @@ pub struct BatchCreateDerivativeLimitOrdersAuthz {
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.CancelDerivativeOrderAuthz")]
 pub struct CancelDerivativeOrderAuthz {
     #[prost(string, tag = "1")]
@@ -116,8 +107,7 @@ pub struct CancelDerivativeOrderAuthz {
     #[serde(alias = "marketIDs")]
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BatchCancelDerivativeOrdersAuthz")]
 pub struct BatchCancelDerivativeOrdersAuthz {
     /// the subaccount ID
@@ -130,8 +120,7 @@ pub struct BatchCancelDerivativeOrdersAuthz {
     pub market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// common authz message used in both spot & derivative markets
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BatchUpdateOrdersAuthz")]
 pub struct BatchUpdateOrdersAuthz {
     /// the subaccount ID
@@ -147,7 +136,6 @@ pub struct BatchUpdateOrdersAuthz {
 }
 /// GenericExchangeAuthorization gives the grantee permissions to execute
 /// the provided Exchange method on behalf of the granter's account.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.GenericExchangeAuthorization")]
 pub struct GenericExchangeAuthorization {
@@ -159,8 +147,45 @@ pub struct GenericExchangeAuthorization {
     #[prost(message, repeated, tag = "2")]
     pub spend_limit: ::prost::alloc::vec::Vec<super::super::super::cosmos::base::v1beta1::Coin>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.ForcePausedInfo")]
+pub struct ForcePausedInfo {
+    #[prost(enumeration = "ForcePausedReason", tag = "1")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub reason: i32,
+    #[prost(string, tag = "2")]
+    pub mark_price_at_pausing: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.OpenNotionalCap")]
+pub struct OpenNotionalCap {
+    #[prost(oneof = "open_notional_cap::Cap", tags = "1, 2")]
+    pub cap: ::core::option::Option<open_notional_cap::Cap>,
+}
+/// Nested message and enum types in `OpenNotionalCap`.
+pub mod open_notional_cap {
+    use injective_std_derive::CosmwasmExt;
+    #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+    pub enum Cap {
+        #[prost(message, tag = "1")]
+        Uncapped(super::OpenNotionalCapUncapped),
+        #[prost(message, tag = "2")]
+        Capped(super::OpenNotionalCapCapped),
+    }
+}
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.OpenNotionalCapUncapped")]
+pub struct OpenNotionalCapUncapped {}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.OpenNotionalCapCapped")]
+pub struct OpenNotionalCapCapped {
+    #[prost(string, tag = "1")]
+    pub value: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MarketFeeMultiplier")]
 pub struct MarketFeeMultiplier {
     #[prost(string, tag = "1")]
@@ -170,8 +195,7 @@ pub struct MarketFeeMultiplier {
     pub fee_multiplier: ::prost::alloc::string::String,
 }
 /// An object describing trade pair of two assets.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SpotMarket")]
 pub struct SpotMarket {
     /// A name of the pair in format AAA/BBB, where AAA is base asset, BBB is quote
@@ -241,10 +265,13 @@ pub struct SpotMarket {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub quote_decimals: u32,
+    /// has_disabled_minimal_protocol_fee indicates whether the minimal protocol
+    /// fee is disabled for the market
+    #[prost(bool, tag = "16")]
+    pub has_disabled_minimal_protocol_fee: bool,
 }
 /// An object describing a binary options market in Injective Protocol.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BinaryOptionsMarket")]
 pub struct BinaryOptionsMarket {
     /// Ticker for the derivative contract.
@@ -341,10 +368,20 @@ pub struct BinaryOptionsMarket {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub quote_decimals: u32,
+    /// open_notional_cap defines the maximum open notional for the market
+    #[prost(message, optional, tag = "21")]
+    pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
+    /// has_disabled_minimal_protocol_fee indicates whether the minimal protocol
+    /// fee is disabled for the market
+    #[prost(bool, tag = "22")]
+    pub has_disabled_minimal_protocol_fee: bool,
+    /// force_paused_info defines additional info for force paused markets, only
+    /// set when status == ForcePaused
+    #[prost(message, optional, tag = "23")]
+    pub force_paused_info: ::core::option::Option<ForcePausedInfo>,
 }
 /// An object describing a derivative market in the Injective Futures Protocol.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeMarket")]
 pub struct DerivativeMarket {
     /// Ticker for the derivative contract.
@@ -438,9 +475,19 @@ pub struct DerivativeMarket {
     /// reduce_margin_ratio defines the ratio of the margin that is reduced
     #[prost(string, tag = "21")]
     pub reduce_margin_ratio: ::prost::alloc::string::String,
+    /// open_notional_cap defines the maximum open notional for the market
+    #[prost(message, optional, tag = "22")]
+    pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
+    /// has_disabled_minimal_protocol_fee indicates whether the minimal protocol
+    /// fee is disabled for the market
+    #[prost(bool, tag = "23")]
+    pub has_disabled_minimal_protocol_fee: bool,
+    /// force_paused_info defines additional info for force paused markets, only
+    /// set when status == ForcePaused
+    #[prost(message, optional, tag = "24")]
+    pub force_paused_info: ::core::option::Option<ForcePausedInfo>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeMarketSettlementInfo")]
 pub struct DerivativeMarketSettlementInfo {
     /// market ID.
@@ -451,8 +498,7 @@ pub struct DerivativeMarketSettlementInfo {
     #[prost(string, tag = "2")]
     pub settlement_price: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MarketVolume")]
 pub struct MarketVolume {
     /// the market ID
@@ -463,8 +509,7 @@ pub struct MarketVolume {
     #[prost(message, optional, tag = "2")]
     pub volume: ::core::option::Option<VolumeRecord>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.VolumeRecord")]
 pub struct VolumeRecord {
     /// the market's maker volume (in human readable format)
@@ -474,8 +519,7 @@ pub struct VolumeRecord {
     #[prost(string, tag = "2")]
     pub taker_volume: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.ExpiryFuturesMarketInfoState")]
 pub struct ExpiryFuturesMarketInfoState {
     #[prost(string, tag = "1")]
@@ -484,8 +528,7 @@ pub struct ExpiryFuturesMarketInfoState {
     #[prost(message, optional, tag = "2")]
     pub market_info: ::core::option::Option<ExpiryFuturesMarketInfo>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.PerpetualMarketFundingState")]
 pub struct PerpetualMarketFundingState {
     #[prost(string, tag = "1")]
@@ -494,8 +537,7 @@ pub struct PerpetualMarketFundingState {
     #[prost(message, optional, tag = "2")]
     pub funding: ::core::option::Option<PerpetualMarketFunding>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.ExpiryFuturesMarketInfo")]
 pub struct ExpiryFuturesMarketInfo {
     /// market ID.
@@ -520,15 +562,30 @@ pub struct ExpiryFuturesMarketInfo {
     pub twap_start_timestamp: i64,
     /// expiration_twap_start_price_cumulative defines the cumulative price for the
     /// start of the TWAP window (in human readable format)
+    /// Deprecated: For correctly calculating the expiration price using TWAP, we
+    /// need to keep the cumulative price at the start of TWAP calculation
+    /// separately for the base asset and the quote asset. Use
+    /// expiration_twap_start_base_cumulative_price and
+    /// expiration_twap_start_quote_cumulative_price instead.
+    #[deprecated]
     #[prost(string, tag = "4")]
     pub expiration_twap_start_price_cumulative: ::prost::alloc::string::String,
     /// settlement_price defines the settlement price for a time expiry futures
     /// market (in human readable format)
     #[prost(string, tag = "5")]
     pub settlement_price: ::prost::alloc::string::String,
+    /// expiration_twap_start_base_cumulative_price defines the cumulative price
+    /// for the base asset at the start of the TWAP calculation window (in human
+    /// readable format)
+    #[prost(string, tag = "6")]
+    pub expiration_twap_start_base_cumulative_price: ::prost::alloc::string::String,
+    /// expiration_twap_start_quote_cumulative_price defines the cumulative price
+    /// for the quote asset at the start of the TWAP calculation window (in human
+    /// readable format)
+    #[prost(string, tag = "7")]
+    pub expiration_twap_start_quote_cumulative_price: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.PerpetualMarketInfo")]
 pub struct PerpetualMarketInfo {
     /// market ID.
@@ -559,8 +616,7 @@ pub struct PerpetualMarketInfo {
     )]
     pub funding_interval: i64,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.PerpetualMarketFunding")]
 pub struct PerpetualMarketFunding {
     /// cumulative_funding defines the cumulative funding of a perpetual market.
@@ -588,6 +644,7 @@ pub enum MarketStatus {
     Paused = 2,
     Demolished = 3,
     Expired = 4,
+    ForcePaused = 5,
 }
 impl MarketStatus {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -596,11 +653,12 @@ impl MarketStatus {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            MarketStatus::Unspecified => "Unspecified",
-            MarketStatus::Active => "Active",
-            MarketStatus::Paused => "Paused",
-            MarketStatus::Demolished => "Demolished",
-            MarketStatus::Expired => "Expired",
+            Self::Unspecified => "Unspecified",
+            Self::Active => "Active",
+            Self::Paused => "Paused",
+            Self::Demolished => "Demolished",
+            Self::Expired => "Expired",
+            Self::ForcePaused => "ForcePaused",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -611,12 +669,36 @@ impl MarketStatus {
             "Paused" => Some(Self::Paused),
             "Demolished" => Some(Self::Demolished),
             "Expired" => Some(Self::Expired),
+            "ForcePaused" => Some(Self::ForcePaused),
             _ => None,
         }
     }
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+#[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+pub enum ForcePausedReason {
+    QuoteDenomPaused = 0,
+}
+impl ForcePausedReason {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::QuoteDenomPaused => "QuoteDenomPaused",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "QuoteDenomPaused" => Some(Self::QuoteDenomPaused),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.OrderInfo")]
 pub struct OrderInfo {
     /// bytes32 subaccount ID that created the order
@@ -636,8 +718,7 @@ pub struct OrderInfo {
     #[prost(string, tag = "5")]
     pub cid: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SpotOrder")]
 pub struct SpotOrder {
     /// market_id represents the unique ID of the market
@@ -667,8 +748,7 @@ pub struct SpotOrder {
     pub expiration_block: i64,
 }
 /// A valid Spot market order with Metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SpotMarketOrder")]
 pub struct SpotMarketOrder {
     /// order_info contains the information of the order
@@ -690,8 +770,7 @@ pub struct SpotMarketOrder {
     pub trigger_price: ::prost::alloc::string::String,
 }
 /// A valid Spot limit order with Metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SpotLimitOrder")]
 pub struct SpotLimitOrder {
     /// order_info contains the information of the order
@@ -721,8 +800,7 @@ pub struct SpotLimitOrder {
     )]
     pub expiration_block: i64,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeOrder")]
 pub struct DerivativeOrder {
     /// market_id represents the unique ID of the market
@@ -755,8 +833,7 @@ pub struct DerivativeOrder {
     pub expiration_block: i64,
 }
 /// A valid Derivative market order with Metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeMarketOrder")]
 pub struct DerivativeMarketOrder {
     /// order_info contains the information of the order
@@ -780,8 +857,7 @@ pub struct DerivativeMarketOrder {
     pub order_hash: ::prost::alloc::vec::Vec<u8>,
 }
 /// A valid Derivative limit order with Metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeLimitOrder")]
 pub struct DerivativeLimitOrder {
     /// order_info contains the information of the order
@@ -836,17 +912,17 @@ impl OrderType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            OrderType::Unspecified => "UNSPECIFIED",
-            OrderType::Buy => "BUY",
-            OrderType::Sell => "SELL",
-            OrderType::StopBuy => "STOP_BUY",
-            OrderType::StopSell => "STOP_SELL",
-            OrderType::TakeBuy => "TAKE_BUY",
-            OrderType::TakeSell => "TAKE_SELL",
-            OrderType::BuyPo => "BUY_PO",
-            OrderType::SellPo => "SELL_PO",
-            OrderType::BuyAtomic => "BUY_ATOMIC",
-            OrderType::SellAtomic => "SELL_ATOMIC",
+            Self::Unspecified => "UNSPECIFIED",
+            Self::Buy => "BUY",
+            Self::Sell => "SELL",
+            Self::StopBuy => "STOP_BUY",
+            Self::StopSell => "STOP_SELL",
+            Self::TakeBuy => "TAKE_BUY",
+            Self::TakeSell => "TAKE_SELL",
+            Self::BuyPo => "BUY_PO",
+            Self::SellPo => "SELL_PO",
+            Self::BuyAtomic => "BUY_ATOMIC",
+            Self::SellAtomic => "SELL_ATOMIC",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -889,14 +965,14 @@ impl OrderMask {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            OrderMask::Unused => "UNUSED",
-            OrderMask::Any => "ANY",
-            OrderMask::Regular => "REGULAR",
-            OrderMask::Conditional => "CONDITIONAL",
-            OrderMask::DirectionBuyOrHigher => "DIRECTION_BUY_OR_HIGHER",
-            OrderMask::DirectionSellOrLower => "DIRECTION_SELL_OR_LOWER",
-            OrderMask::TypeMarket => "TYPE_MARKET",
-            OrderMask::TypeLimit => "TYPE_LIMIT",
+            Self::Unused => "UNUSED",
+            Self::Any => "ANY",
+            Self::Regular => "REGULAR",
+            Self::Conditional => "CONDITIONAL",
+            Self::DirectionBuyOrHigher => "DIRECTION_BUY_OR_HIGHER",
+            Self::DirectionSellOrLower => "DIRECTION_SELL_OR_LOWER",
+            Self::TypeMarket => "TYPE_MARKET",
+            Self::TypeLimit => "TYPE_LIMIT",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -931,10 +1007,10 @@ impl AtomicMarketOrderAccessLevel {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            AtomicMarketOrderAccessLevel::Nobody => "Nobody",
-            AtomicMarketOrderAccessLevel::BeginBlockerSmartContractsOnly => "BeginBlockerSmartContractsOnly",
-            AtomicMarketOrderAccessLevel::SmartContractsOnly => "SmartContractsOnly",
-            AtomicMarketOrderAccessLevel::Everyone => "Everyone",
+            Self::Nobody => "Nobody",
+            Self::BeginBlockerSmartContractsOnly => "BeginBlockerSmartContractsOnly",
+            Self::SmartContractsOnly => "SmartContractsOnly",
+            Self::Everyone => "Everyone",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -948,7 +1024,19 @@ impl AtomicMarketOrderAccessLevel {
         }
     }
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// EnforcedRestrictionsContract defines a contract with its pause event
+/// signature
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.EnforcedRestrictionsContract")]
+pub struct EnforcedRestrictionsContract {
+    /// EVM address of the contract
+    #[prost(string, tag = "1")]
+    pub contract_address: ::prost::alloc::string::String,
+    /// Pause event signature for the contract (e.g. "Pause()", or
+    /// "Pause(address)"). If left empty, it will default to "Pause()".
+    #[prost(string, tag = "2")]
+    pub pause_event_signature: ::prost::alloc::string::String,
+}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.Params")]
 pub struct Params {
@@ -1098,16 +1186,8 @@ pub struct Params {
     /// new derivative market
     #[prost(string, tag = "31")]
     pub default_reduce_margin_ratio: ::prost::alloc::string::String,
-    /// DO NOT USE THIS FIELD. It was introduced for a temporary bug fix.
-    #[deprecated]
-    #[prost(int64, tag = "32")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
-    pub human_readable_upgrade_block_height: i64,
     /// post_only_mode_blocks_amount defines the amount of blocks the post only
-    /// mode will be enabled
+    /// mode will be enabled after a chain upgrade
     #[prost(uint64, tag = "33")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
@@ -1120,9 +1200,21 @@ pub struct Params {
     /// module
     #[prost(string, tag = "34")]
     pub min_post_only_mode_downtime_duration: ::prost::alloc::string::String,
+    /// post_only_mode_blocks_amount defines the amount of blocks the post only
+    /// mode will be enabled after the downtime-detector module detects a chain
+    /// downtime
+    #[prost(uint64, tag = "35")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub post_only_mode_blocks_amount_after_downtime: u64,
+    /// Contracts that exchange will be listening to pause markets denominated in
+    /// respective erc20: denoms, with their pause event signatures
+    #[prost(message, repeated, tag = "36")]
+    pub enforced_restrictions_contracts: ::prost::alloc::vec::Vec<EnforcedRestrictionsContract>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.NextFundingTimestamp")]
 pub struct NextFundingTimestamp {
     #[prost(int64, tag = "1")]
@@ -1132,8 +1224,7 @@ pub struct NextFundingTimestamp {
     )]
     pub next_timestamp: i64,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MidPriceAndTOB")]
 pub struct MidPriceAndTob {
     /// mid price of the market (in human readable format)
@@ -1147,8 +1238,7 @@ pub struct MidPriceAndTob {
     pub best_sell_price: ::prost::alloc::string::String,
 }
 /// A subaccount's deposit for a given base currency
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.Deposit")]
 pub struct Deposit {
     /// the available balance (in chain format)
@@ -1158,8 +1248,7 @@ pub struct Deposit {
     #[prost(string, tag = "2")]
     pub total_balance: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SubaccountTradeNonce")]
 pub struct SubaccountTradeNonce {
     #[prost(uint32, tag = "1")]
@@ -1169,8 +1258,7 @@ pub struct SubaccountTradeNonce {
     )]
     pub nonce: u32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SubaccountOrder")]
 pub struct SubaccountOrder {
     /// price of the order
@@ -1184,8 +1272,7 @@ pub struct SubaccountOrder {
     #[prost(string, tag = "4")]
     pub cid: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SubaccountOrderData")]
 pub struct SubaccountOrderData {
     #[prost(message, optional, tag = "1")]
@@ -1193,8 +1280,7 @@ pub struct SubaccountOrderData {
     #[prost(bytes = "vec", tag = "2")]
     pub order_hash: ::prost::alloc::vec::Vec<u8>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.Position")]
 pub struct Position {
     /// True if the position is long. False if the position is short.
@@ -1213,8 +1299,7 @@ pub struct Position {
     #[prost(string, tag = "5")]
     pub cumulative_funding_entry: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.Balance")]
 pub struct Balance {
     /// the subaccount ID
@@ -1228,8 +1313,7 @@ pub struct Balance {
     #[prost(message, optional, tag = "3")]
     pub deposits: ::core::option::Option<Deposit>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativePosition")]
 pub struct DerivativePosition {
     /// the subaccount ID
@@ -1244,8 +1328,7 @@ pub struct DerivativePosition {
     #[prost(message, optional, tag = "3")]
     pub position: ::core::option::Option<Position>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MarketOrderIndicator")]
 pub struct MarketOrderIndicator {
     /// market_id represents the unique ID of the market
@@ -1255,8 +1338,7 @@ pub struct MarketOrderIndicator {
     #[prost(bool, tag = "2")]
     pub is_buy: bool,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TradeLog")]
 pub struct TradeLog {
     #[prost(string, tag = "1")]
@@ -1276,8 +1358,7 @@ pub struct TradeLog {
     #[prost(string, tag = "7")]
     pub cid: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.PositionDelta")]
 pub struct PositionDelta {
     #[prost(bool, tag = "1")]
@@ -1289,8 +1370,7 @@ pub struct PositionDelta {
     #[prost(string, tag = "4")]
     pub execution_price: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeTradeLog")]
 pub struct DerivativeTradeLog {
     #[prost(bytes = "vec", tag = "1")]
@@ -1311,8 +1391,7 @@ pub struct DerivativeTradeLog {
     #[prost(string, tag = "8")]
     pub pnl: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SubaccountPosition")]
 pub struct SubaccountPosition {
     #[prost(message, optional, tag = "1")]
@@ -1321,8 +1400,7 @@ pub struct SubaccountPosition {
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::vec::Vec<u8>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SubaccountDeposit")]
 pub struct SubaccountDeposit {
     #[prost(bytes = "vec", tag = "1")]
@@ -1331,7 +1409,6 @@ pub struct SubaccountDeposit {
     #[prost(message, optional, tag = "2")]
     pub deposit: ::core::option::Option<Deposit>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DepositUpdate")]
 pub struct DepositUpdate {
@@ -1340,8 +1417,7 @@ pub struct DepositUpdate {
     #[prost(message, repeated, tag = "2")]
     pub deposits: ::prost::alloc::vec::Vec<SubaccountDeposit>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.PointsMultiplier")]
 pub struct PointsMultiplier {
     #[prost(string, tag = "1")]
@@ -1349,7 +1425,6 @@ pub struct PointsMultiplier {
     #[prost(string, tag = "2")]
     pub taker_points_multiplier: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TradingRewardCampaignBoostInfo")]
 pub struct TradingRewardCampaignBoostInfo {
@@ -1364,7 +1439,6 @@ pub struct TradingRewardCampaignBoostInfo {
     #[prost(message, repeated, tag = "4")]
     pub derivative_market_multipliers: ::prost::alloc::vec::Vec<PointsMultiplier>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.CampaignRewardPool")]
 pub struct CampaignRewardPool {
@@ -1380,7 +1454,6 @@ pub struct CampaignRewardPool {
     #[prost(message, repeated, tag = "2")]
     pub max_campaign_rewards: ::prost::alloc::vec::Vec<super::super::super::cosmos::base::v1beta1::Coin>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TradingRewardCampaignInfo")]
 pub struct TradingRewardCampaignInfo {
@@ -1402,8 +1475,7 @@ pub struct TradingRewardCampaignInfo {
     #[serde(alias = "disqualified_marketIDs")]
     pub disqualified_market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.FeeDiscountTierInfo")]
 pub struct FeeDiscountTierInfo {
     /// the maker discount rate
@@ -1419,7 +1491,6 @@ pub struct FeeDiscountTierInfo {
     #[prost(string, tag = "4")]
     pub volume: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.FeeDiscountSchedule")]
 pub struct FeeDiscountSchedule {
@@ -1450,8 +1521,7 @@ pub struct FeeDiscountSchedule {
     #[serde(alias = "disqualified_marketIDs")]
     pub disqualified_market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.FeeDiscountTierTTL")]
 pub struct FeeDiscountTierTtl {
     /// the tier number
@@ -1469,7 +1539,6 @@ pub struct FeeDiscountTierTtl {
     )]
     pub ttl_timestamp: i64,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.AccountRewards")]
 pub struct AccountRewards {
@@ -1478,7 +1547,6 @@ pub struct AccountRewards {
     #[prost(message, repeated, tag = "2")]
     pub rewards: ::prost::alloc::vec::Vec<super::super::super::cosmos::base::v1beta1::Coin>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TradeRecords")]
 pub struct TradeRecords {
@@ -1488,16 +1556,14 @@ pub struct TradeRecords {
     #[prost(message, repeated, tag = "2")]
     pub latest_trade_records: ::prost::alloc::vec::Vec<TradeRecord>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SubaccountIDs")]
 pub struct SubaccountIDs {
     #[prost(bytes = "vec", repeated, tag = "1")]
     #[serde(alias = "subaccountIDs")]
     pub subaccount_ids: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TradeRecord")]
 pub struct TradeRecord {
     /// the timestamp of the trade
@@ -1514,8 +1580,7 @@ pub struct TradeRecord {
     #[prost(string, tag = "3")]
     pub quantity: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.Level")]
 pub struct Level {
     /// price (in human readable format)
@@ -1525,7 +1590,6 @@ pub struct Level {
     #[prost(string, tag = "2")]
     pub q: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.AggregateSubaccountVolumeRecord")]
 pub struct AggregateSubaccountVolumeRecord {
@@ -1537,7 +1601,6 @@ pub struct AggregateSubaccountVolumeRecord {
     #[prost(message, repeated, tag = "2")]
     pub market_volumes: ::prost::alloc::vec::Vec<MarketVolume>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.AggregateAccountVolumeRecord")]
 pub struct AggregateAccountVolumeRecord {
@@ -1548,8 +1611,7 @@ pub struct AggregateAccountVolumeRecord {
     #[prost(message, repeated, tag = "2")]
     pub market_volumes: ::prost::alloc::vec::Vec<MarketVolume>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DenomDecimals")]
 pub struct DenomDecimals {
     /// the denom of the token
@@ -1563,8 +1625,7 @@ pub struct DenomDecimals {
     )]
     pub decimals: u64,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.GrantAuthorization")]
 pub struct GrantAuthorization {
     /// the grantee address
@@ -1574,8 +1635,7 @@ pub struct GrantAuthorization {
     #[prost(string, tag = "2")]
     pub amount: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.ActiveGrant")]
 pub struct ActiveGrant {
     #[prost(string, tag = "1")]
@@ -1583,8 +1643,7 @@ pub struct ActiveGrant {
     #[prost(string, tag = "2")]
     pub amount: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EffectiveGrant")]
 pub struct EffectiveGrant {
     #[prost(string, tag = "1")]
@@ -1594,8 +1653,7 @@ pub struct EffectiveGrant {
     #[prost(bool, tag = "3")]
     pub is_valid: bool,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DenomMinNotional")]
 pub struct DenomMinNotional {
     /// the denom of the token
@@ -1616,6 +1674,8 @@ pub enum ExecutionType {
     LimitMatchNewOrder = 4,
     MarketLiquidation = 5,
     ExpiryMarketSettlement = 6,
+    OffsettingPosition = 7,
+    Synthetic = 8,
 }
 impl ExecutionType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -1624,13 +1684,15 @@ impl ExecutionType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ExecutionType::UnspecifiedExecutionType => "UnspecifiedExecutionType",
-            ExecutionType::Market => "Market",
-            ExecutionType::LimitFill => "LimitFill",
-            ExecutionType::LimitMatchRestingOrder => "LimitMatchRestingOrder",
-            ExecutionType::LimitMatchNewOrder => "LimitMatchNewOrder",
-            ExecutionType::MarketLiquidation => "MarketLiquidation",
-            ExecutionType::ExpiryMarketSettlement => "ExpiryMarketSettlement",
+            Self::UnspecifiedExecutionType => "UnspecifiedExecutionType",
+            Self::Market => "Market",
+            Self::LimitFill => "LimitFill",
+            Self::LimitMatchRestingOrder => "LimitMatchRestingOrder",
+            Self::LimitMatchNewOrder => "LimitMatchNewOrder",
+            Self::MarketLiquidation => "MarketLiquidation",
+            Self::ExpiryMarketSettlement => "ExpiryMarketSettlement",
+            Self::OffsettingPosition => "OffsettingPosition",
+            Self::Synthetic => "Synthetic",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1643,11 +1705,12 @@ impl ExecutionType {
             "LimitMatchNewOrder" => Some(Self::LimitMatchNewOrder),
             "MarketLiquidation" => Some(Self::MarketLiquidation),
             "ExpiryMarketSettlement" => Some(Self::ExpiryMarketSettlement),
+            "OffsettingPosition" => Some(Self::OffsettingPosition),
+            "Synthetic" => Some(Self::Synthetic),
             _ => None,
         }
     }
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventBatchSpotExecution")]
 pub struct EventBatchSpotExecution {
@@ -1665,7 +1728,6 @@ pub struct EventBatchSpotExecution {
     #[prost(message, repeated, tag = "4")]
     pub trades: ::prost::alloc::vec::Vec<TradeLog>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventBatchDerivativeExecution")]
 pub struct EventBatchDerivativeExecution {
@@ -1688,8 +1750,7 @@ pub struct EventBatchDerivativeExecution {
     #[prost(message, repeated, tag = "6")]
     pub trades: ::prost::alloc::vec::Vec<DerivativeTradeLog>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventLostFundsFromLiquidation")]
 pub struct EventLostFundsFromLiquidation {
     #[prost(string, tag = "1")]
@@ -1703,7 +1764,6 @@ pub struct EventLostFundsFromLiquidation {
     #[prost(string, tag = "4")]
     pub lost_funds_from_order_cancels: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventBatchDerivativePosition")]
 pub struct EventBatchDerivativePosition {
@@ -1713,8 +1773,7 @@ pub struct EventBatchDerivativePosition {
     #[prost(message, repeated, tag = "2")]
     pub positions: ::prost::alloc::vec::Vec<SubaccountPosition>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventDerivativeMarketPaused")]
 pub struct EventDerivativeMarketPaused {
     #[prost(string, tag = "1")]
@@ -1727,8 +1786,7 @@ pub struct EventDerivativeMarketPaused {
     #[prost(string, tag = "4")]
     pub missing_funds_rate: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventSettledMarketBalance")]
 pub struct EventSettledMarketBalance {
     #[prost(string, tag = "1")]
@@ -1737,8 +1795,7 @@ pub struct EventSettledMarketBalance {
     #[prost(string, tag = "2")]
     pub amount: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventNotSettledMarketBalance")]
 pub struct EventNotSettledMarketBalance {
     #[prost(string, tag = "1")]
@@ -1747,8 +1804,7 @@ pub struct EventNotSettledMarketBalance {
     #[prost(string, tag = "2")]
     pub amount: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventMarketBeyondBankruptcy")]
 pub struct EventMarketBeyondBankruptcy {
     #[prost(string, tag = "1")]
@@ -1759,8 +1815,7 @@ pub struct EventMarketBeyondBankruptcy {
     #[prost(string, tag = "3")]
     pub missing_market_funds: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventAllPositionsHaircut")]
 pub struct EventAllPositionsHaircut {
     #[prost(string, tag = "1")]
@@ -1771,14 +1826,18 @@ pub struct EventAllPositionsHaircut {
     #[prost(string, tag = "3")]
     pub missing_funds_rate: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventBinaryOptionsMarketUpdate")]
 pub struct EventBinaryOptionsMarketUpdate {
     #[prost(message, optional, tag = "1")]
     pub market: ::core::option::Option<BinaryOptionsMarket>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.EventDerivativeMarketUpdate")]
+pub struct EventDerivativeMarketUpdate {
+    #[prost(message, optional, tag = "1")]
+    pub market: ::core::option::Option<DerivativeMarket>,
+}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventNewSpotOrders")]
 pub struct EventNewSpotOrders {
@@ -1790,7 +1849,6 @@ pub struct EventNewSpotOrders {
     #[prost(message, repeated, tag = "3")]
     pub sell_orders: ::prost::alloc::vec::Vec<SpotLimitOrder>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventNewDerivativeOrders")]
 pub struct EventNewDerivativeOrders {
@@ -1802,8 +1860,7 @@ pub struct EventNewDerivativeOrders {
     #[prost(message, repeated, tag = "3")]
     pub sell_orders: ::prost::alloc::vec::Vec<DerivativeLimitOrder>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventCancelSpotOrder")]
 pub struct EventCancelSpotOrder {
     #[prost(string, tag = "1")]
@@ -1812,15 +1869,13 @@ pub struct EventCancelSpotOrder {
     #[prost(message, optional, tag = "2")]
     pub order: ::core::option::Option<SpotLimitOrder>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventSpotMarketUpdate")]
 pub struct EventSpotMarketUpdate {
     #[prost(message, optional, tag = "1")]
     pub market: ::core::option::Option<SpotMarket>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventPerpetualMarketUpdate")]
 pub struct EventPerpetualMarketUpdate {
     #[prost(message, optional, tag = "1")]
@@ -1830,8 +1885,7 @@ pub struct EventPerpetualMarketUpdate {
     #[prost(message, optional, tag = "3")]
     pub funding: ::core::option::Option<PerpetualMarketFunding>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventExpiryFuturesMarketUpdate")]
 pub struct EventExpiryFuturesMarketUpdate {
     #[prost(message, optional, tag = "1")]
@@ -1839,8 +1893,7 @@ pub struct EventExpiryFuturesMarketUpdate {
     #[prost(message, optional, tag = "3")]
     pub expiry_futures_market_info: ::core::option::Option<ExpiryFuturesMarketInfo>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventPerpetualMarketFundingUpdate")]
 pub struct EventPerpetualMarketFundingUpdate {
     #[prost(string, tag = "1")]
@@ -1855,8 +1908,7 @@ pub struct EventPerpetualMarketFundingUpdate {
     #[prost(string, tag = "5")]
     pub mark_price: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventSubaccountDeposit")]
 pub struct EventSubaccountDeposit {
     #[prost(string, tag = "1")]
@@ -1867,8 +1919,7 @@ pub struct EventSubaccountDeposit {
     #[prost(message, optional, tag = "3")]
     pub amount: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventSubaccountWithdraw")]
 pub struct EventSubaccountWithdraw {
     #[prost(bytes = "vec", tag = "1")]
@@ -1879,8 +1930,7 @@ pub struct EventSubaccountWithdraw {
     #[prost(message, optional, tag = "3")]
     pub amount: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventSubaccountBalanceTransfer")]
 pub struct EventSubaccountBalanceTransfer {
     #[prost(string, tag = "1")]
@@ -1892,15 +1942,13 @@ pub struct EventSubaccountBalanceTransfer {
     #[prost(message, optional, tag = "3")]
     pub amount: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventBatchDepositUpdate")]
 pub struct EventBatchDepositUpdate {
     #[prost(message, repeated, tag = "1")]
     pub deposit_updates: ::prost::alloc::vec::Vec<DepositUpdate>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeMarketOrderCancel")]
 pub struct DerivativeMarketOrderCancel {
     #[prost(message, optional, tag = "1")]
@@ -1908,8 +1956,7 @@ pub struct DerivativeMarketOrderCancel {
     #[prost(string, tag = "2")]
     pub cancel_quantity: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventCancelDerivativeOrder")]
 pub struct EventCancelDerivativeOrder {
     #[prost(string, tag = "1")]
@@ -1922,14 +1969,12 @@ pub struct EventCancelDerivativeOrder {
     #[prost(message, optional, tag = "4")]
     pub market_order_cancel: ::core::option::Option<DerivativeMarketOrderCancel>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventFeeDiscountSchedule")]
 pub struct EventFeeDiscountSchedule {
     #[prost(message, optional, tag = "1")]
     pub schedule: ::core::option::Option<FeeDiscountSchedule>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventTradingRewardCampaignUpdate")]
 pub struct EventTradingRewardCampaignUpdate {
@@ -1938,15 +1983,13 @@ pub struct EventTradingRewardCampaignUpdate {
     #[prost(message, repeated, tag = "2")]
     pub campaign_reward_pools: ::prost::alloc::vec::Vec<CampaignRewardPool>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventTradingRewardDistribution")]
 pub struct EventTradingRewardDistribution {
     #[prost(message, repeated, tag = "1")]
     pub account_rewards: ::prost::alloc::vec::Vec<AccountRewards>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventNewConditionalDerivativeOrder")]
 pub struct EventNewConditionalDerivativeOrder {
     #[prost(string, tag = "1")]
@@ -1959,8 +2002,7 @@ pub struct EventNewConditionalDerivativeOrder {
     #[prost(bool, tag = "4")]
     pub is_market: bool,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventCancelConditionalDerivativeOrder")]
 pub struct EventCancelConditionalDerivativeOrder {
     #[prost(string, tag = "1")]
@@ -1973,8 +2015,7 @@ pub struct EventCancelConditionalDerivativeOrder {
     #[prost(message, optional, tag = "4")]
     pub market_order: ::core::option::Option<DerivativeMarketOrder>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventConditionalDerivativeOrderTrigger")]
 pub struct EventConditionalDerivativeOrderTrigger {
     #[prost(bytes = "vec", tag = "1")]
@@ -1989,8 +2030,7 @@ pub struct EventConditionalDerivativeOrderTrigger {
     #[prost(string, tag = "5")]
     pub triggered_order_cid: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventOrderFail")]
 pub struct EventOrderFail {
     #[prost(bytes = "vec", tag = "1")]
@@ -2002,14 +2042,12 @@ pub struct EventOrderFail {
     #[prost(string, repeated, tag = "4")]
     pub cids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventAtomicMarketOrderFeeMultipliersUpdated")]
 pub struct EventAtomicMarketOrderFeeMultipliersUpdated {
     #[prost(message, repeated, tag = "1")]
     pub market_fee_multipliers: ::prost::alloc::vec::Vec<MarketFeeMultiplier>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventOrderbookUpdate")]
 pub struct EventOrderbookUpdate {
@@ -2018,7 +2056,6 @@ pub struct EventOrderbookUpdate {
     #[prost(message, repeated, tag = "2")]
     pub derivative_updates: ::prost::alloc::vec::Vec<OrderbookUpdate>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.OrderbookUpdate")]
 pub struct OrderbookUpdate {
@@ -2031,7 +2068,6 @@ pub struct OrderbookUpdate {
     #[prost(message, optional, tag = "2")]
     pub orderbook: ::core::option::Option<Orderbook>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.Orderbook")]
 pub struct Orderbook {
@@ -2043,7 +2079,6 @@ pub struct Orderbook {
     #[prost(message, repeated, tag = "3")]
     pub sell_levels: ::prost::alloc::vec::Vec<Level>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventGrantAuthorizations")]
 pub struct EventGrantAuthorizations {
@@ -2052,8 +2087,7 @@ pub struct EventGrantAuthorizations {
     #[prost(message, repeated, tag = "2")]
     pub grants: ::prost::alloc::vec::Vec<GrantAuthorization>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventGrantActivation")]
 pub struct EventGrantActivation {
     #[prost(string, tag = "1")]
@@ -2063,8 +2097,7 @@ pub struct EventGrantActivation {
     #[prost(string, tag = "3")]
     pub amount: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventInvalidGrant")]
 pub struct EventInvalidGrant {
     #[prost(string, tag = "1")]
@@ -2072,8 +2105,7 @@ pub struct EventInvalidGrant {
     #[prost(string, tag = "2")]
     pub granter: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventOrderCancelFail")]
 pub struct EventOrderCancelFail {
     #[prost(string, tag = "1")]
@@ -2089,7 +2121,6 @@ pub struct EventOrderCancelFail {
     #[prost(string, tag = "5")]
     pub description: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventDerivativeOrdersV2Migration")]
 pub struct EventDerivativeOrdersV2Migration {
@@ -2101,8 +2132,7 @@ pub struct EventDerivativeOrdersV2Migration {
     #[prost(message, repeated, tag = "3")]
     pub sell_order_changes: ::prost::alloc::vec::Vec<DerivativeOrderV2Changes>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeOrderV2Changes")]
 pub struct DerivativeOrderV2Changes {
     #[prost(string, tag = "1")]
@@ -2125,7 +2155,6 @@ pub struct DerivativeOrderV2Changes {
     #[prost(string, tag = "7")]
     pub tp: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventSpotOrdersV2Migration")]
 pub struct EventSpotOrdersV2Migration {
@@ -2137,8 +2166,7 @@ pub struct EventSpotOrdersV2Migration {
     #[prost(message, repeated, tag = "3")]
     pub sell_order_changes: ::prost::alloc::vec::Vec<SpotOrderV2Changes>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventTriggerConditionalMarketOrderFailed")]
 pub struct EventTriggerConditionalMarketOrderFailed {
     #[prost(string, tag = "1")]
@@ -2153,9 +2181,10 @@ pub struct EventTriggerConditionalMarketOrderFailed {
     pub order_hash: ::prost::alloc::vec::Vec<u8>,
     #[prost(string, tag = "5")]
     pub trigger_err: ::prost::alloc::string::String,
+    #[prost(string, tag = "6")]
+    pub cid: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventTriggerConditionalLimitOrderFailed")]
 pub struct EventTriggerConditionalLimitOrderFailed {
     #[prost(string, tag = "1")]
@@ -2170,9 +2199,10 @@ pub struct EventTriggerConditionalLimitOrderFailed {
     pub order_hash: ::prost::alloc::vec::Vec<u8>,
     #[prost(string, tag = "5")]
     pub trigger_err: ::prost::alloc::string::String,
+    #[prost(string, tag = "6")]
+    pub cid: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SpotOrderV2Changes")]
 pub struct SpotOrderV2Changes {
     #[prost(string, tag = "1")]
@@ -2192,15 +2222,28 @@ pub struct SpotOrderV2Changes {
     #[prost(string, tag = "6")]
     pub tp: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventDerivativePositionV2Migration")]
 pub struct EventDerivativePositionV2Migration {
     #[prost(message, optional, tag = "1")]
     pub position: ::core::option::Option<DerivativePosition>,
 }
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.EventPositionTransfer")]
+pub struct EventPositionTransfer {
+    #[prost(string, tag = "1")]
+    #[serde(alias = "marketID")]
+    pub market_id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    #[serde(alias = "source_subaccountID")]
+    pub source_subaccount_id: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    #[serde(alias = "destination_subaccountID")]
+    pub destination_subaccount_id: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub quantity: ::prost::alloc::string::String,
+}
 /// Spot Exchange Limit Orderbook
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SpotOrderBook")]
 pub struct SpotOrderBook {
@@ -2213,7 +2256,6 @@ pub struct SpotOrderBook {
     pub orders: ::prost::alloc::vec::Vec<SpotLimitOrder>,
 }
 /// Derivative Exchange Limit Orderbook
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeOrderBook")]
 pub struct DerivativeOrderBook {
@@ -2226,7 +2268,6 @@ pub struct DerivativeOrderBook {
     pub orders: ::prost::alloc::vec::Vec<DerivativeLimitOrder>,
 }
 /// Orderbook containing limit & market conditional orders
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.ConditionalDerivativeOrderBook")]
 pub struct ConditionalDerivativeOrderBook {
@@ -2242,8 +2283,7 @@ pub struct ConditionalDerivativeOrderBook {
     #[prost(message, repeated, tag = "5")]
     pub market_sell_orders: ::prost::alloc::vec::Vec<DerivativeMarketOrder>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SubaccountOrderbookMetadata")]
 pub struct SubaccountOrderbookMetadata {
     /// The number of vanilla limit orders
@@ -2283,8 +2323,7 @@ pub struct SubaccountOrderbookMetadata {
     )]
     pub reduce_only_conditional_order_count: u32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SpotMarketParamUpdateProposal")]
 pub struct SpotMarketParamUpdateProposal {
     #[prost(string, tag = "1")]
@@ -2340,9 +2379,16 @@ pub struct SpotMarketParamUpdateProposal {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub quote_decimals: u32,
+    /// has_disabled_minimal_protocol_fee defines whether the minimal protocol fee
+    /// is disabled for the market
+    #[prost(enumeration = "DisableMinimalProtocolFeeUpdate", tag = "15")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub has_disabled_minimal_protocol_fee: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.ExchangeEnableProposal")]
 pub struct ExchangeEnableProposal {
     #[prost(string, tag = "1")]
@@ -2356,7 +2402,6 @@ pub struct ExchangeEnableProposal {
     )]
     pub exchange_type: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BatchExchangeModificationProposal")]
 pub struct BatchExchangeModificationProposal {
@@ -2381,7 +2426,7 @@ pub struct BatchExchangeModificationProposal {
     #[prost(message, repeated, tag = "10")]
     pub binary_options_param_update_proposals: ::prost::alloc::vec::Vec<BinaryOptionsMarketParamUpdateProposal>,
     #[prost(message, optional, tag = "11")]
-    pub denom_decimals_update_proposal: ::core::option::Option<UpdateDenomDecimalsProposal>,
+    pub auction_exchange_transfer_denom_decimals_update_proposal: ::core::option::Option<UpdateAuctionExchangeTransferDenomDecimalsProposal>,
     #[prost(message, optional, tag = "12")]
     pub fee_discount_proposal: ::core::option::Option<FeeDiscountProposal>,
     #[prost(message, repeated, tag = "13")]
@@ -2391,8 +2436,7 @@ pub struct BatchExchangeModificationProposal {
 }
 /// SpotMarketLaunchProposal defines a SDK message for proposing a new spot
 /// market through governance
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SpotMarketLaunchProposal")]
 pub struct SpotMarketLaunchProposal {
     #[prost(string, tag = "1")]
@@ -2443,8 +2487,7 @@ pub struct SpotMarketLaunchProposal {
 }
 /// PerpetualMarketLaunchProposal defines a SDK message for proposing a new
 /// perpetual futures market through governance
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.PerpetualMarketLaunchProposal")]
 pub struct PerpetualMarketLaunchProposal {
     #[prost(string, tag = "1")]
@@ -2510,9 +2553,11 @@ pub struct PerpetualMarketLaunchProposal {
     /// reduce_margin_ratio defines the ratio of the margin that is reduced
     #[prost(string, tag = "17")]
     pub reduce_margin_ratio: ::prost::alloc::string::String,
+    /// open_notional_cap defines the maximum open notional for the market
+    #[prost(message, optional, tag = "18")]
+    pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BinaryOptionsMarketLaunchProposal")]
 pub struct BinaryOptionsMarketLaunchProposal {
     #[prost(string, tag = "1")]
@@ -2586,11 +2631,13 @@ pub struct BinaryOptionsMarketLaunchProposal {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub admin_permissions: u32,
+    /// open_notional_cap defines the maximum open notional for the market
+    #[prost(message, optional, tag = "18")]
+    pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
 }
 /// ExpiryFuturesMarketLaunchProposal defines a SDK message for proposing a new
 /// expiry futures market through governance
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.ExpiryFuturesMarketLaunchProposal")]
 pub struct ExpiryFuturesMarketLaunchProposal {
     #[prost(string, tag = "1")]
@@ -2663,9 +2710,11 @@ pub struct ExpiryFuturesMarketLaunchProposal {
     /// reduce_margin_ratio defines the ratio of the margin that is reduced
     #[prost(string, tag = "18")]
     pub reduce_margin_ratio: ::prost::alloc::string::String,
+    /// open_notional_cap defines the maximum open notional for the market
+    #[prost(message, optional, tag = "19")]
+    pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeMarketParamUpdateProposal")]
 pub struct DerivativeMarketParamUpdateProposal {
     #[prost(string, tag = "1")]
@@ -2729,9 +2778,19 @@ pub struct DerivativeMarketParamUpdateProposal {
     /// reduce_margin_ratio defines the ratio of the margin that is reduced
     #[prost(string, tag = "18")]
     pub reduce_margin_ratio: ::prost::alloc::string::String,
+    /// open_notional_cap defines the maximum open notional for the market
+    #[prost(message, optional, tag = "19")]
+    pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
+    /// has_disabled_minimal_protocol_fee defines whether the minimal protocol fee
+    /// is disabled for the market
+    #[prost(enumeration = "DisableMinimalProtocolFeeUpdate", tag = "20")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub has_disabled_minimal_protocol_fee: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.AdminInfo")]
 pub struct AdminInfo {
     #[prost(string, tag = "1")]
@@ -2743,8 +2802,7 @@ pub struct AdminInfo {
     )]
     pub admin_permissions: u32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MarketForcedSettlementProposal")]
 pub struct MarketForcedSettlementProposal {
     #[prost(string, tag = "1")]
@@ -2757,10 +2815,9 @@ pub struct MarketForcedSettlementProposal {
     #[prost(string, tag = "4")]
     pub settlement_price: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/injective.exchange.v2.UpdateDenomDecimalsProposal")]
-pub struct UpdateDenomDecimalsProposal {
+#[proto_message(type_url = "/injective.exchange.v2.UpdateAuctionExchangeTransferDenomDecimalsProposal")]
+pub struct UpdateAuctionExchangeTransferDenomDecimalsProposal {
     #[prost(string, tag = "1")]
     pub title: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
@@ -2768,8 +2825,7 @@ pub struct UpdateDenomDecimalsProposal {
     #[prost(message, repeated, tag = "3")]
     pub denom_decimals: ::prost::alloc::vec::Vec<DenomDecimals>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BinaryOptionsMarketParamUpdateProposal")]
 pub struct BinaryOptionsMarketParamUpdateProposal {
     #[prost(string, tag = "1")]
@@ -2833,9 +2889,19 @@ pub struct BinaryOptionsMarketParamUpdateProposal {
     /// orders in the market
     #[prost(string, tag = "16")]
     pub min_notional: ::prost::alloc::string::String,
+    /// open_notional_cap defines the maximum open notional for the market
+    #[prost(message, optional, tag = "17")]
+    pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
+    /// has_disabled_minimal_protocol_fee defines whether the minimal protocol fee
+    /// is disabled for the market
+    #[prost(enumeration = "DisableMinimalProtocolFeeUpdate", tag = "18")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub has_disabled_minimal_protocol_fee: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.ProviderOracleParams")]
 pub struct ProviderOracleParams {
     /// Oracle base currency
@@ -2859,8 +2925,7 @@ pub struct ProviderOracleParams {
     )]
     pub oracle_type: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.OracleParams")]
 pub struct OracleParams {
     /// Oracle base currency
@@ -2884,7 +2949,6 @@ pub struct OracleParams {
     )]
     pub oracle_type: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TradingRewardCampaignLaunchProposal")]
 pub struct TradingRewardCampaignLaunchProposal {
@@ -2897,7 +2961,6 @@ pub struct TradingRewardCampaignLaunchProposal {
     #[prost(message, repeated, tag = "4")]
     pub campaign_reward_pools: ::prost::alloc::vec::Vec<CampaignRewardPool>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TradingRewardCampaignUpdateProposal")]
 pub struct TradingRewardCampaignUpdateProposal {
@@ -2912,8 +2975,7 @@ pub struct TradingRewardCampaignUpdateProposal {
     #[prost(message, repeated, tag = "5")]
     pub campaign_reward_pools_updates: ::prost::alloc::vec::Vec<CampaignRewardPool>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.RewardPointUpdate")]
 pub struct RewardPointUpdate {
     #[prost(string, tag = "1")]
@@ -2922,7 +2984,6 @@ pub struct RewardPointUpdate {
     #[prost(string, tag = "12")]
     pub new_points: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TradingRewardPendingPointsUpdateProposal")]
 pub struct TradingRewardPendingPointsUpdateProposal {
@@ -2939,7 +3000,6 @@ pub struct TradingRewardPendingPointsUpdateProposal {
     #[prost(message, repeated, tag = "4")]
     pub reward_point_updates: ::prost::alloc::vec::Vec<RewardPointUpdate>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.FeeDiscountProposal")]
 pub struct FeeDiscountProposal {
@@ -2950,7 +3010,6 @@ pub struct FeeDiscountProposal {
     #[prost(message, optional, tag = "3")]
     pub schedule: ::core::option::Option<FeeDiscountSchedule>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BatchCommunityPoolSpendProposal")]
 pub struct BatchCommunityPoolSpendProposal {
@@ -2963,7 +3022,6 @@ pub struct BatchCommunityPoolSpendProposal {
 }
 /// AtomicMarketOrderFeeMultiplierScheduleProposal defines a SDK message for
 /// proposing new atomic take fee multipliers for specified markets
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.AtomicMarketOrderFeeMultiplierScheduleProposal")]
 pub struct AtomicMarketOrderFeeMultiplierScheduleProposal {
@@ -2974,7 +3032,6 @@ pub struct AtomicMarketOrderFeeMultiplierScheduleProposal {
     #[prost(message, repeated, tag = "3")]
     pub market_fee_multipliers: ::prost::alloc::vec::Vec<MarketFeeMultiplier>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DenomMinNotionalProposal")]
 pub struct DenomMinNotionalProposal {
@@ -2984,6 +3041,36 @@ pub struct DenomMinNotionalProposal {
     pub description: ::prost::alloc::string::String,
     #[prost(message, repeated, tag = "3")]
     pub denom_min_notionals: ::prost::alloc::vec::Vec<DenomMinNotional>,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+#[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+pub enum DisableMinimalProtocolFeeUpdate {
+    NoUpdate = 0,
+    False = 1,
+    True = 2,
+}
+impl DisableMinimalProtocolFeeUpdate {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::NoUpdate => "NoUpdate",
+            Self::False => "False",
+            Self::True => "True",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "NoUpdate" => Some(Self::NoUpdate),
+            "False" => Some(Self::False),
+            "True" => Some(Self::True),
+            _ => None,
+        }
+    }
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -3000,9 +3087,9 @@ impl ExchangeType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ExchangeType::ExchangeUnspecified => "EXCHANGE_UNSPECIFIED",
-            ExchangeType::Spot => "SPOT",
-            ExchangeType::Derivatives => "DERIVATIVES",
+            Self::ExchangeUnspecified => "EXCHANGE_UNSPECIFIED",
+            Self::Spot => "SPOT",
+            Self::Derivatives => "DERIVATIVES",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3015,8 +3102,7 @@ impl ExchangeType {
         }
     }
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgUpdateSpotMarket")]
 pub struct MsgUpdateSpotMarket {
     /// current admin address of the associated market
@@ -3039,12 +3125,10 @@ pub struct MsgUpdateSpotMarket {
     #[prost(string, tag = "6")]
     pub new_min_notional: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgUpdateSpotMarketResponse")]
 pub struct MsgUpdateSpotMarketResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgUpdateDerivativeMarket")]
 pub struct MsgUpdateDerivativeMarket {
     /// current admin address of the associated market
@@ -3075,12 +3159,13 @@ pub struct MsgUpdateDerivativeMarket {
     /// (optional) updated value for reduce_margin_ratio
     #[prost(string, tag = "9")]
     pub new_reduce_margin_ratio: ::prost::alloc::string::String,
+    /// (optional) updated value for open_notional_cap
+    #[prost(message, optional, tag = "10")]
+    pub new_open_notional_cap: ::core::option::Option<OpenNotionalCap>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgUpdateDerivativeMarketResponse")]
 pub struct MsgUpdateDerivativeMarketResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgUpdateParams")]
 pub struct MsgUpdateParams {
@@ -3093,14 +3178,12 @@ pub struct MsgUpdateParams {
     #[prost(message, optional, tag = "2")]
     pub params: ::core::option::Option<Params>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgUpdateParamsResponse")]
 pub struct MsgUpdateParamsResponse {}
 /// MsgDeposit defines a SDK message for transferring coins from the sender's
 /// bank balance into the subaccount's exchange deposits
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgDeposit")]
 pub struct MsgDeposit {
     /// the sender's Injective address
@@ -3116,14 +3199,12 @@ pub struct MsgDeposit {
     pub amount: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
 /// MsgDepositResponse defines the Msg/Deposit response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgDepositResponse")]
 pub struct MsgDepositResponse {}
 /// MsgWithdraw defines a SDK message for withdrawing coins from a subaccount's
 /// deposits to the user's bank balance
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgWithdraw")]
 pub struct MsgWithdraw {
     /// the sender's Injective address
@@ -3138,14 +3219,12 @@ pub struct MsgWithdraw {
     pub amount: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
 /// MsgWithdraw defines the Msg/Withdraw response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgWithdrawResponse")]
 pub struct MsgWithdrawResponse {}
 /// MsgCreateSpotLimitOrder defines a SDK message for creating a new spot limit
 /// order.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCreateSpotLimitOrder")]
 pub struct MsgCreateSpotLimitOrder {
     /// the sender's Injective address
@@ -3157,8 +3236,7 @@ pub struct MsgCreateSpotLimitOrder {
 }
 /// MsgCreateSpotLimitOrderResponse defines the Msg/CreateSpotOrder response
 /// type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCreateSpotLimitOrderResponse")]
 pub struct MsgCreateSpotLimitOrderResponse {
     #[prost(string, tag = "1")]
@@ -3168,7 +3246,6 @@ pub struct MsgCreateSpotLimitOrderResponse {
 }
 /// MsgBatchCreateSpotLimitOrders defines a SDK message for creating a new batch
 /// of spot limit orders.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchCreateSpotLimitOrders")]
 pub struct MsgBatchCreateSpotLimitOrders {
@@ -3179,8 +3256,7 @@ pub struct MsgBatchCreateSpotLimitOrders {
 }
 /// MsgBatchCreateSpotLimitOrdersResponse defines the
 /// Msg/BatchCreateSpotLimitOrders response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchCreateSpotLimitOrdersResponse")]
 pub struct MsgBatchCreateSpotLimitOrdersResponse {
     #[prost(string, repeated, tag = "1")]
@@ -3192,8 +3268,7 @@ pub struct MsgBatchCreateSpotLimitOrdersResponse {
 }
 /// MsgInstantSpotMarketLaunch defines a SDK message for creating a new spot
 /// market by paying listing fee without governance
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgInstantSpotMarketLaunch")]
 pub struct MsgInstantSpotMarketLaunch {
     /// the sender's Injective address
@@ -3237,14 +3312,12 @@ pub struct MsgInstantSpotMarketLaunch {
 }
 /// MsgInstantSpotMarketLaunchResponse defines the Msg/InstantSpotMarketLaunch
 /// response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgInstantSpotMarketLaunchResponse")]
 pub struct MsgInstantSpotMarketLaunchResponse {}
 /// MsgInstantPerpetualMarketLaunch defines a SDK message for creating a new
 /// perpetual futures market by paying listing fee without governance
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgInstantPerpetualMarketLaunch")]
 pub struct MsgInstantPerpetualMarketLaunch {
     /// the sender's Injective address
@@ -3307,17 +3380,18 @@ pub struct MsgInstantPerpetualMarketLaunch {
     /// reduce_margin_ratio defines the ratio of the margin that is reduced
     #[prost(string, tag = "15")]
     pub reduce_margin_ratio: ::prost::alloc::string::String,
+    /// open_notional_cap defines the cap on the open notional
+    #[prost(message, optional, tag = "16")]
+    pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
 }
 /// MsgInstantPerpetualMarketLaunchResponse defines the
 /// Msg/InstantPerpetualMarketLaunchResponse response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgInstantPerpetualMarketLaunchResponse")]
 pub struct MsgInstantPerpetualMarketLaunchResponse {}
 /// MsgInstantBinaryOptionsMarketLaunch defines a SDK message for creating a new
 /// perpetual futures market by paying listing fee without governance
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgInstantBinaryOptionsMarketLaunch")]
 pub struct MsgInstantBinaryOptionsMarketLaunch {
     #[prost(string, tag = "1")]
@@ -3385,17 +3459,18 @@ pub struct MsgInstantBinaryOptionsMarketLaunch {
     /// orders in the market (in human readable format)
     #[prost(string, tag = "15")]
     pub min_notional: ::prost::alloc::string::String,
+    /// open_notional_cap defines the cap on the open notional
+    #[prost(message, optional, tag = "16")]
+    pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
 }
 /// MsgInstantBinaryOptionsMarketLaunchResponse defines the
 /// Msg/InstantBinaryOptionsMarketLaunchResponse response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgInstantBinaryOptionsMarketLaunchResponse")]
 pub struct MsgInstantBinaryOptionsMarketLaunchResponse {}
 /// MsgInstantExpiryFuturesMarketLaunch defines a SDK message for creating a new
 /// expiry futures market by paying listing fee without governance
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgInstantExpiryFuturesMarketLaunch")]
 pub struct MsgInstantExpiryFuturesMarketLaunch {
     #[prost(string, tag = "1")]
@@ -3464,17 +3539,18 @@ pub struct MsgInstantExpiryFuturesMarketLaunch {
     /// reduce_margin_ratio defines the ratio of the margin that is reduced
     #[prost(string, tag = "16")]
     pub reduce_margin_ratio: ::prost::alloc::string::String,
+    /// open_notional_cap defines the cap on the open notional
+    #[prost(message, optional, tag = "17")]
+    pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
 }
 /// MsgInstantExpiryFuturesMarketLaunchResponse defines the
 /// Msg/InstantExpiryFuturesMarketLaunch response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgInstantExpiryFuturesMarketLaunchResponse")]
 pub struct MsgInstantExpiryFuturesMarketLaunchResponse {}
 /// MsgCreateSpotMarketOrder defines a SDK message for creating a new spot market
 /// order.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCreateSpotMarketOrder")]
 pub struct MsgCreateSpotMarketOrder {
     /// the sender's Injective address
@@ -3486,8 +3562,7 @@ pub struct MsgCreateSpotMarketOrder {
 }
 /// MsgCreateSpotMarketOrderResponse defines the Msg/CreateSpotMarketLimitOrder
 /// response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCreateSpotMarketOrderResponse")]
 pub struct MsgCreateSpotMarketOrderResponse {
     #[prost(string, tag = "1")]
@@ -3497,8 +3572,7 @@ pub struct MsgCreateSpotMarketOrderResponse {
     #[prost(string, tag = "3")]
     pub cid: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SpotMarketOrderResults")]
 pub struct SpotMarketOrderResults {
     #[prost(string, tag = "1")]
@@ -3509,8 +3583,7 @@ pub struct SpotMarketOrderResults {
     pub fee: ::prost::alloc::string::String,
 }
 /// A Cosmos-SDK MsgCreateDerivativeLimitOrder
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCreateDerivativeLimitOrder")]
 pub struct MsgCreateDerivativeLimitOrder {
     /// the sender's Injective address
@@ -3522,8 +3595,7 @@ pub struct MsgCreateDerivativeLimitOrder {
 }
 /// MsgCreateDerivativeLimitOrderResponse defines the
 /// Msg/CreateDerivativeMarketOrder response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCreateDerivativeLimitOrderResponse")]
 pub struct MsgCreateDerivativeLimitOrderResponse {
     #[prost(string, tag = "1")]
@@ -3532,8 +3604,7 @@ pub struct MsgCreateDerivativeLimitOrderResponse {
     pub cid: ::prost::alloc::string::String,
 }
 /// A Cosmos-SDK MsgCreateBinaryOptionsLimitOrder
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCreateBinaryOptionsLimitOrder")]
 pub struct MsgCreateBinaryOptionsLimitOrder {
     /// the sender's Injective address
@@ -3545,8 +3616,7 @@ pub struct MsgCreateBinaryOptionsLimitOrder {
 }
 /// MsgCreateBinaryOptionsLimitOrderResponse defines the
 /// Msg/CreateBinaryOptionsLimitOrder response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCreateBinaryOptionsLimitOrderResponse")]
 pub struct MsgCreateBinaryOptionsLimitOrderResponse {
     #[prost(string, tag = "1")]
@@ -3555,7 +3625,6 @@ pub struct MsgCreateBinaryOptionsLimitOrderResponse {
     pub cid: ::prost::alloc::string::String,
 }
 /// A Cosmos-SDK MsgBatchCreateDerivativeLimitOrders
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchCreateDerivativeLimitOrders")]
 pub struct MsgBatchCreateDerivativeLimitOrders {
@@ -3568,8 +3637,7 @@ pub struct MsgBatchCreateDerivativeLimitOrders {
 }
 /// MsgBatchCreateDerivativeLimitOrdersResponse defines the
 /// Msg/BatchCreateDerivativeLimitOrders response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchCreateDerivativeLimitOrdersResponse")]
 pub struct MsgBatchCreateDerivativeLimitOrdersResponse {
     #[prost(string, repeated, tag = "1")]
@@ -3580,8 +3648,7 @@ pub struct MsgBatchCreateDerivativeLimitOrdersResponse {
     pub failed_orders_cids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// MsgCancelSpotOrder defines the Msg/CancelSpotOrder response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCancelSpotOrder")]
 pub struct MsgCancelSpotOrder {
     /// the sender's Injective address
@@ -3603,12 +3670,10 @@ pub struct MsgCancelSpotOrder {
     pub cid: ::prost::alloc::string::String,
 }
 /// MsgCancelSpotOrderResponse defines the Msg/CancelSpotOrder response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCancelSpotOrderResponse")]
 pub struct MsgCancelSpotOrderResponse {}
 /// MsgBatchCancelSpotOrders defines the Msg/BatchCancelSpotOrders response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchCancelSpotOrders")]
 pub struct MsgBatchCancelSpotOrders {
@@ -3619,8 +3684,7 @@ pub struct MsgBatchCancelSpotOrders {
 }
 /// MsgBatchCancelSpotOrdersResponse defines the Msg/BatchCancelSpotOrders
 /// response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchCancelSpotOrdersResponse")]
 pub struct MsgBatchCancelSpotOrdersResponse {
     #[prost(bool, repeated, tag = "1")]
@@ -3628,7 +3692,6 @@ pub struct MsgBatchCancelSpotOrdersResponse {
 }
 /// MsgBatchCancelBinaryOptionsOrders defines the
 /// Msg/BatchCancelBinaryOptionsOrders response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchCancelBinaryOptionsOrders")]
 pub struct MsgBatchCancelBinaryOptionsOrders {
@@ -3639,15 +3702,13 @@ pub struct MsgBatchCancelBinaryOptionsOrders {
 }
 /// BatchCancelBinaryOptionsOrdersResponse defines the
 /// Msg/BatchCancelBinaryOptionsOrders response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchCancelBinaryOptionsOrdersResponse")]
 pub struct MsgBatchCancelBinaryOptionsOrdersResponse {
     #[prost(bool, repeated, tag = "1")]
     pub success: ::prost::alloc::vec::Vec<bool>,
 }
 /// MsgBatchUpdateOrders defines the Msg/BatchUpdateOrders response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchUpdateOrders")]
 pub struct MsgBatchUpdateOrders {
@@ -3689,10 +3750,18 @@ pub struct MsgBatchUpdateOrders {
     /// the binary options orders to create
     #[prost(message, repeated, tag = "11")]
     pub binary_options_orders_to_create: ::prost::alloc::vec::Vec<DerivativeOrder>,
+    /// the spot market orders to create
+    #[prost(message, repeated, tag = "12")]
+    pub spot_market_orders_to_create: ::prost::alloc::vec::Vec<SpotOrder>,
+    /// the derivative market orders to create
+    #[prost(message, repeated, tag = "13")]
+    pub derivative_market_orders_to_create: ::prost::alloc::vec::Vec<DerivativeOrder>,
+    /// the binary options market orders to create
+    #[prost(message, repeated, tag = "14")]
+    pub binary_options_market_orders_to_create: ::prost::alloc::vec::Vec<DerivativeOrder>,
 }
 /// MsgBatchUpdateOrdersResponse defines the Msg/BatchUpdateOrders response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchUpdateOrdersResponse")]
 pub struct MsgBatchUpdateOrdersResponse {
     #[prost(bool, repeated, tag = "1")]
@@ -3719,10 +3788,27 @@ pub struct MsgBatchUpdateOrdersResponse {
     pub created_binary_options_orders_cids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(string, repeated, tag = "12")]
     pub failed_binary_options_orders_cids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "13")]
+    pub spot_market_order_hashes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "14")]
+    pub created_spot_market_orders_cids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "15")]
+    pub failed_spot_market_orders_cids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "16")]
+    pub derivative_market_order_hashes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "17")]
+    pub created_derivative_market_orders_cids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "18")]
+    pub failed_derivative_market_orders_cids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "19")]
+    pub binary_options_market_order_hashes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "20")]
+    pub created_binary_options_market_orders_cids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "21")]
+    pub failed_binary_options_market_orders_cids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A Cosmos-SDK MsgCreateDerivativeMarketOrder
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCreateDerivativeMarketOrder")]
 pub struct MsgCreateDerivativeMarketOrder {
     /// the sender's Injective address
@@ -3734,8 +3820,7 @@ pub struct MsgCreateDerivativeMarketOrder {
 }
 /// MsgCreateDerivativeMarketOrderResponse defines the
 /// Msg/CreateDerivativeMarketOrder response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCreateDerivativeMarketOrderResponse")]
 pub struct MsgCreateDerivativeMarketOrderResponse {
     #[prost(string, tag = "1")]
@@ -3745,8 +3830,7 @@ pub struct MsgCreateDerivativeMarketOrderResponse {
     #[prost(string, tag = "3")]
     pub cid: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeMarketOrderResults")]
 pub struct DerivativeMarketOrderResults {
     #[prost(string, tag = "1")]
@@ -3761,8 +3845,7 @@ pub struct DerivativeMarketOrderResults {
     pub payout: ::prost::alloc::string::String,
 }
 /// A Cosmos-SDK MsgCreateBinaryOptionsMarketOrder
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCreateBinaryOptionsMarketOrder")]
 pub struct MsgCreateBinaryOptionsMarketOrder {
     /// the sender's Injective address
@@ -3774,8 +3857,7 @@ pub struct MsgCreateBinaryOptionsMarketOrder {
 }
 /// MsgCreateBinaryOptionsMarketOrderResponse defines the
 /// Msg/CreateBinaryOptionsMarketOrder response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCreateBinaryOptionsMarketOrderResponse")]
 pub struct MsgCreateBinaryOptionsMarketOrderResponse {
     #[prost(string, tag = "1")]
@@ -3786,8 +3868,7 @@ pub struct MsgCreateBinaryOptionsMarketOrderResponse {
     pub cid: ::prost::alloc::string::String,
 }
 /// MsgCancelDerivativeOrder defines the Msg/CancelDerivativeOrder response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCancelDerivativeOrder")]
 pub struct MsgCancelDerivativeOrder {
     /// the sender's Injective address
@@ -3817,14 +3898,12 @@ pub struct MsgCancelDerivativeOrder {
 }
 /// MsgCancelDerivativeOrderResponse defines the
 /// Msg/CancelDerivativeOrderResponse response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCancelDerivativeOrderResponse")]
 pub struct MsgCancelDerivativeOrderResponse {}
 /// MsgCancelBinaryOptionsOrder defines the Msg/CancelBinaryOptionsOrder response
 /// type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCancelBinaryOptionsOrder")]
 pub struct MsgCancelBinaryOptionsOrder {
     /// the sender's Injective address
@@ -3854,12 +3933,10 @@ pub struct MsgCancelBinaryOptionsOrder {
 }
 /// MsgCancelBinaryOptionsOrderResponse defines the
 /// Msg/CancelBinaryOptionsOrderResponse response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCancelBinaryOptionsOrderResponse")]
 pub struct MsgCancelBinaryOptionsOrderResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.OrderData")]
 pub struct OrderData {
     /// the market ID
@@ -3888,7 +3965,6 @@ pub struct OrderData {
 }
 /// MsgBatchCancelDerivativeOrders defines the Msg/CancelDerivativeOrders
 /// response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchCancelDerivativeOrders")]
 pub struct MsgBatchCancelDerivativeOrders {
@@ -3899,16 +3975,14 @@ pub struct MsgBatchCancelDerivativeOrders {
 }
 /// MsgBatchCancelDerivativeOrdersResponse defines the
 /// Msg/CancelDerivativeOrderResponse response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchCancelDerivativeOrdersResponse")]
 pub struct MsgBatchCancelDerivativeOrdersResponse {
     #[prost(bool, repeated, tag = "1")]
     pub success: ::prost::alloc::vec::Vec<bool>,
 }
 /// A Cosmos-SDK MsgSubaccountTransfer
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgSubaccountTransfer")]
 pub struct MsgSubaccountTransfer {
     /// the sender's Injective address
@@ -3928,13 +4002,11 @@ pub struct MsgSubaccountTransfer {
 }
 /// MsgSubaccountTransferResponse defines the Msg/SubaccountTransfer response
 /// type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgSubaccountTransferResponse")]
 pub struct MsgSubaccountTransferResponse {}
 /// A Cosmos-SDK MsgExternalTransfer
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgExternalTransfer")]
 pub struct MsgExternalTransfer {
     /// the sender's Injective address
@@ -3953,13 +4025,11 @@ pub struct MsgExternalTransfer {
     pub amount: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
 /// MsgExternalTransferResponse defines the Msg/ExternalTransfer response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgExternalTransferResponse")]
 pub struct MsgExternalTransferResponse {}
 /// A Cosmos-SDK MsgLiquidatePosition
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgLiquidatePosition")]
 pub struct MsgLiquidatePosition {
     /// the sender's Injective address
@@ -3978,13 +4048,32 @@ pub struct MsgLiquidatePosition {
     pub order: ::core::option::Option<DerivativeOrder>,
 }
 /// MsgLiquidatePositionResponse defines the Msg/LiquidatePosition response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgLiquidatePositionResponse")]
 pub struct MsgLiquidatePositionResponse {}
+/// A Cosmos-SDK MsgOffsetPosition
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgOffsetPosition")]
+pub struct MsgOffsetPosition {
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    #[serde(alias = "subaccountID")]
+    pub subaccount_id: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    #[serde(alias = "marketID")]
+    pub market_id: ::prost::alloc::string::String,
+    #[prost(string, repeated, tag = "4")]
+    #[serde(alias = "offsetting_subaccountIDs")]
+    pub offsetting_subaccount_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// MsgOffsetPositionResponse defines the Msg/OffsetPosition
+/// response type.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgOffsetPositionResponse")]
+pub struct MsgOffsetPositionResponse {}
 /// A Cosmos-SDK MsgEmergencySettleMarket
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgEmergencySettleMarket")]
 pub struct MsgEmergencySettleMarket {
     /// the sender's Injective address
@@ -4001,13 +4090,11 @@ pub struct MsgEmergencySettleMarket {
 }
 /// MsgEmergencySettleMarketResponse defines the Msg/EmergencySettleMarket
 /// response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgEmergencySettleMarketResponse")]
 pub struct MsgEmergencySettleMarketResponse {}
 /// A Cosmos-SDK MsgIncreasePositionMargin
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgIncreasePositionMargin")]
 pub struct MsgIncreasePositionMargin {
     /// the sender's Injective address
@@ -4032,13 +4119,11 @@ pub struct MsgIncreasePositionMargin {
 }
 /// MsgIncreasePositionMarginResponse defines the Msg/IncreasePositionMargin
 /// response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgIncreasePositionMarginResponse")]
 pub struct MsgIncreasePositionMarginResponse {}
 /// A Cosmos-SDK MsgDecreasePositionMargin
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgDecreasePositionMargin")]
 pub struct MsgDecreasePositionMargin {
     /// the sender's Injective address
@@ -4063,13 +4148,11 @@ pub struct MsgDecreasePositionMargin {
 }
 /// MsgDecreasePositionMarginResponse defines the Msg/MsgDecreasePositionMargin
 /// response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgDecreasePositionMarginResponse")]
 pub struct MsgDecreasePositionMarginResponse {}
 /// MsgPrivilegedExecuteContract defines the Msg/Exec message type
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgPrivilegedExecuteContract")]
 pub struct MsgPrivilegedExecuteContract {
     #[prost(string, tag = "1")]
@@ -4086,7 +4169,6 @@ pub struct MsgPrivilegedExecuteContract {
     pub data: ::prost::alloc::string::String,
 }
 /// MsgPrivilegedExecuteContractResponse defines the Msg/Exec response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgPrivilegedExecuteContractResponse")]
 pub struct MsgPrivilegedExecuteContractResponse {
@@ -4094,8 +4176,7 @@ pub struct MsgPrivilegedExecuteContractResponse {
     pub funds_diff: ::prost::alloc::vec::Vec<super::super::super::cosmos::base::v1beta1::Coin>,
 }
 /// A Cosmos-SDK MsgRewardsOptOut
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgRewardsOptOut")]
 pub struct MsgRewardsOptOut {
     /// the sender's Injective address
@@ -4103,13 +4184,11 @@ pub struct MsgRewardsOptOut {
     pub sender: ::prost::alloc::string::String,
 }
 /// MsgRewardsOptOutResponse defines the Msg/RewardsOptOut response type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgRewardsOptOutResponse")]
 pub struct MsgRewardsOptOutResponse {}
 /// A Cosmos-SDK MsgReclaimLockedFunds
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgReclaimLockedFunds")]
 pub struct MsgReclaimLockedFunds {
     #[prost(string, tag = "1")]
@@ -4121,13 +4200,11 @@ pub struct MsgReclaimLockedFunds {
 }
 /// MsgReclaimLockedFundsResponse defines the Msg/ReclaimLockedFunds response
 /// type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgReclaimLockedFundsResponse")]
 pub struct MsgReclaimLockedFundsResponse {}
 /// MsgSignData defines an arbitrary, general-purpose, off-chain message
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgSignData")]
 pub struct MsgSignData {
     /// Signer is the sdk.AccAddress of the message signer
@@ -4139,8 +4216,7 @@ pub struct MsgSignData {
     pub data: ::prost::alloc::vec::Vec<u8>,
 }
 /// MsgSignDoc defines an arbitrary, general-purpose, off-chain message
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgSignDoc")]
 pub struct MsgSignDoc {
     #[prost(string, tag = "1")]
@@ -4150,8 +4226,7 @@ pub struct MsgSignDoc {
 }
 /// MsgAdminUpdateBinaryOptionsMarket is used by the market Admin to operate the
 /// market
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgAdminUpdateBinaryOptionsMarket")]
 pub struct MsgAdminUpdateBinaryOptionsMarket {
     /// The sender's Injective address
@@ -4188,12 +4263,10 @@ pub struct MsgAdminUpdateBinaryOptionsMarket {
 }
 /// MsgAdminUpdateBinaryOptionsMarketResponse is the response for
 /// AdminUpdateBinaryOptionsMarket rpc method
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgAdminUpdateBinaryOptionsMarketResponse")]
 pub struct MsgAdminUpdateBinaryOptionsMarketResponse {}
 /// MsgAuthorizeStakeGrants grants stakes to grantees.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgAuthorizeStakeGrants")]
 pub struct MsgAuthorizeStakeGrants {
@@ -4204,13 +4277,11 @@ pub struct MsgAuthorizeStakeGrants {
     #[prost(message, repeated, tag = "2")]
     pub grants: ::prost::alloc::vec::Vec<GrantAuthorization>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgAuthorizeStakeGrantsResponse")]
 pub struct MsgAuthorizeStakeGrantsResponse {}
 /// MsgActivateStakeGrant allows a grantee to activate a stake grant.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgActivateStakeGrant")]
 pub struct MsgActivateStakeGrant {
     /// Injective address of the stake grantee
@@ -4220,11 +4291,9 @@ pub struct MsgActivateStakeGrant {
     #[prost(string, tag = "2")]
     pub granter: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgActivateStakeGrantResponse")]
 pub struct MsgActivateStakeGrantResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchExchangeModification")]
 pub struct MsgBatchExchangeModification {
@@ -4234,12 +4303,10 @@ pub struct MsgBatchExchangeModification {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<BatchExchangeModificationProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchExchangeModificationResponse")]
 pub struct MsgBatchExchangeModificationResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgSpotMarketLaunch")]
 pub struct MsgSpotMarketLaunch {
     /// message sender, that is also the TX signer
@@ -4248,12 +4315,10 @@ pub struct MsgSpotMarketLaunch {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<SpotMarketLaunchProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgSpotMarketLaunchResponse")]
 pub struct MsgSpotMarketLaunchResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgPerpetualMarketLaunch")]
 pub struct MsgPerpetualMarketLaunch {
     /// message sender, that is also the TX signer
@@ -4262,12 +4327,10 @@ pub struct MsgPerpetualMarketLaunch {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<PerpetualMarketLaunchProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgPerpetualMarketLaunchResponse")]
 pub struct MsgPerpetualMarketLaunchResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgExpiryFuturesMarketLaunch")]
 pub struct MsgExpiryFuturesMarketLaunch {
     /// message sender, that is also the TX signer
@@ -4276,12 +4339,10 @@ pub struct MsgExpiryFuturesMarketLaunch {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<ExpiryFuturesMarketLaunchProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgExpiryFuturesMarketLaunchResponse")]
 pub struct MsgExpiryFuturesMarketLaunchResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBinaryOptionsMarketLaunch")]
 pub struct MsgBinaryOptionsMarketLaunch {
     /// message sender, that is also the TX signer
@@ -4290,11 +4351,9 @@ pub struct MsgBinaryOptionsMarketLaunch {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<BinaryOptionsMarketLaunchProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBinaryOptionsMarketLaunchResponse")]
 pub struct MsgBinaryOptionsMarketLaunchResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchCommunityPoolSpend")]
 pub struct MsgBatchCommunityPoolSpend {
@@ -4304,12 +4363,10 @@ pub struct MsgBatchCommunityPoolSpend {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<BatchCommunityPoolSpendProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBatchCommunityPoolSpendResponse")]
 pub struct MsgBatchCommunityPoolSpendResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgSpotMarketParamUpdate")]
 pub struct MsgSpotMarketParamUpdate {
     /// message sender, that is also the TX signer
@@ -4318,12 +4375,10 @@ pub struct MsgSpotMarketParamUpdate {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<SpotMarketParamUpdateProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgSpotMarketParamUpdateResponse")]
 pub struct MsgSpotMarketParamUpdateResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgDerivativeMarketParamUpdate")]
 pub struct MsgDerivativeMarketParamUpdate {
     /// message sender, that is also the TX signer
@@ -4332,12 +4387,10 @@ pub struct MsgDerivativeMarketParamUpdate {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<DerivativeMarketParamUpdateProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgDerivativeMarketParamUpdateResponse")]
 pub struct MsgDerivativeMarketParamUpdateResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBinaryOptionsMarketParamUpdate")]
 pub struct MsgBinaryOptionsMarketParamUpdate {
     /// message sender, that is also the TX signer
@@ -4346,12 +4399,10 @@ pub struct MsgBinaryOptionsMarketParamUpdate {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<BinaryOptionsMarketParamUpdateProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgBinaryOptionsMarketParamUpdateResponse")]
 pub struct MsgBinaryOptionsMarketParamUpdateResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgMarketForcedSettlement")]
 pub struct MsgMarketForcedSettlement {
     /// message sender, that is also the TX signer
@@ -4360,11 +4411,9 @@ pub struct MsgMarketForcedSettlement {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<MarketForcedSettlementProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgMarketForcedSettlementResponse")]
 pub struct MsgMarketForcedSettlementResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgTradingRewardCampaignLaunch")]
 pub struct MsgTradingRewardCampaignLaunch {
@@ -4374,12 +4423,10 @@ pub struct MsgTradingRewardCampaignLaunch {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<TradingRewardCampaignLaunchProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgTradingRewardCampaignLaunchResponse")]
 pub struct MsgTradingRewardCampaignLaunchResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgExchangeEnable")]
 pub struct MsgExchangeEnable {
     /// message sender, that is also the TX signer
@@ -4388,11 +4435,9 @@ pub struct MsgExchangeEnable {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<ExchangeEnableProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgExchangeEnableResponse")]
 pub struct MsgExchangeEnableResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgTradingRewardCampaignUpdate")]
 pub struct MsgTradingRewardCampaignUpdate {
@@ -4402,11 +4447,9 @@ pub struct MsgTradingRewardCampaignUpdate {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<TradingRewardCampaignUpdateProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgTradingRewardCampaignUpdateResponse")]
 pub struct MsgTradingRewardCampaignUpdateResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgTradingRewardPendingPointsUpdate")]
 pub struct MsgTradingRewardPendingPointsUpdate {
@@ -4416,11 +4459,9 @@ pub struct MsgTradingRewardPendingPointsUpdate {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<TradingRewardPendingPointsUpdateProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgTradingRewardPendingPointsUpdateResponse")]
 pub struct MsgTradingRewardPendingPointsUpdateResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgFeeDiscount")]
 pub struct MsgFeeDiscount {
@@ -4430,11 +4471,9 @@ pub struct MsgFeeDiscount {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<FeeDiscountProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgFeeDiscountResponse")]
 pub struct MsgFeeDiscountResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgAtomicMarketOrderFeeMultiplierSchedule")]
 pub struct MsgAtomicMarketOrderFeeMultiplierSchedule {
@@ -4444,32 +4483,11 @@ pub struct MsgAtomicMarketOrderFeeMultiplierSchedule {
     #[prost(message, optional, tag = "2")]
     pub proposal: ::core::option::Option<AtomicMarketOrderFeeMultiplierScheduleProposal>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgAtomicMarketOrderFeeMultiplierScheduleResponse")]
 pub struct MsgAtomicMarketOrderFeeMultiplierScheduleResponse {}
-/// MsgSetDelegationTransferReceivers defines a message for setting delegation
-/// transfer receivers
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/injective.exchange.v2.MsgSetDelegationTransferReceivers")]
-pub struct MsgSetDelegationTransferReceivers {
-    /// the sender's Injective address (must be exchange admin)
-    #[prost(string, tag = "1")]
-    pub sender: ::prost::alloc::string::String,
-    /// list of receiver addresses to set as delegation transfer receivers
-    #[prost(string, repeated, tag = "2")]
-    pub receivers: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-}
-/// MsgSetDelegationTransferReceiversResponse defines the response for
-/// MsgSetDelegationTransferReceivers
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/injective.exchange.v2.MsgSetDelegationTransferReceiversResponse")]
-pub struct MsgSetDelegationTransferReceiversResponse {}
 /// MsgCancelPostOnlyMode defines a message for canceling post-only mode
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCancelPostOnlyMode")]
 pub struct MsgCancelPostOnlyMode {
     /// the sender's Injective address
@@ -4477,12 +4495,31 @@ pub struct MsgCancelPostOnlyMode {
     pub sender: ::prost::alloc::string::String,
 }
 /// MsgCancelPostOnlyModeResponse defines the response for MsgCancelPostOnlyMode
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCancelPostOnlyModeResponse")]
 pub struct MsgCancelPostOnlyModeResponse {}
+/// MsgActivatePostOnlyMode defines a message to turn on the post-only mode for a
+/// number of blocks
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgActivatePostOnlyMode")]
+pub struct MsgActivatePostOnlyMode {
+    /// the sender's Injective address
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+    /// the number of blocks to activate post-only mode for
+    #[prost(uint32, tag = "2")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub blocks_amount: u32,
+}
+/// MsgActivatePostOnlyModeResponse defines the response for
+/// MsgActivatePostOnlyMode
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgActivatePostOnlyModeResponse")]
+pub struct MsgActivatePostOnlyModeResponse {}
 /// GenesisState defines the exchange module's genesis state.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.GenesisState")]
 pub struct GenesisState {
@@ -4580,9 +4617,10 @@ pub struct GenesisState {
     #[prost(string, repeated, tag = "28")]
     #[serde(alias = "spot_marketIDs_scheduled_to_force_close")]
     pub spot_market_ids_scheduled_to_force_close: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// denom_decimals defines the denom decimals for the exchange.
+    /// auction_exchange_transfer_denom_decimals defines the denom decimals for the
+    /// exchange.
     #[prost(message, repeated, tag = "29")]
-    pub denom_decimals: ::prost::alloc::vec::Vec<DenomDecimals>,
+    pub auction_exchange_transfer_denom_decimals: ::prost::alloc::vec::Vec<DenomDecimals>,
     /// conditional_derivative_orderbook contains conditional orderbooks for all
     /// markets (both lmit and market conditional orders)
     #[prost(message, repeated, tag = "30")]
@@ -4604,8 +4642,7 @@ pub struct GenesisState {
     #[prost(message, repeated, tag = "37")]
     pub denom_min_notionals: ::prost::alloc::vec::Vec<DenomMinNotional>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.OrderbookSequence")]
 pub struct OrderbookSequence {
     #[prost(uint64, tag = "1")]
@@ -4618,8 +4655,7 @@ pub struct OrderbookSequence {
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.FeeDiscountAccountTierTTL")]
 pub struct FeeDiscountAccountTierTtl {
     #[prost(string, tag = "1")]
@@ -4627,7 +4663,6 @@ pub struct FeeDiscountAccountTierTtl {
     #[prost(message, optional, tag = "2")]
     pub tier_ttl: ::core::option::Option<FeeDiscountTierTtl>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.FeeDiscountBucketVolumeAccounts")]
 pub struct FeeDiscountBucketVolumeAccounts {
@@ -4640,8 +4675,7 @@ pub struct FeeDiscountBucketVolumeAccounts {
     #[prost(message, repeated, tag = "2")]
     pub account_volume: ::prost::alloc::vec::Vec<AccountVolume>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.AccountVolume")]
 pub struct AccountVolume {
     #[prost(string, tag = "1")]
@@ -4649,8 +4683,7 @@ pub struct AccountVolume {
     #[prost(string, tag = "2")]
     pub volume: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TradingRewardCampaignAccountPoints")]
 pub struct TradingRewardCampaignAccountPoints {
     #[prost(string, tag = "1")]
@@ -4658,7 +4691,6 @@ pub struct TradingRewardCampaignAccountPoints {
     #[prost(string, tag = "2")]
     pub points: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TradingRewardCampaignAccountPendingPoints")]
 pub struct TradingRewardCampaignAccountPendingPoints {
@@ -4671,8 +4703,7 @@ pub struct TradingRewardCampaignAccountPendingPoints {
     #[prost(message, repeated, tag = "2")]
     pub account_points: ::prost::alloc::vec::Vec<TradingRewardCampaignAccountPoints>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SubaccountNonce")]
 pub struct SubaccountNonce {
     /// the subaccount ID
@@ -4683,7 +4714,6 @@ pub struct SubaccountNonce {
     #[prost(message, optional, tag = "2")]
     pub subaccount_trade_nonce: ::core::option::Option<SubaccountTradeNonce>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.FullGrantAuthorizations")]
 pub struct FullGrantAuthorizations {
@@ -4700,8 +4730,7 @@ pub struct FullGrantAuthorizations {
     #[prost(message, repeated, tag = "4")]
     pub grants: ::prost::alloc::vec::Vec<GrantAuthorization>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.FullActiveGrant")]
 pub struct FullActiveGrant {
     #[prost(string, tag = "1")]
@@ -4709,8 +4738,7 @@ pub struct FullActiveGrant {
     #[prost(message, optional, tag = "2")]
     pub active_grant: ::core::option::Option<ActiveGrant>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.Subaccount")]
 pub struct Subaccount {
     /// the subaccount's trader address
@@ -4724,8 +4752,7 @@ pub struct Subaccount {
     )]
     pub subaccount_nonce: u32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountOrdersRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SubaccountOrders",
@@ -4741,7 +4768,6 @@ pub struct QuerySubaccountOrdersRequest {
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountOrdersResponse")]
 pub struct QuerySubaccountOrdersResponse {
@@ -4750,8 +4776,7 @@ pub struct QuerySubaccountOrdersResponse {
     #[prost(message, repeated, tag = "2")]
     pub sell_orders: ::prost::alloc::vec::Vec<SubaccountOrderData>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.SubaccountOrderbookMetadataWithMarket")]
 pub struct SubaccountOrderbookMetadataWithMarket {
     /// the subaccount orderbook details
@@ -4767,8 +4792,7 @@ pub struct SubaccountOrderbookMetadataWithMarket {
 }
 /// QueryExchangeParamsRequest is the request type for the Query/ExchangeParams
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryExchangeParamsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/QueryExchangeParams",
@@ -4777,7 +4801,6 @@ pub struct SubaccountOrderbookMetadataWithMarket {
 pub struct QueryExchangeParamsRequest {}
 /// QueryExchangeParamsRequest is the response type for the Query/ExchangeParams
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryExchangeParamsResponse")]
 pub struct QueryExchangeParamsResponse {
@@ -4786,8 +4809,7 @@ pub struct QueryExchangeParamsResponse {
 }
 /// QuerySubaccountDepositsRequest is the request type for the
 /// Query/SubaccountDeposits RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountDepositsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SubaccountDeposits",
@@ -4804,7 +4826,6 @@ pub struct QuerySubaccountDepositsRequest {
 }
 /// QuerySubaccountDepositsResponse is the response type for the
 /// Query/SubaccountDeposits RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountDepositsResponse")]
 pub struct QuerySubaccountDepositsResponse {
@@ -4813,8 +4834,7 @@ pub struct QuerySubaccountDepositsResponse {
 }
 /// QueryExchangeBalancesRequest is the request type for the
 /// Query/ExchangeBalances RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryExchangeBalancesRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/ExchangeBalances",
@@ -4823,7 +4843,6 @@ pub struct QuerySubaccountDepositsResponse {
 pub struct QueryExchangeBalancesRequest {}
 /// QuerySubaccountDepositsResponse is the response type for the
 /// Query/SubaccountDeposits RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryExchangeBalancesResponse")]
 pub struct QueryExchangeBalancesResponse {
@@ -4832,8 +4851,7 @@ pub struct QueryExchangeBalancesResponse {
 }
 /// QueryAggregateVolumeRequest is the request type for the Query/AggregateVolume
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryAggregateVolumeRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/AggregateVolume",
@@ -4846,7 +4864,6 @@ pub struct QueryAggregateVolumeRequest {
 }
 /// QueryAggregateVolumeResponse is the response type for the
 /// Query/AggregateVolume RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryAggregateVolumeResponse")]
 pub struct QueryAggregateVolumeResponse {
@@ -4857,8 +4874,7 @@ pub struct QueryAggregateVolumeResponse {
 }
 /// QueryAggregateVolumesRequest is the request type for the
 /// Query/AggregateVolumes RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryAggregateVolumesRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/AggregateVolumes",
@@ -4873,7 +4889,6 @@ pub struct QueryAggregateVolumesRequest {
 }
 /// QueryAggregateVolumesResponse is the response type for the
 /// Query/AggregateVolumes RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryAggregateVolumesResponse")]
 pub struct QueryAggregateVolumesResponse {
@@ -4886,8 +4901,7 @@ pub struct QueryAggregateVolumesResponse {
 }
 /// QueryAggregateMarketVolumeRequest is the request type for the
 /// Query/AggregateMarketVolume RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryAggregateMarketVolumeRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/AggregateMarketVolume",
@@ -4900,32 +4914,29 @@ pub struct QueryAggregateMarketVolumeRequest {
 }
 /// QueryAggregateMarketVolumeResponse is the response type for the
 /// Query/AggregateMarketVolume RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryAggregateMarketVolumeResponse")]
 pub struct QueryAggregateMarketVolumeResponse {
     #[prost(message, optional, tag = "1")]
     pub volume: ::core::option::Option<VolumeRecord>,
 }
-/// QueryDenomDecimalRequest is the request type for the Query/DenomDecimal RPC
-/// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/injective.exchange.v2.QueryDenomDecimalRequest")]
+/// QueryAuctionExchangeTransferDenomDecimalRequest is the request type for the
+/// Query/DenomDecimal RPC method.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.QueryAuctionExchangeTransferDenomDecimalRequest")]
 #[proto_query(
-    path = "/injective.exchange.v2.Query/DenomDecimal",
-    response_type = QueryDenomDecimalResponse
+    path = "/injective.exchange.v2.Query/AuctionExchangeTransferDenomDecimal",
+    response_type = QueryAuctionExchangeTransferDenomDecimalResponse
 )]
-pub struct QueryDenomDecimalRequest {
+pub struct QueryAuctionExchangeTransferDenomDecimalRequest {
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
 }
 /// QueryDenomDecimalResponse is the response type for the Query/DenomDecimal RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/injective.exchange.v2.QueryDenomDecimalResponse")]
-pub struct QueryDenomDecimalResponse {
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.QueryAuctionExchangeTransferDenomDecimalResponse")]
+pub struct QueryAuctionExchangeTransferDenomDecimalResponse {
     #[prost(uint64, tag = "1")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
@@ -4935,31 +4946,28 @@ pub struct QueryDenomDecimalResponse {
 }
 /// QueryDenomDecimalsRequest is the request type for the Query/DenomDecimals RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/injective.exchange.v2.QueryDenomDecimalsRequest")]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.QueryAuctionExchangeTransferDenomDecimalsRequest")]
 #[proto_query(
-    path = "/injective.exchange.v2.Query/DenomDecimals",
-    response_type = QueryDenomDecimalsResponse
+    path = "/injective.exchange.v2.Query/AuctionExchangeTransferDenomDecimals",
+    response_type = QueryAuctionExchangeTransferDenomDecimalsResponse
 )]
-pub struct QueryDenomDecimalsRequest {
+pub struct QueryAuctionExchangeTransferDenomDecimalsRequest {
     /// denoms can be empty to query all denom decimals
     #[prost(string, repeated, tag = "1")]
     pub denoms: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// QueryDenomDecimalsRequest is the response type for the Query/DenomDecimals
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/injective.exchange.v2.QueryDenomDecimalsResponse")]
-pub struct QueryDenomDecimalsResponse {
+#[proto_message(type_url = "/injective.exchange.v2.QueryAuctionExchangeTransferDenomDecimalsResponse")]
+pub struct QueryAuctionExchangeTransferDenomDecimalsResponse {
     #[prost(message, repeated, tag = "1")]
     pub denom_decimals: ::prost::alloc::vec::Vec<DenomDecimals>,
 }
 /// QueryAggregateMarketVolumesRequest is the request type for the
 /// Query/AggregateMarketVolumes RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryAggregateMarketVolumesRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/AggregateMarketVolumes",
@@ -4972,7 +4980,6 @@ pub struct QueryAggregateMarketVolumesRequest {
 }
 /// QueryAggregateMarketVolumesResponse is the response type for the
 /// Query/AggregateMarketVolumes RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryAggregateMarketVolumesResponse")]
 pub struct QueryAggregateMarketVolumesResponse {
@@ -4982,8 +4989,7 @@ pub struct QueryAggregateMarketVolumesResponse {
 }
 /// QuerySubaccountDepositsRequest is the request type for the
 /// Query/SubaccountDeposits RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountDepositRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SubaccountDeposit",
@@ -5000,8 +5006,7 @@ pub struct QuerySubaccountDepositRequest {
 }
 /// QuerySubaccountDepositsResponse is the response type for the
 /// Query/SubaccountDeposits RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountDepositResponse")]
 pub struct QuerySubaccountDepositResponse {
     #[prost(message, optional, tag = "1")]
@@ -5009,8 +5014,7 @@ pub struct QuerySubaccountDepositResponse {
 }
 /// QuerySpotMarketsRequest is the request type for the Query/SpotMarkets RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySpotMarketsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SpotMarkets",
@@ -5027,7 +5031,6 @@ pub struct QuerySpotMarketsRequest {
 }
 /// QuerySpotMarketsResponse is the response type for the Query/SpotMarkets RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySpotMarketsResponse")]
 pub struct QuerySpotMarketsResponse {
@@ -5036,8 +5039,7 @@ pub struct QuerySpotMarketsResponse {
 }
 /// QuerySpotMarketRequest is the request type for the Query/SpotMarket RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySpotMarketRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SpotMarket",
@@ -5051,8 +5053,7 @@ pub struct QuerySpotMarketRequest {
 }
 /// QuerySpotMarketResponse is the response type for the Query/SpotMarket RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySpotMarketResponse")]
 pub struct QuerySpotMarketResponse {
     #[prost(message, optional, tag = "1")]
@@ -5060,8 +5061,7 @@ pub struct QuerySpotMarketResponse {
 }
 /// QuerySpotOrderbookRequest is the request type for the Query/SpotOrderbook RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySpotOrderbookRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SpotOrderbook",
@@ -5097,7 +5097,6 @@ pub struct QuerySpotOrderbookRequest {
 }
 /// QuerySpotOrderbookResponse is the response type for the Query/SpotOrderbook
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySpotOrderbookResponse")]
 pub struct QuerySpotOrderbookResponse {
@@ -5105,9 +5104,15 @@ pub struct QuerySpotOrderbookResponse {
     pub buys_price_level: ::prost::alloc::vec::Vec<Level>,
     #[prost(message, repeated, tag = "2")]
     pub sells_price_level: ::prost::alloc::vec::Vec<Level>,
+    /// the current orderbook sequence number
+    #[prost(uint64, tag = "3")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub seq: u64,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.FullSpotMarket")]
 pub struct FullSpotMarket {
     /// spot market details
@@ -5120,8 +5125,7 @@ pub struct FullSpotMarket {
 }
 /// QueryFullSpotMarketsRequest is the request type for the Query/FullSpotMarkets
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFullSpotMarketsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/FullSpotMarkets",
@@ -5142,7 +5146,6 @@ pub struct QueryFullSpotMarketsRequest {
 }
 /// QueryFullSpotMarketsResponse is the response type for the
 /// Query/FullSpotMarkets RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFullSpotMarketsResponse")]
 pub struct QueryFullSpotMarketsResponse {
@@ -5151,8 +5154,7 @@ pub struct QueryFullSpotMarketsResponse {
 }
 /// QuerySpotMarketRequest is the request type for the Query/SpotMarket RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFullSpotMarketRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/FullSpotMarket",
@@ -5170,8 +5172,7 @@ pub struct QueryFullSpotMarketRequest {
 }
 /// QuerySpotMarketResponse is the response type for the Query/SpotMarket RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFullSpotMarketResponse")]
 pub struct QueryFullSpotMarketResponse {
     #[prost(message, optional, tag = "1")]
@@ -5179,8 +5180,7 @@ pub struct QueryFullSpotMarketResponse {
 }
 /// QuerySpotOrdersByHashesRequest is the request type for the
 /// Query/SpotOrdersByHashes RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySpotOrdersByHashesRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SpotOrdersByHashes",
@@ -5201,7 +5201,6 @@ pub struct QuerySpotOrdersByHashesRequest {
 }
 /// QuerySpotOrdersByHashesResponse is the response type for the
 /// Query/SpotOrdersByHashes RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySpotOrdersByHashesResponse")]
 pub struct QuerySpotOrdersByHashesResponse {
@@ -5210,8 +5209,7 @@ pub struct QuerySpotOrdersByHashesResponse {
 }
 /// QueryTraderSpotOrdersRequest is the request type for the
 /// Query/TraderSpotOrders RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTraderSpotOrdersRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/TraderSpotOrders",
@@ -5229,8 +5227,7 @@ pub struct QueryTraderSpotOrdersRequest {
 }
 /// QueryAccountAddressSpotOrdersRequest is the request type for the
 /// Query/AccountAddressSpotOrders RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryAccountAddressSpotOrdersRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/AccountAddressSpotOrders",
@@ -5245,8 +5242,7 @@ pub struct QueryAccountAddressSpotOrdersRequest {
     #[prost(string, tag = "2")]
     pub account_address: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TrimmedSpotLimitOrder")]
 pub struct TrimmedSpotLimitOrder {
     /// price of the order (in human readable format)
@@ -5270,7 +5266,6 @@ pub struct TrimmedSpotLimitOrder {
 }
 /// QueryTraderSpotOrdersResponse is the response type for the
 /// Query/TraderSpotOrders RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTraderSpotOrdersResponse")]
 pub struct QueryTraderSpotOrdersResponse {
@@ -5279,7 +5274,6 @@ pub struct QueryTraderSpotOrdersResponse {
 }
 /// QueryAccountAddressSpotOrdersResponse is the response type for the
 /// Query/AccountAddressSpotOrders RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryAccountAddressSpotOrdersResponse")]
 pub struct QueryAccountAddressSpotOrdersResponse {
@@ -5288,8 +5282,7 @@ pub struct QueryAccountAddressSpotOrdersResponse {
 }
 /// QuerySpotMidPriceAndTOBRequest is the request type for the
 /// Query/SpotMidPriceAndTOB RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySpotMidPriceAndTOBRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SpotMidPriceAndTOB",
@@ -5303,8 +5296,7 @@ pub struct QuerySpotMidPriceAndTobRequest {
 }
 /// QuerySpotMidPriceAndTOBResponse is the response type for the
 /// Query/SpotMidPriceAndTOB RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySpotMidPriceAndTOBResponse")]
 pub struct QuerySpotMidPriceAndTobResponse {
     /// mid price of the market (in human readable format)
@@ -5319,8 +5311,7 @@ pub struct QuerySpotMidPriceAndTobResponse {
 }
 /// QueryDerivativeMidPriceAndTOBRequest is the request type for the
 /// Query/GetDerivativeMidPriceAndTOB RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDerivativeMidPriceAndTOBRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/DerivativeMidPriceAndTOB",
@@ -5334,8 +5325,7 @@ pub struct QueryDerivativeMidPriceAndTobRequest {
 }
 /// QueryDerivativeMidPriceAndTOBResponse is the response type for the
 /// Query/GetDerivativeMidPriceAndTOB RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDerivativeMidPriceAndTOBResponse")]
 pub struct QueryDerivativeMidPriceAndTobResponse {
     /// mid price of the market
@@ -5350,8 +5340,7 @@ pub struct QueryDerivativeMidPriceAndTobResponse {
 }
 /// QueryDerivativeOrderbookRequest is the request type for the
 /// Query/DerivativeOrderbook RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDerivativeOrderbookRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/DerivativeOrderbook",
@@ -5373,7 +5362,6 @@ pub struct QueryDerivativeOrderbookRequest {
 }
 /// QueryDerivativeOrderbookResponse is the response type for the
 /// Query/DerivativeOrderbook RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDerivativeOrderbookResponse")]
 pub struct QueryDerivativeOrderbookResponse {
@@ -5381,11 +5369,17 @@ pub struct QueryDerivativeOrderbookResponse {
     pub buys_price_level: ::prost::alloc::vec::Vec<Level>,
     #[prost(message, repeated, tag = "2")]
     pub sells_price_level: ::prost::alloc::vec::Vec<Level>,
+    /// the current orderbook sequence number
+    #[prost(uint64, tag = "3")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub seq: u64,
 }
 /// QueryTraderSpotOrdersToCancelUpToAmountRequest is the request type for the
 /// Query/TraderSpotOrdersToCancelUpToAmountRequest RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTraderSpotOrdersToCancelUpToAmountRequest")]
 pub struct QueryTraderSpotOrdersToCancelUpToAmountRequest {
     /// Market ID for the market
@@ -5416,8 +5410,7 @@ pub struct QueryTraderSpotOrdersToCancelUpToAmountRequest {
 }
 /// QueryTraderDerivativeOrdersToCancelUpToAmountRequest is the request type for
 /// the Query/TraderDerivativeOrdersToCancelUpToAmountRequest RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTraderDerivativeOrdersToCancelUpToAmountRequest")]
 pub struct QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
     /// Market ID for the market
@@ -5445,8 +5438,7 @@ pub struct QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
 }
 /// QueryTraderDerivativeOrdersRequest is the request type for the
 /// Query/TraderDerivativeOrders RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTraderDerivativeOrdersRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/TraderDerivativeOrders",
@@ -5464,8 +5456,7 @@ pub struct QueryTraderDerivativeOrdersRequest {
 }
 /// QueryAccountAddressSpotOrdersRequest is the request type for the
 /// Query/AccountAddressDerivativeOrders RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryAccountAddressDerivativeOrdersRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/AccountAddressDerivativeOrders",
@@ -5480,8 +5471,7 @@ pub struct QueryAccountAddressDerivativeOrdersRequest {
     #[prost(string, tag = "2")]
     pub account_address: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TrimmedDerivativeLimitOrder")]
 pub struct TrimmedDerivativeLimitOrder {
     /// price of the order (in human readable format)
@@ -5508,7 +5498,6 @@ pub struct TrimmedDerivativeLimitOrder {
 }
 /// QueryTraderDerivativeOrdersResponse is the response type for the
 /// Query/TraderDerivativeOrders RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTraderDerivativeOrdersResponse")]
 pub struct QueryTraderDerivativeOrdersResponse {
@@ -5517,7 +5506,6 @@ pub struct QueryTraderDerivativeOrdersResponse {
 }
 /// QueryAccountAddressDerivativeOrdersResponse is the response type for the
 /// Query/AccountAddressDerivativeOrders RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryAccountAddressDerivativeOrdersResponse")]
 pub struct QueryAccountAddressDerivativeOrdersResponse {
@@ -5526,8 +5514,7 @@ pub struct QueryAccountAddressDerivativeOrdersResponse {
 }
 /// QueryTraderDerivativeOrdersRequest is the request type for the
 /// Query/TraderDerivativeOrders RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDerivativeOrdersByHashesRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/DerivativeOrdersByHashes",
@@ -5548,7 +5535,6 @@ pub struct QueryDerivativeOrdersByHashesRequest {
 }
 /// QueryDerivativeOrdersByHashesResponse is the response type for the
 /// Query/DerivativeOrdersByHashes RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDerivativeOrdersByHashesResponse")]
 pub struct QueryDerivativeOrdersByHashesResponse {
@@ -5557,8 +5543,7 @@ pub struct QueryDerivativeOrdersByHashesResponse {
 }
 /// QueryDerivativeMarketsRequest is the request type for the
 /// Query/DerivativeMarkets RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDerivativeMarketsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/DerivativeMarkets",
@@ -5577,8 +5562,7 @@ pub struct QueryDerivativeMarketsRequest {
     #[prost(bool, tag = "3")]
     pub with_mid_price_and_tob: bool,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.PriceLevel")]
 pub struct PriceLevel {
     #[prost(string, tag = "1")]
@@ -5587,8 +5571,7 @@ pub struct PriceLevel {
     #[prost(string, tag = "2")]
     pub quantity: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.PerpetualMarketState")]
 pub struct PerpetualMarketState {
     #[prost(message, optional, tag = "1")]
@@ -5596,8 +5579,7 @@ pub struct PerpetualMarketState {
     #[prost(message, optional, tag = "2")]
     pub funding_info: ::core::option::Option<PerpetualMarketFunding>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.FullDerivativeMarket")]
 pub struct FullDerivativeMarket {
     /// derivative market details
@@ -5618,8 +5600,7 @@ pub struct FullDerivativeMarket {
 pub mod full_derivative_market {
     use injective_std_derive::CosmwasmExt;
     /// perpetual market state or expiry futures market state
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+    #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Info {
         /// perpetual market info
         #[prost(message, tag = "2")]
@@ -5631,7 +5612,6 @@ pub mod full_derivative_market {
 }
 /// QueryDerivativeMarketsResponse is the response type for the
 /// Query/DerivativeMarkets RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDerivativeMarketsResponse")]
 pub struct QueryDerivativeMarketsResponse {
@@ -5640,8 +5620,7 @@ pub struct QueryDerivativeMarketsResponse {
 }
 /// QueryDerivativeMarketRequest is the request type for the
 /// Query/DerivativeMarket RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDerivativeMarketRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/DerivativeMarket",
@@ -5655,8 +5634,7 @@ pub struct QueryDerivativeMarketRequest {
 }
 /// QueryDerivativeMarketResponse is the response type for the
 /// Query/DerivativeMarket RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDerivativeMarketResponse")]
 pub struct QueryDerivativeMarketResponse {
     #[prost(message, optional, tag = "1")]
@@ -5664,8 +5642,7 @@ pub struct QueryDerivativeMarketResponse {
 }
 /// QueryDerivativeMarketAddressRequest is the request type for the
 /// Query/DerivativeMarketAddress RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDerivativeMarketAddressRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/DerivativeMarketAddress",
@@ -5679,8 +5656,7 @@ pub struct QueryDerivativeMarketAddressRequest {
 }
 /// QueryDerivativeMarketAddressResponse is the response type for the
 /// Query/DerivativeMarketAddress RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDerivativeMarketAddressResponse")]
 pub struct QueryDerivativeMarketAddressResponse {
     /// address for the market
@@ -5693,8 +5669,7 @@ pub struct QueryDerivativeMarketAddressResponse {
 }
 /// QuerySubaccountTradeNonceRequest is the request type for the
 /// Query/SubaccountTradeNonce RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountTradeNonceRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SubaccountTradeNonce",
@@ -5708,8 +5683,7 @@ pub struct QuerySubaccountTradeNonceRequest {
 }
 /// QueryPositionsInMarketRequest is the request type for the
 /// Query/PositionsInMarket RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryPositionsInMarketRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/PositionsInMarket",
@@ -5722,7 +5696,6 @@ pub struct QueryPositionsInMarketRequest {
 }
 /// QueryPositionsInMarketResponse is the response type for the
 /// Query/PositionsInMarket RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryPositionsInMarketResponse")]
 pub struct QueryPositionsInMarketResponse {
@@ -5731,8 +5704,7 @@ pub struct QueryPositionsInMarketResponse {
 }
 /// QuerySubaccountPositionsRequest is the request type for the
 /// Query/SubaccountPositions RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountPositionsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SubaccountPositions",
@@ -5746,8 +5718,7 @@ pub struct QuerySubaccountPositionsRequest {
 }
 /// QuerySubaccountPositionInMarketRequest is the request type for the
 /// Query/SubaccountPositionInMarket RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountPositionInMarketRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SubaccountPositionInMarket",
@@ -5765,8 +5736,7 @@ pub struct QuerySubaccountPositionInMarketRequest {
 }
 /// QuerySubaccountEffectivePositionInMarketRequest is the request type for the
 /// Query/SubaccountEffectivePositionInMarket RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountEffectivePositionInMarketRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SubaccountEffectivePositionInMarket",
@@ -5784,8 +5754,7 @@ pub struct QuerySubaccountEffectivePositionInMarketRequest {
 }
 /// QuerySubaccountOrderMetadataRequest is the request type for the
 /// Query/SubaccountOrderMetadata RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountOrderMetadataRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/SubaccountOrderMetadata",
@@ -5799,7 +5768,6 @@ pub struct QuerySubaccountOrderMetadataRequest {
 }
 /// QuerySubaccountPositionsResponse is the response type for the
 /// Query/SubaccountPositions RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountPositionsResponse")]
 pub struct QuerySubaccountPositionsResponse {
@@ -5808,15 +5776,13 @@ pub struct QuerySubaccountPositionsResponse {
 }
 /// QuerySubaccountPositionInMarketResponse is the response type for the
 /// Query/SubaccountPositionInMarket RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountPositionInMarketResponse")]
 pub struct QuerySubaccountPositionInMarketResponse {
     #[prost(message, optional, tag = "1")]
     pub state: ::core::option::Option<Position>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EffectivePosition")]
 pub struct EffectivePosition {
     /// whether the position is long or short
@@ -5834,8 +5800,7 @@ pub struct EffectivePosition {
 }
 /// QuerySubaccountEffectivePositionInMarketResponse is the response type for the
 /// Query/SubaccountEffectivePositionInMarket RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountEffectivePositionInMarketResponse")]
 pub struct QuerySubaccountEffectivePositionInMarketResponse {
     #[prost(message, optional, tag = "1")]
@@ -5843,8 +5808,7 @@ pub struct QuerySubaccountEffectivePositionInMarketResponse {
 }
 /// QueryPerpetualMarketInfoRequest is the request type for the
 /// Query/PerpetualMarketInfo RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryPerpetualMarketInfoRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/PerpetualMarketInfo",
@@ -5857,8 +5821,7 @@ pub struct QueryPerpetualMarketInfoRequest {
 }
 /// QueryPerpetualMarketInfoResponse is the response type for the
 /// Query/PerpetualMarketInfo RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryPerpetualMarketInfoResponse")]
 pub struct QueryPerpetualMarketInfoResponse {
     #[prost(message, optional, tag = "1")]
@@ -5866,8 +5829,7 @@ pub struct QueryPerpetualMarketInfoResponse {
 }
 /// QueryExpiryFuturesMarketInfoRequest is the request type for the Query/
 /// ExpiryFuturesMarketInfo RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryExpiryFuturesMarketInfoRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/ExpiryFuturesMarketInfo",
@@ -5880,8 +5842,7 @@ pub struct QueryExpiryFuturesMarketInfoRequest {
 }
 /// QueryExpiryFuturesMarketInfoResponse is the response type for the Query/
 /// ExpiryFuturesMarketInfo RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryExpiryFuturesMarketInfoResponse")]
 pub struct QueryExpiryFuturesMarketInfoResponse {
     #[prost(message, optional, tag = "1")]
@@ -5889,8 +5850,7 @@ pub struct QueryExpiryFuturesMarketInfoResponse {
 }
 /// QueryPerpetualMarketFundingRequest is the request type for the
 /// Query/PerpetualMarketFunding RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryPerpetualMarketFundingRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/PerpetualMarketFunding",
@@ -5903,8 +5863,7 @@ pub struct QueryPerpetualMarketFundingRequest {
 }
 /// QueryPerpetualMarketFundingResponse is the response type for the
 /// Query/PerpetualMarketFunding RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryPerpetualMarketFundingResponse")]
 pub struct QueryPerpetualMarketFundingResponse {
     #[prost(message, optional, tag = "1")]
@@ -5912,7 +5871,6 @@ pub struct QueryPerpetualMarketFundingResponse {
 }
 /// QuerySubaccountOrderMetadataResponse is the response type for the
 /// Query/SubaccountOrderMetadata RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountOrderMetadataResponse")]
 pub struct QuerySubaccountOrderMetadataResponse {
@@ -5921,8 +5879,7 @@ pub struct QuerySubaccountOrderMetadataResponse {
 }
 /// QuerySubaccountTradeNonceResponse is the response type for the
 /// Query/SubaccountTradeNonce RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountTradeNonceResponse")]
 pub struct QuerySubaccountTradeNonceResponse {
     #[prost(uint32, tag = "1")]
@@ -5934,8 +5891,7 @@ pub struct QuerySubaccountTradeNonceResponse {
 }
 /// QueryModuleStateRequest is the request type for the Query/ExchangeModuleState
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryModuleStateRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/ExchangeModuleState",
@@ -5944,7 +5900,6 @@ pub struct QuerySubaccountTradeNonceResponse {
 pub struct QueryModuleStateRequest {}
 /// QueryModuleStateResponse is the response type for the
 /// Query/ExchangeModuleState RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryModuleStateResponse")]
 pub struct QueryModuleStateResponse {
@@ -5952,8 +5907,7 @@ pub struct QueryModuleStateResponse {
     pub state: ::core::option::Option<GenesisState>,
 }
 /// QueryPositionsRequest is the request type for the Query/Positions RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryPositionsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/Positions",
@@ -5962,7 +5916,6 @@ pub struct QueryModuleStateResponse {
 pub struct QueryPositionsRequest {}
 /// QueryPositionsResponse is the response type for the Query/Positions RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryPositionsResponse")]
 pub struct QueryPositionsResponse {
@@ -5971,8 +5924,7 @@ pub struct QueryPositionsResponse {
 }
 /// QueryTradeRewardPointsRequest is the request type for the
 /// Query/TradeRewardPoints RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTradeRewardPointsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/TradeRewardPoints",
@@ -5990,8 +5942,7 @@ pub struct QueryTradeRewardPointsRequest {
 }
 /// QueryTradeRewardPointsResponse is the response type for the
 /// Query/TradeRewardPoints RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTradeRewardPointsResponse")]
 pub struct QueryTradeRewardPointsResponse {
     #[prost(string, repeated, tag = "1")]
@@ -5999,8 +5950,7 @@ pub struct QueryTradeRewardPointsResponse {
 }
 /// QueryTradeRewardCampaignRequest is the request type for the
 /// Query/TradeRewardCampaign RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTradeRewardCampaignRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/TradeRewardCampaign",
@@ -6009,7 +5959,6 @@ pub struct QueryTradeRewardPointsResponse {
 pub struct QueryTradeRewardCampaignRequest {}
 /// QueryTradeRewardCampaignResponse is the response type for the
 /// Query/TradeRewardCampaign RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTradeRewardCampaignResponse")]
 pub struct QueryTradeRewardCampaignResponse {
@@ -6026,8 +5975,7 @@ pub struct QueryTradeRewardCampaignResponse {
 }
 /// QueryIsRegisteredDMMRequest is the request type for the Query/IsRegisteredDMM
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryIsOptedOutOfRewardsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/IsOptedOutOfRewards",
@@ -6039,8 +5987,7 @@ pub struct QueryIsOptedOutOfRewardsRequest {
 }
 /// QueryIsRegisteredDMMResponse is the response type for the
 /// Query/IsRegisteredDMM RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryIsOptedOutOfRewardsResponse")]
 pub struct QueryIsOptedOutOfRewardsResponse {
     #[prost(bool, tag = "1")]
@@ -6048,8 +5995,7 @@ pub struct QueryIsOptedOutOfRewardsResponse {
 }
 /// QueryRegisteredDMMsRequest is the request type for the Query/RegisteredDMMs
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryOptedOutOfRewardsAccountsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/OptedOutOfRewardsAccounts",
@@ -6058,8 +6004,7 @@ pub struct QueryIsOptedOutOfRewardsResponse {
 pub struct QueryOptedOutOfRewardsAccountsRequest {}
 /// QueryRegisteredDMMsResponse is the response type for the Query/RegisteredDMMs
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryOptedOutOfRewardsAccountsResponse")]
 pub struct QueryOptedOutOfRewardsAccountsResponse {
     #[prost(string, repeated, tag = "1")]
@@ -6067,8 +6012,7 @@ pub struct QueryOptedOutOfRewardsAccountsResponse {
 }
 /// QueryFeeDiscountAccountInfoRequest is the request type for the
 /// Query/FeeDiscountAccountInfo RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFeeDiscountAccountInfoRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/FeeDiscountAccountInfo",
@@ -6080,8 +6024,7 @@ pub struct QueryFeeDiscountAccountInfoRequest {
 }
 /// QueryFeeDiscountAccountInfoResponse is the response type for the
 /// Query/FeeDiscountAccountInfo RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFeeDiscountAccountInfoResponse")]
 pub struct QueryFeeDiscountAccountInfoResponse {
     #[prost(uint64, tag = "1")]
@@ -6097,8 +6040,7 @@ pub struct QueryFeeDiscountAccountInfoResponse {
 }
 /// QueryFeeDiscountScheduleRequest is the request type for the
 /// Query/FeeDiscountSchedule RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFeeDiscountScheduleRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/FeeDiscountSchedule",
@@ -6107,7 +6049,6 @@ pub struct QueryFeeDiscountAccountInfoResponse {
 pub struct QueryFeeDiscountScheduleRequest {}
 /// QueryFeeDiscountScheduleResponse is the response type for the
 /// Query/FeeDiscountSchedule RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFeeDiscountScheduleResponse")]
 pub struct QueryFeeDiscountScheduleResponse {
@@ -6116,8 +6057,7 @@ pub struct QueryFeeDiscountScheduleResponse {
 }
 /// QueryBalanceMismatchesRequest is the request type for the
 /// Query/QueryBalanceMismatches RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryBalanceMismatchesRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/BalanceMismatches",
@@ -6131,8 +6071,7 @@ pub struct QueryBalanceMismatchesRequest {
     )]
     pub dust_factor: i64,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BalanceMismatch")]
 pub struct BalanceMismatch {
     /// the subaccount ID
@@ -6160,7 +6099,6 @@ pub struct BalanceMismatch {
 }
 /// QueryBalanceMismatchesResponse is the response type for the
 /// Query/QueryBalanceMismatches RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryBalanceMismatchesResponse")]
 pub struct QueryBalanceMismatchesResponse {
@@ -6169,16 +6107,14 @@ pub struct QueryBalanceMismatchesResponse {
 }
 /// QueryBalanceWithBalanceHoldsRequest is the request type for the
 /// Query/QueryBalanceWithBalanceHolds RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryBalanceWithBalanceHoldsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/BalanceWithBalanceHolds",
     response_type = QueryBalanceWithBalanceHoldsResponse
 )]
 pub struct QueryBalanceWithBalanceHoldsRequest {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BalanceWithMarginHold")]
 pub struct BalanceWithMarginHold {
     /// the subaccount ID
@@ -6200,7 +6136,6 @@ pub struct BalanceWithMarginHold {
 }
 /// QueryBalanceWithBalanceHoldsResponse is the response type for the
 /// Query/QueryBalanceWithBalanceHolds RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryBalanceWithBalanceHoldsResponse")]
 pub struct QueryBalanceWithBalanceHoldsResponse {
@@ -6209,16 +6144,14 @@ pub struct QueryBalanceWithBalanceHoldsResponse {
 }
 /// QueryFeeDiscountTierStatisticsRequest is the request type for the
 /// Query/QueryFeeDiscountTierStatistics RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFeeDiscountTierStatisticsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/FeeDiscountTierStatistics",
     response_type = QueryFeeDiscountTierStatisticsResponse
 )]
 pub struct QueryFeeDiscountTierStatisticsRequest {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TierStatistic")]
 pub struct TierStatistic {
     #[prost(uint64, tag = "1")]
@@ -6236,7 +6169,6 @@ pub struct TierStatistic {
 }
 /// QueryFeeDiscountTierStatisticsResponse is the response type for the
 /// Query/QueryFeeDiscountTierStatistics RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFeeDiscountTierStatisticsResponse")]
 pub struct QueryFeeDiscountTierStatisticsResponse {
@@ -6245,8 +6177,7 @@ pub struct QueryFeeDiscountTierStatisticsResponse {
 }
 /// MitoVaultInfosRequest is the request type for the Query/MitoVaultInfos RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MitoVaultInfosRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/MitoVaultInfos",
@@ -6255,8 +6186,7 @@ pub struct QueryFeeDiscountTierStatisticsResponse {
 pub struct MitoVaultInfosRequest {}
 /// MitoVaultInfosResponse is the response type for the Query/MitoVaultInfos RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MitoVaultInfosResponse")]
 pub struct MitoVaultInfosResponse {
     /// list of master addresses
@@ -6274,8 +6204,7 @@ pub struct MitoVaultInfosResponse {
 }
 /// QueryMarketIDFromVaultRequest is the request type for the
 /// Query/QueryMarketIDFromVault RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryMarketIDFromVaultRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/QueryMarketIDFromVault",
@@ -6287,16 +6216,14 @@ pub struct QueryMarketIdFromVaultRequest {
 }
 /// QueryMarketIDFromVaultResponse is the response type for the
 /// Query/QueryMarketIDFromVault RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryMarketIDFromVaultResponse")]
 pub struct QueryMarketIdFromVaultResponse {
     #[prost(string, tag = "1")]
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryHistoricalTradeRecordsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/HistoricalTradeRecords",
@@ -6307,7 +6234,6 @@ pub struct QueryHistoricalTradeRecordsRequest {
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryHistoricalTradeRecordsResponse")]
 pub struct QueryHistoricalTradeRecordsResponse {
@@ -6316,8 +6242,7 @@ pub struct QueryHistoricalTradeRecordsResponse {
 }
 /// TradeHistoryOptions are the optional params for Query/MarketVolatility RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TradeHistoryOptions")]
 pub struct TradeHistoryOptions {
     /// TradeGroupingSec of 0 means use the chain's default grouping
@@ -6347,8 +6272,7 @@ pub struct TradeHistoryOptions {
 }
 /// QueryMarketVolatilityRequest are the request params for the
 /// Query/MarketVolatility RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryMarketVolatilityRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/MarketVolatility",
@@ -6365,7 +6289,6 @@ pub struct QueryMarketVolatilityRequest {
 }
 /// QueryMarketVolatilityResponse is the response type for the
 /// Query/MarketVolatility RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryMarketVolatilityResponse")]
 pub struct QueryMarketVolatilityResponse {
@@ -6378,8 +6301,7 @@ pub struct QueryMarketVolatilityResponse {
 }
 /// QuerBinaryMarketsRequest is the request type for the Query/BinaryMarkets RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryBinaryMarketsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/BinaryOptionsMarkets",
@@ -6392,7 +6314,6 @@ pub struct QueryBinaryMarketsRequest {
 }
 /// QueryBinaryMarketsResponse is the response type for the Query/BinaryMarkets
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryBinaryMarketsResponse")]
 pub struct QueryBinaryMarketsResponse {
@@ -6401,8 +6322,7 @@ pub struct QueryBinaryMarketsResponse {
 }
 /// QueryConditionalOrdersRequest is the request type for the
 /// Query/ConditionalOrders RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTraderDerivativeConditionalOrdersRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/TraderDerivativeConditionalOrders",
@@ -6418,8 +6338,7 @@ pub struct QueryTraderDerivativeConditionalOrdersRequest {
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TrimmedDerivativeConditionalOrder")]
 pub struct TrimmedDerivativeConditionalOrder {
     /// price of the order (in human readable format)
@@ -6449,15 +6368,13 @@ pub struct TrimmedDerivativeConditionalOrder {
 }
 /// QueryTraderDerivativeOrdersResponse is the response type for the
 /// Query/TraderDerivativeOrders RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTraderDerivativeConditionalOrdersResponse")]
 pub struct QueryTraderDerivativeConditionalOrdersResponse {
     #[prost(message, repeated, tag = "1")]
     pub orders: ::prost::alloc::vec::Vec<TrimmedDerivativeConditionalOrder>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFullSpotOrderbookRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/L3SpotOrderBook",
@@ -6469,7 +6386,6 @@ pub struct QueryFullSpotOrderbookRequest {
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFullSpotOrderbookResponse")]
 pub struct QueryFullSpotOrderbookResponse {
@@ -6477,9 +6393,15 @@ pub struct QueryFullSpotOrderbookResponse {
     pub bids: ::prost::alloc::vec::Vec<TrimmedLimitOrder>,
     #[prost(message, repeated, tag = "2")]
     pub asks: ::prost::alloc::vec::Vec<TrimmedLimitOrder>,
+    /// the current orderbook sequence number
+    #[prost(uint64, tag = "3")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub seq: u64,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFullDerivativeOrderbookRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/L3DerivativeOrderBook",
@@ -6491,7 +6413,6 @@ pub struct QueryFullDerivativeOrderbookRequest {
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryFullDerivativeOrderbookResponse")]
 pub struct QueryFullDerivativeOrderbookResponse {
@@ -6499,9 +6420,15 @@ pub struct QueryFullDerivativeOrderbookResponse {
     pub bids: ::prost::alloc::vec::Vec<TrimmedLimitOrder>,
     #[prost(message, repeated, tag = "2")]
     pub asks: ::prost::alloc::vec::Vec<TrimmedLimitOrder>,
+    /// the current orderbook sequence number
+    #[prost(uint64, tag = "3")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub seq: u64,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.TrimmedLimitOrder")]
 pub struct TrimmedLimitOrder {
     /// price of the order (in human readable format)
@@ -6518,8 +6445,7 @@ pub struct TrimmedLimitOrder {
     #[serde(alias = "subaccountID")]
     pub subaccount_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryMarketAtomicExecutionFeeMultiplierRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/MarketAtomicExecutionFeeMultiplier",
@@ -6530,15 +6456,13 @@ pub struct QueryMarketAtomicExecutionFeeMultiplierRequest {
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryMarketAtomicExecutionFeeMultiplierResponse")]
 pub struct QueryMarketAtomicExecutionFeeMultiplierResponse {
     #[prost(string, tag = "1")]
     pub multiplier: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryActiveStakeGrantRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/ActiveStakeGrant",
@@ -6548,8 +6472,7 @@ pub struct QueryActiveStakeGrantRequest {
     #[prost(string, tag = "1")]
     pub grantee: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryActiveStakeGrantResponse")]
 pub struct QueryActiveStakeGrantResponse {
     #[prost(message, optional, tag = "1")]
@@ -6557,8 +6480,7 @@ pub struct QueryActiveStakeGrantResponse {
     #[prost(message, optional, tag = "2")]
     pub effective_grant: ::core::option::Option<EffectiveGrant>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryGrantAuthorizationRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/GrantAuthorization",
@@ -6570,15 +6492,13 @@ pub struct QueryGrantAuthorizationRequest {
     #[prost(string, tag = "2")]
     pub grantee: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryGrantAuthorizationResponse")]
 pub struct QueryGrantAuthorizationResponse {
     #[prost(string, tag = "1")]
     pub amount: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryGrantAuthorizationsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/GrantAuthorizations",
@@ -6588,7 +6508,6 @@ pub struct QueryGrantAuthorizationsRequest {
     #[prost(string, tag = "1")]
     pub granter: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryGrantAuthorizationsResponse")]
 pub struct QueryGrantAuthorizationsResponse {
@@ -6597,8 +6516,7 @@ pub struct QueryGrantAuthorizationsResponse {
     #[prost(message, repeated, tag = "2")]
     pub grants: ::prost::alloc::vec::Vec<GrantAuthorization>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryMarketBalanceRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/MarketBalance",
@@ -6610,30 +6528,26 @@ pub struct QueryMarketBalanceRequest {
     #[serde(alias = "marketID")]
     pub market_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryMarketBalanceResponse")]
 pub struct QueryMarketBalanceResponse {
     #[prost(message, optional, tag = "1")]
     pub balance: ::core::option::Option<MarketBalance>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryMarketBalancesRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/MarketBalances",
     response_type = QueryMarketBalancesResponse
 )]
 pub struct QueryMarketBalancesRequest {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryMarketBalancesResponse")]
 pub struct QueryMarketBalancesResponse {
     #[prost(message, repeated, tag = "1")]
     pub balances: ::prost::alloc::vec::Vec<MarketBalance>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MarketBalance")]
 pub struct MarketBalance {
     /// the market ID
@@ -6644,8 +6558,7 @@ pub struct MarketBalance {
     #[prost(string, tag = "2")]
     pub balance: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDenomMinNotionalRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/DenomMinNotional",
@@ -6655,28 +6568,54 @@ pub struct QueryDenomMinNotionalRequest {
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDenomMinNotionalResponse")]
 pub struct QueryDenomMinNotionalResponse {
     /// the minimum notional amount for the denom (in human readable format)
     #[prost(string, tag = "1")]
     pub amount: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDenomMinNotionalsRequest")]
 #[proto_query(
     path = "/injective.exchange.v2.Query/DenomMinNotionals",
     response_type = QueryDenomMinNotionalsResponse
 )]
 pub struct QueryDenomMinNotionalsRequest {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryDenomMinNotionalsResponse")]
 pub struct QueryDenomMinNotionalsResponse {
     #[prost(message, repeated, tag = "1")]
     pub denom_min_notionals: ::prost::alloc::vec::Vec<DenomMinNotional>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.OpenInterest")]
+pub struct OpenInterest {
+    /// the market ID
+    #[prost(string, tag = "1")]
+    #[serde(alias = "marketID")]
+    pub market_id: ::prost::alloc::string::String,
+    /// the open interest of the market
+    #[prost(string, tag = "2")]
+    pub balance: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.QueryOpenInterestRequest")]
+#[proto_query(
+    path = "/injective.exchange.v2.Query/OpenInterest",
+    response_type = QueryOpenInterestResponse
+)]
+pub struct QueryOpenInterestRequest {
+    /// market id
+    #[prost(string, tag = "1")]
+    #[serde(alias = "marketID")]
+    pub market_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.QueryOpenInterestResponse")]
+pub struct QueryOpenInterestResponse {
+    #[prost(message, optional, tag = "1")]
+    pub amount: ::core::option::Option<OpenInterest>,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -6694,9 +6633,9 @@ impl OrderSide {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            OrderSide::SideUnspecified => "Side_Unspecified",
-            OrderSide::Buy => "Buy",
-            OrderSide::Sell => "Sell",
+            Self::SideUnspecified => "Side_Unspecified",
+            Self::Buy => "Buy",
+            Self::Sell => "Sell",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -6728,9 +6667,9 @@ impl CancellationStrategy {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            CancellationStrategy::UnspecifiedOrder => "UnspecifiedOrder",
-            CancellationStrategy::FromWorstToBest => "FromWorstToBest",
-            CancellationStrategy::FromBestToWorst => "FromBestToWorst",
+            Self::UnspecifiedOrder => "UnspecifiedOrder",
+            Self::FromWorstToBest => "FromWorstToBest",
+            Self::FromBestToWorst => "FromBestToWorst",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -6801,14 +6740,17 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
     ) -> Result<QueryAggregateMarketVolumesResponse, cosmwasm_std::StdError> {
         QueryAggregateMarketVolumesRequest { market_ids }.query(self.querier)
     }
-    pub fn denom_decimal(&self, denom: ::prost::alloc::string::String) -> Result<QueryDenomDecimalResponse, cosmwasm_std::StdError> {
-        QueryDenomDecimalRequest { denom }.query(self.querier)
+    pub fn auction_exchange_transfer_denom_decimal(
+        &self,
+        denom: ::prost::alloc::string::String,
+    ) -> Result<QueryAuctionExchangeTransferDenomDecimalResponse, cosmwasm_std::StdError> {
+        QueryAuctionExchangeTransferDenomDecimalRequest { denom }.query(self.querier)
     }
-    pub fn denom_decimals(
+    pub fn auction_exchange_transfer_denom_decimals(
         &self,
         denoms: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    ) -> Result<QueryDenomDecimalsResponse, cosmwasm_std::StdError> {
-        QueryDenomDecimalsRequest { denoms }.query(self.querier)
+    ) -> Result<QueryAuctionExchangeTransferDenomDecimalsResponse, cosmwasm_std::StdError> {
+        QueryAuctionExchangeTransferDenomDecimalsRequest { denoms }.query(self.querier)
     }
     pub fn spot_markets(
         &self,
@@ -7160,5 +7102,8 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
     }
     pub fn denom_min_notionals(&self) -> Result<QueryDenomMinNotionalsResponse, cosmwasm_std::StdError> {
         QueryDenomMinNotionalsRequest {}.query(self.querier)
+    }
+    pub fn open_interest(&self, market_id: ::prost::alloc::string::String) -> Result<QueryOpenInterestResponse, cosmwasm_std::StdError> {
+        QueryOpenInterestRequest { market_id }.query(self.querier)
     }
 }

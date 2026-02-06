@@ -1,6 +1,5 @@
 use injective_std_derive::CosmwasmExt;
 /// ResponseBroadcastTx is a response of broadcasting the transaction.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.rpc.grpc.v1beta3.ResponseBroadcastTx")]
 pub struct ResponseBroadcastTx {
