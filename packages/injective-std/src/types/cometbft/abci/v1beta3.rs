@@ -322,6 +322,7 @@ pub struct ResponseExtendVote {
 #[proto_message(type_url = "/cometbft.abci.v1beta3.ResponseVerifyVoteExtension")]
 pub struct ResponseVerifyVoteExtension {
     #[prost(enumeration = "response_verify_vote_extension::VerifyStatus", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<response_verify_vote_extension::VerifyStatus, _>")]
     pub status: i32,
 }
 /// Nested message and enum types in `ResponseVerifyVoteExtension`.
@@ -333,13 +334,19 @@ pub mod response_verify_vote_extension {
     #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum VerifyStatus {
         /// Unknown
+        #[serde(rename = "UNKNOWN")]
+        #[serde(alias = "Unknown")]
         Unknown = 0,
         /// Accepted
+        #[serde(rename = "ACCEPT")]
+        #[serde(alias = "Accept")]
         Accept = 1,
         /// Rejecting the vote extension will reject the entire precommit by the sender.
         /// Incorrectly implementing this thus has liveness implications as it may affect
         /// CometBFT's ability to receive 2/3+ valid votes to finalize the block.
         /// Honest nodes should never be rejected.
+        #[serde(rename = "REJECT")]
+        #[serde(alias = "Reject")]
         Reject = 2,
     }
     impl VerifyStatus {
@@ -397,6 +404,7 @@ pub struct VoteInfo {
     pub validator: ::core::option::Option<super::v1beta1::Validator>,
     #[prost(enumeration = "super::super::types::v1beta1::BlockIdFlag", tag = "3")]
     #[serde(alias = "blockID_flag")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::types::v1beta1::BlockIdFlag, _>")]
     pub block_id_flag: i32,
 }
 /// ExtendedVoteInfo extends VoteInfo with the vote extensions (non-deterministic).
@@ -415,6 +423,7 @@ pub struct ExtendedVoteInfo {
     /// block_id_flag indicates whether the validator voted for a block, nil, or did not vote at all
     #[prost(enumeration = "super::super::types::v1beta1::BlockIdFlag", tag = "5")]
     #[serde(alias = "blockID_flag")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::types::v1beta1::BlockIdFlag, _>")]
     pub block_id_flag: i32,
 }
 /// CommitInfo contains votes for the particular round.

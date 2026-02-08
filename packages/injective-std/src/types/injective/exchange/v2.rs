@@ -151,6 +151,7 @@ pub struct GenericExchangeAuthorization {
 #[proto_message(type_url = "/injective.exchange.v2.ForcePausedInfo")]
 pub struct ForcePausedInfo {
     #[prost(enumeration = "ForcePausedReason", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<ForcePausedReason, _>")]
     pub reason: i32,
     #[prost(string, tag = "2")]
     pub mark_price_at_pausing: ::prost::alloc::string::String,
@@ -220,6 +221,7 @@ pub struct SpotMarket {
     pub market_id: ::prost::alloc::string::String,
     /// Status of the market
     #[prost(enumeration = "MarketStatus", tag = "8")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<MarketStatus, _>")]
     pub status: i32,
     /// min_price_tick_size defines the minimum tick size that the price required
     /// for orders in the market (in human readable format)
@@ -265,6 +267,7 @@ pub struct BinaryOptionsMarket {
     pub oracle_provider: ::prost::alloc::string::String,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "4")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::oracle::v1beta1::OracleType, _>")]
     pub oracle_type: i32,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "5")]
@@ -305,6 +308,7 @@ pub struct BinaryOptionsMarket {
     pub relayer_fee_share_rate: ::prost::alloc::string::String,
     /// Status of the market
     #[prost(enumeration = "MarketStatus", tag = "14")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<MarketStatus, _>")]
     pub status: i32,
     /// min_price_tick_size defines the minimum tick size that the price and margin
     /// required for orders in the market (in human readable format)
@@ -355,6 +359,7 @@ pub struct DerivativeMarket {
     pub oracle_quote: ::prost::alloc::string::String,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "4")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::oracle::v1beta1::OracleType, _>")]
     pub oracle_type: i32,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "5")]
@@ -387,9 +392,11 @@ pub struct DerivativeMarket {
     /// true if the market is a perpetual market. false if the market is an expiry
     /// futures market
     #[prost(bool, tag = "13")]
+    #[serde(alias = "isPerpetual")]
     pub is_perpetual: bool,
     /// Status of the market
     #[prost(enumeration = "MarketStatus", tag = "14")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<MarketStatus, _>")]
     pub status: i32,
     /// min_price_tick_size defines the minimum tick size that the price and margin
     /// required for orders in the market (in human readable format)
@@ -579,11 +586,17 @@ pub struct PerpetualMarketFunding {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum MarketStatus {
+    #[serde(rename = "Unspecified")]
     Unspecified = 0,
+    #[serde(rename = "Active")]
     Active = 1,
+    #[serde(rename = "Paused")]
     Paused = 2,
+    #[serde(rename = "Demolished")]
     Demolished = 3,
+    #[serde(rename = "Expired")]
     Expired = 4,
+    #[serde(rename = "ForcePaused")]
     ForcePaused = 5,
 }
 impl MarketStatus {
@@ -618,6 +631,7 @@ impl MarketStatus {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum ForcePausedReason {
+    #[serde(rename = "QuoteDenomPaused")]
     QuoteDenomPaused = 0,
 }
 impl ForcePausedReason {
@@ -670,6 +684,7 @@ pub struct SpotOrder {
     pub order_info: ::core::option::Option<OrderInfo>,
     /// order types
     #[prost(enumeration = "OrderType", tag = "3")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OrderType, _>")]
     pub order_type: i32,
     /// trigger_price is the trigger price used by stop/take orders (in human
     /// readable format) (optional)
@@ -696,6 +711,7 @@ pub struct SpotMarketOrder {
     pub order_hash: ::prost::alloc::vec::Vec<u8>,
     /// order types
     #[prost(enumeration = "OrderType", tag = "4")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OrderType, _>")]
     pub order_type: i32,
     /// trigger_price is the trigger price used by stop/take orders
     #[prost(string, tag = "5")]
@@ -710,6 +726,7 @@ pub struct SpotLimitOrder {
     pub order_info: ::core::option::Option<OrderInfo>,
     /// order types
     #[prost(enumeration = "OrderType", tag = "2")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OrderType, _>")]
     pub order_type: i32,
     /// the amount of the quantity remaining fillable
     #[prost(string, tag = "3")]
@@ -740,6 +757,7 @@ pub struct DerivativeOrder {
     pub order_info: ::core::option::Option<OrderInfo>,
     /// order types
     #[prost(enumeration = "OrderType", tag = "3")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OrderType, _>")]
     pub order_type: i32,
     /// margin is the margin used by the limit order (in human readable format)
     #[prost(string, tag = "4")]
@@ -765,6 +783,7 @@ pub struct DerivativeMarketOrder {
     pub order_info: ::core::option::Option<OrderInfo>,
     /// order types
     #[prost(enumeration = "OrderType", tag = "2")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OrderType, _>")]
     pub order_type: i32,
     #[prost(string, tag = "3")]
     pub margin: ::prost::alloc::string::String,
@@ -785,6 +804,7 @@ pub struct DerivativeLimitOrder {
     pub order_info: ::core::option::Option<OrderInfo>,
     /// order types
     #[prost(enumeration = "OrderType", tag = "2")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OrderType, _>")]
     pub order_type: i32,
     /// margin is the margin used by the limit order
     #[prost(string, tag = "3")]
@@ -809,16 +829,38 @@ pub struct DerivativeLimitOrder {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum OrderType {
+    #[serde(rename = "UNSPECIFIED")]
+    #[serde(alias = "Unspecified")]
     Unspecified = 0,
+    #[serde(rename = "BUY")]
+    #[serde(alias = "Buy")]
     Buy = 1,
+    #[serde(rename = "SELL")]
+    #[serde(alias = "Sell")]
     Sell = 2,
+    #[serde(rename = "STOP_BUY")]
+    #[serde(alias = "StopBuy")]
     StopBuy = 3,
+    #[serde(rename = "STOP_SELL")]
+    #[serde(alias = "StopSell")]
     StopSell = 4,
+    #[serde(rename = "TAKE_BUY")]
+    #[serde(alias = "TakeBuy")]
     TakeBuy = 5,
+    #[serde(rename = "TAKE_SELL")]
+    #[serde(alias = "TakeSell")]
     TakeSell = 6,
+    #[serde(rename = "BUY_PO")]
+    #[serde(alias = "BuyPo")]
     BuyPo = 7,
+    #[serde(rename = "SELL_PO")]
+    #[serde(alias = "SellPo")]
     SellPo = 8,
+    #[serde(rename = "BUY_ATOMIC")]
+    #[serde(alias = "BuyAtomic")]
     BuyAtomic = 9,
+    #[serde(rename = "SELL_ATOMIC")]
+    #[serde(alias = "SellAtomic")]
     SellAtomic = 10,
 }
 impl OrderType {
@@ -863,15 +905,31 @@ impl OrderType {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum OrderMask {
+    #[serde(rename = "UNUSED")]
+    #[serde(alias = "Unused")]
     Unused = 0,
+    #[serde(rename = "ANY")]
+    #[serde(alias = "Any")]
     Any = 1,
+    #[serde(rename = "REGULAR")]
+    #[serde(alias = "Regular")]
     Regular = 2,
+    #[serde(rename = "CONDITIONAL")]
+    #[serde(alias = "Conditional")]
     Conditional = 4,
     /// for conditional orders means HIGHER
+    #[serde(rename = "DIRECTION_BUY_OR_HIGHER")]
+    #[serde(alias = "DirectionBuyOrHigher")]
     DirectionBuyOrHigher = 8,
     /// for conditional orders means LOWER
+    #[serde(rename = "DIRECTION_SELL_OR_LOWER")]
+    #[serde(alias = "DirectionSellOrLower")]
     DirectionSellOrLower = 16,
+    #[serde(rename = "TYPE_MARKET")]
+    #[serde(alias = "TypeMarket")]
     TypeMarket = 32,
+    #[serde(rename = "TYPE_LIMIT")]
+    #[serde(alias = "TypeLimit")]
     TypeLimit = 64,
 }
 impl OrderMask {
@@ -910,10 +968,14 @@ impl OrderMask {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum AtomicMarketOrderAccessLevel {
+    #[serde(rename = "Nobody")]
     Nobody = 0,
     /// currently unsupported
+    #[serde(rename = "BeginBlockerSmartContractsOnly")]
     BeginBlockerSmartContractsOnly = 1,
+    #[serde(rename = "SmartContractsOnly")]
     SmartContractsOnly = 2,
+    #[serde(rename = "Everyone")]
     Everyone = 3,
 }
 impl AtomicMarketOrderAccessLevel {
@@ -1042,6 +1104,7 @@ pub struct Params {
     /// atomic_market_order_access_level defines the required access permissions
     /// for executing atomic market orders
     #[prost(enumeration = "AtomicMarketOrderAccessLevel", tag = "19")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<AtomicMarketOrderAccessLevel, _>")]
     pub atomic_market_order_access_level: i32,
     /// spot_atomic_market_order_fee_multiplier defines the default multiplier for
     /// executing atomic market orders in spot markets
@@ -1571,14 +1634,23 @@ pub struct DenomMinNotional {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum ExecutionType {
+    #[serde(rename = "UnspecifiedExecutionType")]
     UnspecifiedExecutionType = 0,
+    #[serde(rename = "Market")]
     Market = 1,
+    #[serde(rename = "LimitFill")]
     LimitFill = 2,
+    #[serde(rename = "LimitMatchRestingOrder")]
     LimitMatchRestingOrder = 3,
+    #[serde(rename = "LimitMatchNewOrder")]
     LimitMatchNewOrder = 4,
+    #[serde(rename = "MarketLiquidation")]
     MarketLiquidation = 5,
+    #[serde(rename = "ExpiryMarketSettlement")]
     ExpiryMarketSettlement = 6,
+    #[serde(rename = "OffsettingPosition")]
     OffsettingPosition = 7,
+    #[serde(rename = "Synthetic")]
     Synthetic = 8,
 }
 impl ExecutionType {
@@ -1624,6 +1696,7 @@ pub struct EventBatchSpotExecution {
     #[prost(bool, tag = "2")]
     pub is_buy: bool,
     #[prost(enumeration = "ExecutionType", tag = "3")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<ExecutionType, _>")]
     pub execution_type: i32,
     #[prost(message, repeated, tag = "4")]
     pub trades: ::prost::alloc::vec::Vec<TradeLog>,
@@ -1642,6 +1715,7 @@ pub struct EventBatchDerivativeExecution {
     #[prost(string, tag = "4")]
     pub cumulative_funding: ::prost::alloc::string::String,
     #[prost(enumeration = "ExecutionType", tag = "5")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<ExecutionType, _>")]
     pub execution_type: i32,
     #[prost(message, repeated, tag = "6")]
     pub trades: ::prost::alloc::vec::Vec<DerivativeTradeLog>,
@@ -2232,6 +2306,7 @@ pub struct SpotMarketParamUpdateProposal {
     #[prost(string, tag = "8")]
     pub min_quantity_tick_size: ::prost::alloc::string::String,
     #[prost(enumeration = "MarketStatus", tag = "9")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<MarketStatus, _>")]
     pub status: i32,
     #[prost(string, tag = "10")]
     pub ticker: ::prost::alloc::string::String,
@@ -2250,6 +2325,7 @@ pub struct SpotMarketParamUpdateProposal {
     /// has_disabled_minimal_protocol_fee defines whether the minimal protocol fee
     /// is disabled for the market
     #[prost(enumeration = "DisableMinimalProtocolFeeUpdate", tag = "15")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<DisableMinimalProtocolFeeUpdate, _>")]
     pub has_disabled_minimal_protocol_fee: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2260,6 +2336,7 @@ pub struct ExchangeEnableProposal {
     #[prost(string, tag = "2")]
     pub description: ::prost::alloc::string::String,
     #[prost(enumeration = "ExchangeType", tag = "3")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<ExchangeType, _>")]
     pub exchange_type: i32,
 }
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2363,6 +2440,7 @@ pub struct PerpetualMarketLaunchProposal {
     pub oracle_scale_factor: u32,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "8")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::oracle::v1beta1::OracleType, _>")]
     pub oracle_type: i32,
     /// initial_margin_ratio defines the initial margin ratio for the derivative
     /// market
@@ -2419,6 +2497,7 @@ pub struct BinaryOptionsMarketLaunchProposal {
     pub oracle_provider: ::prost::alloc::string::String,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "6")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::oracle::v1beta1::OracleType, _>")]
     pub oracle_type: i32,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "7")]
@@ -2493,6 +2572,7 @@ pub struct ExpiryFuturesMarketLaunchProposal {
     pub oracle_scale_factor: u32,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "8")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::oracle::v1beta1::OracleType, _>")]
     pub oracle_type: i32,
     /// Expiration time of the market
     #[prost(int64, tag = "9")]
@@ -2584,6 +2664,7 @@ pub struct DerivativeMarketParamUpdateProposal {
     #[prost(string, tag = "12")]
     pub hourly_funding_rate_cap: ::prost::alloc::string::String,
     #[prost(enumeration = "MarketStatus", tag = "13")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<MarketStatus, _>")]
     pub status: i32,
     #[prost(message, optional, tag = "14")]
     pub oracle_params: ::core::option::Option<OracleParams>,
@@ -2604,6 +2685,7 @@ pub struct DerivativeMarketParamUpdateProposal {
     /// has_disabled_minimal_protocol_fee defines whether the minimal protocol fee
     /// is disabled for the market
     #[prost(enumeration = "DisableMinimalProtocolFeeUpdate", tag = "20")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<DisableMinimalProtocolFeeUpdate, _>")]
     pub has_disabled_minimal_protocol_fee: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2688,6 +2770,7 @@ pub struct BinaryOptionsMarketParamUpdateProposal {
     #[prost(string, tag = "12")]
     pub admin: ::prost::alloc::string::String,
     #[prost(enumeration = "MarketStatus", tag = "13")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<MarketStatus, _>")]
     pub status: i32,
     #[prost(message, optional, tag = "14")]
     pub oracle_params: ::core::option::Option<ProviderOracleParams>,
@@ -2703,6 +2786,7 @@ pub struct BinaryOptionsMarketParamUpdateProposal {
     /// has_disabled_minimal_protocol_fee defines whether the minimal protocol fee
     /// is disabled for the market
     #[prost(enumeration = "DisableMinimalProtocolFeeUpdate", tag = "18")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<DisableMinimalProtocolFeeUpdate, _>")]
     pub has_disabled_minimal_protocol_fee: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2719,6 +2803,7 @@ pub struct ProviderOracleParams {
     pub oracle_scale_factor: u32,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "4")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::oracle::v1beta1::OracleType, _>")]
     pub oracle_type: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2735,6 +2820,7 @@ pub struct OracleParams {
     pub oracle_scale_factor: u32,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "4")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::oracle::v1beta1::OracleType, _>")]
     pub oracle_type: i32,
 }
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -2834,8 +2920,11 @@ pub struct DenomMinNotionalProposal {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum DisableMinimalProtocolFeeUpdate {
+    #[serde(rename = "NoUpdate")]
     NoUpdate = 0,
+    #[serde(rename = "False")]
     False = 1,
+    #[serde(rename = "True")]
     True = 2,
 }
 impl DisableMinimalProtocolFeeUpdate {
@@ -2864,8 +2953,14 @@ impl DisableMinimalProtocolFeeUpdate {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum ExchangeType {
+    #[serde(rename = "EXCHANGE_UNSPECIFIED")]
+    #[serde(alias = "ExchangeUnspecified")]
     ExchangeUnspecified = 0,
+    #[serde(rename = "SPOT")]
+    #[serde(alias = "Spot")]
     Spot = 1,
+    #[serde(rename = "DERIVATIVES")]
+    #[serde(alias = "Derivatives")]
     Derivatives = 2,
 }
 impl ExchangeType {
@@ -3120,6 +3215,7 @@ pub struct MsgInstantPerpetualMarketLaunch {
     pub oracle_scale_factor: u32,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "7")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::oracle::v1beta1::OracleType, _>")]
     pub oracle_type: i32,
     /// maker_fee_rate defines the trade fee rate for makers on the perpetual
     /// market
@@ -3179,6 +3275,7 @@ pub struct MsgInstantBinaryOptionsMarketLaunch {
     pub oracle_provider: ::prost::alloc::string::String,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "5")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::oracle::v1beta1::OracleType, _>")]
     pub oracle_type: i32,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "6")]
@@ -3253,6 +3350,7 @@ pub struct MsgInstantExpiryFuturesMarketLaunch {
     pub oracle_quote: ::prost::alloc::string::String,
     /// Oracle type
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "6")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::oracle::v1beta1::OracleType, _>")]
     pub oracle_type: i32,
     /// Scale factor for oracle prices.
     #[prost(uint32, tag = "7")]
@@ -3999,6 +4097,7 @@ pub struct MsgAdminUpdateBinaryOptionsMarket {
     pub settlement_timestamp: i64,
     /// Status of the market
     #[prost(enumeration = "MarketStatus", tag = "6")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<MarketStatus, _>")]
     pub status: i32,
 }
 /// MsgAdminUpdateBinaryOptionsMarketResponse is the response for
@@ -4813,6 +4912,7 @@ pub struct QuerySpotOrderbookRequest {
     pub limit: u64,
     /// the order side to return the orderbook entries for (optional)
     #[prost(enumeration = "OrderSide", tag = "3")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OrderSide, _>")]
     pub order_side: i32,
     /// limits the number of entries to return per side based on the cumulative
     /// notional (in human readable format)
@@ -5126,6 +5226,7 @@ pub struct QueryTraderSpotOrdersToCancelUpToAmountRequest {
     pub quote_amount: ::prost::alloc::string::String,
     /// The cancellation strategy
     #[prost(enumeration = "CancellationStrategy", tag = "5")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<CancellationStrategy, _>")]
     pub strategy: i32,
     /// The reference price for the cancellation strategy, e.g. mid price or mark
     /// price
@@ -5150,6 +5251,7 @@ pub struct QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
     pub quote_amount: ::prost::alloc::string::String,
     /// The cancellation strategy
     #[prost(enumeration = "CancellationStrategy", tag = "4")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<CancellationStrategy, _>")]
     pub strategy: i32,
     /// The reference price for the cancellation strategy, e.g. mid price or mark
     /// price
@@ -6338,8 +6440,12 @@ pub struct QueryOpenInterestResponse {
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum OrderSide {
     /// will return both
+    #[serde(rename = "Side_Unspecified")]
+    #[serde(alias = "SideUnspecified")]
     SideUnspecified = 0,
+    #[serde(rename = "Buy")]
     Buy = 1,
+    #[serde(rename = "Sell")]
     Sell = 2,
 }
 impl OrderSide {
@@ -6370,10 +6476,13 @@ impl OrderSide {
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum CancellationStrategy {
     /// just cancelling in random order in most efficient way
+    #[serde(rename = "UnspecifiedOrder")]
     UnspecifiedOrder = 0,
     /// e.g. for buy orders from lowest to highest price
+    #[serde(rename = "FromWorstToBest")]
     FromWorstToBest = 1,
     /// e.g. for buy orders from higest to lowest price
+    #[serde(rename = "FromBestToWorst")]
     FromBestToWorst = 2,
 }
 impl CancellationStrategy {

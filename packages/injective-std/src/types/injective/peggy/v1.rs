@@ -251,6 +251,7 @@ pub struct Erc20ToDenom {
 #[proto_message(type_url = "/injective.peggy.v1.EventAttestationObserved")]
 pub struct EventAttestationObserved {
     #[prost(enumeration = "ClaimType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<ClaimType, _>")]
     pub attestation_type: i32,
     #[prost(string, tag = "2")]
     pub bridge_contract: ::prost::alloc::string::String,
@@ -628,6 +629,7 @@ pub struct Withdrawal {
 #[proto_message(type_url = "/injective.peggy.v1.EventValidatorJailed")]
 pub struct EventValidatorJailed {
     #[prost(enumeration = "JailReason", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<JailReason, _>")]
     pub reason: i32,
     #[prost(int64, tag = "2")]
     #[serde(
@@ -646,7 +648,9 @@ pub struct EventValidatorJailed {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum JailReason {
+    #[serde(rename = "MissingValsetConfirm")]
     MissingValsetConfirm = 0,
+    #[serde(rename = "MissingBatchConfirm")]
     MissingBatchConfirm = 1,
 }
 impl JailReason {
@@ -1345,12 +1349,12 @@ pub struct QueryCurrentValsetResponse {
     pub valset: ::core::option::Option<Valset>,
 }
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/injective.peggy.v1.QueryValsetRequest")]
+#[proto_message(type_url = "/injective.peggy.v1.QueryValsetRequestRequest")]
 #[proto_query(
     path = "/injective.peggy.v1.Query/ValsetRequest",
     response_type = QueryValsetRequestResponse
 )]
-pub struct QueryValsetRequest {
+pub struct QueryValsetRequestRequest {
     #[prost(uint64, tag = "1")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
@@ -1689,7 +1693,7 @@ impl<'a, Q: cosmwasm_std::CustomQuery> PeggyQuerier<'a, Q> {
         QueryCurrentValsetRequest {}.query(self.querier)
     }
     pub fn valset_request(&self, nonce: u64) -> Result<QueryValsetRequestResponse, cosmwasm_std::StdError> {
-        QueryValsetRequest { nonce }.query(self.querier)
+        QueryValsetRequestRequest { nonce }.query(self.querier)
     }
     pub fn valset_confirm(&self, nonce: u64, address: ::prost::alloc::string::String) -> Result<QueryValsetConfirmResponse, cosmwasm_std::StdError> {
         QueryValsetConfirmRequest { nonce, address }.query(self.querier)

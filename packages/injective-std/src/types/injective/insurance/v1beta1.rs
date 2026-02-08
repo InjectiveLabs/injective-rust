@@ -45,6 +45,7 @@ pub struct InsuranceFund {
     pub oracle_quote: ::prost::alloc::string::String,
     /// Oracle type of the binary options or derivative market
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "10")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::oracle::v1beta1::OracleType, _>")]
     pub oracle_type: i32,
     /// Expiration time of the derivative market. Should be -1 for perpetual or -2
     /// for binary options markets.
@@ -306,6 +307,7 @@ pub struct MsgCreateInsuranceFund {
     pub oracle_quote: ::prost::alloc::string::String,
     /// Oracle type of the binary options or derivative market
     #[prost(enumeration = "super::super::oracle::v1beta1::OracleType", tag = "6")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::oracle::v1beta1::OracleType, _>")]
     pub oracle_type: i32,
     /// Expiration time of the derivative market. Should be -1 for perpetual or -2
     /// for binary options markets.

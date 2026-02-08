@@ -79,6 +79,7 @@ pub struct Validator {
     pub jailed: bool,
     /// status is the validator status (bonded/unbonding/unbonded).
     #[prost(enumeration = "BondStatus", tag = "4")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<BondStatus, _>")]
     pub status: i32,
     /// tokens define the delegated tokens (incl. self-delegation).
     #[prost(string, tag = "5")]

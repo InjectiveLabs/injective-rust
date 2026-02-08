@@ -333,6 +333,7 @@ pub struct ResponsePrepareProposal {
 #[proto_message(type_url = "/cometbft.abci.v1beta2.ResponseProcessProposal")]
 pub struct ResponseProcessProposal {
     #[prost(enumeration = "response_process_proposal::ProposalStatus", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<response_process_proposal::ProposalStatus, _>")]
     pub status: i32,
 }
 /// Nested message and enum types in `ResponseProcessProposal`.
@@ -344,10 +345,16 @@ pub mod response_process_proposal {
     #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum ProposalStatus {
         /// Unknown
+        #[serde(rename = "UNKNOWN")]
+        #[serde(alias = "Unknown")]
         Unknown = 0,
         /// Accepted
+        #[serde(rename = "ACCEPT")]
+        #[serde(alias = "Accept")]
         Accept = 1,
         /// Rejected
+        #[serde(rename = "REJECT")]
+        #[serde(alias = "Reject")]
         Reject = 2,
     }
     impl ProposalStatus {
@@ -440,6 +447,7 @@ pub struct ExtendedVoteInfo {
 #[proto_message(type_url = "/cometbft.abci.v1beta2.Misbehavior")]
 pub struct Misbehavior {
     #[prost(enumeration = "MisbehaviorType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<MisbehaviorType, _>")]
     pub r#type: i32,
     /// The offending validator
     #[prost(message, optional, tag = "2")]
@@ -470,10 +478,16 @@ pub struct Misbehavior {
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum MisbehaviorType {
     /// Unknown
+    #[serde(rename = "UNKNOWN")]
+    #[serde(alias = "Unknown")]
     Unknown = 0,
     /// Duplicate vote
+    #[serde(rename = "DUPLICATE_VOTE")]
+    #[serde(alias = "DuplicateVote")]
     DuplicateVote = 1,
     /// Light client attack
+    #[serde(rename = "LIGHT_CLIENT_ATTACK")]
+    #[serde(alias = "LightClientAttack")]
     LightClientAttack = 2,
 }
 impl MisbehaviorType {

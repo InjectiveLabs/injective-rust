@@ -4,6 +4,7 @@ use injective_std_derive::CosmwasmExt;
 #[proto_message(type_url = "/cosmwasm.wasm.v1.AccessTypeParam")]
 pub struct AccessTypeParam {
     #[prost(enumeration = "AccessType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<AccessType, _>")]
     pub value: i32,
 }
 /// AccessConfig access control type.
@@ -11,6 +12,7 @@ pub struct AccessTypeParam {
 #[proto_message(type_url = "/cosmwasm.wasm.v1.AccessConfig")]
 pub struct AccessConfig {
     #[prost(enumeration = "AccessType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<AccessType, _>")]
     pub permission: i32,
     #[prost(string, repeated, tag = "3")]
     pub addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -22,6 +24,7 @@ pub struct Params {
     #[prost(message, optional, tag = "1")]
     pub code_upload_access: ::core::option::Option<AccessConfig>,
     #[prost(enumeration = "AccessType", tag = "2")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<AccessType, _>")]
     pub instantiate_default_permission: i32,
 }
 /// CodeInfo is data for the uploaded contract WASM code
@@ -75,6 +78,7 @@ pub struct ContractInfo {
 #[proto_message(type_url = "/cosmwasm.wasm.v1.ContractCodeHistoryEntry")]
 pub struct ContractCodeHistoryEntry {
     #[prost(enumeration = "ContractCodeHistoryOperationType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<ContractCodeHistoryOperationType, _>")]
     pub operation: i32,
     /// CodeID is the reference to the stored WASM code
     #[prost(uint64, tag = "2")]
@@ -582,7 +586,7 @@ pub struct InstantiateContractProposal {
 /// a simple MsgInstantiateContract2 can be invoked from the x/gov module via
 /// a v1 governance proposal.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/cosmwasm.wasm.v1.InstantiateContract2ProposalInstantiateContract2Proposal")]
+#[proto_message(type_url = "/cosmwasm.wasm.v1.InstantiateContract2Proposal")]
 #[deprecated]
 pub struct InstantiateContract2Proposal {
     /// Title is a short summary

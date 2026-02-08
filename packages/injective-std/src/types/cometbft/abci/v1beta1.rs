@@ -143,6 +143,7 @@ pub struct RequestCheckTx {
     #[prost(bytes = "vec", tag = "1")]
     pub tx: ::prost::alloc::vec::Vec<u8>,
     #[prost(enumeration = "CheckTxType", tag = "2")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<CheckTxType, _>")]
     pub r#type: i32,
 }
 /// RequestDeliverTx is a request to apply the transaction.
@@ -478,6 +479,7 @@ pub struct ResponseListSnapshots {
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseOfferSnapshot")]
 pub struct ResponseOfferSnapshot {
     #[prost(enumeration = "response_offer_snapshot::Result", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<response_offer_snapshot::Result, _>")]
     pub result: i32,
 }
 /// Nested message and enum types in `ResponseOfferSnapshot`.
@@ -489,16 +491,28 @@ pub mod response_offer_snapshot {
     #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Result {
         /// Unknown result, abort all snapshot restoration
+        #[serde(rename = "UNKNOWN")]
+        #[serde(alias = "Unknown")]
         Unknown = 0,
         /// Snapshot accepted, apply chunks
+        #[serde(rename = "ACCEPT")]
+        #[serde(alias = "Accept")]
         Accept = 1,
         /// Abort all snapshot restoration
+        #[serde(rename = "ABORT")]
+        #[serde(alias = "Abort")]
         Abort = 2,
         /// Reject this specific snapshot, try others
+        #[serde(rename = "REJECT")]
+        #[serde(alias = "Reject")]
         Reject = 3,
         /// Reject all snapshots of this format, try others
+        #[serde(rename = "REJECT_FORMAT")]
+        #[serde(alias = "RejectFormat")]
         RejectFormat = 4,
         /// Reject all snapshots from the sender(s), try others
+        #[serde(rename = "REJECT_SENDER")]
+        #[serde(alias = "RejectSender")]
         RejectSender = 5,
     }
     impl Result {
@@ -542,6 +556,7 @@ pub struct ResponseLoadSnapshotChunk {
 #[proto_message(type_url = "/cometbft.abci.v1beta1.ResponseApplySnapshotChunk")]
 pub struct ResponseApplySnapshotChunk {
     #[prost(enumeration = "response_apply_snapshot_chunk::Result", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<response_apply_snapshot_chunk::Result, _>")]
     pub result: i32,
     /// Chunks to refetch and reapply
     #[prost(uint32, repeated, tag = "2")]
@@ -559,10 +574,16 @@ pub mod response_apply_snapshot_chunk {
     #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Result {
         /// Unknown result, abort all snapshot restoration
+        #[serde(rename = "UNKNOWN")]
+        #[serde(alias = "Unknown")]
         Unknown = 0,
         /// Chunk successfully accepted
+        #[serde(rename = "ACCEPT")]
+        #[serde(alias = "Accept")]
         Accept = 1,
         /// Abort all snapshot restoration
+        #[serde(rename = "ABORT")]
+        #[serde(alias = "Abort")]
         Abort = 2,
         /// Retry chunk (combine with refetch and reject)
         Retry = 3,
@@ -728,6 +749,7 @@ pub struct VoteInfo {
 #[proto_message(type_url = "/cometbft.abci.v1beta1.Evidence")]
 pub struct Evidence {
     #[prost(enumeration = "EvidenceType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<EvidenceType, _>")]
     pub r#type: i32,
     /// The offending validator
     #[prost(message, optional, tag = "2")]
@@ -782,8 +804,12 @@ pub struct Snapshot {
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum CheckTxType {
     /// New
+    #[serde(rename = "NEW")]
+    #[serde(alias = "New")]
     New = 0,
     /// Recheck (2nd, 3rd, etc.)
+    #[serde(rename = "RECHECK")]
+    #[serde(alias = "Recheck")]
     Recheck = 1,
 }
 impl CheckTxType {
@@ -812,10 +838,16 @@ impl CheckTxType {
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum EvidenceType {
     /// Unknown
+    #[serde(rename = "UNKNOWN")]
+    #[serde(alias = "Unknown")]
     Unknown = 0,
     /// Duplicate vote
+    #[serde(rename = "DUPLICATE_VOTE")]
+    #[serde(alias = "DuplicateVote")]
     DuplicateVote = 1,
     /// Light client attack
+    #[serde(rename = "LIGHT_CLIENT_ATTACK")]
+    #[serde(alias = "LightClientAttack")]
     LightClientAttack = 2,
 }
 impl EvidenceType {

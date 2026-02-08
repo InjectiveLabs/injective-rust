@@ -90,6 +90,7 @@ pub struct RoleManager {
 pub struct PolicyStatus {
     /// The action code number
     #[prost(enumeration = "Action", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<Action, _>")]
     pub action: i32,
     /// Whether the policy is disabled
     #[prost(bool, tag = "2")]
@@ -123,6 +124,7 @@ pub struct PolicyManagerCapability {
     pub manager: ::prost::alloc::string::String,
     /// The action code number
     #[prost(enumeration = "Action", tag = "2")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<Action, _>")]
     pub action: i32,
     /// Whether the manager can disable the policy
     #[prost(bool, tag = "3")]
@@ -156,32 +158,52 @@ pub struct AddressVoucher {
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum Action {
     /// 0 is reserved for ACTION_UNSPECIFIED
+    #[serde(rename = "UNSPECIFIED")]
+    #[serde(alias = "Unspecified")]
     Unspecified = 0,
     /// 1 is reserved for MINT
+    #[serde(rename = "MINT")]
+    #[serde(alias = "Mint")]
     Mint = 1,
     /// 2 is reserved for RECEIVE
+    #[serde(rename = "RECEIVE")]
+    #[serde(alias = "Receive")]
     Receive = 2,
     /// 4 is reserved for BURN
+    #[serde(rename = "BURN")]
+    #[serde(alias = "Burn")]
     Burn = 4,
     /// 8 is reserved for SEND
+    #[serde(rename = "SEND")]
+    #[serde(alias = "Send")]
     Send = 8,
     /// 16 is reserved for SUPER_BURN
+    #[serde(rename = "SUPER_BURN")]
+    #[serde(alias = "SuperBurn")]
     SuperBurn = 16,
     /// 2^27 is reserved for MODIFY_POLICY_MANAGERS
     ///
     /// 2^27 or 134217728
+    #[serde(rename = "MODIFY_POLICY_MANAGERS")]
+    #[serde(alias = "ModifyPolicyManagers")]
     ModifyPolicyManagers = 134217728,
     /// 2^28 is reserved for MODIFY_CONTRACT_HOOK
     ///
     /// 2^28 or 268435456
+    #[serde(rename = "MODIFY_CONTRACT_HOOK")]
+    #[serde(alias = "ModifyContractHook")]
     ModifyContractHook = 268435456,
     /// 2^29 is reserved for MODIFY_ROLE_PERMISSIONS
     ///
     /// 2^29 or 536870912
+    #[serde(rename = "MODIFY_ROLE_PERMISSIONS")]
+    #[serde(alias = "ModifyRolePermissions")]
     ModifyRolePermissions = 536870912,
     /// 2^30 is reserved for MODIFY_ROLE_MANAGERS
     ///
     /// 2^30 or 1073741824
+    #[serde(rename = "MODIFY_ROLE_MANAGERS")]
+    #[serde(alias = "ModifyRoleManagers")]
     ModifyRoleManagers = 1073741824,
 }
 impl Action {

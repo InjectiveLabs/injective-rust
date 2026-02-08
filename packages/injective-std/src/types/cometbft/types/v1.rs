@@ -383,6 +383,7 @@ pub struct Data {
 #[proto_message(type_url = "/cometbft.types.v1.Vote")]
 pub struct Vote {
     #[prost(enumeration = "SignedMsgType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<SignedMsgType, _>")]
     pub r#type: i32,
     #[prost(int64, tag = "2")]
     #[serde(
@@ -440,6 +441,7 @@ pub struct Commit {
 pub struct CommitSig {
     #[prost(enumeration = "BlockIdFlag", tag = "1")]
     #[serde(alias = "blockID_flag")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<BlockIdFlag, _>")]
     pub block_id_flag: i32,
     #[prost(bytes = "vec", tag = "2")]
     pub validator_address: ::prost::alloc::vec::Vec<u8>,
@@ -474,6 +476,7 @@ pub struct ExtendedCommit {
 pub struct ExtendedCommitSig {
     #[prost(enumeration = "BlockIdFlag", tag = "1")]
     #[serde(alias = "blockID_flag")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<BlockIdFlag, _>")]
     pub block_id_flag: i32,
     #[prost(bytes = "vec", tag = "2")]
     pub validator_address: ::prost::alloc::vec::Vec<u8>,
@@ -493,6 +496,7 @@ pub struct ExtendedCommitSig {
 #[proto_message(type_url = "/cometbft.types.v1.Proposal")]
 pub struct Proposal {
     #[prost(enumeration = "SignedMsgType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<SignedMsgType, _>")]
     pub r#type: i32,
     #[prost(int64, tag = "2")]
     #[serde(
@@ -729,6 +733,7 @@ pub struct CanonicalPartSetHeader {
 pub struct CanonicalProposal {
     /// type alias for byte
     #[prost(enumeration = "SignedMsgType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<SignedMsgType, _>")]
     pub r#type: i32,
     /// canonicalization requires fixed size encoding here
     #[prost(sfixed64, tag = "2")]
@@ -766,6 +771,7 @@ pub struct CanonicalProposal {
 pub struct CanonicalVote {
     /// type alias for byte
     #[prost(enumeration = "SignedMsgType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<SignedMsgType, _>")]
     pub r#type: i32,
     /// canonicalization requires fixed size encoding here
     #[prost(sfixed64, tag = "2")]

@@ -83,6 +83,7 @@ pub struct ContractRegistrationRequest {
     pub granter_address: ::prost::alloc::string::String,
     /// Specifies how the contract will fund its execution
     #[prost(enumeration = "FundingMode", tag = "9")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<FundingMode, _>")]
     pub funding_mode: i32,
 }
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -99,9 +100,13 @@ pub struct BatchStoreCodeProposal {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum FundingMode {
+    #[serde(rename = "Unspecified")]
     Unspecified = 0,
+    #[serde(rename = "SelfFunded")]
     SelfFunded = 1,
+    #[serde(rename = "GrantOnly")]
     GrantOnly = 2,
+    #[serde(rename = "Dual")]
     Dual = 3,
 }
 impl FundingMode {
@@ -200,6 +205,7 @@ pub struct RegisteredContract {
     pub granter_address: ::prost::alloc::string::String,
     /// funding mode
     #[prost(enumeration = "FundingMode", tag = "7")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<FundingMode, _>")]
     pub fund_mode: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -241,6 +247,7 @@ pub struct EventContractRegistered {
     #[prost(string, tag = "8")]
     pub granter_address: ::prost::alloc::string::String,
     #[prost(enumeration = "FundingMode", tag = "9")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<FundingMode, _>")]
     pub funding_mode: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]

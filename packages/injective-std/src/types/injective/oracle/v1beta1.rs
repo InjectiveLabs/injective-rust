@@ -21,6 +21,7 @@ pub struct OracleInfo {
     #[prost(string, tag = "1")]
     pub symbol: ::prost::alloc::string::String,
     #[prost(enumeration = "OracleType", tag = "2")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OracleType, _>")]
     pub oracle_type: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -323,6 +324,7 @@ pub struct BandIbcParams {
 #[proto_message(type_url = "/injective.oracle.v1beta1.SymbolPriceTimestamp")]
 pub struct SymbolPriceTimestamp {
     #[prost(enumeration = "OracleType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OracleType, _>")]
     pub oracle: i32,
     #[prost(string, tag = "2")]
     #[serde(alias = "symbolID")]
@@ -344,6 +346,7 @@ pub struct LastPriceTimestamps {
 #[proto_message(type_url = "/injective.oracle.v1beta1.PriceRecords")]
 pub struct PriceRecords {
     #[prost(enumeration = "OracleType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OracleType, _>")]
     pub oracle: i32,
     #[prost(string, tag = "2")]
     #[serde(alias = "symbolID")]
@@ -501,19 +504,35 @@ pub struct ChainlinkReport {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum OracleType {
+    #[serde(rename = "Unspecified")]
     Unspecified = 0,
+    #[serde(rename = "Band")]
     Band = 1,
+    #[serde(rename = "PriceFeed")]
     PriceFeed = 2,
+    #[serde(rename = "Coinbase")]
     Coinbase = 3,
+    #[serde(rename = "Chainlink")]
     Chainlink = 4,
+    #[serde(rename = "Razor")]
     Razor = 5,
+    #[serde(rename = "Dia")]
     Dia = 6,
+    #[serde(rename = "API3")]
+    #[serde(alias = "Api3")]
     Api3 = 7,
+    #[serde(rename = "Uma")]
     Uma = 8,
+    #[serde(rename = "Pyth")]
     Pyth = 9,
+    #[serde(rename = "BandIBC")]
+    #[serde(alias = "BandIbc")]
     BandIbc = 10,
+    #[serde(rename = "Provider")]
     Provider = 11,
+    #[serde(rename = "Stork")]
     Stork = 12,
+    #[serde(rename = "ChainlinkDataStreams")]
     ChainlinkDataStreams = 13,
 }
 impl OracleType {
@@ -1170,6 +1189,7 @@ pub struct QueryModuleStateResponse {
 )]
 pub struct QueryHistoricalPriceRecordsRequest {
     #[prost(enumeration = "OracleType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OracleType, _>")]
     pub oracle: i32,
     #[prost(string, tag = "2")]
     #[serde(alias = "symbolID")]
@@ -1280,6 +1300,7 @@ pub struct ScalingOptions {
 )]
 pub struct QueryOraclePriceRequest {
     #[prost(enumeration = "OracleType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OracleType, _>")]
     pub oracle_type: i32,
     #[prost(string, tag = "2")]
     pub base: ::prost::alloc::string::String,

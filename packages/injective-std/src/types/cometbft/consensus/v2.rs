@@ -101,6 +101,7 @@ pub struct HasVote {
     #[prost(int32, tag = "2")]
     pub round: i32,
     #[prost(enumeration = "super::super::types::v2::SignedMsgType", tag = "3")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::types::v2::SignedMsgType, _>")]
     pub r#type: i32,
     #[prost(int32, tag = "4")]
     pub index: i32,
@@ -118,6 +119,7 @@ pub struct VoteSetMaj23 {
     #[prost(int32, tag = "2")]
     pub round: i32,
     #[prost(enumeration = "super::super::types::v2::SignedMsgType", tag = "3")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::types::v2::SignedMsgType, _>")]
     pub r#type: i32,
     #[prost(message, optional, tag = "4")]
     #[serde(alias = "blockID")]
@@ -136,6 +138,7 @@ pub struct VoteSetBits {
     #[prost(int32, tag = "2")]
     pub round: i32,
     #[prost(enumeration = "super::super::types::v2::SignedMsgType", tag = "3")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::types::v2::SignedMsgType, _>")]
     pub r#type: i32,
     #[prost(message, optional, tag = "4")]
     #[serde(alias = "blockID")]
