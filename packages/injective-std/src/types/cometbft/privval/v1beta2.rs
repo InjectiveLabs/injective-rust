@@ -1,21 +1,15 @@
 use injective_std_derive::CosmwasmExt;
 /// remotesignererror is returned when the remote signer fails.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.privval.v1beta2.RemoteSignerError")]
 pub struct RemoteSignerError {
     #[prost(int32, tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub code: i32,
     #[prost(string, tag = "2")]
     pub description: ::prost::alloc::string::String,
 }
 /// PubKeyRequest requests the consensus public key from the remote signer.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.privval.v1beta2.PubKeyRequest")]
 pub struct PubKeyRequest {
     #[prost(string, tag = "1")]
@@ -23,8 +17,7 @@ pub struct PubKeyRequest {
     pub chain_id: ::prost::alloc::string::String,
 }
 /// PubKeyResponse is a response message containing the public key.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.privval.v1beta2.PubKeyResponse")]
 pub struct PubKeyResponse {
     #[prost(message, optional, tag = "1")]
@@ -33,8 +26,7 @@ pub struct PubKeyResponse {
     pub error: ::core::option::Option<RemoteSignerError>,
 }
 /// SignVoteRequest is a request to sign a vote
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.privval.v1beta2.SignVoteRequest")]
 pub struct SignVoteRequest {
     #[prost(message, optional, tag = "1")]
@@ -44,8 +36,7 @@ pub struct SignVoteRequest {
     pub chain_id: ::prost::alloc::string::String,
 }
 /// SignedVoteResponse is a response containing a signed vote or an error
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.privval.v1beta2.SignedVoteResponse")]
 pub struct SignedVoteResponse {
     #[prost(message, optional, tag = "1")]
@@ -54,8 +45,7 @@ pub struct SignedVoteResponse {
     pub error: ::core::option::Option<RemoteSignerError>,
 }
 /// SignProposalRequest is a request to sign a proposal
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.privval.v1beta2.SignProposalRequest")]
 pub struct SignProposalRequest {
     #[prost(message, optional, tag = "1")]
@@ -65,8 +55,7 @@ pub struct SignProposalRequest {
     pub chain_id: ::prost::alloc::string::String,
 }
 /// SignedProposalResponse is response containing a signed proposal or an error
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.privval.v1beta2.SignedProposalResponse")]
 pub struct SignedProposalResponse {
     #[prost(message, optional, tag = "1")]
@@ -75,18 +64,15 @@ pub struct SignedProposalResponse {
     pub error: ::core::option::Option<RemoteSignerError>,
 }
 /// PingRequest is a request to confirm that the connection is alive.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.privval.v1beta2.PingRequest")]
 pub struct PingRequest {}
 /// PingResponse is a response to confirm that the connection is alive.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.privval.v1beta2.PingResponse")]
 pub struct PingResponse {}
 /// Message is an abstract message to/from the remote signer.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.privval.v1beta2.Message")]
 pub struct Message {
     /// Sum of all possible messages.
@@ -97,8 +83,7 @@ pub struct Message {
 pub mod message {
     use injective_std_derive::CosmwasmExt;
     /// Sum of all possible messages.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+    #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Sum {
         #[prost(message, tag = "1")]
         PubKeyRequest(super::PubKeyRequest),
@@ -143,12 +128,12 @@ impl Errors {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            Errors::Unknown => "ERRORS_UNKNOWN",
-            Errors::UnexpectedResponse => "ERRORS_UNEXPECTED_RESPONSE",
-            Errors::NoConnection => "ERRORS_NO_CONNECTION",
-            Errors::ConnectionTimeout => "ERRORS_CONNECTION_TIMEOUT",
-            Errors::ReadTimeout => "ERRORS_READ_TIMEOUT",
-            Errors::WriteTimeout => "ERRORS_WRITE_TIMEOUT",
+            Self::Unknown => "ERRORS_UNKNOWN",
+            Self::UnexpectedResponse => "ERRORS_UNEXPECTED_RESPONSE",
+            Self::NoConnection => "ERRORS_NO_CONNECTION",
+            Self::ConnectionTimeout => "ERRORS_CONNECTION_TIMEOUT",
+            Self::ReadTimeout => "ERRORS_READ_TIMEOUT",
+            Self::WriteTimeout => "ERRORS_WRITE_TIMEOUT",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.

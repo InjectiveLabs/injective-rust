@@ -1,6 +1,5 @@
 use injective_std_derive::CosmwasmExt;
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.EventSetVoucher")]
 pub struct EventSetVoucher {
     #[prost(string, tag = "1")]
@@ -9,35 +8,37 @@ pub struct EventSetVoucher {
     pub voucher: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
 /// Params defines the parameters for the permissions module.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.Params")]
 pub struct Params {
+    /// Max amount of gas allowed for contract hook queries
     #[prost(uint64, tag = "1")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
-    pub wasm_hook_query_max_gas: u64,
+    pub contract_hook_max_gas: u64,
+    /// EVM addresses of contracts that will not bypass module-to-module transfers
+    #[prost(string, repeated, tag = "2")]
+    pub enforced_restrictions_contracts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Namespace defines a permissions namespace
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.Namespace")]
 pub struct Namespace {
-    /// tokenfactory denom to which this namespace applies to
+    /// The tokenfactory denom to which this namespace applies to
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
-    /// address of smart contract to apply code-based restrictions
+    /// The address of cosmwasm contract to apply code-based restrictions
     #[prost(string, tag = "2")]
-    pub contract_hook: ::prost::alloc::string::String,
+    pub wasm_hook: ::prost::alloc::string::String,
     /// permissions for each role
     #[prost(message, repeated, tag = "3")]
     pub role_permissions: ::prost::alloc::vec::Vec<Role>,
     /// roles for each actor
     #[prost(message, repeated, tag = "4")]
     pub actor_roles: ::prost::alloc::vec::Vec<ActorRoles>,
-    ///   managers for each role
+    /// managers for each role
     #[prost(message, repeated, tag = "5")]
     pub role_managers: ::prost::alloc::vec::Vec<RoleManager>,
     /// status for each policy
@@ -46,95 +47,94 @@ pub struct Namespace {
     /// capabilities for each manager for each policy
     #[prost(message, repeated, tag = "7")]
     pub policy_manager_capabilities: ::prost::alloc::vec::Vec<PolicyManagerCapability>,
+    /// The address of the EVM contract to map code-based permissions
+    #[prost(string, tag = "8")]
+    pub evm_hook: ::prost::alloc::string::String,
 }
 /// AddressRoles defines roles for an actor
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.ActorRoles")]
 pub struct ActorRoles {
+    /// The actor name
     #[prost(string, tag = "1")]
     pub actor: ::prost::alloc::string::String,
+    /// The roles for the actor
     #[prost(string, repeated, tag = "2")]
     pub roles: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// RoleActors defines actors for a role
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.RoleActors")]
 pub struct RoleActors {
+    /// The role name
     #[prost(string, tag = "1")]
     pub role: ::prost::alloc::string::String,
+    /// List of actor names associated with the role
     #[prost(string, repeated, tag = "2")]
     pub actors: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// RoleManager defines roles for a manager address
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.RoleManager")]
 pub struct RoleManager {
+    /// The manager name
     #[prost(string, tag = "1")]
     pub manager: ::prost::alloc::string::String,
+    /// List of roles associated with the manager
     #[prost(string, repeated, tag = "2")]
     pub roles: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// PolicyStatus defines the status of a policy
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.PolicyStatus")]
 pub struct PolicyStatus {
+    /// The action code number
     #[prost(enumeration = "Action", tag = "1")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<Action, _>")]
     pub action: i32,
+    /// Whether the policy is disabled
     #[prost(bool, tag = "2")]
     pub is_disabled: bool,
+    /// Whether the policy is sealed
     #[prost(bool, tag = "3")]
     pub is_sealed: bool,
 }
 /// Role is only used for storage
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.Role")]
 pub struct Role {
+    /// The role name
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
+    /// The role ID
     #[prost(uint32, tag = "2")]
     #[serde(alias = "roleID")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub role_id: u32,
+    /// Integer representing the bitwise combination of all actions assigned to the
+    /// role
     #[prost(uint32, tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub permissions: u32,
 }
 /// PolicyManagerCapability defines the capabilities of a manager for a policy
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.PolicyManagerCapability")]
 pub struct PolicyManagerCapability {
+    /// The manager name
     #[prost(string, tag = "1")]
     pub manager: ::prost::alloc::string::String,
+    /// The action code number
     #[prost(enumeration = "Action", tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<Action, _>")]
     pub action: i32,
+    /// Whether the manager can disable the policy
     #[prost(bool, tag = "3")]
     pub can_disable: bool,
+    /// Whether the manager can seal the policy
     #[prost(bool, tag = "4")]
     pub can_seal: bool,
 }
 /// used in storage
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.RoleIDs")]
 pub struct RoleIDs {
     #[prost(uint32, repeated, tag = "1")]
@@ -142,12 +142,13 @@ pub struct RoleIDs {
     pub role_ids: ::prost::alloc::vec::Vec<u32>,
 }
 /// AddressVoucher is used to represent a voucher for a specific address
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.AddressVoucher")]
 pub struct AddressVoucher {
+    /// The Injective address that the voucher is for
     #[prost(string, tag = "1")]
     pub address: ::prost::alloc::string::String,
+    /// The voucher amount
     #[prost(message, optional, tag = "2")]
     pub voucher: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
@@ -157,32 +158,52 @@ pub struct AddressVoucher {
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum Action {
     /// 0 is reserved for ACTION_UNSPECIFIED
+    #[serde(rename = "UNSPECIFIED")]
+    #[serde(alias = "Unspecified")]
     Unspecified = 0,
     /// 1 is reserved for MINT
+    #[serde(rename = "MINT")]
+    #[serde(alias = "Mint")]
     Mint = 1,
     /// 2 is reserved for RECEIVE
+    #[serde(rename = "RECEIVE")]
+    #[serde(alias = "Receive")]
     Receive = 2,
     /// 4 is reserved for BURN
+    #[serde(rename = "BURN")]
+    #[serde(alias = "Burn")]
     Burn = 4,
     /// 8 is reserved for SEND
+    #[serde(rename = "SEND")]
+    #[serde(alias = "Send")]
     Send = 8,
     /// 16 is reserved for SUPER_BURN
+    #[serde(rename = "SUPER_BURN")]
+    #[serde(alias = "SuperBurn")]
     SuperBurn = 16,
     /// 2^27 is reserved for MODIFY_POLICY_MANAGERS
     ///
     /// 2^27 or 134217728
+    #[serde(rename = "MODIFY_POLICY_MANAGERS")]
+    #[serde(alias = "ModifyPolicyManagers")]
     ModifyPolicyManagers = 134217728,
     /// 2^28 is reserved for MODIFY_CONTRACT_HOOK
     ///
     /// 2^28 or 268435456
+    #[serde(rename = "MODIFY_CONTRACT_HOOK")]
+    #[serde(alias = "ModifyContractHook")]
     ModifyContractHook = 268435456,
     /// 2^29 is reserved for MODIFY_ROLE_PERMISSIONS
     ///
     /// 2^29 or 536870912
+    #[serde(rename = "MODIFY_ROLE_PERMISSIONS")]
+    #[serde(alias = "ModifyRolePermissions")]
     ModifyRolePermissions = 536870912,
     /// 2^30 is reserved for MODIFY_ROLE_MANAGERS
     ///
     /// 2^30 or 1073741824
+    #[serde(rename = "MODIFY_ROLE_MANAGERS")]
+    #[serde(alias = "ModifyRoleManagers")]
     ModifyRoleManagers = 1073741824,
 }
 impl Action {
@@ -192,16 +213,16 @@ impl Action {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            Action::Unspecified => "UNSPECIFIED",
-            Action::Mint => "MINT",
-            Action::Receive => "RECEIVE",
-            Action::Burn => "BURN",
-            Action::Send => "SEND",
-            Action::SuperBurn => "SUPER_BURN",
-            Action::ModifyPolicyManagers => "MODIFY_POLICY_MANAGERS",
-            Action::ModifyContractHook => "MODIFY_CONTRACT_HOOK",
-            Action::ModifyRolePermissions => "MODIFY_ROLE_PERMISSIONS",
-            Action::ModifyRoleManagers => "MODIFY_ROLE_MANAGERS",
+            Self::Unspecified => "UNSPECIFIED",
+            Self::Mint => "MINT",
+            Self::Receive => "RECEIVE",
+            Self::Burn => "BURN",
+            Self::Send => "SEND",
+            Self::SuperBurn => "SUPER_BURN",
+            Self::ModifyPolicyManagers => "MODIFY_POLICY_MANAGERS",
+            Self::ModifyContractHook => "MODIFY_CONTRACT_HOOK",
+            Self::ModifyRolePermissions => "MODIFY_ROLE_PERMISSIONS",
+            Self::ModifyRoleManagers => "MODIFY_ROLE_MANAGERS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -222,21 +243,21 @@ impl Action {
     }
 }
 /// GenesisState defines the permissions module's genesis state.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.GenesisState")]
 pub struct GenesisState {
-    /// params defines the parameters of the module.
+    /// params defines the parameters of the module
     #[prost(message, optional, tag = "1")]
     pub params: ::core::option::Option<Params>,
+    /// namespaces defines the namespaces of the module
     #[prost(message, repeated, tag = "2")]
     pub namespaces: ::prost::alloc::vec::Vec<Namespace>,
+    /// vouchers defines the vouchers of the module
     #[prost(message, repeated, tag = "3")]
     pub vouchers: ::prost::alloc::vec::Vec<AddressVoucher>,
 }
 /// QueryParamsRequest is the request type for the Query/Params RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryParamsRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/Params",
@@ -244,8 +265,7 @@ pub struct GenesisState {
 )]
 pub struct QueryParamsRequest {}
 /// QueryParamsResponse is the response type for the Query/Params RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryParamsResponse")]
 pub struct QueryParamsResponse {
     /// params defines the parameters of the module.
@@ -254,8 +274,7 @@ pub struct QueryParamsResponse {
 }
 /// QueryNamespaceDenomsRequest is the request type for the Query/NamespaceDenoms
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryNamespaceDenomsRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/NamespaceDenoms",
@@ -264,17 +283,16 @@ pub struct QueryParamsResponse {
 pub struct QueryNamespaceDenomsRequest {}
 /// QueryNamespaceDenomsResponse is the response type for the
 /// Query/NamespaceDenoms RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryNamespaceDenomsResponse")]
 pub struct QueryNamespaceDenomsResponse {
+    /// List of denoms
     #[prost(string, repeated, tag = "1")]
     pub denoms: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// QueryNamespacesRequest is the request type for the Query/Namespaces RPC
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryNamespacesRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/Namespaces",
@@ -283,215 +301,218 @@ pub struct QueryNamespaceDenomsResponse {
 pub struct QueryNamespacesRequest {}
 /// QueryNamespacesResponse is the response type for the Query/Namespaces
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryNamespacesResponse")]
 pub struct QueryNamespacesResponse {
+    /// List of namespaces
     #[prost(message, repeated, tag = "1")]
     pub namespaces: ::prost::alloc::vec::Vec<Namespace>,
 }
 /// QueryNamespaceRequest is the request type for the
 /// Query/Namespace RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryNamespaceRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/Namespace",
     response_type = QueryNamespaceResponse
 )]
 pub struct QueryNamespaceRequest {
+    /// The token denom
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
 }
 /// QueryNamespaceResponse is the response type for the
 /// Query/NamespaceByDenom RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryNamespaceResponse")]
 pub struct QueryNamespaceResponse {
+    /// The namespace details
     #[prost(message, optional, tag = "1")]
     pub namespace: ::core::option::Option<Namespace>,
 }
 /// QueryAddressesByRoleRequest is the request type for the Query/AddressesByRole
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryActorsByRoleRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/ActorsByRole",
     response_type = QueryActorsByRoleResponse
 )]
 pub struct QueryActorsByRoleRequest {
+    /// The token denom
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
+    /// The role to query actors for
     #[prost(string, tag = "2")]
     pub role: ::prost::alloc::string::String,
 }
 /// QueryAddressesByRoleResponse is the response type for the
 /// Query/AddressesByRole RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryActorsByRoleResponse")]
 pub struct QueryActorsByRoleResponse {
+    /// List of actors' Injective addresses
     #[prost(string, repeated, tag = "1")]
     pub actors: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// QueryRolesByActorRequest is the request type for the
 /// Query/RolesByActor RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryRolesByActorRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/RolesByActor",
     response_type = QueryRolesByActorResponse
 )]
 pub struct QueryRolesByActorRequest {
+    /// The token denom
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
+    /// The actor's Injective address
     #[prost(string, tag = "2")]
     pub actor: ::prost::alloc::string::String,
 }
 /// QueryRolesByActorResponse is the response type for the
 /// Query/RolesByActor RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryRolesByActorResponse")]
 pub struct QueryRolesByActorResponse {
+    /// List of roles
     #[prost(string, repeated, tag = "1")]
     pub roles: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// QueryRoleManagersRequest is the request type for the Query/RoleManagers
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryRoleManagersRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/RoleManagers",
     response_type = QueryRoleManagersResponse
 )]
 pub struct QueryRoleManagersRequest {
+    /// The token denom
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
 }
 /// QueryRoleManagersResponse is the response type for the
 /// Query/RoleManagers RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryRoleManagersResponse")]
 pub struct QueryRoleManagersResponse {
+    /// List of role managers
     #[prost(message, repeated, tag = "1")]
     pub role_managers: ::prost::alloc::vec::Vec<RoleManager>,
 }
 /// QueryRoleManagerRequest is the request type for the Query/RoleManager
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryRoleManagerRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/RoleManager",
     response_type = QueryRoleManagerResponse
 )]
 pub struct QueryRoleManagerRequest {
+    /// The token denom
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
+    /// The manager Injective address
     #[prost(string, tag = "2")]
     pub manager: ::prost::alloc::string::String,
 }
 /// QueryRoleManagerResponse is the response type for the
 /// Query/RoleManager RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryRoleManagerResponse")]
 pub struct QueryRoleManagerResponse {
+    /// The role manager details
     #[prost(message, optional, tag = "1")]
     pub role_manager: ::core::option::Option<RoleManager>,
 }
 /// QueryPolicyStatusesRequest is the request type for the Query/PolicyStatuses
 /// RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryPolicyStatusesRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/PolicyStatuses",
     response_type = QueryPolicyStatusesResponse
 )]
 pub struct QueryPolicyStatusesRequest {
+    /// The token denom
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
 }
 /// QueryRoleManagerResponse is the response type for the
 /// Query/RoleManager RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryPolicyStatusesResponse")]
 pub struct QueryPolicyStatusesResponse {
+    /// List of policy statuses
     #[prost(message, repeated, tag = "1")]
     pub policy_statuses: ::prost::alloc::vec::Vec<PolicyStatus>,
 }
 /// QueryPolicyManagerCapabilitiesRequest is the request type for the
 /// Query/PolicyManagerCapabilities RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryPolicyManagerCapabilitiesRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/PolicyManagerCapabilities",
     response_type = QueryPolicyManagerCapabilitiesResponse
 )]
 pub struct QueryPolicyManagerCapabilitiesRequest {
+    /// The token denom
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
 }
 /// QueryPolicyManagerCapabilitiesResponse is the response type for the
 /// Query/PolicyManagerCapabilities RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryPolicyManagerCapabilitiesResponse")]
 pub struct QueryPolicyManagerCapabilitiesResponse {
+    /// List of policy manager capabilities
     #[prost(message, repeated, tag = "1")]
     pub policy_manager_capabilities: ::prost::alloc::vec::Vec<PolicyManagerCapability>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryVouchersRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/Vouchers",
     response_type = QueryVouchersResponse
 )]
 pub struct QueryVouchersRequest {
+    /// The token denom
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryVouchersResponse")]
 pub struct QueryVouchersResponse {
+    /// List of vouchers
     #[prost(message, repeated, tag = "1")]
     pub vouchers: ::prost::alloc::vec::Vec<AddressVoucher>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryVoucherRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/Voucher",
     response_type = QueryVoucherResponse
 )]
 pub struct QueryVoucherRequest {
+    /// The token denom
     #[prost(string, tag = "1")]
     pub denom: ::prost::alloc::string::String,
+    /// The Injective address of the receiver
     #[prost(string, tag = "2")]
     pub address: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryVoucherResponse")]
 pub struct QueryVoucherResponse {
+    /// The voucher amount
     #[prost(message, optional, tag = "1")]
     pub voucher: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
 /// QueryModuleStateRequest is the request type for the
 /// Query/PermissionsModuleState RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryModuleStateRequest")]
 #[proto_query(
     path = "/injective.permissions.v1beta1.Query/PermissionsModuleState",
@@ -500,15 +521,14 @@ pub struct QueryVoucherResponse {
 pub struct QueryModuleStateRequest {}
 /// QueryModuleStateResponse is the response type for the
 /// Query/PermissionsModuleState RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryModuleStateResponse")]
 pub struct QueryModuleStateResponse {
+    /// The module state
     #[prost(message, optional, tag = "1")]
     pub state: ::core::option::Option<GenesisState>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.MsgUpdateParams")]
 pub struct MsgUpdateParams {
     /// authority is the address of the governance account.
@@ -520,39 +540,38 @@ pub struct MsgUpdateParams {
     #[prost(message, optional, tag = "2")]
     pub params: ::core::option::Option<Params>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.MsgUpdateParamsResponse")]
 pub struct MsgUpdateParamsResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.MsgCreateNamespace")]
 pub struct MsgCreateNamespace {
+    /// The sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
+    /// The namespace information
     #[prost(message, optional, tag = "2")]
     pub namespace: ::core::option::Option<Namespace>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.MsgCreateNamespaceResponse")]
 pub struct MsgCreateNamespaceResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.MsgUpdateNamespace")]
 pub struct MsgUpdateNamespace {
+    /// The sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
     /// denom whose namespace updates are to be applied
     #[prost(string, tag = "2")]
     pub denom: ::prost::alloc::string::String,
-    /// address of smart contract to apply code-based restrictions
+    /// address of wasm smart contract to apply code-based restrictions
     #[prost(message, optional, tag = "3")]
-    pub contract_hook: ::core::option::Option<msg_update_namespace::SetContractHook>,
+    pub wasm_hook: ::core::option::Option<msg_update_namespace::SetContractHook>,
     /// role permissions to update
     #[prost(message, repeated, tag = "4")]
     pub role_permissions: ::prost::alloc::vec::Vec<Role>,
-    ///   role managers to update
+    /// role managers to update
     #[prost(message, repeated, tag = "5")]
     pub role_managers: ::prost::alloc::vec::Vec<RoleManager>,
     /// policy statuses to update
@@ -561,53 +580,53 @@ pub struct MsgUpdateNamespace {
     /// policy manager capabilities to update
     #[prost(message, repeated, tag = "7")]
     pub policy_manager_capabilities: ::prost::alloc::vec::Vec<PolicyManagerCapability>,
+    /// address of EVM smart contract to apply code-based restrictions
+    #[prost(message, optional, tag = "8")]
+    pub evm_hook: ::core::option::Option<msg_update_namespace::SetContractHook>,
 }
 /// Nested message and enum types in `MsgUpdateNamespace`.
 pub mod msg_update_namespace {
     use injective_std_derive::CosmwasmExt;
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+    #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
     #[proto_message(type_url = "/injective.permissions.v1beta1.MsgUpdateNamespace.SetContractHook")]
     pub struct SetContractHook {
         #[prost(string, tag = "1")]
         pub new_value: ::prost::alloc::string::String,
     }
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.MsgUpdateNamespaceResponse")]
 pub struct MsgUpdateNamespaceResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.MsgUpdateActorRoles")]
 pub struct MsgUpdateActorRoles {
+    /// The sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
-    /// namespace denom to which this updates are applied
+    /// The namespace denom to which this updates are applied
     #[prost(string, tag = "2")]
     pub denom: ::prost::alloc::string::String,
-    /// roles to add for given actors
+    /// The roles to add for given actors
     #[prost(message, repeated, tag = "3")]
     pub role_actors_to_add: ::prost::alloc::vec::Vec<RoleActors>,
-    /// roles to revoke from given actors
+    /// The roles to revoke from given actors
     #[prost(message, repeated, tag = "5")]
     pub role_actors_to_revoke: ::prost::alloc::vec::Vec<RoleActors>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.MsgUpdateActorRolesResponse")]
 pub struct MsgUpdateActorRolesResponse {}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.MsgClaimVoucher")]
 pub struct MsgClaimVoucher {
+    /// The sender's Injective address
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
+    /// The token denom of the voucher to claim
     #[prost(string, tag = "2")]
     pub denom: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.MsgClaimVoucherResponse")]
 pub struct MsgClaimVoucherResponse {}
 pub struct PermissionsQuerier<'a, Q: cosmwasm_std::CustomQuery> {

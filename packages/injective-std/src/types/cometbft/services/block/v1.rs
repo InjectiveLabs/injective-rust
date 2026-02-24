@@ -1,7 +1,6 @@
 use injective_std_derive::CosmwasmExt;
 /// GetByHeightRequest is a request for a block at the specified height.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.services.block.v1.GetByHeightRequest")]
 pub struct GetByHeightRequest {
     /// The height of the block requested.
@@ -13,7 +12,6 @@ pub struct GetByHeightRequest {
     pub height: i64,
 }
 /// GetByHeightResponse contains the block ID and the block at the specified height.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.services.block.v1.GetByHeightResponse")]
 pub struct GetByHeightResponse {
@@ -24,13 +22,11 @@ pub struct GetByHeightResponse {
     pub block: ::core::option::Option<super::super::super::types::v1::Block>,
 }
 /// GetLatestHeightRequest - empty message since no parameter is required
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.services.block.v1.GetLatestHeightRequest")]
 pub struct GetLatestHeightRequest {}
 /// GetLatestHeightResponse provides the height of the latest committed block.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.services.block.v1.GetLatestHeightResponse")]
 pub struct GetLatestHeightResponse {
     /// The height of the latest committed block. Will be 0 if no data has been

@@ -1,8 +1,7 @@
 use injective_std_derive::CosmwasmExt;
 /// ConsensusParams contains consensus critical parameters that determine the
 /// validity of blocks.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta2.ConsensusParams")]
 pub struct ConsensusParams {
     #[prost(message, optional, tag = "1")]
@@ -15,8 +14,7 @@ pub struct ConsensusParams {
     pub version: ::core::option::Option<super::v1beta1::VersionParams>,
 }
 /// BlockParams contains limits on the block size.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.types.v1beta2.BlockParams")]
 pub struct BlockParams {
     /// Max block size, in bytes.

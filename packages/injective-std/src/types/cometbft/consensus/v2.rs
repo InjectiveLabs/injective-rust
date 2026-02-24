@@ -1,8 +1,7 @@
 use injective_std_derive::CosmwasmExt;
 /// NewRoundStep is sent for every step taken in the ConsensusState.
 /// For every height/round/step transition
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.NewRoundStep")]
 pub struct NewRoundStep {
     #[prost(int64, tag = "1")]
@@ -12,16 +11,8 @@ pub struct NewRoundStep {
     )]
     pub height: i64,
     #[prost(int32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(uint32, tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub step: u32,
     #[prost(int64, tag = "4")]
     #[serde(
@@ -30,17 +21,12 @@ pub struct NewRoundStep {
     )]
     pub seconds_since_start_time: i64,
     #[prost(int32, tag = "5")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub last_commit_round: i32,
 }
 /// NewValidBlock is sent when a validator observes a valid block B in some round r,
 /// i.e., there is a Proposal for block B and 2/3+ prevotes for the block B in the round r.
 /// In case the block is also committed, then IsCommit flag is set to true.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.NewValidBlock")]
 pub struct NewValidBlock {
     #[prost(int64, tag = "1")]
@@ -50,10 +36,6 @@ pub struct NewValidBlock {
     )]
     pub height: i64,
     #[prost(int32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(message, optional, tag = "3")]
     pub block_part_set_header: ::core::option::Option<super::super::types::v2::PartSetHeader>,
@@ -63,16 +45,14 @@ pub struct NewValidBlock {
     pub is_commit: bool,
 }
 /// Proposal is sent when a new block is proposed.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.Proposal")]
 pub struct Proposal {
     #[prost(message, optional, tag = "1")]
     pub proposal: ::core::option::Option<super::super::types::v2::Proposal>,
 }
 /// ProposalPOL is sent when a previous proposal is re-proposed.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.ProposalPOL")]
 pub struct ProposalPol {
     #[prost(int64, tag = "1")]
@@ -82,17 +62,12 @@ pub struct ProposalPol {
     )]
     pub height: i64,
     #[prost(int32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub proposal_pol_round: i32,
     #[prost(message, optional, tag = "3")]
     pub proposal_pol: ::core::option::Option<super::super::libs::bits::v1::BitArray>,
 }
 /// BlockPart is sent when gossipping a piece of the proposed block.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.BlockPart")]
 pub struct BlockPart {
     #[prost(int64, tag = "1")]
@@ -102,25 +77,19 @@ pub struct BlockPart {
     )]
     pub height: i64,
     #[prost(int32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(message, optional, tag = "3")]
     pub part: ::core::option::Option<super::super::types::v2::Part>,
 }
 /// Vote is sent when voting for a proposal (or lack thereof).
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.Vote")]
 pub struct Vote {
     #[prost(message, optional, tag = "1")]
     pub vote: ::core::option::Option<super::super::types::v2::Vote>,
 }
 /// HasVote is sent to indicate that a particular vote has been received.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.HasVote")]
 pub struct HasVote {
     #[prost(int64, tag = "1")]
@@ -130,27 +99,15 @@ pub struct HasVote {
     )]
     pub height: i64,
     #[prost(int32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(enumeration = "super::super::types::v2::SignedMsgType", tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::types::v2::SignedMsgType, _>")]
     pub r#type: i32,
     #[prost(int32, tag = "4")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub index: i32,
 }
 /// VoteSetMaj23 is sent to indicate that a given BlockID has seen +2/3 votes.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.VoteSetMaj23")]
 pub struct VoteSetMaj23 {
     #[prost(int64, tag = "1")]
@@ -160,24 +117,16 @@ pub struct VoteSetMaj23 {
     )]
     pub height: i64,
     #[prost(int32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(enumeration = "super::super::types::v2::SignedMsgType", tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::types::v2::SignedMsgType, _>")]
     pub r#type: i32,
     #[prost(message, optional, tag = "4")]
     #[serde(alias = "blockID")]
     pub block_id: ::core::option::Option<super::super::types::v2::BlockId>,
 }
 /// VoteSetBits is sent to communicate the bit-array of votes seen for the BlockID.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.VoteSetBits")]
 pub struct VoteSetBits {
     #[prost(int64, tag = "1")]
@@ -187,16 +136,9 @@ pub struct VoteSetBits {
     )]
     pub height: i64,
     #[prost(int32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(enumeration = "super::super::types::v2::SignedMsgType", tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<super::super::types::v2::SignedMsgType, _>")]
     pub r#type: i32,
     #[prost(message, optional, tag = "4")]
     #[serde(alias = "blockID")]
@@ -205,8 +147,7 @@ pub struct VoteSetBits {
     pub votes: ::core::option::Option<super::super::libs::bits::v1::BitArray>,
 }
 /// HasProposalBlockPart is sent to indicate that a particular proposal block part has been received.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.HasProposalBlockPart")]
 pub struct HasProposalBlockPart {
     #[prost(int64, tag = "1")]
@@ -216,21 +157,12 @@ pub struct HasProposalBlockPart {
     )]
     pub height: i64,
     #[prost(int32, tag = "2")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(int32, tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub index: i32,
 }
 /// Message is an abstract consensus message.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.Message")]
 pub struct Message {
     /// Sum of all possible messages.
@@ -241,8 +173,7 @@ pub struct Message {
 pub mod message {
     use injective_std_derive::CosmwasmExt;
     /// Sum of all possible messages.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+    #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Sum {
         #[prost(message, tag = "1")]
         NewRoundStep(super::NewRoundStep),
@@ -267,8 +198,7 @@ pub mod message {
     }
 }
 /// MsgInfo are msgs from the reactor which may update the state
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.MsgInfo")]
 pub struct MsgInfo {
     #[prost(message, optional, tag = "1")]
@@ -280,8 +210,7 @@ pub struct MsgInfo {
     pub receive_time: ::core::option::Option<crate::shim::Timestamp>,
 }
 /// TimeoutInfo internally generated messages which may update the state
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.TimeoutInfo")]
 pub struct TimeoutInfo {
     #[prost(message, optional, tag = "1")]
@@ -293,22 +222,13 @@ pub struct TimeoutInfo {
     )]
     pub height: i64,
     #[prost(int32, tag = "3")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub round: i32,
     #[prost(uint32, tag = "4")]
-    #[serde(
-        serialize_with = "crate::serde::as_str::serialize",
-        deserialize_with = "crate::serde::as_str::deserialize"
-    )]
     pub step: u32,
 }
 /// EndHeight marks the end of the given height inside WAL.
 /// @internal used by scripts/wal2json util.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.EndHeight")]
 pub struct EndHeight {
     #[prost(int64, tag = "1")]
@@ -319,8 +239,7 @@ pub struct EndHeight {
     pub height: i64,
 }
 /// WALMessage describes a consensus WAL (Write Ahead Log) entry.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.WALMessage")]
 pub struct WalMessage {
     /// Sum of all possible messages.
@@ -331,8 +250,7 @@ pub struct WalMessage {
 pub mod wal_message {
     use injective_std_derive::CosmwasmExt;
     /// Sum of all possible messages.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+    #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Sum {
         #[prost(message, tag = "1")]
         EventDataRoundState(super::super::super::types::v2::EventDataRoundState),
@@ -345,8 +263,7 @@ pub mod wal_message {
     }
 }
 /// TimedWALMessage wraps WALMessage and adds Time for debugging purposes.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.consensus.v2.TimedWALMessage")]
 pub struct TimedWalMessage {
     #[prost(message, optional, tag = "1")]

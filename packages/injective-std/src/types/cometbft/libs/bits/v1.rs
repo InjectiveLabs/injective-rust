@@ -1,7 +1,6 @@
 use injective_std_derive::CosmwasmExt;
 /// BitArray is an array of bits.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.libs.bits.v1.BitArray")]
 pub struct BitArray {
     #[prost(int64, tag = "1")]

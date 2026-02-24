@@ -2,7 +2,6 @@ use injective_std_derive::CosmwasmExt;
 /// ABCIResponses retains the responses
 /// of the various ABCI calls during block processing.
 /// It is persisted to disk for each height before calling Commit.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.state.v1beta2.ABCIResponses")]
 pub struct AbciResponses {
@@ -14,8 +13,7 @@ pub struct AbciResponses {
     pub begin_block: ::core::option::Option<super::super::abci::v1beta2::ResponseBeginBlock>,
 }
 /// ConsensusParamsInfo represents the latest consensus params, or the last height it changed
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.state.v1beta2.ConsensusParamsInfo")]
 pub struct ConsensusParamsInfo {
     #[prost(message, optional, tag = "1")]
@@ -28,7 +26,6 @@ pub struct ConsensusParamsInfo {
     pub last_height_changed: i64,
 }
 /// ABCIResponsesInfo retains the responses of the ABCI calls during block processing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.state.v1beta2.ABCIResponsesInfo")]
 pub struct AbciResponsesInfo {
@@ -42,7 +39,6 @@ pub struct AbciResponsesInfo {
     pub height: i64,
 }
 /// State represents the state of the blockchain.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.state.v1beta2.State")]
 pub struct State {

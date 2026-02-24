@@ -3,13 +3,13 @@ use std::path::Path;
 
 use heck::ToSnakeCase;
 use heck::ToUpperCamelCase;
-use proc_macro2::{Group, TokenStream as TokenStream2, TokenTree};
+use proc_macro2::{Group, Span, TokenStream as TokenStream2, TokenTree};
 use prost_types::{DescriptorProto, EnumDescriptorProto, FileDescriptorSet, ServiceDescriptorProto};
-use quote::{format_ident, quote};
+use quote::{format_ident, quote, ToTokens};
 use regex::Regex;
 use syn::ItemEnum;
 use syn::ItemMod;
-use syn::{parse_quote, Attribute, Fields, Ident, Item, ItemStruct, Type};
+use syn::{parse_quote, Attribute, Fields, Ident, Item, ItemStruct, Lit, LitStr, Meta, NestedMeta, Type};
 
 /// Regex substitutions to apply to the prost-generated output
 pub const REPLACEMENTS: &[(&str, &str)] = &[
@@ -126,10 +126,32 @@ pub fn append_attrs_struct(src: &Path, s: &ItemStruct, descriptor: &FileDescript
 pub fn append_attrs_enum(src: &Path, e: &ItemEnum, descriptor: &FileDescriptorSet) -> ItemEnum {
     let mut e = e.clone();
     let deprecated = get_deprecation(src, &e.ident, descriptor);
+    let enum_value_renames = get_enum_value_renames(src, &e.ident, descriptor);
 
     e.attrs.append(&mut vec![
         syn::parse_quote! { #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)] },
     ]);
+
+    if let Some(enum_value_renames) = enum_value_renames {
+        for variant in e.variants.iter_mut() {
+            let rust_name = variant.ident.to_string();
+            if let Some(proto_name) = enum_value_renames.get(&rust_name) {
+                let rename_lit = LitStr::new(proto_name, Span::call_site());
+                let rename_attr: syn::Attribute = parse_quote! {
+                    #[serde(rename = #rename_lit)]
+                };
+                variant.attrs.append(&mut vec![rename_attr]);
+
+                if proto_name != &rust_name {
+                    let alias_lit = LitStr::new(&rust_name, Span::call_site());
+                    let alias_attr: syn::Attribute = parse_quote! {
+                        #[serde(alias = #alias_lit)]
+                    };
+                    variant.attrs.append(&mut vec![alias_attr]);
+                }
+            }
+        }
+    }
 
     if deprecated {
         e.attrs.append(&mut vec![syn::parse_quote! { #[deprecated] }]);
@@ -144,20 +166,8 @@ pub fn allow_serde_int_as_str(s: ItemStruct) -> ItemStruct {
         .clone()
         .into_iter()
         .map(|mut field| {
-            let int_types = vec![
-                parse_quote!(i8),
-                parse_quote!(i16),
-                parse_quote!(i32),
-                parse_quote!(i64),
-                parse_quote!(i128),
-                parse_quote!(isize),
-                parse_quote!(u8),
-                parse_quote!(u16),
-                parse_quote!(u32),
-                parse_quote!(u64),
-                parse_quote!(u128),
-                parse_quote!(usize),
-            ];
+            // Only apply string serialization to 64-bit (or larger) integers.
+            let int_types = vec![parse_quote!(i64), parse_quote!(i128), parse_quote!(u64), parse_quote!(u128)];
 
             if int_types.contains(&field.ty) {
                 let from_str: syn::Attribute = parse_quote! {
@@ -171,6 +181,33 @@ pub fn allow_serde_int_as_str(s: ItemStruct) -> ItemStruct {
             } else {
                 field
             }
+        })
+        .collect::<Vec<syn::Field>>();
+
+    let fields_named: syn::FieldsNamed = parse_quote! {
+        { #(#fields_vec,)* }
+    };
+    let fields = syn::Fields::Named(fields_named);
+
+    syn::ItemStruct { fields, ..s }
+}
+
+pub fn allow_serde_enum_str_or_int(s: ItemStruct) -> ItemStruct {
+    let fields_vec = s
+        .fields
+        .clone()
+        .into_iter()
+        .map(|mut field| {
+            if let Some(enum_path) = prost_enum_path(&field) {
+                let enum_path_str = enum_path.to_token_stream().to_string().replace(' ', "");
+                let enum_deser_path = format!("crate::serde::enum_i32::deserialize::<{}, _>", enum_path_str);
+                let enum_deser_lit = LitStr::new(&enum_deser_path, Span::call_site());
+                let enum_deserializer: syn::Attribute = parse_quote! {
+                    #[serde(deserialize_with = #enum_deser_lit)]
+                };
+                field.attrs.append(&mut vec![enum_deserializer]);
+            }
+            field
         })
         .collect::<Vec<syn::Field>>();
 
@@ -223,6 +260,32 @@ pub fn serde_alias_id_with_uppercased(s: ItemStruct) -> ItemStruct {
 
     syn::ItemStruct { fields, ..s }
 }
+
+pub fn serde_alias_is_perpetual(s: ItemStruct) -> ItemStruct {
+    let fields_vec = s
+        .fields
+        .clone()
+        .into_iter()
+        .map(|mut field| {
+            if let Some(ident) = &field.ident {
+                if ident == "is_perpetual" {
+                    let serde_alias: syn::Attribute = parse_quote! {
+                        #[serde(alias = "isPerpetual")]
+                    };
+                    field.attrs.append(&mut vec![serde_alias]);
+                }
+            }
+            field
+        })
+        .collect::<Vec<syn::Field>>();
+
+    let fields_named: syn::FieldsNamed = parse_quote! {
+        { #(#fields_vec,)* }
+    };
+    let fields = syn::Fields::Named(fields_named);
+
+    syn::ItemStruct { fields, ..s }
+}
 // ====== helpers ======
 
 fn get_query_attr(src: &Path, ident: &Ident, query_services: &HashMap<String, ServiceDescriptorProto>) -> Option<Attribute> {
@@ -248,20 +311,14 @@ fn get_type_url(src: &Path, ident: &Ident, descriptor: &FileDescriptorSet) -> St
     let type_path = src.file_stem().unwrap().to_str().unwrap();
     let init_path = "";
 
+    let target = ident.to_string();
     let name: Option<String> = descriptor
         .file
         .clone()
         .into_iter()
         .filter(|f| f.package.to_owned().unwrap() == type_path)
-        .flat_map(|f| {
-            let target = ident.to_string();
-            vec![
-                extract_type_path_from_enum(&target, &f.enum_type, init_path),
-                extract_type_path_from_descriptor(&target, &f.message_type, init_path),
-            ]
-        })
-        .filter(|r| r.is_some())
-        .collect();
+        // Only message types should be used for struct type URLs.
+        .find_map(|f| extract_type_path_from_descriptor(&target, &f.message_type, init_path));
 
     format!("/{}.{}", type_path, name.unwrap())
 }
@@ -330,6 +387,53 @@ fn extract_type_path_from_enum(target: &str, enum_type: &[EnumDescriptorProto], 
         .map(|e| append_type_path(path, &e.name.to_owned().unwrap()))
 }
 
+fn get_enum_value_renames(src: &Path, ident: &Ident, descriptor: &FileDescriptorSet) -> Option<HashMap<String, String>> {
+    let type_path = src.file_stem().unwrap().to_str().unwrap();
+    let target = ident.to_string();
+
+    let enum_desc: Option<EnumDescriptorProto> = descriptor
+        .file
+        .clone()
+        .into_iter()
+        .filter(|f| f.package.to_owned().unwrap() == type_path)
+        .flat_map(|f| {
+            vec![
+                extract_enum_descriptor(&target, &f.enum_type),
+                extract_enum_descriptor_from_descriptor(&target, &f.message_type),
+            ]
+        })
+        .find(|r| r.is_some())
+        .flatten();
+
+    let enum_desc = enum_desc?;
+    let mut renames = HashMap::new();
+
+    for value in enum_desc.value {
+        let proto_name = value.name.unwrap();
+        let rust_name = proto_name.to_upper_camel_case();
+        renames.insert(rust_name, proto_name);
+    }
+
+    Some(renames)
+}
+
+fn extract_enum_descriptor(target: &str, enum_type: &[EnumDescriptorProto]) -> Option<EnumDescriptorProto> {
+    enum_type
+        .iter()
+        .find(|e| e.name.to_owned().unwrap().to_upper_camel_case() == target)
+        .cloned()
+}
+
+fn extract_enum_descriptor_from_descriptor(target: &str, message_type: &[DescriptorProto]) -> Option<EnumDescriptorProto> {
+    message_type.iter().find_map(|descriptor| {
+        if let Some(found) = extract_enum_descriptor(target, &descriptor.enum_type) {
+            Some(found)
+        } else {
+            extract_enum_descriptor_from_descriptor(target, &descriptor.nested_type)
+        }
+    })
+}
+
 pub fn extract_query_services(descriptor: &FileDescriptorSet) -> HashMap<String, ServiceDescriptorProto> {
     descriptor
         .clone()
@@ -353,6 +457,35 @@ fn append_type_path(path: &str, name: &str) -> String {
     } else {
         format!("{}.{}", path, name)
     }
+}
+
+fn prost_enum_path(field: &syn::Field) -> Option<syn::Path> {
+    for attr in &field.attrs {
+        if !attr.path.is_ident("prost") {
+            continue;
+        }
+
+        let meta = match attr.parse_meta() {
+            Ok(meta) => meta,
+            Err(_) => continue,
+        };
+
+        if let Meta::List(list) = meta {
+            for nested in list.nested {
+                if let NestedMeta::Meta(Meta::NameValue(nv)) = nested {
+                    if nv.path.is_ident("enumeration") {
+                        if let Lit::Str(lit) = nv.lit {
+                            if let Ok(path) = syn::parse_str::<syn::Path>(&lit.value()) {
+                                return Some(path);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    None
 }
 
 pub fn append_querier(items: Vec<Item>, src: &Path, nested_mod: bool, descriptor: &FileDescriptorSet) -> Vec<Item> {
@@ -625,6 +758,30 @@ mod tests {
                 pub denom: ::prost::alloc::string::String,
                 #[serde(alias = "poolID")]
                 pub pool_id: u64,
+            }
+        };
+
+        assert_ast_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_alias_is_perpetual_with_camel_case() {
+        let item_struct: ItemStruct = syn::parse_quote! {
+            #[derive(PartialEq, Eq, Debug)]
+            struct DerivativeMarket {
+                is_perpetual: bool,
+                market_id: String,
+            }
+        };
+
+        let result = serde_alias_is_perpetual(item_struct);
+
+        let expected: ItemStruct = syn::parse_quote! {
+            #[derive(PartialEq, Eq, Debug)]
+            struct DerivativeMarket {
+                #[serde(alias = "isPerpetual")]
+                is_perpetual: bool,
+                market_id: String,
             }
         };
 

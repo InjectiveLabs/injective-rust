@@ -137,6 +137,8 @@ fn transform_items(items: Vec<Item>, src: &Path, ancestors: &[String], descripto
                 let s = transformers::add_derive_eq_struct(&s);
                 let s = transformers::append_attrs_struct(src, &s, descriptor);
                 let s = transformers::serde_alias_id_with_uppercased(s);
+                let s = transformers::serde_alias_is_perpetual(s);
+                let s = transformers::allow_serde_enum_str_or_int(s);
                 transformers::allow_serde_int_as_str(s)
             }),
 

@@ -1,7 +1,6 @@
 use injective_std_derive::CosmwasmExt;
 /// Proof is a Merkle proof.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.crypto.v1.Proof")]
 pub struct Proof {
     #[prost(int64, tag = "1")]
@@ -22,8 +21,7 @@ pub struct Proof {
     pub aunts: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// ValueOp is a Merkle proof for a single key.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.crypto.v1.ValueOp")]
 pub struct ValueOp {
     /// Encoded in ProofOp.Key.
@@ -34,8 +32,7 @@ pub struct ValueOp {
     pub proof: ::core::option::Option<Proof>,
 }
 /// DominoOp always returns the given output.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.crypto.v1.DominoOp")]
 pub struct DominoOp {
     #[prost(string, tag = "1")]
@@ -48,8 +45,7 @@ pub struct DominoOp {
 /// ProofOp defines an operation used for calculating Merkle root
 /// The data could be arbitrary format, providing necessary data
 /// for example neighbouring node hash
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.crypto.v1.ProofOp")]
 pub struct ProofOp {
     #[prost(string, tag = "1")]
@@ -60,7 +56,6 @@ pub struct ProofOp {
     pub data: ::prost::alloc::vec::Vec<u8>,
 }
 /// ProofOps is Merkle proof defined by the list of ProofOps
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.crypto.v1.ProofOps")]
 pub struct ProofOps {
@@ -68,8 +63,7 @@ pub struct ProofOps {
     pub ops: ::prost::alloc::vec::Vec<ProofOp>,
 }
 /// PublicKey is a ED25519 or a secp256k1 public key.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cometbft.crypto.v1.PublicKey")]
 pub struct PublicKey {
     /// The type of key.
@@ -80,8 +74,7 @@ pub struct PublicKey {
 pub mod public_key {
     use injective_std_derive::CosmwasmExt;
     /// The type of key.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, Eq, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+    #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
     pub enum Sum {
         #[prost(bytes, tag = "1")]
         Ed25519(::prost::alloc::vec::Vec<u8>),
