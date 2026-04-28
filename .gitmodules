@@ -1,16 +1,16 @@
 [submodule "dependencies/cosmos-sdk"]
 	path = dependencies/cosmos-sdk
 	url = https://github.com/InjectiveLabs/cosmos-sdk.git
-	branch = v0.50.13-evm-comet1-inj.3
+	branch = v0.50.14-inj.9
 [submodule "dependencies/injective-core"]
 	path = dependencies/injective-core
 	url = https://github.com/InjectiveLabs/injective-core.git
-	branch = v1.16.3
+	branch = v1.19.0
 [submodule "dependencies/wasmd"]
 	path = dependencies/wasmd
 	url = https://github.com/InjectiveLabs/wasmd.git
-	branch = v0.53.3-evm-comet1-inj
+	branch = v0.53.3-inj.3
 [submodule "dependencies/cometbft"]
 	path = dependencies/cometbft
-	url = https://github.com/cometbft/cometbft
-	branch = v1.0.1-inj.2
+	url = https://github.com/InjectiveLabs/cometbft.git
+	branch = v1.0.1-inj.7
