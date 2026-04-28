@@ -209,33 +209,20 @@ impl<'a, Q: cosmwasm_std::CustomQuery> FeegrantQuerier<'a, Q> {
         granter: ::prost::alloc::string::String,
         grantee: ::prost::alloc::string::String,
     ) -> Result<QueryAllowanceResponse, cosmwasm_std::StdError> {
-        let request = QueryAllowanceRequest { granter, grantee };
-        self.querier.query::<QueryAllowanceResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.feegrant.v1beta1.Query/Allowance".to_string(),
-            data: request.into(),
-        })
+        QueryAllowanceRequest { granter, grantee }.query(self.querier)
     }
     pub fn allowances(
         &self,
         grantee: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryAllowancesResponse, cosmwasm_std::StdError> {
-        let request = QueryAllowancesRequest { grantee, pagination };
-        self.querier.query::<QueryAllowancesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.feegrant.v1beta1.Query/Allowances".to_string(),
-            data: request.into(),
-        })
+        QueryAllowancesRequest { grantee, pagination }.query(self.querier)
     }
     pub fn allowances_by_granter(
         &self,
         granter: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryAllowancesByGranterResponse, cosmwasm_std::StdError> {
-        let request = QueryAllowancesByGranterRequest { granter, pagination };
-        self.querier
-            .query::<QueryAllowancesByGranterResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmos.feegrant.v1beta1.Query/AllowancesByGranter".to_string(),
-                data: request.into(),
-            })
+        QueryAllowancesByGranterRequest { granter, pagination }.query(self.querier)
     }
 }

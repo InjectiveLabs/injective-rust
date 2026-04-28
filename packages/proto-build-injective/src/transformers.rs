@@ -568,6 +568,17 @@ pub fn append_querier(items: Vec<Item>, src: &Path, nested_mod: bool, descriptor
 
     let query_services = extract_query_services(descriptor);
     let query_fns = query_services.get(package).map(|service| {
+        let request_method_counts = service.method.iter().fold(HashMap::<String, usize>::new(), |mut counts, method_desc| {
+            let request_type = method_desc
+                .input_type
+                .as_deref()
+                .and_then(|input_type| input_type.split('.').last())
+                .unwrap_or_default()
+                .to_string();
+            *counts.entry(request_type).or_default() += 1;
+            counts
+        });
+
         service
             .method
             .iter()
@@ -581,20 +592,12 @@ pub fn append_querier(items: Vec<Item>, src: &Path, nested_mod: bool, descriptor
 
                 let method_desc = method_desc.clone();
                 let method_name = method_desc.name.clone().unwrap();
-                let path = format!("/{}.Query/{}", package, method_name);
-
                 let name = format_ident!("{}", method_name.as_str().to_snake_case());
-                let req_type = format_ident!(
-                    "{}",
-                    method_desc
-                        .input_type
-                        .unwrap()
-                        .split('.')
-                        .last()
-                        .unwrap()
-                        .to_string()
-                        .to_upper_camel_case()
-                );
+                let req_type_name = method_desc.input_type.unwrap().split('.').last().unwrap().to_string();
+                if request_method_counts.get(&req_type_name).copied().unwrap_or_default() > 1 {
+                    return quote! {};
+                }
+                let req_type = format_ident!("{}", req_type_name.to_upper_camel_case());
                 let res_type = format_ident!(
                     "{}",
                     method_desc
@@ -632,11 +635,7 @@ pub fn append_querier(items: Vec<Item>, src: &Path, nested_mod: bool, descriptor
                 quote! {
                   #deprecated_macro
                   pub fn #name( &self, #(#arg_idents : #arg_ty),* ) -> Result<#res_type, cosmwasm_std::StdError> {
-                    let request = #req_type { #(#arg_idents),* };
-                    self.querier.query::<#res_type>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                        path: #path.to_string(),
-                        data: request.into(),
-                    })
+                    #req_type { #(#arg_idents),* }.query(self.querier)
                   }
                 }
             })

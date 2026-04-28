@@ -657,121 +657,61 @@ impl<'a, Q: cosmwasm_std::CustomQuery> PermissionsQuerier<'a, Q> {
         Self { querier }
     }
     pub fn params(&self) -> Result<QueryParamsResponse, cosmwasm_std::StdError> {
-        let request = QueryParamsRequest {};
-        self.querier.query::<QueryParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.permissions.v1beta1.Query/Params".to_string(),
-            data: request.into(),
-        })
+        QueryParamsRequest {}.query(self.querier)
     }
     pub fn namespace_denoms(&self) -> Result<QueryNamespaceDenomsResponse, cosmwasm_std::StdError> {
-        let request = QueryNamespaceDenomsRequest {};
-        self.querier
-            .query::<QueryNamespaceDenomsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.permissions.v1beta1.Query/NamespaceDenoms".to_string(),
-                data: request.into(),
-            })
+        QueryNamespaceDenomsRequest {}.query(self.querier)
     }
     pub fn namespaces(&self) -> Result<QueryNamespacesResponse, cosmwasm_std::StdError> {
-        let request = QueryNamespacesRequest {};
-        self.querier.query::<QueryNamespacesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.permissions.v1beta1.Query/Namespaces".to_string(),
-            data: request.into(),
-        })
+        QueryNamespacesRequest {}.query(self.querier)
     }
     pub fn namespace(&self, denom: ::prost::alloc::string::String) -> Result<QueryNamespaceResponse, cosmwasm_std::StdError> {
-        let request = QueryNamespaceRequest { denom };
-        self.querier.query::<QueryNamespaceResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.permissions.v1beta1.Query/Namespace".to_string(),
-            data: request.into(),
-        })
+        QueryNamespaceRequest { denom }.query(self.querier)
     }
     pub fn roles_by_actor(
         &self,
         denom: ::prost::alloc::string::String,
         actor: ::prost::alloc::string::String,
     ) -> Result<QueryRolesByActorResponse, cosmwasm_std::StdError> {
-        let request = QueryRolesByActorRequest { denom, actor };
-        self.querier
-            .query::<QueryRolesByActorResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.permissions.v1beta1.Query/RolesByActor".to_string(),
-                data: request.into(),
-            })
+        QueryRolesByActorRequest { denom, actor }.query(self.querier)
     }
     pub fn actors_by_role(
         &self,
         denom: ::prost::alloc::string::String,
         role: ::prost::alloc::string::String,
     ) -> Result<QueryActorsByRoleResponse, cosmwasm_std::StdError> {
-        let request = QueryActorsByRoleRequest { denom, role };
-        self.querier
-            .query::<QueryActorsByRoleResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.permissions.v1beta1.Query/ActorsByRole".to_string(),
-                data: request.into(),
-            })
+        QueryActorsByRoleRequest { denom, role }.query(self.querier)
     }
     pub fn role_managers(&self, denom: ::prost::alloc::string::String) -> Result<QueryRoleManagersResponse, cosmwasm_std::StdError> {
-        let request = QueryRoleManagersRequest { denom };
-        self.querier
-            .query::<QueryRoleManagersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.permissions.v1beta1.Query/RoleManagers".to_string(),
-                data: request.into(),
-            })
+        QueryRoleManagersRequest { denom }.query(self.querier)
     }
     pub fn role_manager(
         &self,
         denom: ::prost::alloc::string::String,
         manager: ::prost::alloc::string::String,
     ) -> Result<QueryRoleManagerResponse, cosmwasm_std::StdError> {
-        let request = QueryRoleManagerRequest { denom, manager };
-        self.querier
-            .query::<QueryRoleManagerResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.permissions.v1beta1.Query/RoleManager".to_string(),
-                data: request.into(),
-            })
+        QueryRoleManagerRequest { denom, manager }.query(self.querier)
     }
     pub fn policy_statuses(&self, denom: ::prost::alloc::string::String) -> Result<QueryPolicyStatusesResponse, cosmwasm_std::StdError> {
-        let request = QueryPolicyStatusesRequest { denom };
-        self.querier
-            .query::<QueryPolicyStatusesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.permissions.v1beta1.Query/PolicyStatuses".to_string(),
-                data: request.into(),
-            })
+        QueryPolicyStatusesRequest { denom }.query(self.querier)
     }
     pub fn policy_manager_capabilities(
         &self,
         denom: ::prost::alloc::string::String,
     ) -> Result<QueryPolicyManagerCapabilitiesResponse, cosmwasm_std::StdError> {
-        let request = QueryPolicyManagerCapabilitiesRequest { denom };
-        self.querier
-            .query::<QueryPolicyManagerCapabilitiesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.permissions.v1beta1.Query/PolicyManagerCapabilities".to_string(),
-                data: request.into(),
-            })
+        QueryPolicyManagerCapabilitiesRequest { denom }.query(self.querier)
     }
     pub fn vouchers(&self, denom: ::prost::alloc::string::String) -> Result<QueryVouchersResponse, cosmwasm_std::StdError> {
-        let request = QueryVouchersRequest { denom };
-        self.querier.query::<QueryVouchersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.permissions.v1beta1.Query/Vouchers".to_string(),
-            data: request.into(),
-        })
+        QueryVouchersRequest { denom }.query(self.querier)
     }
     pub fn voucher(
         &self,
         denom: ::prost::alloc::string::String,
         address: ::prost::alloc::string::String,
     ) -> Result<QueryVoucherResponse, cosmwasm_std::StdError> {
-        let request = QueryVoucherRequest { denom, address };
-        self.querier.query::<QueryVoucherResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.permissions.v1beta1.Query/Voucher".to_string(),
-            data: request.into(),
-        })
+        QueryVoucherRequest { denom, address }.query(self.querier)
     }
     pub fn permissions_module_state(&self) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
-        let request = QueryModuleStateRequest {};
-        self.querier
-            .query::<QueryModuleStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.permissions.v1beta1.Query/PermissionsModuleState".to_string(),
-                data: request.into(),
-            })
+        QueryModuleStateRequest {}.query(self.querier)
     }
 }

@@ -509,85 +509,42 @@ impl<'a, Q: cosmwasm_std::CustomQuery> InsuranceQuerier<'a, Q> {
         Self { querier }
     }
     pub fn insurance_params(&self) -> Result<QueryInsuranceParamsResponse, cosmwasm_std::StdError> {
-        let request = QueryInsuranceParamsRequest {};
-        self.querier
-            .query::<QueryInsuranceParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.insurance.v1beta1.Query/InsuranceParams".to_string(),
-                data: request.into(),
-            })
+        QueryInsuranceParamsRequest {}.query(self.querier)
     }
     pub fn insurance_fund(&self, market_id: ::prost::alloc::string::String) -> Result<QueryInsuranceFundResponse, cosmwasm_std::StdError> {
-        let request = QueryInsuranceFundRequest { market_id };
-        self.querier
-            .query::<QueryInsuranceFundResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.insurance.v1beta1.Query/InsuranceFund".to_string(),
-                data: request.into(),
-            })
+        QueryInsuranceFundRequest { market_id }.query(self.querier)
     }
     pub fn insurance_funds(&self) -> Result<QueryInsuranceFundsResponse, cosmwasm_std::StdError> {
-        let request = QueryInsuranceFundsRequest {};
-        self.querier
-            .query::<QueryInsuranceFundsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.insurance.v1beta1.Query/InsuranceFunds".to_string(),
-                data: request.into(),
-            })
+        QueryInsuranceFundsRequest {}.query(self.querier)
     }
     pub fn estimated_redemptions(
         &self,
         market_id: ::prost::alloc::string::String,
         address: ::prost::alloc::string::String,
     ) -> Result<QueryEstimatedRedemptionsResponse, cosmwasm_std::StdError> {
-        let request = QueryEstimatedRedemptionsRequest { market_id, address };
-        self.querier
-            .query::<QueryEstimatedRedemptionsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.insurance.v1beta1.Query/EstimatedRedemptions".to_string(),
-                data: request.into(),
-            })
+        QueryEstimatedRedemptionsRequest { market_id, address }.query(self.querier)
     }
     pub fn pending_redemptions(
         &self,
         market_id: ::prost::alloc::string::String,
         address: ::prost::alloc::string::String,
     ) -> Result<QueryPendingRedemptionsResponse, cosmwasm_std::StdError> {
-        let request = QueryPendingRedemptionsRequest { market_id, address };
-        self.querier
-            .query::<QueryPendingRedemptionsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.insurance.v1beta1.Query/PendingRedemptions".to_string(),
-                data: request.into(),
-            })
+        QueryPendingRedemptionsRequest { market_id, address }.query(self.querier)
     }
     pub fn insurance_module_state(&self) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
-        let request = QueryModuleStateRequest {};
-        self.querier
-            .query::<QueryModuleStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.insurance.v1beta1.Query/InsuranceModuleState".to_string(),
-                data: request.into(),
-            })
+        QueryModuleStateRequest {}.query(self.querier)
     }
     pub fn failed_redemptions(&self) -> Result<QueryFailedRedemptionsResponse, cosmwasm_std::StdError> {
-        let request = QueryFailedRedemptionsRequest {};
-        self.querier
-            .query::<QueryFailedRedemptionsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.insurance.v1beta1.Query/FailedRedemptions".to_string(),
-                data: request.into(),
-            })
+        QueryFailedRedemptionsRequest {}.query(self.querier)
     }
     pub fn vouchers(&self, denom: ::prost::alloc::string::String) -> Result<QueryVouchersResponse, cosmwasm_std::StdError> {
-        let request = QueryVouchersRequest { denom };
-        self.querier.query::<QueryVouchersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.insurance.v1beta1.Query/Vouchers".to_string(),
-            data: request.into(),
-        })
+        QueryVouchersRequest { denom }.query(self.querier)
     }
     pub fn voucher(
         &self,
         denom: ::prost::alloc::string::String,
         address: ::prost::alloc::string::String,
     ) -> Result<QueryVoucherResponse, cosmwasm_std::StdError> {
-        let request = QueryVoucherRequest { denom, address };
-        self.querier.query::<QueryVoucherResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.insurance.v1beta1.Query/Voucher".to_string(),
-            data: request.into(),
-        })
+        QueryVoucherRequest { denom, address }.query(self.querier)
     }
 }

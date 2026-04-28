@@ -629,11 +629,7 @@ impl<'a, Q: cosmwasm_std::CustomQuery> GovQuerier<'a, Q> {
         Self { querier }
     }
     pub fn proposal(&self, proposal_id: u64) -> Result<QueryProposalResponse, cosmwasm_std::StdError> {
-        let request = QueryProposalRequest { proposal_id };
-        self.querier.query::<QueryProposalResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.gov.v1beta1.Query/Proposal".to_string(),
-            data: request.into(),
-        })
+        QueryProposalRequest { proposal_id }.query(self.querier)
     }
     pub fn proposals(
         &self,
@@ -642,66 +638,38 @@ impl<'a, Q: cosmwasm_std::CustomQuery> GovQuerier<'a, Q> {
         depositor: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryProposalsResponse, cosmwasm_std::StdError> {
-        let request = QueryProposalsRequest {
+        QueryProposalsRequest {
             proposal_status,
             voter,
             depositor,
             pagination,
-        };
-        self.querier.query::<QueryProposalsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.gov.v1beta1.Query/Proposals".to_string(),
-            data: request.into(),
-        })
+        }
+        .query(self.querier)
     }
     pub fn vote(&self, proposal_id: u64, voter: ::prost::alloc::string::String) -> Result<QueryVoteResponse, cosmwasm_std::StdError> {
-        let request = QueryVoteRequest { proposal_id, voter };
-        self.querier.query::<QueryVoteResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.gov.v1beta1.Query/Vote".to_string(),
-            data: request.into(),
-        })
+        QueryVoteRequest { proposal_id, voter }.query(self.querier)
     }
     pub fn votes(
         &self,
         proposal_id: u64,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryVotesResponse, cosmwasm_std::StdError> {
-        let request = QueryVotesRequest { proposal_id, pagination };
-        self.querier.query::<QueryVotesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.gov.v1beta1.Query/Votes".to_string(),
-            data: request.into(),
-        })
+        QueryVotesRequest { proposal_id, pagination }.query(self.querier)
     }
     pub fn params(&self, params_type: ::prost::alloc::string::String) -> Result<QueryParamsResponse, cosmwasm_std::StdError> {
-        let request = QueryParamsRequest { params_type };
-        self.querier.query::<QueryParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.gov.v1beta1.Query/Params".to_string(),
-            data: request.into(),
-        })
+        QueryParamsRequest { params_type }.query(self.querier)
     }
     pub fn deposit(&self, proposal_id: u64, depositor: ::prost::alloc::string::String) -> Result<QueryDepositResponse, cosmwasm_std::StdError> {
-        let request = QueryDepositRequest { proposal_id, depositor };
-        self.querier.query::<QueryDepositResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.gov.v1beta1.Query/Deposit".to_string(),
-            data: request.into(),
-        })
+        QueryDepositRequest { proposal_id, depositor }.query(self.querier)
     }
     pub fn deposits(
         &self,
         proposal_id: u64,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryDepositsResponse, cosmwasm_std::StdError> {
-        let request = QueryDepositsRequest { proposal_id, pagination };
-        self.querier.query::<QueryDepositsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.gov.v1beta1.Query/Deposits".to_string(),
-            data: request.into(),
-        })
+        QueryDepositsRequest { proposal_id, pagination }.query(self.querier)
     }
     pub fn tally_result(&self, proposal_id: u64) -> Result<QueryTallyResultResponse, cosmwasm_std::StdError> {
-        let request = QueryTallyResultRequest { proposal_id };
-        self.querier
-            .query::<QueryTallyResultResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmos.gov.v1beta1.Query/TallyResult".to_string(),
-                data: request.into(),
-            })
+        QueryTallyResultRequest { proposal_id }.query(self.querier)
     }
 }

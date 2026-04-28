@@ -1676,119 +1676,67 @@ impl<'a, Q: cosmwasm_std::CustomQuery> WasmQuerier<'a, Q> {
         Self { querier }
     }
     pub fn contract_info(&self, address: ::prost::alloc::string::String) -> Result<QueryContractInfoResponse, cosmwasm_std::StdError> {
-        let request = QueryContractInfoRequest { address };
-        self.querier
-            .query::<QueryContractInfoResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmwasm.wasm.v1.Query/ContractInfo".to_string(),
-                data: request.into(),
-            })
+        QueryContractInfoRequest { address }.query(self.querier)
     }
     pub fn contract_history(
         &self,
         address: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::super::cosmos::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryContractHistoryResponse, cosmwasm_std::StdError> {
-        let request = QueryContractHistoryRequest { address, pagination };
-        self.querier
-            .query::<QueryContractHistoryResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmwasm.wasm.v1.Query/ContractHistory".to_string(),
-                data: request.into(),
-            })
+        QueryContractHistoryRequest { address, pagination }.query(self.querier)
     }
     pub fn contracts_by_code(
         &self,
         code_id: u64,
         pagination: ::core::option::Option<super::super::super::cosmos::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryContractsByCodeResponse, cosmwasm_std::StdError> {
-        let request = QueryContractsByCodeRequest { code_id, pagination };
-        self.querier
-            .query::<QueryContractsByCodeResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmwasm.wasm.v1.Query/ContractsByCode".to_string(),
-                data: request.into(),
-            })
+        QueryContractsByCodeRequest { code_id, pagination }.query(self.querier)
     }
     pub fn all_contract_state(
         &self,
         address: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::super::cosmos::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryAllContractStateResponse, cosmwasm_std::StdError> {
-        let request = QueryAllContractStateRequest { address, pagination };
-        self.querier
-            .query::<QueryAllContractStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmwasm.wasm.v1.Query/AllContractState".to_string(),
-                data: request.into(),
-            })
+        QueryAllContractStateRequest { address, pagination }.query(self.querier)
     }
     pub fn raw_contract_state(
         &self,
         address: ::prost::alloc::string::String,
         query_data: ::prost::alloc::vec::Vec<u8>,
     ) -> Result<QueryRawContractStateResponse, cosmwasm_std::StdError> {
-        let request = QueryRawContractStateRequest { address, query_data };
-        self.querier
-            .query::<QueryRawContractStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmwasm.wasm.v1.Query/RawContractState".to_string(),
-                data: request.into(),
-            })
+        QueryRawContractStateRequest { address, query_data }.query(self.querier)
     }
     pub fn smart_contract_state(
         &self,
         address: ::prost::alloc::string::String,
         query_data: ::prost::alloc::vec::Vec<u8>,
     ) -> Result<QuerySmartContractStateResponse, cosmwasm_std::StdError> {
-        let request = QuerySmartContractStateRequest { address, query_data };
-        self.querier
-            .query::<QuerySmartContractStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmwasm.wasm.v1.Query/SmartContractState".to_string(),
-                data: request.into(),
-            })
+        QuerySmartContractStateRequest { address, query_data }.query(self.querier)
     }
     pub fn code(&self, code_id: u64) -> Result<QueryCodeResponse, cosmwasm_std::StdError> {
-        let request = QueryCodeRequest { code_id };
-        self.querier.query::<QueryCodeResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmwasm.wasm.v1.Query/Code".to_string(),
-            data: request.into(),
-        })
+        QueryCodeRequest { code_id }.query(self.querier)
     }
     pub fn codes(
         &self,
         pagination: ::core::option::Option<super::super::super::cosmos::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryCodesResponse, cosmwasm_std::StdError> {
-        let request = QueryCodesRequest { pagination };
-        self.querier.query::<QueryCodesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmwasm.wasm.v1.Query/Codes".to_string(),
-            data: request.into(),
-        })
+        QueryCodesRequest { pagination }.query(self.querier)
     }
     pub fn pinned_codes(
         &self,
         pagination: ::core::option::Option<super::super::super::cosmos::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryPinnedCodesResponse, cosmwasm_std::StdError> {
-        let request = QueryPinnedCodesRequest { pagination };
-        self.querier
-            .query::<QueryPinnedCodesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmwasm.wasm.v1.Query/PinnedCodes".to_string(),
-                data: request.into(),
-            })
+        QueryPinnedCodesRequest { pagination }.query(self.querier)
     }
     pub fn params(&self) -> Result<QueryParamsResponse, cosmwasm_std::StdError> {
-        let request = QueryParamsRequest {};
-        self.querier.query::<QueryParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmwasm.wasm.v1.Query/Params".to_string(),
-            data: request.into(),
-        })
+        QueryParamsRequest {}.query(self.querier)
     }
     pub fn contracts_by_creator(
         &self,
         creator_address: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::super::cosmos::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryContractsByCreatorResponse, cosmwasm_std::StdError> {
-        let request = QueryContractsByCreatorRequest { creator_address, pagination };
-        self.querier
-            .query::<QueryContractsByCreatorResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmwasm.wasm.v1.Query/ContractsByCreator".to_string(),
-                data: request.into(),
-            })
+        QueryContractsByCreatorRequest { creator_address, pagination }.query(self.querier)
     }
     pub fn build_address(
         &self,
@@ -1797,16 +1745,12 @@ impl<'a, Q: cosmwasm_std::CustomQuery> WasmQuerier<'a, Q> {
         salt: ::prost::alloc::string::String,
         init_args: ::prost::alloc::vec::Vec<u8>,
     ) -> Result<QueryBuildAddressResponse, cosmwasm_std::StdError> {
-        let request = QueryBuildAddressRequest {
+        QueryBuildAddressRequest {
             code_hash,
             creator_address,
             salt,
             init_args,
-        };
-        self.querier
-            .query::<QueryBuildAddressResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmwasm.wasm.v1.Query/BuildAddress".to_string(),
-                data: request.into(),
-            })
+        }
+        .query(self.querier)
     }
 }

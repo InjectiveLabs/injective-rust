@@ -326,53 +326,25 @@ impl<'a, Q: cosmwasm_std::CustomQuery> AuctionQuerier<'a, Q> {
         Self { querier }
     }
     pub fn auction_params(&self) -> Result<QueryAuctionParamsResponse, cosmwasm_std::StdError> {
-        let request = QueryAuctionParamsRequest {};
-        self.querier
-            .query::<QueryAuctionParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.auction.v1beta1.Query/AuctionParams".to_string(),
-                data: request.into(),
-            })
+        QueryAuctionParamsRequest {}.query(self.querier)
     }
     pub fn current_auction_basket(&self) -> Result<QueryCurrentAuctionBasketResponse, cosmwasm_std::StdError> {
-        let request = QueryCurrentAuctionBasketRequest {};
-        self.querier
-            .query::<QueryCurrentAuctionBasketResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.auction.v1beta1.Query/CurrentAuctionBasket".to_string(),
-                data: request.into(),
-            })
+        QueryCurrentAuctionBasketRequest {}.query(self.querier)
     }
     pub fn auction_module_state(&self) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
-        let request = QueryModuleStateRequest {};
-        self.querier
-            .query::<QueryModuleStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.auction.v1beta1.Query/AuctionModuleState".to_string(),
-                data: request.into(),
-            })
+        QueryModuleStateRequest {}.query(self.querier)
     }
     pub fn last_auction_result(&self) -> Result<QueryLastAuctionResultResponse, cosmwasm_std::StdError> {
-        let request = QueryLastAuctionResultRequest {};
-        self.querier
-            .query::<QueryLastAuctionResultResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.auction.v1beta1.Query/LastAuctionResult".to_string(),
-                data: request.into(),
-            })
+        QueryLastAuctionResultRequest {}.query(self.querier)
     }
     pub fn vouchers(&self, denom: ::prost::alloc::string::String) -> Result<QueryVouchersResponse, cosmwasm_std::StdError> {
-        let request = QueryVouchersRequest { denom };
-        self.querier.query::<QueryVouchersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.auction.v1beta1.Query/Vouchers".to_string(),
-            data: request.into(),
-        })
+        QueryVouchersRequest { denom }.query(self.querier)
     }
     pub fn voucher(
         &self,
         denom: ::prost::alloc::string::String,
         address: ::prost::alloc::string::String,
     ) -> Result<QueryVoucherResponse, cosmwasm_std::StdError> {
-        let request = QueryVoucherRequest { denom, address };
-        self.querier.query::<QueryVoucherResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.auction.v1beta1.Query/Voucher".to_string(),
-            data: request.into(),
-        })
+        QueryVoucherRequest { denom, address }.query(self.querier)
     }
 }

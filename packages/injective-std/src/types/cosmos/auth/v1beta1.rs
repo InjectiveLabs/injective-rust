@@ -356,85 +356,39 @@ impl<'a, Q: cosmwasm_std::CustomQuery> AuthQuerier<'a, Q> {
         &self,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryAccountsResponse, cosmwasm_std::StdError> {
-        let request = QueryAccountsRequest { pagination };
-        self.querier.query::<QueryAccountsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.auth.v1beta1.Query/Accounts".to_string(),
-            data: request.into(),
-        })
+        QueryAccountsRequest { pagination }.query(self.querier)
     }
     pub fn account(&self, address: ::prost::alloc::string::String) -> Result<QueryAccountResponse, cosmwasm_std::StdError> {
-        let request = QueryAccountRequest { address };
-        self.querier.query::<QueryAccountResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.auth.v1beta1.Query/Account".to_string(),
-            data: request.into(),
-        })
+        QueryAccountRequest { address }.query(self.querier)
     }
     pub fn account_address_by_id(&self, id: i64, account_id: u64) -> Result<QueryAccountAddressByIdResponse, cosmwasm_std::StdError> {
-        let request = QueryAccountAddressByIdRequest { id, account_id };
-        self.querier
-            .query::<QueryAccountAddressByIdResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmos.auth.v1beta1.Query/AccountAddressByID".to_string(),
-                data: request.into(),
-            })
+        QueryAccountAddressByIdRequest { id, account_id }.query(self.querier)
     }
     pub fn params(&self) -> Result<QueryParamsResponse, cosmwasm_std::StdError> {
-        let request = QueryParamsRequest {};
-        self.querier.query::<QueryParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.auth.v1beta1.Query/Params".to_string(),
-            data: request.into(),
-        })
+        QueryParamsRequest {}.query(self.querier)
     }
     pub fn module_accounts(&self) -> Result<QueryModuleAccountsResponse, cosmwasm_std::StdError> {
-        let request = QueryModuleAccountsRequest {};
-        self.querier
-            .query::<QueryModuleAccountsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmos.auth.v1beta1.Query/ModuleAccounts".to_string(),
-                data: request.into(),
-            })
+        QueryModuleAccountsRequest {}.query(self.querier)
     }
     pub fn module_account_by_name(&self, name: ::prost::alloc::string::String) -> Result<QueryModuleAccountByNameResponse, cosmwasm_std::StdError> {
-        let request = QueryModuleAccountByNameRequest { name };
-        self.querier
-            .query::<QueryModuleAccountByNameResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmos.auth.v1beta1.Query/ModuleAccountByName".to_string(),
-                data: request.into(),
-            })
+        QueryModuleAccountByNameRequest { name }.query(self.querier)
     }
     pub fn bech32_prefix(&self) -> Result<Bech32PrefixResponse, cosmwasm_std::StdError> {
-        let request = Bech32PrefixRequest {};
-        self.querier.query::<Bech32PrefixResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.auth.v1beta1.Query/Bech32Prefix".to_string(),
-            data: request.into(),
-        })
+        Bech32PrefixRequest {}.query(self.querier)
     }
     pub fn address_bytes_to_string(
         &self,
         address_bytes: ::prost::alloc::vec::Vec<u8>,
     ) -> Result<AddressBytesToStringResponse, cosmwasm_std::StdError> {
-        let request = AddressBytesToStringRequest { address_bytes };
-        self.querier
-            .query::<AddressBytesToStringResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmos.auth.v1beta1.Query/AddressBytesToString".to_string(),
-                data: request.into(),
-            })
+        AddressBytesToStringRequest { address_bytes }.query(self.querier)
     }
     pub fn address_string_to_bytes(
         &self,
         address_string: ::prost::alloc::string::String,
     ) -> Result<AddressStringToBytesResponse, cosmwasm_std::StdError> {
-        let request = AddressStringToBytesRequest { address_string };
-        self.querier
-            .query::<AddressStringToBytesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmos.auth.v1beta1.Query/AddressStringToBytes".to_string(),
-                data: request.into(),
-            })
+        AddressStringToBytesRequest { address_string }.query(self.querier)
     }
     pub fn account_info(&self, address: ::prost::alloc::string::String) -> Result<QueryAccountInfoResponse, cosmwasm_std::StdError> {
-        let request = QueryAccountInfoRequest { address };
-        self.querier
-            .query::<QueryAccountInfoResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmos.auth.v1beta1.Query/AccountInfo".to_string(),
-                data: request.into(),
-            })
+        QueryAccountInfoRequest { address }.query(self.querier)
     }
 }

@@ -440,30 +440,15 @@ impl<'a, Q: cosmwasm_std::CustomQuery> WasmxQuerier<'a, Q> {
         Self { querier }
     }
     pub fn wasmx_params(&self) -> Result<QueryWasmxParamsResponse, cosmwasm_std::StdError> {
-        let request = QueryWasmxParamsRequest {};
-        self.querier
-            .query::<QueryWasmxParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.wasmx.v1.Query/WasmxParams".to_string(),
-                data: request.into(),
-            })
+        QueryWasmxParamsRequest {}.query(self.querier)
     }
     pub fn contract_registration_info(
         &self,
         contract_address: ::prost::alloc::string::String,
     ) -> Result<QueryContractRegistrationInfoResponse, cosmwasm_std::StdError> {
-        let request = QueryContractRegistrationInfoRequest { contract_address };
-        self.querier
-            .query::<QueryContractRegistrationInfoResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.wasmx.v1.Query/ContractRegistrationInfo".to_string(),
-                data: request.into(),
-            })
+        QueryContractRegistrationInfoRequest { contract_address }.query(self.querier)
     }
     pub fn wasmx_module_state(&self) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
-        let request = QueryModuleStateRequest {};
-        self.querier
-            .query::<QueryModuleStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.wasmx.v1.Query/WasmxModuleState".to_string(),
-                data: request.into(),
-            })
+        QueryModuleStateRequest {}.query(self.querier)
     }
 }

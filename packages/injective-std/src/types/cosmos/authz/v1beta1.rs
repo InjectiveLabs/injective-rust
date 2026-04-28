@@ -246,39 +246,26 @@ impl<'a, Q: cosmwasm_std::CustomQuery> AuthzQuerier<'a, Q> {
         msg_type_url: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryGrantsResponse, cosmwasm_std::StdError> {
-        let request = QueryGrantsRequest {
+        QueryGrantsRequest {
             granter,
             grantee,
             msg_type_url,
             pagination,
-        };
-        self.querier.query::<QueryGrantsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/cosmos.authz.v1beta1.Query/Grants".to_string(),
-            data: request.into(),
-        })
+        }
+        .query(self.querier)
     }
     pub fn granter_grants(
         &self,
         granter: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryGranterGrantsResponse, cosmwasm_std::StdError> {
-        let request = QueryGranterGrantsRequest { granter, pagination };
-        self.querier
-            .query::<QueryGranterGrantsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmos.authz.v1beta1.Query/GranterGrants".to_string(),
-                data: request.into(),
-            })
+        QueryGranterGrantsRequest { granter, pagination }.query(self.querier)
     }
     pub fn grantee_grants(
         &self,
         grantee: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryGranteeGrantsResponse, cosmwasm_std::StdError> {
-        let request = QueryGranteeGrantsRequest { grantee, pagination };
-        self.querier
-            .query::<QueryGranteeGrantsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/cosmos.authz.v1beta1.Query/GranteeGrants".to_string(),
-                data: request.into(),
-            })
+        QueryGranteeGrantsRequest { grantee, pagination }.query(self.querier)
     }
 }

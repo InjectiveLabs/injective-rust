@@ -167,40 +167,21 @@ impl<'a, Q: cosmwasm_std::CustomQuery> Erc20Querier<'a, Q> {
         Self { querier }
     }
     pub fn params(&self) -> Result<QueryParamsResponse, cosmwasm_std::StdError> {
-        let request = QueryParamsRequest {};
-        self.querier.query::<QueryParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.erc20.v1beta1.Query/Params".to_string(),
-            data: request.into(),
-        })
+        QueryParamsRequest {}.query(self.querier)
     }
     pub fn all_token_pairs(
         &self,
         pagination: ::core::option::Option<super::super::super::cosmos::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryAllTokenPairsResponse, cosmwasm_std::StdError> {
-        let request = QueryAllTokenPairsRequest { pagination };
-        self.querier
-            .query::<QueryAllTokenPairsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.erc20.v1beta1.Query/AllTokenPairs".to_string(),
-                data: request.into(),
-            })
+        QueryAllTokenPairsRequest { pagination }.query(self.querier)
     }
     pub fn token_pair_by_denom(&self, bank_denom: ::prost::alloc::string::String) -> Result<QueryTokenPairByDenomResponse, cosmwasm_std::StdError> {
-        let request = QueryTokenPairByDenomRequest { bank_denom };
-        self.querier
-            .query::<QueryTokenPairByDenomResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.erc20.v1beta1.Query/TokenPairByDenom".to_string(),
-                data: request.into(),
-            })
+        QueryTokenPairByDenomRequest { bank_denom }.query(self.querier)
     }
     pub fn token_pair_by_erc20_address(
         &self,
         erc20_address: ::prost::alloc::string::String,
     ) -> Result<QueryTokenPairByErc20AddressResponse, cosmwasm_std::StdError> {
-        let request = QueryTokenPairByErc20AddressRequest { erc20_address };
-        self.querier
-            .query::<QueryTokenPairByErc20AddressResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.erc20.v1beta1.Query/TokenPairByERC20Address".to_string(),
-                data: request.into(),
-            })
+        QueryTokenPairByErc20AddressRequest { erc20_address }.query(self.querier)
     }
 }

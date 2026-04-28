@@ -325,38 +325,19 @@ impl<'a, Q: cosmwasm_std::CustomQuery> TokenfactoryQuerier<'a, Q> {
         Self { querier }
     }
     pub fn params(&self) -> Result<QueryParamsResponse, cosmwasm_std::StdError> {
-        let request = QueryParamsRequest {};
-        self.querier.query::<QueryParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.tokenfactory.v1beta1.Query/Params".to_string(),
-            data: request.into(),
-        })
+        QueryParamsRequest {}.query(self.querier)
     }
     pub fn denom_authority_metadata(
         &self,
         creator: ::prost::alloc::string::String,
         sub_denom: ::prost::alloc::string::String,
     ) -> Result<QueryDenomAuthorityMetadataResponse, cosmwasm_std::StdError> {
-        let request = QueryDenomAuthorityMetadataRequest { creator, sub_denom };
-        self.querier
-            .query::<QueryDenomAuthorityMetadataResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.tokenfactory.v1beta1.Query/DenomAuthorityMetadata".to_string(),
-                data: request.into(),
-            })
+        QueryDenomAuthorityMetadataRequest { creator, sub_denom }.query(self.querier)
     }
     pub fn denoms_from_creator(&self, creator: ::prost::alloc::string::String) -> Result<QueryDenomsFromCreatorResponse, cosmwasm_std::StdError> {
-        let request = QueryDenomsFromCreatorRequest { creator };
-        self.querier
-            .query::<QueryDenomsFromCreatorResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.tokenfactory.v1beta1.Query/DenomsFromCreator".to_string(),
-                data: request.into(),
-            })
+        QueryDenomsFromCreatorRequest { creator }.query(self.querier)
     }
     pub fn tokenfactory_module_state(&self) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
-        let request = QueryModuleStateRequest {};
-        self.querier
-            .query::<QueryModuleStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.tokenfactory.v1beta1.Query/TokenfactoryModuleState".to_string(),
-                data: request.into(),
-            })
+        QueryModuleStateRequest {}.query(self.querier)
     }
 }

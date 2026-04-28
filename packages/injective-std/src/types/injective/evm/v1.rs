@@ -1050,99 +1050,29 @@ impl<'a, Q: cosmwasm_std::CustomQuery> EvmQuerier<'a, Q> {
         Self { querier }
     }
     pub fn account(&self, address: ::prost::alloc::string::String) -> Result<QueryAccountResponse, cosmwasm_std::StdError> {
-        let request = QueryAccountRequest { address };
-        self.querier.query::<QueryAccountResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.evm.v1.Query/Account".to_string(),
-            data: request.into(),
-        })
+        QueryAccountRequest { address }.query(self.querier)
     }
     pub fn cosmos_account(&self, address: ::prost::alloc::string::String) -> Result<QueryCosmosAccountResponse, cosmwasm_std::StdError> {
-        let request = QueryCosmosAccountRequest { address };
-        self.querier
-            .query::<QueryCosmosAccountResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.evm.v1.Query/CosmosAccount".to_string(),
-                data: request.into(),
-            })
+        QueryCosmosAccountRequest { address }.query(self.querier)
     }
     pub fn validator_account(&self, cons_address: ::prost::alloc::string::String) -> Result<QueryValidatorAccountResponse, cosmwasm_std::StdError> {
-        let request = QueryValidatorAccountRequest { cons_address };
-        self.querier
-            .query::<QueryValidatorAccountResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-                path: "/injective.evm.v1.Query/ValidatorAccount".to_string(),
-                data: request.into(),
-            })
+        QueryValidatorAccountRequest { cons_address }.query(self.querier)
     }
     pub fn balance(&self, address: ::prost::alloc::string::String) -> Result<QueryBalanceResponse, cosmwasm_std::StdError> {
-        let request = QueryBalanceRequest { address };
-        self.querier.query::<QueryBalanceResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.evm.v1.Query/Balance".to_string(),
-            data: request.into(),
-        })
+        QueryBalanceRequest { address }.query(self.querier)
     }
     pub fn storage(
         &self,
         address: ::prost::alloc::string::String,
         key: ::prost::alloc::string::String,
     ) -> Result<QueryStorageResponse, cosmwasm_std::StdError> {
-        let request = QueryStorageRequest { address, key };
-        self.querier.query::<QueryStorageResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.evm.v1.Query/Storage".to_string(),
-            data: request.into(),
-        })
+        QueryStorageRequest { address, key }.query(self.querier)
     }
     pub fn code(&self, address: ::prost::alloc::string::String) -> Result<QueryCodeResponse, cosmwasm_std::StdError> {
-        let request = QueryCodeRequest { address };
-        self.querier.query::<QueryCodeResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.evm.v1.Query/Code".to_string(),
-            data: request.into(),
-        })
+        QueryCodeRequest { address }.query(self.querier)
     }
     pub fn params(&self) -> Result<QueryParamsResponse, cosmwasm_std::StdError> {
-        let request = QueryParamsRequest {};
-        self.querier.query::<QueryParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.evm.v1.Query/Params".to_string(),
-            data: request.into(),
-        })
-    }
-    pub fn eth_call(
-        &self,
-        args: ::prost::alloc::vec::Vec<u8>,
-        gas_cap: u64,
-        proposer_address: ::prost::alloc::vec::Vec<u8>,
-        chain_id: i64,
-        overrides: ::prost::alloc::vec::Vec<u8>,
-    ) -> Result<MsgEthereumTxResponse, cosmwasm_std::StdError> {
-        let request = EthCallRequest {
-            args,
-            gas_cap,
-            proposer_address,
-            chain_id,
-            overrides,
-        };
-        self.querier.query::<MsgEthereumTxResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.evm.v1.Query/EthCall".to_string(),
-            data: request.into(),
-        })
-    }
-    pub fn estimate_gas(
-        &self,
-        args: ::prost::alloc::vec::Vec<u8>,
-        gas_cap: u64,
-        proposer_address: ::prost::alloc::vec::Vec<u8>,
-        chain_id: i64,
-        overrides: ::prost::alloc::vec::Vec<u8>,
-    ) -> Result<EstimateGasResponse, cosmwasm_std::StdError> {
-        let request = EthCallRequest {
-            args,
-            gas_cap,
-            proposer_address,
-            chain_id,
-            overrides,
-        };
-        self.querier.query::<EstimateGasResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.evm.v1.Query/EstimateGas".to_string(),
-            data: request.into(),
-        })
+        QueryParamsRequest {}.query(self.querier)
     }
     pub fn trace_tx(
         &self,
@@ -1155,7 +1085,7 @@ impl<'a, Q: cosmwasm_std::CustomQuery> EvmQuerier<'a, Q> {
         proposer_address: ::prost::alloc::vec::Vec<u8>,
         chain_id: i64,
     ) -> Result<QueryTraceTxResponse, cosmwasm_std::StdError> {
-        let request = QueryTraceTxRequest {
+        QueryTraceTxRequest {
             msg,
             trace_config,
             predecessors,
@@ -1164,11 +1094,8 @@ impl<'a, Q: cosmwasm_std::CustomQuery> EvmQuerier<'a, Q> {
             block_time,
             proposer_address,
             chain_id,
-        };
-        self.querier.query::<QueryTraceTxResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.evm.v1.Query/TraceTx".to_string(),
-            data: request.into(),
-        })
+        }
+        .query(self.querier)
     }
     pub fn trace_block(
         &self,
@@ -1180,7 +1107,7 @@ impl<'a, Q: cosmwasm_std::CustomQuery> EvmQuerier<'a, Q> {
         proposer_address: ::prost::alloc::vec::Vec<u8>,
         chain_id: i64,
     ) -> Result<QueryTraceBlockResponse, cosmwasm_std::StdError> {
-        let request = QueryTraceBlockRequest {
+        QueryTraceBlockRequest {
             txs,
             trace_config,
             block_number,
@@ -1188,11 +1115,8 @@ impl<'a, Q: cosmwasm_std::CustomQuery> EvmQuerier<'a, Q> {
             block_time,
             proposer_address,
             chain_id,
-        };
-        self.querier.query::<QueryTraceBlockResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.evm.v1.Query/TraceBlock".to_string(),
-            data: request.into(),
-        })
+        }
+        .query(self.querier)
     }
     pub fn trace_call(
         &self,
@@ -1205,7 +1129,7 @@ impl<'a, Q: cosmwasm_std::CustomQuery> EvmQuerier<'a, Q> {
         block_time: ::core::option::Option<crate::shim::Timestamp>,
         chain_id: i64,
     ) -> Result<QueryTraceCallResponse, cosmwasm_std::StdError> {
-        let request = QueryTraceCallRequest {
+        QueryTraceCallRequest {
             args,
             gas_cap,
             proposer_address,
@@ -1214,17 +1138,10 @@ impl<'a, Q: cosmwasm_std::CustomQuery> EvmQuerier<'a, Q> {
             block_hash,
             block_time,
             chain_id,
-        };
-        self.querier.query::<QueryTraceCallResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.evm.v1.Query/TraceCall".to_string(),
-            data: request.into(),
-        })
+        }
+        .query(self.querier)
     }
     pub fn base_fee(&self) -> Result<QueryBaseFeeResponse, cosmwasm_std::StdError> {
-        let request = QueryBaseFeeRequest {};
-        self.querier.query::<QueryBaseFeeResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
-            path: "/injective.evm.v1.Query/BaseFee".to_string(),
-            data: request.into(),
-        })
+        QueryBaseFeeRequest {}.query(self.querier)
     }
 }
