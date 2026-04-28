@@ -1,5 +1,15 @@
 use injective_std_derive::CosmwasmExt;
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.auction.v1beta1.EventSetVoucher")]
+pub struct EventSetVoucher {
+    /// The bech32 address of the voucher holder.
+    #[prost(string, tag = "1")]
+    pub addr: ::prost::alloc::string::String,
+    /// The new voucher amount. A zero coin signals voucher deletion.
+    #[prost(message, optional, tag = "2")]
+    pub voucher: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.auction.v1beta1.Params")]
 pub struct Params {
     /// auction_period_duration defines the auction period duration
@@ -104,7 +114,7 @@ pub struct EventAuctionStart {
     pub new_basket: ::prost::alloc::vec::Vec<super::super::super::cosmos::base::v1beta1::Coin>,
 }
 /// GenesisState defines the auction module's genesis state.
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.auction.v1beta1.GenesisState")]
 pub struct GenesisState {
     /// params defines all the parameters of related to auction.
@@ -130,6 +140,9 @@ pub struct GenesisState {
     /// last auction result
     #[prost(message, optional, tag = "5")]
     pub last_auction_result: ::core::option::Option<LastAuctionResult>,
+    /// outstanding vouchers (failed basket deliveries)
+    #[prost(message, repeated, tag = "6")]
+    pub vouchers: ::prost::alloc::vec::Vec<super::super::common::vouchers::v1::AddressVoucher>,
 }
 /// QueryAuctionParamsRequest is the request type for the Query/AuctionParams RPC
 /// method.
@@ -197,7 +210,7 @@ pub struct QueryCurrentAuctionBasketResponse {
 pub struct QueryModuleStateRequest {}
 /// QueryModuleStateResponse is the response type for the
 /// Query/AuctionModuleState RPC method.
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.auction.v1beta1.QueryModuleStateResponse")]
 pub struct QueryModuleStateResponse {
     #[prost(message, optional, tag = "1")]
@@ -215,6 +228,45 @@ pub struct QueryLastAuctionResultRequest {}
 pub struct QueryLastAuctionResultResponse {
     #[prost(message, optional, tag = "1")]
     pub last_auction_result: ::core::option::Option<LastAuctionResult>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.auction.v1beta1.QueryVouchersRequest")]
+#[proto_query(
+    path = "/injective.auction.v1beta1.Query/Vouchers",
+    response_type = QueryVouchersResponse
+)]
+pub struct QueryVouchersRequest {
+    /// denom filter; empty string returns all vouchers
+    #[prost(string, tag = "1")]
+    pub denom: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.auction.v1beta1.QueryVouchersResponse")]
+pub struct QueryVouchersResponse {
+    /// List of outstanding vouchers matching the request filter.
+    #[prost(message, repeated, tag = "1")]
+    pub vouchers: ::prost::alloc::vec::Vec<super::super::common::vouchers::v1::AddressVoucher>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.auction.v1beta1.QueryVoucherRequest")]
+#[proto_query(
+    path = "/injective.auction.v1beta1.Query/Voucher",
+    response_type = QueryVoucherResponse
+)]
+pub struct QueryVoucherRequest {
+    /// Required. The token denom to look up.
+    #[prost(string, tag = "1")]
+    pub denom: ::prost::alloc::string::String,
+    /// Required. The bech32 address of the voucher holder.
+    #[prost(string, tag = "2")]
+    pub address: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.auction.v1beta1.QueryVoucherResponse")]
+pub struct QueryVoucherResponse {
+    /// The outstanding voucher coin for the requested denom and address.
+    #[prost(message, optional, tag = "1")]
+    pub voucher: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
 /// Bid defines a SDK message for placing a bid for an auction
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -252,6 +304,20 @@ pub struct MsgUpdateParams {
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.auction.v1beta1.MsgUpdateParamsResponse")]
 pub struct MsgUpdateParamsResponse {}
+/// MsgClaimVoucher defines a message for claiming an outstanding voucher
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.auction.v1beta1.MsgClaimVoucher")]
+pub struct MsgClaimVoucher {
+    /// The sender's Injective address.
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+    /// The token denom of the voucher to claim.
+    #[prost(string, tag = "2")]
+    pub denom: ::prost::alloc::string::String,
+}
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.auction.v1beta1.MsgClaimVoucherResponse")]
+pub struct MsgClaimVoucherResponse {}
 pub struct AuctionQuerier<'a, Q: cosmwasm_std::CustomQuery> {
     querier: &'a cosmwasm_std::QuerierWrapper<'a, Q>,
 }
@@ -260,15 +326,53 @@ impl<'a, Q: cosmwasm_std::CustomQuery> AuctionQuerier<'a, Q> {
         Self { querier }
     }
     pub fn auction_params(&self) -> Result<QueryAuctionParamsResponse, cosmwasm_std::StdError> {
-        QueryAuctionParamsRequest {}.query(self.querier)
+        let request = QueryAuctionParamsRequest {};
+        self.querier
+            .query::<QueryAuctionParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.auction.v1beta1.Query/AuctionParams".to_string(),
+                data: request.into(),
+            })
     }
     pub fn current_auction_basket(&self) -> Result<QueryCurrentAuctionBasketResponse, cosmwasm_std::StdError> {
-        QueryCurrentAuctionBasketRequest {}.query(self.querier)
+        let request = QueryCurrentAuctionBasketRequest {};
+        self.querier
+            .query::<QueryCurrentAuctionBasketResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.auction.v1beta1.Query/CurrentAuctionBasket".to_string(),
+                data: request.into(),
+            })
     }
     pub fn auction_module_state(&self) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
-        QueryModuleStateRequest {}.query(self.querier)
+        let request = QueryModuleStateRequest {};
+        self.querier
+            .query::<QueryModuleStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.auction.v1beta1.Query/AuctionModuleState".to_string(),
+                data: request.into(),
+            })
     }
     pub fn last_auction_result(&self) -> Result<QueryLastAuctionResultResponse, cosmwasm_std::StdError> {
-        QueryLastAuctionResultRequest {}.query(self.querier)
+        let request = QueryLastAuctionResultRequest {};
+        self.querier
+            .query::<QueryLastAuctionResultResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.auction.v1beta1.Query/LastAuctionResult".to_string(),
+                data: request.into(),
+            })
+    }
+    pub fn vouchers(&self, denom: ::prost::alloc::string::String) -> Result<QueryVouchersResponse, cosmwasm_std::StdError> {
+        let request = QueryVouchersRequest { denom };
+        self.querier.query::<QueryVouchersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/injective.auction.v1beta1.Query/Vouchers".to_string(),
+            data: request.into(),
+        })
+    }
+    pub fn voucher(
+        &self,
+        denom: ::prost::alloc::string::String,
+        address: ::prost::alloc::string::String,
+    ) -> Result<QueryVoucherResponse, cosmwasm_std::StdError> {
+        let request = QueryVoucherRequest { denom, address };
+        self.querier.query::<QueryVoucherResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/injective.auction.v1beta1.Query/Voucher".to_string(),
+            data: request.into(),
+        })
     }
 }

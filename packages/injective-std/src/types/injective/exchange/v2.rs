@@ -1142,7 +1142,10 @@ pub struct Params {
     /// List of addresses that are allowed to perform exchange admin operations
     #[prost(string, repeated, tag = "27")]
     pub exchange_admins: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// inj_auction_max_cap defines the maximum cap for INJ sent to auction
+    /// inj_auction_max_cap defines the maximum cap for INJ sent to auction.
+    /// Deprecated: the cap is now driven by the auction module's InjBasketMaxCap;
+    /// this field is ignored.
+    #[deprecated]
     #[prost(string, tag = "28")]
     pub inj_auction_max_cap: ::prost::alloc::string::String,
     /// fixed_gas_enabled indicates if msg server will consume fixed gas amount for
@@ -1180,10 +1183,19 @@ pub struct Params {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub post_only_mode_blocks_amount_after_downtime: u64,
+    /// DEPRECATED, left for upgrade purposes
     /// Contracts that exchange will be listening to pause markets denominated in
     /// respective erc20: denoms, with their pause event signatures
     #[prost(message, repeated, tag = "36")]
-    pub enforced_restrictions_contracts: ::prost::alloc::vec::Vec<EnforcedRestrictionsContract>,
+    pub deprecated_enforced_restrictions_contracts: ::prost::alloc::vec::Vec<EnforcedRestrictionsContract>,
+    /// white_knight_liquidators defines addresses that can liquidate positions
+    /// with a dedicated white-knight reward share in positive payout liquidations
+    #[prost(string, repeated, tag = "37")]
+    pub white_knight_liquidators: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// white_knight_liquidator_reward_share_rate defines the ratio of the split of
+    /// the surplus collateral that goes to a white knight liquidator
+    #[prost(string, tag = "38")]
+    pub white_knight_liquidator_reward_share_rate: ::prost::alloc::string::String,
 }
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.NextFundingTimestamp")]
@@ -5039,10 +5051,6 @@ pub struct QuerySpotOrdersByHashesResponse {
 /// Query/TraderSpotOrders RPC method.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTraderSpotOrdersRequest")]
-#[proto_query(
-    path = "/injective.exchange.v2.Query/TraderSpotOrders",
-    response_type = QueryTraderSpotOrdersResponse
-)]
 pub struct QueryTraderSpotOrdersRequest {
     /// Market ID for the market
     #[prost(string, tag = "1")]
@@ -5262,10 +5270,6 @@ pub struct QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
 /// Query/TraderDerivativeOrders RPC method.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTraderDerivativeOrdersRequest")]
-#[proto_query(
-    path = "/injective.exchange.v2.Query/TraderDerivativeOrders",
-    response_type = QueryTraderDerivativeOrdersResponse
-)]
 pub struct QueryTraderDerivativeOrdersRequest {
     /// Market ID for the market
     #[prost(string, tag = "1")]
@@ -5744,10 +5748,6 @@ pub struct QueryPositionsResponse {
 /// Query/TradeRewardPoints RPC method.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTradeRewardPointsRequest")]
-#[proto_query(
-    path = "/injective.exchange.v2.Query/TradeRewardPoints",
-    response_type = QueryTradeRewardPointsResponse
-)]
 pub struct QueryTradeRewardPointsRequest {
     #[prost(string, repeated, tag = "1")]
     pub accounts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -6518,74 +6518,143 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
         &self,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QueryFullDerivativeOrderbookResponse, cosmwasm_std::StdError> {
-        QueryFullDerivativeOrderbookRequest { market_id }.query(self.querier)
+        let request = QueryFullDerivativeOrderbookRequest { market_id };
+        self.querier
+            .query::<QueryFullDerivativeOrderbookResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/L3DerivativeOrderBook".to_string(),
+                data: request.into(),
+            })
     }
     pub fn l3_spot_order_book(&self, market_id: ::prost::alloc::string::String) -> Result<QueryFullSpotOrderbookResponse, cosmwasm_std::StdError> {
-        QueryFullSpotOrderbookRequest { market_id }.query(self.querier)
+        let request = QueryFullSpotOrderbookRequest { market_id };
+        self.querier
+            .query::<QueryFullSpotOrderbookResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/L3SpotOrderBook".to_string(),
+                data: request.into(),
+            })
     }
     pub fn query_exchange_params(&self) -> Result<QueryExchangeParamsResponse, cosmwasm_std::StdError> {
-        QueryExchangeParamsRequest {}.query(self.querier)
+        let request = QueryExchangeParamsRequest {};
+        self.querier
+            .query::<QueryExchangeParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/QueryExchangeParams".to_string(),
+                data: request.into(),
+            })
     }
     pub fn subaccount_deposits(
         &self,
         subaccount_id: ::prost::alloc::string::String,
         subaccount: ::core::option::Option<Subaccount>,
     ) -> Result<QuerySubaccountDepositsResponse, cosmwasm_std::StdError> {
-        QuerySubaccountDepositsRequest { subaccount_id, subaccount }.query(self.querier)
+        let request = QuerySubaccountDepositsRequest { subaccount_id, subaccount };
+        self.querier
+            .query::<QuerySubaccountDepositsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/SubaccountDeposits".to_string(),
+                data: request.into(),
+            })
     }
     pub fn subaccount_deposit(
         &self,
         subaccount_id: ::prost::alloc::string::String,
         denom: ::prost::alloc::string::String,
     ) -> Result<QuerySubaccountDepositResponse, cosmwasm_std::StdError> {
-        QuerySubaccountDepositRequest { subaccount_id, denom }.query(self.querier)
+        let request = QuerySubaccountDepositRequest { subaccount_id, denom };
+        self.querier
+            .query::<QuerySubaccountDepositResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/SubaccountDeposit".to_string(),
+                data: request.into(),
+            })
     }
     pub fn exchange_balances(&self) -> Result<QueryExchangeBalancesResponse, cosmwasm_std::StdError> {
-        QueryExchangeBalancesRequest {}.query(self.querier)
+        let request = QueryExchangeBalancesRequest {};
+        self.querier
+            .query::<QueryExchangeBalancesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/ExchangeBalances".to_string(),
+                data: request.into(),
+            })
     }
     pub fn aggregate_volume(&self, account: ::prost::alloc::string::String) -> Result<QueryAggregateVolumeResponse, cosmwasm_std::StdError> {
-        QueryAggregateVolumeRequest { account }.query(self.querier)
+        let request = QueryAggregateVolumeRequest { account };
+        self.querier
+            .query::<QueryAggregateVolumeResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/AggregateVolume".to_string(),
+                data: request.into(),
+            })
     }
     pub fn aggregate_volumes(
         &self,
         accounts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     ) -> Result<QueryAggregateVolumesResponse, cosmwasm_std::StdError> {
-        QueryAggregateVolumesRequest { accounts, market_ids }.query(self.querier)
+        let request = QueryAggregateVolumesRequest { accounts, market_ids };
+        self.querier
+            .query::<QueryAggregateVolumesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/AggregateVolumes".to_string(),
+                data: request.into(),
+            })
     }
     pub fn aggregate_market_volume(
         &self,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QueryAggregateMarketVolumeResponse, cosmwasm_std::StdError> {
-        QueryAggregateMarketVolumeRequest { market_id }.query(self.querier)
+        let request = QueryAggregateMarketVolumeRequest { market_id };
+        self.querier
+            .query::<QueryAggregateMarketVolumeResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/AggregateMarketVolume".to_string(),
+                data: request.into(),
+            })
     }
     pub fn aggregate_market_volumes(
         &self,
         market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     ) -> Result<QueryAggregateMarketVolumesResponse, cosmwasm_std::StdError> {
-        QueryAggregateMarketVolumesRequest { market_ids }.query(self.querier)
+        let request = QueryAggregateMarketVolumesRequest { market_ids };
+        self.querier
+            .query::<QueryAggregateMarketVolumesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/AggregateMarketVolumes".to_string(),
+                data: request.into(),
+            })
     }
     pub fn auction_exchange_transfer_denom_decimal(
         &self,
         denom: ::prost::alloc::string::String,
     ) -> Result<QueryAuctionExchangeTransferDenomDecimalResponse, cosmwasm_std::StdError> {
-        QueryAuctionExchangeTransferDenomDecimalRequest { denom }.query(self.querier)
+        let request = QueryAuctionExchangeTransferDenomDecimalRequest { denom };
+        self.querier
+            .query::<QueryAuctionExchangeTransferDenomDecimalResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/AuctionExchangeTransferDenomDecimal".to_string(),
+                data: request.into(),
+            })
     }
     pub fn auction_exchange_transfer_denom_decimals(
         &self,
         denoms: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     ) -> Result<QueryAuctionExchangeTransferDenomDecimalsResponse, cosmwasm_std::StdError> {
-        QueryAuctionExchangeTransferDenomDecimalsRequest { denoms }.query(self.querier)
+        let request = QueryAuctionExchangeTransferDenomDecimalsRequest { denoms };
+        self.querier
+            .query::<QueryAuctionExchangeTransferDenomDecimalsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/AuctionExchangeTransferDenomDecimals".to_string(),
+                data: request.into(),
+            })
     }
     pub fn spot_markets(
         &self,
         status: ::prost::alloc::string::String,
         market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     ) -> Result<QuerySpotMarketsResponse, cosmwasm_std::StdError> {
-        QuerySpotMarketsRequest { status, market_ids }.query(self.querier)
+        let request = QuerySpotMarketsRequest { status, market_ids };
+        self.querier
+            .query::<QuerySpotMarketsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/SpotMarkets".to_string(),
+                data: request.into(),
+            })
     }
     pub fn spot_market(&self, market_id: ::prost::alloc::string::String) -> Result<QuerySpotMarketResponse, cosmwasm_std::StdError> {
-        QuerySpotMarketRequest { market_id }.query(self.querier)
+        let request = QuerySpotMarketRequest { market_id };
+        self.querier.query::<QuerySpotMarketResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/injective.exchange.v2.Query/SpotMarket".to_string(),
+            data: request.into(),
+        })
     }
     pub fn full_spot_markets(
         &self,
@@ -6593,23 +6662,31 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
         market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         with_mid_price_and_tob: bool,
     ) -> Result<QueryFullSpotMarketsResponse, cosmwasm_std::StdError> {
-        QueryFullSpotMarketsRequest {
+        let request = QueryFullSpotMarketsRequest {
             status,
             market_ids,
             with_mid_price_and_tob,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryFullSpotMarketsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/FullSpotMarkets".to_string(),
+                data: request.into(),
+            })
     }
     pub fn full_spot_market(
         &self,
         market_id: ::prost::alloc::string::String,
         with_mid_price_and_tob: bool,
     ) -> Result<QueryFullSpotMarketResponse, cosmwasm_std::StdError> {
-        QueryFullSpotMarketRequest {
+        let request = QueryFullSpotMarketRequest {
             market_id,
             with_mid_price_and_tob,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryFullSpotMarketResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/FullSpotMarket".to_string(),
+                data: request.into(),
+            })
     }
     pub fn spot_orderbook(
         &self,
@@ -6619,28 +6696,42 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
         limit_cumulative_notional: ::prost::alloc::string::String,
         limit_cumulative_quantity: ::prost::alloc::string::String,
     ) -> Result<QuerySpotOrderbookResponse, cosmwasm_std::StdError> {
-        QuerySpotOrderbookRequest {
+        let request = QuerySpotOrderbookRequest {
             market_id,
             limit,
             order_side,
             limit_cumulative_notional,
             limit_cumulative_quantity,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QuerySpotOrderbookResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/SpotOrderbook".to_string(),
+                data: request.into(),
+            })
     }
     pub fn trader_spot_orders(
         &self,
         market_id: ::prost::alloc::string::String,
         subaccount_id: ::prost::alloc::string::String,
     ) -> Result<QueryTraderSpotOrdersResponse, cosmwasm_std::StdError> {
-        QueryTraderSpotOrdersRequest { market_id, subaccount_id }.query(self.querier)
+        let request = QueryTraderSpotOrdersRequest { market_id, subaccount_id };
+        self.querier
+            .query::<QueryTraderSpotOrdersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/TraderSpotOrders".to_string(),
+                data: request.into(),
+            })
     }
     pub fn account_address_spot_orders(
         &self,
         market_id: ::prost::alloc::string::String,
         account_address: ::prost::alloc::string::String,
     ) -> Result<QueryAccountAddressSpotOrdersResponse, cosmwasm_std::StdError> {
-        QueryAccountAddressSpotOrdersRequest { market_id, account_address }.query(self.querier)
+        let request = QueryAccountAddressSpotOrdersRequest { market_id, account_address };
+        self.querier
+            .query::<QueryAccountAddressSpotOrdersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/AccountAddressSpotOrders".to_string(),
+                data: request.into(),
+            })
     }
     pub fn spot_orders_by_hashes(
         &self,
@@ -6648,38 +6739,62 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
         subaccount_id: ::prost::alloc::string::String,
         order_hashes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     ) -> Result<QuerySpotOrdersByHashesResponse, cosmwasm_std::StdError> {
-        QuerySpotOrdersByHashesRequest {
+        let request = QuerySpotOrdersByHashesRequest {
             market_id,
             subaccount_id,
             order_hashes,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QuerySpotOrdersByHashesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/SpotOrdersByHashes".to_string(),
+                data: request.into(),
+            })
     }
     pub fn subaccount_orders(
         &self,
         subaccount_id: ::prost::alloc::string::String,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QuerySubaccountOrdersResponse, cosmwasm_std::StdError> {
-        QuerySubaccountOrdersRequest { subaccount_id, market_id }.query(self.querier)
+        let request = QuerySubaccountOrdersRequest { subaccount_id, market_id };
+        self.querier
+            .query::<QuerySubaccountOrdersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/SubaccountOrders".to_string(),
+                data: request.into(),
+            })
     }
     pub fn trader_spot_transient_orders(
         &self,
         market_id: ::prost::alloc::string::String,
         subaccount_id: ::prost::alloc::string::String,
     ) -> Result<QueryTraderSpotOrdersResponse, cosmwasm_std::StdError> {
-        QueryTraderSpotOrdersRequest { market_id, subaccount_id }.query(self.querier)
+        let request = QueryTraderSpotOrdersRequest { market_id, subaccount_id };
+        self.querier
+            .query::<QueryTraderSpotOrdersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/TraderSpotTransientOrders".to_string(),
+                data: request.into(),
+            })
     }
     pub fn spot_mid_price_and_tob(
         &self,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QuerySpotMidPriceAndTobResponse, cosmwasm_std::StdError> {
-        QuerySpotMidPriceAndTobRequest { market_id }.query(self.querier)
+        let request = QuerySpotMidPriceAndTobRequest { market_id };
+        self.querier
+            .query::<QuerySpotMidPriceAndTobResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/SpotMidPriceAndTOB".to_string(),
+                data: request.into(),
+            })
     }
     pub fn derivative_mid_price_and_tob(
         &self,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QueryDerivativeMidPriceAndTobResponse, cosmwasm_std::StdError> {
-        QueryDerivativeMidPriceAndTobRequest { market_id }.query(self.querier)
+        let request = QueryDerivativeMidPriceAndTobRequest { market_id };
+        self.querier
+            .query::<QueryDerivativeMidPriceAndTobResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/DerivativeMidPriceAndTOB".to_string(),
+                data: request.into(),
+            })
     }
     pub fn derivative_orderbook(
         &self,
@@ -6687,26 +6802,40 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
         limit: u64,
         limit_cumulative_notional: ::prost::alloc::string::String,
     ) -> Result<QueryDerivativeOrderbookResponse, cosmwasm_std::StdError> {
-        QueryDerivativeOrderbookRequest {
+        let request = QueryDerivativeOrderbookRequest {
             market_id,
             limit,
             limit_cumulative_notional,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryDerivativeOrderbookResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/DerivativeOrderbook".to_string(),
+                data: request.into(),
+            })
     }
     pub fn trader_derivative_orders(
         &self,
         market_id: ::prost::alloc::string::String,
         subaccount_id: ::prost::alloc::string::String,
     ) -> Result<QueryTraderDerivativeOrdersResponse, cosmwasm_std::StdError> {
-        QueryTraderDerivativeOrdersRequest { market_id, subaccount_id }.query(self.querier)
+        let request = QueryTraderDerivativeOrdersRequest { market_id, subaccount_id };
+        self.querier
+            .query::<QueryTraderDerivativeOrdersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/TraderDerivativeOrders".to_string(),
+                data: request.into(),
+            })
     }
     pub fn account_address_derivative_orders(
         &self,
         market_id: ::prost::alloc::string::String,
         account_address: ::prost::alloc::string::String,
     ) -> Result<QueryAccountAddressDerivativeOrdersResponse, cosmwasm_std::StdError> {
-        QueryAccountAddressDerivativeOrdersRequest { market_id, account_address }.query(self.querier)
+        let request = QueryAccountAddressDerivativeOrdersRequest { market_id, account_address };
+        self.querier
+            .query::<QueryAccountAddressDerivativeOrdersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/AccountAddressDerivativeOrders".to_string(),
+                data: request.into(),
+            })
     }
     pub fn derivative_orders_by_hashes(
         &self,
@@ -6714,19 +6843,28 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
         subaccount_id: ::prost::alloc::string::String,
         order_hashes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     ) -> Result<QueryDerivativeOrdersByHashesResponse, cosmwasm_std::StdError> {
-        QueryDerivativeOrdersByHashesRequest {
+        let request = QueryDerivativeOrdersByHashesRequest {
             market_id,
             subaccount_id,
             order_hashes,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryDerivativeOrdersByHashesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/DerivativeOrdersByHashes".to_string(),
+                data: request.into(),
+            })
     }
     pub fn trader_derivative_transient_orders(
         &self,
         market_id: ::prost::alloc::string::String,
         subaccount_id: ::prost::alloc::string::String,
     ) -> Result<QueryTraderDerivativeOrdersResponse, cosmwasm_std::StdError> {
-        QueryTraderDerivativeOrdersRequest { market_id, subaccount_id }.query(self.querier)
+        let request = QueryTraderDerivativeOrdersRequest { market_id, subaccount_id };
+        self.querier
+            .query::<QueryTraderDerivativeOrdersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/TraderDerivativeTransientOrders".to_string(),
+                data: request.into(),
+            })
     }
     pub fn derivative_markets(
         &self,
@@ -6734,201 +6872,390 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
         market_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         with_mid_price_and_tob: bool,
     ) -> Result<QueryDerivativeMarketsResponse, cosmwasm_std::StdError> {
-        QueryDerivativeMarketsRequest {
+        let request = QueryDerivativeMarketsRequest {
             status,
             market_ids,
             with_mid_price_and_tob,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryDerivativeMarketsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/DerivativeMarkets".to_string(),
+                data: request.into(),
+            })
     }
     pub fn derivative_market(&self, market_id: ::prost::alloc::string::String) -> Result<QueryDerivativeMarketResponse, cosmwasm_std::StdError> {
-        QueryDerivativeMarketRequest { market_id }.query(self.querier)
+        let request = QueryDerivativeMarketRequest { market_id };
+        self.querier
+            .query::<QueryDerivativeMarketResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/DerivativeMarket".to_string(),
+                data: request.into(),
+            })
     }
     pub fn derivative_market_address(
         &self,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QueryDerivativeMarketAddressResponse, cosmwasm_std::StdError> {
-        QueryDerivativeMarketAddressRequest { market_id }.query(self.querier)
+        let request = QueryDerivativeMarketAddressRequest { market_id };
+        self.querier
+            .query::<QueryDerivativeMarketAddressResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/DerivativeMarketAddress".to_string(),
+                data: request.into(),
+            })
     }
     pub fn subaccount_trade_nonce(
         &self,
         subaccount_id: ::prost::alloc::string::String,
     ) -> Result<QuerySubaccountTradeNonceResponse, cosmwasm_std::StdError> {
-        QuerySubaccountTradeNonceRequest { subaccount_id }.query(self.querier)
+        let request = QuerySubaccountTradeNonceRequest { subaccount_id };
+        self.querier
+            .query::<QuerySubaccountTradeNonceResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/SubaccountTradeNonce".to_string(),
+                data: request.into(),
+            })
     }
     pub fn exchange_module_state(&self) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
-        QueryModuleStateRequest {}.query(self.querier)
+        let request = QueryModuleStateRequest {};
+        self.querier
+            .query::<QueryModuleStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/ExchangeModuleState".to_string(),
+                data: request.into(),
+            })
     }
     pub fn positions(&self) -> Result<QueryPositionsResponse, cosmwasm_std::StdError> {
-        QueryPositionsRequest {}.query(self.querier)
+        let request = QueryPositionsRequest {};
+        self.querier.query::<QueryPositionsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/injective.exchange.v2.Query/Positions".to_string(),
+            data: request.into(),
+        })
     }
     pub fn positions_in_market(&self, market_id: ::prost::alloc::string::String) -> Result<QueryPositionsInMarketResponse, cosmwasm_std::StdError> {
-        QueryPositionsInMarketRequest { market_id }.query(self.querier)
+        let request = QueryPositionsInMarketRequest { market_id };
+        self.querier
+            .query::<QueryPositionsInMarketResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/PositionsInMarket".to_string(),
+                data: request.into(),
+            })
     }
     pub fn subaccount_positions(
         &self,
         subaccount_id: ::prost::alloc::string::String,
     ) -> Result<QuerySubaccountPositionsResponse, cosmwasm_std::StdError> {
-        QuerySubaccountPositionsRequest { subaccount_id }.query(self.querier)
+        let request = QuerySubaccountPositionsRequest { subaccount_id };
+        self.querier
+            .query::<QuerySubaccountPositionsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/SubaccountPositions".to_string(),
+                data: request.into(),
+            })
     }
     pub fn subaccount_position_in_market(
         &self,
         subaccount_id: ::prost::alloc::string::String,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QuerySubaccountPositionInMarketResponse, cosmwasm_std::StdError> {
-        QuerySubaccountPositionInMarketRequest { subaccount_id, market_id }.query(self.querier)
+        let request = QuerySubaccountPositionInMarketRequest { subaccount_id, market_id };
+        self.querier
+            .query::<QuerySubaccountPositionInMarketResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/SubaccountPositionInMarket".to_string(),
+                data: request.into(),
+            })
     }
     pub fn subaccount_effective_position_in_market(
         &self,
         subaccount_id: ::prost::alloc::string::String,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QuerySubaccountEffectivePositionInMarketResponse, cosmwasm_std::StdError> {
-        QuerySubaccountEffectivePositionInMarketRequest { subaccount_id, market_id }.query(self.querier)
+        let request = QuerySubaccountEffectivePositionInMarketRequest { subaccount_id, market_id };
+        self.querier
+            .query::<QuerySubaccountEffectivePositionInMarketResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/SubaccountEffectivePositionInMarket".to_string(),
+                data: request.into(),
+            })
     }
     pub fn perpetual_market_info(
         &self,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QueryPerpetualMarketInfoResponse, cosmwasm_std::StdError> {
-        QueryPerpetualMarketInfoRequest { market_id }.query(self.querier)
+        let request = QueryPerpetualMarketInfoRequest { market_id };
+        self.querier
+            .query::<QueryPerpetualMarketInfoResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/PerpetualMarketInfo".to_string(),
+                data: request.into(),
+            })
     }
     pub fn expiry_futures_market_info(
         &self,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QueryExpiryFuturesMarketInfoResponse, cosmwasm_std::StdError> {
-        QueryExpiryFuturesMarketInfoRequest { market_id }.query(self.querier)
+        let request = QueryExpiryFuturesMarketInfoRequest { market_id };
+        self.querier
+            .query::<QueryExpiryFuturesMarketInfoResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/ExpiryFuturesMarketInfo".to_string(),
+                data: request.into(),
+            })
     }
     pub fn perpetual_market_funding(
         &self,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QueryPerpetualMarketFundingResponse, cosmwasm_std::StdError> {
-        QueryPerpetualMarketFundingRequest { market_id }.query(self.querier)
+        let request = QueryPerpetualMarketFundingRequest { market_id };
+        self.querier
+            .query::<QueryPerpetualMarketFundingResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/PerpetualMarketFunding".to_string(),
+                data: request.into(),
+            })
     }
     pub fn subaccount_order_metadata(
         &self,
         subaccount_id: ::prost::alloc::string::String,
     ) -> Result<QuerySubaccountOrderMetadataResponse, cosmwasm_std::StdError> {
-        QuerySubaccountOrderMetadataRequest { subaccount_id }.query(self.querier)
+        let request = QuerySubaccountOrderMetadataRequest { subaccount_id };
+        self.querier
+            .query::<QuerySubaccountOrderMetadataResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/SubaccountOrderMetadata".to_string(),
+                data: request.into(),
+            })
     }
     pub fn trade_reward_points(
         &self,
         accounts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         pending_pool_timestamp: i64,
     ) -> Result<QueryTradeRewardPointsResponse, cosmwasm_std::StdError> {
-        QueryTradeRewardPointsRequest {
+        let request = QueryTradeRewardPointsRequest {
             accounts,
             pending_pool_timestamp,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryTradeRewardPointsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/TradeRewardPoints".to_string(),
+                data: request.into(),
+            })
     }
     pub fn pending_trade_reward_points(
         &self,
         accounts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         pending_pool_timestamp: i64,
     ) -> Result<QueryTradeRewardPointsResponse, cosmwasm_std::StdError> {
-        QueryTradeRewardPointsRequest {
+        let request = QueryTradeRewardPointsRequest {
             accounts,
             pending_pool_timestamp,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryTradeRewardPointsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/PendingTradeRewardPoints".to_string(),
+                data: request.into(),
+            })
     }
     pub fn trade_reward_campaign(&self) -> Result<QueryTradeRewardCampaignResponse, cosmwasm_std::StdError> {
-        QueryTradeRewardCampaignRequest {}.query(self.querier)
+        let request = QueryTradeRewardCampaignRequest {};
+        self.querier
+            .query::<QueryTradeRewardCampaignResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/TradeRewardCampaign".to_string(),
+                data: request.into(),
+            })
     }
     pub fn fee_discount_account_info(
         &self,
         account: ::prost::alloc::string::String,
     ) -> Result<QueryFeeDiscountAccountInfoResponse, cosmwasm_std::StdError> {
-        QueryFeeDiscountAccountInfoRequest { account }.query(self.querier)
+        let request = QueryFeeDiscountAccountInfoRequest { account };
+        self.querier
+            .query::<QueryFeeDiscountAccountInfoResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/FeeDiscountAccountInfo".to_string(),
+                data: request.into(),
+            })
     }
     pub fn fee_discount_schedule(&self) -> Result<QueryFeeDiscountScheduleResponse, cosmwasm_std::StdError> {
-        QueryFeeDiscountScheduleRequest {}.query(self.querier)
+        let request = QueryFeeDiscountScheduleRequest {};
+        self.querier
+            .query::<QueryFeeDiscountScheduleResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/FeeDiscountSchedule".to_string(),
+                data: request.into(),
+            })
     }
     pub fn balance_mismatches(&self, dust_factor: i64) -> Result<QueryBalanceMismatchesResponse, cosmwasm_std::StdError> {
-        QueryBalanceMismatchesRequest { dust_factor }.query(self.querier)
+        let request = QueryBalanceMismatchesRequest { dust_factor };
+        self.querier
+            .query::<QueryBalanceMismatchesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/BalanceMismatches".to_string(),
+                data: request.into(),
+            })
     }
     pub fn balance_with_balance_holds(&self) -> Result<QueryBalanceWithBalanceHoldsResponse, cosmwasm_std::StdError> {
-        QueryBalanceWithBalanceHoldsRequest {}.query(self.querier)
+        let request = QueryBalanceWithBalanceHoldsRequest {};
+        self.querier
+            .query::<QueryBalanceWithBalanceHoldsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/BalanceWithBalanceHolds".to_string(),
+                data: request.into(),
+            })
     }
     pub fn fee_discount_tier_statistics(&self) -> Result<QueryFeeDiscountTierStatisticsResponse, cosmwasm_std::StdError> {
-        QueryFeeDiscountTierStatisticsRequest {}.query(self.querier)
+        let request = QueryFeeDiscountTierStatisticsRequest {};
+        self.querier
+            .query::<QueryFeeDiscountTierStatisticsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/FeeDiscountTierStatistics".to_string(),
+                data: request.into(),
+            })
     }
     pub fn mito_vault_infos(&self) -> Result<MitoVaultInfosResponse, cosmwasm_std::StdError> {
-        MitoVaultInfosRequest {}.query(self.querier)
+        let request = MitoVaultInfosRequest {};
+        self.querier.query::<MitoVaultInfosResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/injective.exchange.v2.Query/MitoVaultInfos".to_string(),
+            data: request.into(),
+        })
     }
     pub fn query_market_id_from_vault(
         &self,
         vault_address: ::prost::alloc::string::String,
     ) -> Result<QueryMarketIdFromVaultResponse, cosmwasm_std::StdError> {
-        QueryMarketIdFromVaultRequest { vault_address }.query(self.querier)
+        let request = QueryMarketIdFromVaultRequest { vault_address };
+        self.querier
+            .query::<QueryMarketIdFromVaultResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/QueryMarketIDFromVault".to_string(),
+                data: request.into(),
+            })
     }
     pub fn historical_trade_records(
         &self,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QueryHistoricalTradeRecordsResponse, cosmwasm_std::StdError> {
-        QueryHistoricalTradeRecordsRequest { market_id }.query(self.querier)
+        let request = QueryHistoricalTradeRecordsRequest { market_id };
+        self.querier
+            .query::<QueryHistoricalTradeRecordsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/HistoricalTradeRecords".to_string(),
+                data: request.into(),
+            })
     }
     pub fn is_opted_out_of_rewards(
         &self,
         account: ::prost::alloc::string::String,
     ) -> Result<QueryIsOptedOutOfRewardsResponse, cosmwasm_std::StdError> {
-        QueryIsOptedOutOfRewardsRequest { account }.query(self.querier)
+        let request = QueryIsOptedOutOfRewardsRequest { account };
+        self.querier
+            .query::<QueryIsOptedOutOfRewardsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/IsOptedOutOfRewards".to_string(),
+                data: request.into(),
+            })
     }
     pub fn opted_out_of_rewards_accounts(&self) -> Result<QueryOptedOutOfRewardsAccountsResponse, cosmwasm_std::StdError> {
-        QueryOptedOutOfRewardsAccountsRequest {}.query(self.querier)
+        let request = QueryOptedOutOfRewardsAccountsRequest {};
+        self.querier
+            .query::<QueryOptedOutOfRewardsAccountsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/OptedOutOfRewardsAccounts".to_string(),
+                data: request.into(),
+            })
     }
     pub fn market_volatility(
         &self,
         market_id: ::prost::alloc::string::String,
         trade_history_options: ::core::option::Option<TradeHistoryOptions>,
     ) -> Result<QueryMarketVolatilityResponse, cosmwasm_std::StdError> {
-        QueryMarketVolatilityRequest {
+        let request = QueryMarketVolatilityRequest {
             market_id,
             trade_history_options,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryMarketVolatilityResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/MarketVolatility".to_string(),
+                data: request.into(),
+            })
     }
     pub fn binary_options_markets(&self, status: ::prost::alloc::string::String) -> Result<QueryBinaryMarketsResponse, cosmwasm_std::StdError> {
-        QueryBinaryMarketsRequest { status }.query(self.querier)
+        let request = QueryBinaryMarketsRequest { status };
+        self.querier
+            .query::<QueryBinaryMarketsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/BinaryOptionsMarkets".to_string(),
+                data: request.into(),
+            })
     }
     pub fn trader_derivative_conditional_orders(
         &self,
         subaccount_id: ::prost::alloc::string::String,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QueryTraderDerivativeConditionalOrdersResponse, cosmwasm_std::StdError> {
-        QueryTraderDerivativeConditionalOrdersRequest { subaccount_id, market_id }.query(self.querier)
+        let request = QueryTraderDerivativeConditionalOrdersRequest { subaccount_id, market_id };
+        self.querier
+            .query::<QueryTraderDerivativeConditionalOrdersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/TraderDerivativeConditionalOrders".to_string(),
+                data: request.into(),
+            })
     }
     pub fn market_atomic_execution_fee_multiplier(
         &self,
         market_id: ::prost::alloc::string::String,
     ) -> Result<QueryMarketAtomicExecutionFeeMultiplierResponse, cosmwasm_std::StdError> {
-        QueryMarketAtomicExecutionFeeMultiplierRequest { market_id }.query(self.querier)
+        let request = QueryMarketAtomicExecutionFeeMultiplierRequest { market_id };
+        self.querier
+            .query::<QueryMarketAtomicExecutionFeeMultiplierResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/MarketAtomicExecutionFeeMultiplier".to_string(),
+                data: request.into(),
+            })
     }
     pub fn active_stake_grant(&self, grantee: ::prost::alloc::string::String) -> Result<QueryActiveStakeGrantResponse, cosmwasm_std::StdError> {
-        QueryActiveStakeGrantRequest { grantee }.query(self.querier)
+        let request = QueryActiveStakeGrantRequest { grantee };
+        self.querier
+            .query::<QueryActiveStakeGrantResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/ActiveStakeGrant".to_string(),
+                data: request.into(),
+            })
     }
     pub fn grant_authorization(
         &self,
         granter: ::prost::alloc::string::String,
         grantee: ::prost::alloc::string::String,
     ) -> Result<QueryGrantAuthorizationResponse, cosmwasm_std::StdError> {
-        QueryGrantAuthorizationRequest { granter, grantee }.query(self.querier)
+        let request = QueryGrantAuthorizationRequest { granter, grantee };
+        self.querier
+            .query::<QueryGrantAuthorizationResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/GrantAuthorization".to_string(),
+                data: request.into(),
+            })
     }
     pub fn grant_authorizations(&self, granter: ::prost::alloc::string::String) -> Result<QueryGrantAuthorizationsResponse, cosmwasm_std::StdError> {
-        QueryGrantAuthorizationsRequest { granter }.query(self.querier)
+        let request = QueryGrantAuthorizationsRequest { granter };
+        self.querier
+            .query::<QueryGrantAuthorizationsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/GrantAuthorizations".to_string(),
+                data: request.into(),
+            })
     }
     pub fn market_balance(&self, market_id: ::prost::alloc::string::String) -> Result<QueryMarketBalanceResponse, cosmwasm_std::StdError> {
-        QueryMarketBalanceRequest { market_id }.query(self.querier)
+        let request = QueryMarketBalanceRequest { market_id };
+        self.querier
+            .query::<QueryMarketBalanceResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/MarketBalance".to_string(),
+                data: request.into(),
+            })
     }
     pub fn market_balances(&self) -> Result<QueryMarketBalancesResponse, cosmwasm_std::StdError> {
-        QueryMarketBalancesRequest {}.query(self.querier)
+        let request = QueryMarketBalancesRequest {};
+        self.querier
+            .query::<QueryMarketBalancesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/MarketBalances".to_string(),
+                data: request.into(),
+            })
     }
     pub fn denom_min_notional(&self, denom: ::prost::alloc::string::String) -> Result<QueryDenomMinNotionalResponse, cosmwasm_std::StdError> {
-        QueryDenomMinNotionalRequest { denom }.query(self.querier)
+        let request = QueryDenomMinNotionalRequest { denom };
+        self.querier
+            .query::<QueryDenomMinNotionalResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/DenomMinNotional".to_string(),
+                data: request.into(),
+            })
     }
     pub fn denom_min_notionals(&self) -> Result<QueryDenomMinNotionalsResponse, cosmwasm_std::StdError> {
-        QueryDenomMinNotionalsRequest {}.query(self.querier)
+        let request = QueryDenomMinNotionalsRequest {};
+        self.querier
+            .query::<QueryDenomMinNotionalsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/DenomMinNotionals".to_string(),
+                data: request.into(),
+            })
     }
     pub fn open_interest(&self, market_id: ::prost::alloc::string::String) -> Result<QueryOpenInterestResponse, cosmwasm_std::StdError> {
-        QueryOpenInterestRequest { market_id }.query(self.querier)
+        let request = QueryOpenInterestRequest { market_id };
+        self.querier
+            .query::<QueryOpenInterestResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.exchange.v2.Query/OpenInterest".to_string(),
+                data: request.into(),
+            })
     }
 }

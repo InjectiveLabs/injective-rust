@@ -90,9 +90,17 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ParamsQuerier<'a, Q> {
         subspace: ::prost::alloc::string::String,
         key: ::prost::alloc::string::String,
     ) -> Result<QueryParamsResponse, cosmwasm_std::StdError> {
-        QueryParamsRequest { subspace, key }.query(self.querier)
+        let request = QueryParamsRequest { subspace, key };
+        self.querier.query::<QueryParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/cosmos.params.v1beta1.Query/Params".to_string(),
+            data: request.into(),
+        })
     }
     pub fn subspaces(&self) -> Result<QuerySubspacesResponse, cosmwasm_std::StdError> {
-        QuerySubspacesRequest {}.query(self.querier)
+        let request = QuerySubspacesRequest {};
+        self.querier.query::<QuerySubspacesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/cosmos.params.v1beta1.Query/Subspaces".to_string(),
+            data: request.into(),
+        })
     }
 }

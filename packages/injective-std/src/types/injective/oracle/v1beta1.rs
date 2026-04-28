@@ -6,8 +6,6 @@ pub struct Params {
     pub pyth_contract: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
     pub chainlink_verifier_proxy_contract: ::prost::alloc::string::String,
-    #[prost(bool, tag = "3")]
-    pub accept_unverified_chainlink_data_streams_reports: bool,
     #[prost(uint64, tag = "4")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
@@ -26,6 +24,7 @@ pub struct OracleInfo {
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.ChainlinkPriceState")]
+#[deprecated]
 pub struct ChainlinkPriceState {
     #[prost(string, tag = "1")]
     #[serde(alias = "feedID")]
@@ -220,6 +219,12 @@ pub struct ChainlinkDataStreamsPriceState {
     pub observations_timestamp: u64,
     #[prost(message, optional, tag = "5")]
     pub price_state: ::core::option::Option<PriceState>,
+    #[prost(uint64, tag = "6")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub expires_at: u64,
 }
 /// DEPRECATED! Oracle price from Band is no longer supported
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -579,8 +584,10 @@ impl OracleType {
         }
     }
 }
+/// Deprecated: Do not use.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.SetChainlinkPriceEvent")]
+#[deprecated]
 pub struct SetChainlinkPriceEvent {
     #[prost(string, tag = "1")]
     #[serde(alias = "feedID")]
@@ -594,9 +601,10 @@ pub struct SetChainlinkPriceEvent {
     )]
     pub timestamp: u64,
 }
-/// Event type upon set ref
+/// Deprecated: Do not use.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.SetBandPriceEvent")]
+#[deprecated]
 pub struct SetBandPriceEvent {
     #[prost(string, tag = "1")]
     pub relayer: ::prost::alloc::string::String,
@@ -618,8 +626,10 @@ pub struct SetBandPriceEvent {
     )]
     pub request_id: u64,
 }
+/// Deprecated: Do not use.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.SetBandIBCPriceEvent")]
+#[deprecated]
 pub struct SetBandIbcPriceEvent {
     #[prost(string, tag = "1")]
     pub relayer: ::prost::alloc::string::String,
@@ -648,8 +658,10 @@ pub struct SetBandIbcPriceEvent {
     )]
     pub client_id: i64,
 }
+/// Deprecated: Do not use.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.EventBandIBCAckSuccess")]
+#[deprecated]
 pub struct EventBandIbcAckSuccess {
     #[prost(string, tag = "1")]
     pub ack_result: ::prost::alloc::string::String,
@@ -661,8 +673,10 @@ pub struct EventBandIbcAckSuccess {
     )]
     pub client_id: i64,
 }
+/// Deprecated: Do not use.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.EventBandIBCAckError")]
+#[deprecated]
 pub struct EventBandIbcAckError {
     #[prost(string, tag = "1")]
     pub ack_error: ::prost::alloc::string::String,
@@ -674,8 +688,10 @@ pub struct EventBandIbcAckError {
     )]
     pub client_id: i64,
 }
+/// Deprecated: Do not use.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.EventBandIBCResponseTimeout")]
+#[deprecated]
 pub struct EventBandIbcResponseTimeout {
     #[prost(int64, tag = "1")]
     #[serde(alias = "clientID")]
@@ -787,6 +803,7 @@ pub struct GenesisState {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub band_ibc_latest_request_id: u64,
+    #[deprecated]
     #[prost(message, repeated, tag = "12")]
     pub chainlink_price_states: ::prost::alloc::vec::Vec<ChainlinkPriceState>,
     #[prost(message, repeated, tag = "13")]
@@ -1457,51 +1474,115 @@ impl<'a, Q: cosmwasm_std::CustomQuery> OracleQuerier<'a, Q> {
         Self { querier }
     }
     pub fn params(&self) -> Result<QueryParamsResponse, cosmwasm_std::StdError> {
-        QueryParamsRequest {}.query(self.querier)
+        let request = QueryParamsRequest {};
+        self.querier.query::<QueryParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/injective.oracle.v1beta1.Query/Params".to_string(),
+            data: request.into(),
+        })
     }
     pub fn band_relayers(&self) -> Result<QueryBandRelayersResponse, cosmwasm_std::StdError> {
-        QueryBandRelayersRequest {}.query(self.querier)
+        let request = QueryBandRelayersRequest {};
+        self.querier
+            .query::<QueryBandRelayersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/BandRelayers".to_string(),
+                data: request.into(),
+            })
     }
     pub fn band_price_states(&self) -> Result<QueryBandPriceStatesResponse, cosmwasm_std::StdError> {
-        QueryBandPriceStatesRequest {}.query(self.querier)
+        let request = QueryBandPriceStatesRequest {};
+        self.querier
+            .query::<QueryBandPriceStatesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/BandPriceStates".to_string(),
+                data: request.into(),
+            })
     }
     pub fn band_ibc_price_states(&self) -> Result<QueryBandIbcPriceStatesResponse, cosmwasm_std::StdError> {
-        QueryBandIbcPriceStatesRequest {}.query(self.querier)
+        let request = QueryBandIbcPriceStatesRequest {};
+        self.querier
+            .query::<QueryBandIbcPriceStatesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/BandIBCPriceStates".to_string(),
+                data: request.into(),
+            })
     }
     pub fn price_feed_price_states(&self) -> Result<QueryPriceFeedPriceStatesResponse, cosmwasm_std::StdError> {
-        QueryPriceFeedPriceStatesRequest {}.query(self.querier)
+        let request = QueryPriceFeedPriceStatesRequest {};
+        self.querier
+            .query::<QueryPriceFeedPriceStatesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/PriceFeedPriceStates".to_string(),
+                data: request.into(),
+            })
     }
     pub fn coinbase_price_states(&self) -> Result<QueryCoinbasePriceStatesResponse, cosmwasm_std::StdError> {
-        QueryCoinbasePriceStatesRequest {}.query(self.querier)
+        let request = QueryCoinbasePriceStatesRequest {};
+        self.querier
+            .query::<QueryCoinbasePriceStatesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/CoinbasePriceStates".to_string(),
+                data: request.into(),
+            })
     }
     pub fn pyth_price_states(&self) -> Result<QueryPythPriceStatesResponse, cosmwasm_std::StdError> {
-        QueryPythPriceStatesRequest {}.query(self.querier)
+        let request = QueryPythPriceStatesRequest {};
+        self.querier
+            .query::<QueryPythPriceStatesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/PythPriceStates".to_string(),
+                data: request.into(),
+            })
     }
     pub fn stork_price_states(&self) -> Result<QueryStorkPriceStatesResponse, cosmwasm_std::StdError> {
-        QueryStorkPriceStatesRequest {}.query(self.querier)
+        let request = QueryStorkPriceStatesRequest {};
+        self.querier
+            .query::<QueryStorkPriceStatesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/StorkPriceStates".to_string(),
+                data: request.into(),
+            })
     }
     pub fn stork_publishers(&self) -> Result<QueryStorkPublishersResponse, cosmwasm_std::StdError> {
-        QueryStorkPublishersRequest {}.query(self.querier)
+        let request = QueryStorkPublishersRequest {};
+        self.querier
+            .query::<QueryStorkPublishersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/StorkPublishers".to_string(),
+                data: request.into(),
+            })
     }
     pub fn provider_price_state(
         &self,
         provider: ::prost::alloc::string::String,
         symbol: ::prost::alloc::string::String,
     ) -> Result<QueryProviderPriceStateResponse, cosmwasm_std::StdError> {
-        QueryProviderPriceStateRequest { provider, symbol }.query(self.querier)
+        let request = QueryProviderPriceStateRequest { provider, symbol };
+        self.querier
+            .query::<QueryProviderPriceStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/ProviderPriceState".to_string(),
+                data: request.into(),
+            })
     }
     pub fn chainlink_data_streams_price_states(&self) -> Result<QueryChainlinkDataStreamsPriceStatesResponse, cosmwasm_std::StdError> {
-        QueryChainlinkDataStreamsPriceStatesRequest {}.query(self.querier)
+        let request = QueryChainlinkDataStreamsPriceStatesRequest {};
+        self.querier
+            .query::<QueryChainlinkDataStreamsPriceStatesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/ChainlinkDataStreamsPriceStates".to_string(),
+                data: request.into(),
+            })
     }
     pub fn oracle_module_state(&self) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
-        QueryModuleStateRequest {}.query(self.querier)
+        let request = QueryModuleStateRequest {};
+        self.querier
+            .query::<QueryModuleStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/OracleModuleState".to_string(),
+                data: request.into(),
+            })
     }
     pub fn historical_price_records(
         &self,
         oracle: i32,
         symbol_id: ::prost::alloc::string::String,
     ) -> Result<QueryHistoricalPriceRecordsResponse, cosmwasm_std::StdError> {
-        QueryHistoricalPriceRecordsRequest { oracle, symbol_id }.query(self.querier)
+        let request = QueryHistoricalPriceRecordsRequest { oracle, symbol_id };
+        self.querier
+            .query::<QueryHistoricalPriceRecordsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/HistoricalPriceRecords".to_string(),
+                data: request.into(),
+            })
     }
     pub fn oracle_volatility(
         &self,
@@ -1509,21 +1590,35 @@ impl<'a, Q: cosmwasm_std::CustomQuery> OracleQuerier<'a, Q> {
         quote_info: ::core::option::Option<OracleInfo>,
         oracle_history_options: ::core::option::Option<OracleHistoryOptions>,
     ) -> Result<QueryOracleVolatilityResponse, cosmwasm_std::StdError> {
-        QueryOracleVolatilityRequest {
+        let request = QueryOracleVolatilityRequest {
             base_info,
             quote_info,
             oracle_history_options,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryOracleVolatilityResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/OracleVolatility".to_string(),
+                data: request.into(),
+            })
     }
     pub fn oracle_providers_info(&self) -> Result<QueryOracleProvidersInfoResponse, cosmwasm_std::StdError> {
-        QueryOracleProvidersInfoRequest {}.query(self.querier)
+        let request = QueryOracleProvidersInfoRequest {};
+        self.querier
+            .query::<QueryOracleProvidersInfoResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/OracleProvidersInfo".to_string(),
+                data: request.into(),
+            })
     }
     pub fn oracle_provider_prices(
         &self,
         provider: ::prost::alloc::string::String,
     ) -> Result<QueryOracleProviderPricesResponse, cosmwasm_std::StdError> {
-        QueryOracleProviderPricesRequest { provider }.query(self.querier)
+        let request = QueryOracleProviderPricesRequest { provider };
+        self.querier
+            .query::<QueryOracleProviderPricesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/OracleProviderPrices".to_string(),
+                data: request.into(),
+            })
     }
     pub fn oracle_price(
         &self,
@@ -1532,15 +1627,23 @@ impl<'a, Q: cosmwasm_std::CustomQuery> OracleQuerier<'a, Q> {
         quote: ::prost::alloc::string::String,
         scaling_options: ::core::option::Option<ScalingOptions>,
     ) -> Result<QueryOraclePriceResponse, cosmwasm_std::StdError> {
-        QueryOraclePriceRequest {
+        let request = QueryOraclePriceRequest {
             oracle_type,
             base,
             quote,
             scaling_options,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryOraclePriceResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.oracle.v1beta1.Query/OraclePrice".to_string(),
+                data: request.into(),
+            })
     }
     pub fn pyth_price(&self, price_id: ::prost::alloc::string::String) -> Result<QueryPythPriceResponse, cosmwasm_std::StdError> {
-        QueryPythPriceRequest { price_id }.query(self.querier)
+        let request = QueryPythPriceRequest { price_id };
+        self.querier.query::<QueryPythPriceResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/injective.oracle.v1beta1.Query/PythPrice".to_string(),
+            data: request.into(),
+        })
     }
 }

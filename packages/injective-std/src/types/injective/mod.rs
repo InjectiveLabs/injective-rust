@@ -1,4 +1,7 @@
 pub mod auction;
+pub mod common;
+pub mod erc20;
+pub mod evm;
 pub mod exchange;
 pub mod insurance;
 pub mod oracle;

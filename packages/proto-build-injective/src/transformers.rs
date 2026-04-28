@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::path::Path;
 
 use heck::ToSnakeCase;
@@ -9,7 +9,7 @@ use quote::{format_ident, quote, ToTokens};
 use regex::Regex;
 use syn::ItemEnum;
 use syn::ItemMod;
-use syn::{parse_quote, Attribute, Fields, Ident, Item, ItemStruct, Lit, LitStr, Meta, NestedMeta, Type};
+use syn::{parse_quote, Attribute, Fields, GenericArgument, Ident, Item, ItemStruct, Lit, LitStr, Meta, NestedMeta, PathArguments, Type};
 
 /// Regex substitutions to apply to the prost-generated output
 pub const REPLACEMENTS: &[(&str, &str)] = &[
@@ -86,14 +86,22 @@ pub fn add_derive_eq(mut attr: Attribute) -> Attribute {
     }
 }
 
-pub fn add_derive_eq_struct(s: &ItemStruct) -> ItemStruct {
+pub fn add_derive_eq_struct(s: &ItemStruct, non_eq_types: &HashSet<String>) -> ItemStruct {
+    if fields_contain_non_eq(&s.fields, non_eq_types) {
+        return s.clone();
+    }
+
     let mut item_struct = s.clone();
     item_struct.attrs = item_struct.attrs.into_iter().map(add_derive_eq).collect();
 
     item_struct
 }
 
-pub fn add_derive_eq_enum(s: &ItemEnum) -> ItemEnum {
+pub fn add_derive_eq_enum(s: &ItemEnum, non_eq_types: &HashSet<String>) -> ItemEnum {
+    if s.variants.iter().any(|variant| fields_contain_non_eq(&variant.fields, non_eq_types)) {
+        return s.clone();
+    }
+
     let mut item_enum = s.clone();
     item_enum.attrs = item_enum.attrs.into_iter().map(add_derive_eq).collect();
 
@@ -292,14 +300,18 @@ fn get_query_attr(src: &Path, ident: &Ident, query_services: &HashMap<String, Se
     let package = src.file_stem().unwrap().to_str().unwrap();
     let service = query_services.get(package);
 
-    let method = service?.method.iter().find(|m| {
+    let mut methods = service?.method.iter().filter(|m| {
         let input_type = m.input_type.clone().unwrap();
         let input_type = input_type.split('.').last().unwrap();
         *ident == input_type.to_upper_camel_case()
     });
+    let method = methods.next()?;
+    if methods.next().is_some() {
+        return None;
+    }
 
-    let method_name = method?.name.clone().unwrap();
-    let response_type = method?.output_type.clone().unwrap();
+    let method_name = method.name.clone().unwrap();
+    let response_type = method.output_type.clone().unwrap();
     let response_type = response_type.split('.').last().unwrap();
     let response_type = format_ident!("{}", response_type.to_upper_camel_case());
 
@@ -488,6 +500,64 @@ fn prost_enum_path(field: &syn::Field) -> Option<syn::Path> {
     None
 }
 
+pub fn find_non_eq_type_names(items: &[Item]) -> HashSet<String> {
+    let mut non_eq_types = HashSet::new();
+
+    loop {
+        let mut changed = false;
+
+        for item in items {
+            match item {
+                Item::Struct(s) if fields_contain_non_eq(&s.fields, &non_eq_types) => {
+                    changed |= non_eq_types.insert(s.ident.to_string());
+                }
+                Item::Enum(e) if e.variants.iter().any(|variant| fields_contain_non_eq(&variant.fields, &non_eq_types)) => {
+                    changed |= non_eq_types.insert(e.ident.to_string());
+                }
+                _ => {}
+            }
+        }
+
+        if !changed {
+            return non_eq_types;
+        }
+    }
+}
+
+fn fields_contain_non_eq(fields: &Fields, non_eq_types: &HashSet<String>) -> bool {
+    fields.iter().any(|field| type_contains_non_eq(&field.ty, non_eq_types))
+}
+
+fn type_contains_non_eq(ty: &Type, non_eq_types: &HashSet<String>) -> bool {
+    match ty {
+        Type::Array(array) => type_contains_non_eq(&array.elem, non_eq_types),
+        Type::Group(group) => type_contains_non_eq(&group.elem, non_eq_types),
+        Type::Paren(paren) => type_contains_non_eq(&paren.elem, non_eq_types),
+        Type::Path(type_path) => {
+            let Some(segment) = type_path.path.segments.last() else {
+                return false;
+            };
+
+            if matches!(segment.ident.to_string().as_str(), "f32" | "f64") || non_eq_types.contains(&segment.ident.to_string()) {
+                return true;
+            }
+
+            match &segment.arguments {
+                PathArguments::AngleBracketed(args) => args.args.iter().any(|arg| match arg {
+                    GenericArgument::Type(inner_ty) => type_contains_non_eq(inner_ty, non_eq_types),
+                    _ => false,
+                }),
+                _ => false,
+            }
+        }
+        Type::Ptr(ptr) => type_contains_non_eq(&ptr.elem, non_eq_types),
+        Type::Reference(reference) => type_contains_non_eq(&reference.elem, non_eq_types),
+        Type::Slice(slice) => type_contains_non_eq(&slice.elem, non_eq_types),
+        Type::Tuple(tuple) => tuple.elems.iter().any(|elem| type_contains_non_eq(elem, non_eq_types)),
+        _ => false,
+    }
+}
+
 pub fn append_querier(items: Vec<Item>, src: &Path, nested_mod: bool, descriptor: &FileDescriptorSet) -> Vec<Item> {
     let package = src.file_stem().unwrap().to_str().unwrap();
     let re = Regex::new(r"([^.]*)(\.v\d+(beta\d+)?)?$").unwrap();
@@ -510,8 +580,10 @@ pub fn append_querier(items: Vec<Item>, src: &Path, nested_mod: bool, descriptor
                 let deprecated_macro = if deprecated { quote!(#[deprecated]) } else { quote!() };
 
                 let method_desc = method_desc.clone();
+                let method_name = method_desc.name.clone().unwrap();
+                let path = format!("/{}.Query/{}", package, method_name);
 
-                let name = format_ident!("{}", method_desc.name.unwrap().as_str().to_snake_case());
+                let name = format_ident!("{}", method_name.as_str().to_snake_case());
                 let req_type = format_ident!(
                     "{}",
                     method_desc
@@ -560,7 +632,11 @@ pub fn append_querier(items: Vec<Item>, src: &Path, nested_mod: bool, descriptor
                 quote! {
                   #deprecated_macro
                   pub fn #name( &self, #(#arg_idents : #arg_ty),* ) -> Result<#res_type, cosmwasm_std::StdError> {
-                    #req_type { #(#arg_idents),* }.query(self.querier)
+                    let request = #req_type { #(#arg_idents),* };
+                    self.querier.query::<#res_type>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                        path: #path.to_string(),
+                        data: request.into(),
+                    })
                   }
                 }
             })
@@ -642,7 +718,8 @@ pub fn fix_clashing_stake_authorization_validators(input: ItemMod) -> ItemMod {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use syn::ItemStruct;
+    use std::collections::HashSet;
+    use syn::{Item, ItemStruct};
 
     macro_rules! assert_ast_eq {
         ($left:ident, $right:ident) => {
@@ -660,6 +737,7 @@ mod tests {
 
     #[test]
     fn test_add_derive_eq_if_there_is_partial_eq() {
+        let non_eq_types = HashSet::new();
         let item_struct: ItemStruct = syn::parse_quote! {
             #[derive(PartialEq, Debug)]
             struct Hello {
@@ -667,7 +745,7 @@ mod tests {
             }
         };
 
-        let result = add_derive_eq_struct(&item_struct);
+        let result = add_derive_eq_struct(&item_struct, &non_eq_types);
         let expected: ItemStruct = syn::parse_quote! {
             #[derive(PartialEq, Eq, Debug)]
             struct Hello {
@@ -680,6 +758,7 @@ mod tests {
 
     #[test]
     fn test_add_derive_eq_does_not_add_if_there_is_no_partial_eq() {
+        let non_eq_types = HashSet::new();
         let item_struct: ItemStruct = syn::parse_quote! {
             #[derive(Debug)]
             struct Hello {
@@ -687,13 +766,14 @@ mod tests {
             }
         };
 
-        let result = add_derive_eq_struct(&item_struct);
+        let result = add_derive_eq_struct(&item_struct, &non_eq_types);
 
         assert_ast_eq!(item_struct, result);
     }
 
     #[test]
     fn test_add_derive_eq_does_not_add_if_there_is_partial_eq_and_eq() {
+        let non_eq_types = HashSet::new();
         let item_struct: ItemStruct = syn::parse_quote! {
             #[derive(PartialEq, Eq, Debug)]
             struct Hello {
@@ -701,7 +781,7 @@ mod tests {
             }
         };
 
-        let result = add_derive_eq_struct(&item_struct);
+        let result = add_derive_eq_struct(&item_struct, &non_eq_types);
 
         let expected: ItemStruct = syn::parse_quote! {
             #[derive(PartialEq, Eq, Debug)]
@@ -711,6 +791,48 @@ mod tests {
         };
 
         assert_ast_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_add_derive_eq_skips_structs_with_float_fields() {
+        let non_eq_types = HashSet::new();
+        let item_struct: ItemStruct = syn::parse_quote! {
+            #[derive(Clone, PartialEq, Debug)]
+            struct MsgEthereumTx {
+                size: f64,
+            }
+        };
+
+        let result = add_derive_eq_struct(&item_struct, &non_eq_types);
+
+        assert_ast_eq!(item_struct, result);
+    }
+
+    #[test]
+    fn test_find_non_eq_type_names_propagates_nested_non_eq_fields() {
+        let items = vec![
+            Item::Struct(syn::parse_quote! {
+                struct MsgEthereumTx {
+                    size: f64,
+                }
+            }),
+            Item::Struct(syn::parse_quote! {
+                struct QueryTraceTxRequest {
+                    msg: ::core::option::Option<MsgEthereumTx>,
+                }
+            }),
+            Item::Struct(syn::parse_quote! {
+                struct QueryTraceBlockRequest {
+                    txs: ::prost::alloc::vec::Vec<MsgEthereumTx>,
+                }
+            }),
+        ];
+
+        let non_eq_types = find_non_eq_type_names(&items);
+
+        assert!(non_eq_types.contains("MsgEthereumTx"));
+        assert!(non_eq_types.contains("QueryTraceTxRequest"));
+        assert!(non_eq_types.contains("QueryTraceBlockRequest"));
     }
 
     #[test]

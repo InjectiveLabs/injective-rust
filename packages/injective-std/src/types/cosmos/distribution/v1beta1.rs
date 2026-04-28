@@ -688,25 +688,44 @@ impl<'a, Q: cosmwasm_std::CustomQuery> DistributionQuerier<'a, Q> {
         Self { querier }
     }
     pub fn params(&self) -> Result<QueryParamsResponse, cosmwasm_std::StdError> {
-        QueryParamsRequest {}.query(self.querier)
+        let request = QueryParamsRequest {};
+        self.querier.query::<QueryParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/cosmos.distribution.v1beta1.Query/Params".to_string(),
+            data: request.into(),
+        })
     }
     pub fn validator_distribution_info(
         &self,
         validator_address: ::prost::alloc::string::String,
     ) -> Result<QueryValidatorDistributionInfoResponse, cosmwasm_std::StdError> {
-        QueryValidatorDistributionInfoRequest { validator_address }.query(self.querier)
+        let request = QueryValidatorDistributionInfoRequest { validator_address };
+        self.querier
+            .query::<QueryValidatorDistributionInfoResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.distribution.v1beta1.Query/ValidatorDistributionInfo".to_string(),
+                data: request.into(),
+            })
     }
     pub fn validator_outstanding_rewards(
         &self,
         validator_address: ::prost::alloc::string::String,
     ) -> Result<QueryValidatorOutstandingRewardsResponse, cosmwasm_std::StdError> {
-        QueryValidatorOutstandingRewardsRequest { validator_address }.query(self.querier)
+        let request = QueryValidatorOutstandingRewardsRequest { validator_address };
+        self.querier
+            .query::<QueryValidatorOutstandingRewardsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.distribution.v1beta1.Query/ValidatorOutstandingRewards".to_string(),
+                data: request.into(),
+            })
     }
     pub fn validator_commission(
         &self,
         validator_address: ::prost::alloc::string::String,
     ) -> Result<QueryValidatorCommissionResponse, cosmwasm_std::StdError> {
-        QueryValidatorCommissionRequest { validator_address }.query(self.querier)
+        let request = QueryValidatorCommissionRequest { validator_address };
+        self.querier
+            .query::<QueryValidatorCommissionResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.distribution.v1beta1.Query/ValidatorCommission".to_string(),
+                data: request.into(),
+            })
     }
     pub fn validator_slashes(
         &self,
@@ -715,44 +734,72 @@ impl<'a, Q: cosmwasm_std::CustomQuery> DistributionQuerier<'a, Q> {
         ending_height: u64,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryValidatorSlashesResponse, cosmwasm_std::StdError> {
-        QueryValidatorSlashesRequest {
+        let request = QueryValidatorSlashesRequest {
             validator_address,
             starting_height,
             ending_height,
             pagination,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryValidatorSlashesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.distribution.v1beta1.Query/ValidatorSlashes".to_string(),
+                data: request.into(),
+            })
     }
     pub fn delegation_rewards(
         &self,
         delegator_address: ::prost::alloc::string::String,
         validator_address: ::prost::alloc::string::String,
     ) -> Result<QueryDelegationRewardsResponse, cosmwasm_std::StdError> {
-        QueryDelegationRewardsRequest {
+        let request = QueryDelegationRewardsRequest {
             delegator_address,
             validator_address,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryDelegationRewardsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.distribution.v1beta1.Query/DelegationRewards".to_string(),
+                data: request.into(),
+            })
     }
     pub fn delegation_total_rewards(
         &self,
         delegator_address: ::prost::alloc::string::String,
     ) -> Result<QueryDelegationTotalRewardsResponse, cosmwasm_std::StdError> {
-        QueryDelegationTotalRewardsRequest { delegator_address }.query(self.querier)
+        let request = QueryDelegationTotalRewardsRequest { delegator_address };
+        self.querier
+            .query::<QueryDelegationTotalRewardsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.distribution.v1beta1.Query/DelegationTotalRewards".to_string(),
+                data: request.into(),
+            })
     }
     pub fn delegator_validators(
         &self,
         delegator_address: ::prost::alloc::string::String,
     ) -> Result<QueryDelegatorValidatorsResponse, cosmwasm_std::StdError> {
-        QueryDelegatorValidatorsRequest { delegator_address }.query(self.querier)
+        let request = QueryDelegatorValidatorsRequest { delegator_address };
+        self.querier
+            .query::<QueryDelegatorValidatorsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.distribution.v1beta1.Query/DelegatorValidators".to_string(),
+                data: request.into(),
+            })
     }
     pub fn delegator_withdraw_address(
         &self,
         delegator_address: ::prost::alloc::string::String,
     ) -> Result<QueryDelegatorWithdrawAddressResponse, cosmwasm_std::StdError> {
-        QueryDelegatorWithdrawAddressRequest { delegator_address }.query(self.querier)
+        let request = QueryDelegatorWithdrawAddressRequest { delegator_address };
+        self.querier
+            .query::<QueryDelegatorWithdrawAddressResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.distribution.v1beta1.Query/DelegatorWithdrawAddress".to_string(),
+                data: request.into(),
+            })
     }
     pub fn community_pool(&self) -> Result<QueryCommunityPoolResponse, cosmwasm_std::StdError> {
-        QueryCommunityPoolRequest {}.query(self.querier)
+        let request = QueryCommunityPoolRequest {};
+        self.querier
+            .query::<QueryCommunityPoolResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.distribution.v1beta1.Query/CommunityPool".to_string(),
+                data: request.into(),
+            })
     }
 }

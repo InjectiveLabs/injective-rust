@@ -633,7 +633,11 @@ impl<'a, Q: cosmwasm_std::CustomQuery> BankQuerier<'a, Q> {
         address: ::prost::alloc::string::String,
         denom: ::prost::alloc::string::String,
     ) -> Result<QueryBalanceResponse, cosmwasm_std::StdError> {
-        QueryBalanceRequest { address, denom }.query(self.querier)
+        let request = QueryBalanceRequest { address, denom };
+        self.querier.query::<QueryBalanceResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/cosmos.bank.v1beta1.Query/Balance".to_string(),
+            data: request.into(),
+        })
     }
     pub fn all_balances(
         &self,
@@ -641,73 +645,130 @@ impl<'a, Q: cosmwasm_std::CustomQuery> BankQuerier<'a, Q> {
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
         resolve_denom: bool,
     ) -> Result<QueryAllBalancesResponse, cosmwasm_std::StdError> {
-        QueryAllBalancesRequest {
+        let request = QueryAllBalancesRequest {
             address,
             pagination,
             resolve_denom,
-        }
-        .query(self.querier)
+        };
+        self.querier
+            .query::<QueryAllBalancesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.bank.v1beta1.Query/AllBalances".to_string(),
+                data: request.into(),
+            })
     }
     pub fn spendable_balances(
         &self,
         address: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QuerySpendableBalancesResponse, cosmwasm_std::StdError> {
-        QuerySpendableBalancesRequest { address, pagination }.query(self.querier)
+        let request = QuerySpendableBalancesRequest { address, pagination };
+        self.querier
+            .query::<QuerySpendableBalancesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.bank.v1beta1.Query/SpendableBalances".to_string(),
+                data: request.into(),
+            })
     }
     pub fn spendable_balance_by_denom(
         &self,
         address: ::prost::alloc::string::String,
         denom: ::prost::alloc::string::String,
     ) -> Result<QuerySpendableBalanceByDenomResponse, cosmwasm_std::StdError> {
-        QuerySpendableBalanceByDenomRequest { address, denom }.query(self.querier)
+        let request = QuerySpendableBalanceByDenomRequest { address, denom };
+        self.querier
+            .query::<QuerySpendableBalanceByDenomResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.bank.v1beta1.Query/SpendableBalanceByDenom".to_string(),
+                data: request.into(),
+            })
     }
     pub fn total_supply(
         &self,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryTotalSupplyResponse, cosmwasm_std::StdError> {
-        QueryTotalSupplyRequest { pagination }.query(self.querier)
+        let request = QueryTotalSupplyRequest { pagination };
+        self.querier
+            .query::<QueryTotalSupplyResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.bank.v1beta1.Query/TotalSupply".to_string(),
+                data: request.into(),
+            })
     }
     pub fn supply_of(&self, denom: ::prost::alloc::string::String) -> Result<QuerySupplyOfResponse, cosmwasm_std::StdError> {
-        QuerySupplyOfRequest { denom }.query(self.querier)
+        let request = QuerySupplyOfRequest { denom };
+        self.querier.query::<QuerySupplyOfResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/cosmos.bank.v1beta1.Query/SupplyOf".to_string(),
+            data: request.into(),
+        })
     }
     pub fn params(&self) -> Result<QueryParamsResponse, cosmwasm_std::StdError> {
-        QueryParamsRequest {}.query(self.querier)
+        let request = QueryParamsRequest {};
+        self.querier.query::<QueryParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/cosmos.bank.v1beta1.Query/Params".to_string(),
+            data: request.into(),
+        })
     }
     pub fn denom_metadata(&self, denom: ::prost::alloc::string::String) -> Result<QueryDenomMetadataResponse, cosmwasm_std::StdError> {
-        QueryDenomMetadataRequest { denom }.query(self.querier)
+        let request = QueryDenomMetadataRequest { denom };
+        self.querier
+            .query::<QueryDenomMetadataResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.bank.v1beta1.Query/DenomMetadata".to_string(),
+                data: request.into(),
+            })
     }
     pub fn denom_metadata_by_query_string(
         &self,
         denom: ::prost::alloc::string::String,
     ) -> Result<QueryDenomMetadataByQueryStringResponse, cosmwasm_std::StdError> {
-        QueryDenomMetadataByQueryStringRequest { denom }.query(self.querier)
+        let request = QueryDenomMetadataByQueryStringRequest { denom };
+        self.querier
+            .query::<QueryDenomMetadataByQueryStringResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.bank.v1beta1.Query/DenomMetadataByQueryString".to_string(),
+                data: request.into(),
+            })
     }
     pub fn denoms_metadata(
         &self,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryDenomsMetadataResponse, cosmwasm_std::StdError> {
-        QueryDenomsMetadataRequest { pagination }.query(self.querier)
+        let request = QueryDenomsMetadataRequest { pagination };
+        self.querier
+            .query::<QueryDenomsMetadataResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.bank.v1beta1.Query/DenomsMetadata".to_string(),
+                data: request.into(),
+            })
     }
     pub fn denom_owners(
         &self,
         denom: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryDenomOwnersResponse, cosmwasm_std::StdError> {
-        QueryDenomOwnersRequest { denom, pagination }.query(self.querier)
+        let request = QueryDenomOwnersRequest { denom, pagination };
+        self.querier
+            .query::<QueryDenomOwnersResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.bank.v1beta1.Query/DenomOwners".to_string(),
+                data: request.into(),
+            })
     }
     pub fn denom_owners_by_query(
         &self,
         denom: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryDenomOwnersByQueryResponse, cosmwasm_std::StdError> {
-        QueryDenomOwnersByQueryRequest { denom, pagination }.query(self.querier)
+        let request = QueryDenomOwnersByQueryRequest { denom, pagination };
+        self.querier
+            .query::<QueryDenomOwnersByQueryResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.bank.v1beta1.Query/DenomOwnersByQuery".to_string(),
+                data: request.into(),
+            })
     }
     pub fn send_enabled(
         &self,
         denoms: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QuerySendEnabledResponse, cosmwasm_std::StdError> {
-        QuerySendEnabledRequest { denoms, pagination }.query(self.querier)
+        let request = QuerySendEnabledRequest { denoms, pagination };
+        self.querier
+            .query::<QuerySendEnabledResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.bank.v1beta1.Query/SendEnabled".to_string(),
+                data: request.into(),
+            })
     }
 }

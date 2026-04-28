@@ -786,15 +786,18 @@ pub struct RateLimit {
     /// the notional USD limit imposed on all outgoing traffic (per token)
     #[prost(string, tag = "5")]
     pub rate_limit_usd: ::prost::alloc::string::String,
-    /// the absolute amount of tokens that can be minted on Injective
+    /// \[DEPRECATED\] the absolute amount of tokens that can be minted on Injective
+    #[deprecated]
     #[prost(string, tag = "6")]
     pub absolute_mint_limit: ::prost::alloc::string::String,
     /// transfers that occurred within the sliding window
+    #[deprecated]
     #[prost(message, repeated, tag = "7")]
     pub transfers: ::prost::alloc::vec::Vec<BridgeTransfer>,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.peggy.v1.BridgeTransfer")]
+#[deprecated]
 pub struct BridgeTransfer {
     /// quantity that was bridged (chain format)
     #[prost(string, tag = "1")]
@@ -809,6 +812,43 @@ pub struct BridgeTransfer {
     /// type of transfer (withdrawal/deposit)
     #[prost(bool, tag = "3")]
     pub is_deposit: bool,
+}
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.peggy.v1.RateLimitTransfers")]
+pub struct RateLimitTransfers {
+    /// contract address of the erc20 on Ethereum
+    #[prost(string, tag = "1")]
+    pub token: ::prost::alloc::string::String,
+    /// records of deposit transfers across blocks
+    #[prost(message, repeated, tag = "2")]
+    pub inflows: ::prost::alloc::vec::Vec<BlockTransferRecord>,
+    /// records of withdrawal transfers across blocks
+    #[prost(message, repeated, tag = "3")]
+    pub outflows: ::prost::alloc::vec::Vec<BlockTransferRecord>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.peggy.v1.BlockTransferRecord")]
+pub struct BlockTransferRecord {
+    /// block number at which the transfers occurred
+    #[prost(uint64, tag = "1")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub block_number: u64,
+    /// sum amount of transfers that happened in that block
+    #[prost(string, tag = "2")]
+    pub amount: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.peggy.v1.MintAmount")]
+pub struct MintAmount {
+    /// address of the erc20 bridged in
+    #[prost(string, tag = "1")]
+    pub token: ::prost::alloc::string::String,
+    /// amount currently minted on chain
+    #[prost(string, tag = "2")]
+    pub amount: ::prost::alloc::string::String,
 }
 /// MsgSetOrchestratorAddresses
 /// this message allows validators to delegate their voting responsibilities
@@ -1198,6 +1238,7 @@ pub struct MsgCreateRateLimit {
     #[prost(string, tag = "5")]
     pub rate_limit_usd: ::prost::alloc::string::String,
     /// the absolute amount of tokens that can be minted on Injective
+    #[deprecated]
     #[prost(string, tag = "6")]
     pub absolute_mint_limit: ::prost::alloc::string::String,
     /// length of the sliding window in which inbound (outbound) traffic is
@@ -1306,6 +1347,10 @@ pub struct GenesisState {
     pub ethereum_blacklist: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(message, repeated, tag = "16")]
     pub rate_limits: ::prost::alloc::vec::Vec<RateLimit>,
+    #[prost(message, repeated, tag = "17")]
+    pub rate_limit_transfers: ::prost::alloc::vec::Vec<RateLimitTransfers>,
+    #[prost(message, repeated, tag = "18")]
+    pub mint_amounts: ::prost::alloc::vec::Vec<MintAmount>,
 }
 /// IDSet represents a set of IDs
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -1687,92 +1732,194 @@ impl<'a, Q: cosmwasm_std::CustomQuery> PeggyQuerier<'a, Q> {
         Self { querier }
     }
     pub fn params(&self) -> Result<QueryParamsResponse, cosmwasm_std::StdError> {
-        QueryParamsRequest {}.query(self.querier)
+        let request = QueryParamsRequest {};
+        self.querier.query::<QueryParamsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/injective.peggy.v1.Query/Params".to_string(),
+            data: request.into(),
+        })
     }
     pub fn current_valset(&self) -> Result<QueryCurrentValsetResponse, cosmwasm_std::StdError> {
-        QueryCurrentValsetRequest {}.query(self.querier)
+        let request = QueryCurrentValsetRequest {};
+        self.querier
+            .query::<QueryCurrentValsetResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/CurrentValset".to_string(),
+                data: request.into(),
+            })
     }
     pub fn valset_request(&self, nonce: u64) -> Result<QueryValsetRequestResponse, cosmwasm_std::StdError> {
-        QueryValsetRequestRequest { nonce }.query(self.querier)
+        let request = QueryValsetRequestRequest { nonce };
+        self.querier
+            .query::<QueryValsetRequestResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/ValsetRequest".to_string(),
+                data: request.into(),
+            })
     }
     pub fn valset_confirm(&self, nonce: u64, address: ::prost::alloc::string::String) -> Result<QueryValsetConfirmResponse, cosmwasm_std::StdError> {
-        QueryValsetConfirmRequest { nonce, address }.query(self.querier)
+        let request = QueryValsetConfirmRequest { nonce, address };
+        self.querier
+            .query::<QueryValsetConfirmResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/ValsetConfirm".to_string(),
+                data: request.into(),
+            })
     }
     pub fn valset_confirms_by_nonce(&self, nonce: u64) -> Result<QueryValsetConfirmsByNonceResponse, cosmwasm_std::StdError> {
-        QueryValsetConfirmsByNonceRequest { nonce }.query(self.querier)
+        let request = QueryValsetConfirmsByNonceRequest { nonce };
+        self.querier
+            .query::<QueryValsetConfirmsByNonceResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/ValsetConfirmsByNonce".to_string(),
+                data: request.into(),
+            })
     }
     pub fn last_valset_requests(&self) -> Result<QueryLastValsetRequestsResponse, cosmwasm_std::StdError> {
-        QueryLastValsetRequestsRequest {}.query(self.querier)
+        let request = QueryLastValsetRequestsRequest {};
+        self.querier
+            .query::<QueryLastValsetRequestsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/LastValsetRequests".to_string(),
+                data: request.into(),
+            })
     }
     pub fn last_pending_valset_request_by_addr(
         &self,
         address: ::prost::alloc::string::String,
     ) -> Result<QueryLastPendingValsetRequestByAddrResponse, cosmwasm_std::StdError> {
-        QueryLastPendingValsetRequestByAddrRequest { address }.query(self.querier)
+        let request = QueryLastPendingValsetRequestByAddrRequest { address };
+        self.querier
+            .query::<QueryLastPendingValsetRequestByAddrResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/LastPendingValsetRequestByAddr".to_string(),
+                data: request.into(),
+            })
     }
     pub fn last_event_by_addr(&self, address: ::prost::alloc::string::String) -> Result<QueryLastEventByAddrResponse, cosmwasm_std::StdError> {
-        QueryLastEventByAddrRequest { address }.query(self.querier)
+        let request = QueryLastEventByAddrRequest { address };
+        self.querier
+            .query::<QueryLastEventByAddrResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/LastEventByAddr".to_string(),
+                data: request.into(),
+            })
     }
     pub fn get_pending_send_to_eth(
         &self,
         sender_address: ::prost::alloc::string::String,
     ) -> Result<QueryPendingSendToEthResponse, cosmwasm_std::StdError> {
-        QueryPendingSendToEth { sender_address }.query(self.querier)
+        let request = QueryPendingSendToEth { sender_address };
+        self.querier
+            .query::<QueryPendingSendToEthResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/GetPendingSendToEth".to_string(),
+                data: request.into(),
+            })
     }
     pub fn batch_fees(&self) -> Result<QueryBatchFeeResponse, cosmwasm_std::StdError> {
-        QueryBatchFeeRequest {}.query(self.querier)
+        let request = QueryBatchFeeRequest {};
+        self.querier.query::<QueryBatchFeeResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/injective.peggy.v1.Query/BatchFees".to_string(),
+            data: request.into(),
+        })
     }
     pub fn outgoing_tx_batches(&self) -> Result<QueryOutgoingTxBatchesResponse, cosmwasm_std::StdError> {
-        QueryOutgoingTxBatchesRequest {}.query(self.querier)
+        let request = QueryOutgoingTxBatchesRequest {};
+        self.querier
+            .query::<QueryOutgoingTxBatchesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/OutgoingTxBatches".to_string(),
+                data: request.into(),
+            })
     }
     pub fn last_pending_batch_request_by_addr(
         &self,
         address: ::prost::alloc::string::String,
     ) -> Result<QueryLastPendingBatchRequestByAddrResponse, cosmwasm_std::StdError> {
-        QueryLastPendingBatchRequestByAddrRequest { address }.query(self.querier)
+        let request = QueryLastPendingBatchRequestByAddrRequest { address };
+        self.querier
+            .query::<QueryLastPendingBatchRequestByAddrResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/LastPendingBatchRequestByAddr".to_string(),
+                data: request.into(),
+            })
     }
     pub fn batch_request_by_nonce(
         &self,
         nonce: u64,
         contract_address: ::prost::alloc::string::String,
     ) -> Result<QueryBatchRequestByNonceResponse, cosmwasm_std::StdError> {
-        QueryBatchRequestByNonceRequest { nonce, contract_address }.query(self.querier)
+        let request = QueryBatchRequestByNonceRequest { nonce, contract_address };
+        self.querier
+            .query::<QueryBatchRequestByNonceResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/BatchRequestByNonce".to_string(),
+                data: request.into(),
+            })
     }
     pub fn batch_confirms(
         &self,
         nonce: u64,
         contract_address: ::prost::alloc::string::String,
     ) -> Result<QueryBatchConfirmsResponse, cosmwasm_std::StdError> {
-        QueryBatchConfirmsRequest { nonce, contract_address }.query(self.querier)
+        let request = QueryBatchConfirmsRequest { nonce, contract_address };
+        self.querier
+            .query::<QueryBatchConfirmsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/BatchConfirms".to_string(),
+                data: request.into(),
+            })
     }
     pub fn erc20_to_denom(&self, erc20: ::prost::alloc::string::String) -> Result<QueryErc20ToDenomResponse, cosmwasm_std::StdError> {
-        QueryErc20ToDenomRequest { erc20 }.query(self.querier)
+        let request = QueryErc20ToDenomRequest { erc20 };
+        self.querier
+            .query::<QueryErc20ToDenomResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/ERC20ToDenom".to_string(),
+                data: request.into(),
+            })
     }
     pub fn denom_to_erc20(&self, denom: ::prost::alloc::string::String) -> Result<QueryDenomToErc20Response, cosmwasm_std::StdError> {
-        QueryDenomToErc20Request { denom }.query(self.querier)
+        let request = QueryDenomToErc20Request { denom };
+        self.querier
+            .query::<QueryDenomToErc20Response>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/DenomToERC20".to_string(),
+                data: request.into(),
+            })
     }
     pub fn get_delegate_key_by_validator(
         &self,
         validator_address: ::prost::alloc::string::String,
     ) -> Result<QueryDelegateKeysByValidatorAddressResponse, cosmwasm_std::StdError> {
-        QueryDelegateKeysByValidatorAddress { validator_address }.query(self.querier)
+        let request = QueryDelegateKeysByValidatorAddress { validator_address };
+        self.querier
+            .query::<QueryDelegateKeysByValidatorAddressResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/GetDelegateKeyByValidator".to_string(),
+                data: request.into(),
+            })
     }
     pub fn get_delegate_key_by_eth(
         &self,
         eth_address: ::prost::alloc::string::String,
     ) -> Result<QueryDelegateKeysByEthAddressResponse, cosmwasm_std::StdError> {
-        QueryDelegateKeysByEthAddress { eth_address }.query(self.querier)
+        let request = QueryDelegateKeysByEthAddress { eth_address };
+        self.querier
+            .query::<QueryDelegateKeysByEthAddressResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/GetDelegateKeyByEth".to_string(),
+                data: request.into(),
+            })
     }
     pub fn get_delegate_key_by_orchestrator(
         &self,
         orchestrator_address: ::prost::alloc::string::String,
     ) -> Result<QueryDelegateKeysByOrchestratorAddressResponse, cosmwasm_std::StdError> {
-        QueryDelegateKeysByOrchestratorAddress { orchestrator_address }.query(self.querier)
+        let request = QueryDelegateKeysByOrchestratorAddress { orchestrator_address };
+        self.querier
+            .query::<QueryDelegateKeysByOrchestratorAddressResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/GetDelegateKeyByOrchestrator".to_string(),
+                data: request.into(),
+            })
     }
     pub fn peggy_module_state(&self) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
-        QueryModuleStateRequest {}.query(self.querier)
+        let request = QueryModuleStateRequest {};
+        self.querier
+            .query::<QueryModuleStateResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/injective.peggy.v1.Query/PeggyModuleState".to_string(),
+                data: request.into(),
+            })
     }
     pub fn missing_peggo_nonces(&self) -> Result<MissingNoncesResponse, cosmwasm_std::StdError> {
-        MissingNoncesRequest {}.query(self.querier)
+        let request = MissingNoncesRequest {};
+        self.querier.query::<MissingNoncesResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/injective.peggy.v1.Query/MissingPeggoNonces".to_string(),
+            data: request.into(),
+        })
     }
 }

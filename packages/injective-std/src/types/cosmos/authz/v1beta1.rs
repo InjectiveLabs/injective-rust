@@ -212,16 +212,20 @@ pub struct MsgRevoke {
 #[proto_message(type_url = "/cosmos.authz.v1beta1.MsgRevokeResponse")]
 pub struct MsgRevokeResponse {}
 /// MsgExecCompatResponse defines the Msg/MsgExecCompatResponse response type.
+/// Deprecated: This message is deprecated and will be removed in a future version.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.authz.v1beta1.MsgExecCompatResponse")]
+#[deprecated]
 pub struct MsgExecCompatResponse {
     #[prost(bytes = "vec", repeated, tag = "1")]
     pub results: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// MsgExecCompat supports legacy amino codec for frontend metamask signing
 /// Functions are same as MsgExec, but input for msgs is array of strings
+/// Deprecated: This message is deprecated and will be removed in a future version.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.authz.v1beta1.MsgExecCompat")]
+#[deprecated]
 pub struct MsgExecCompat {
     #[prost(string, tag = "1")]
     pub grantee: ::prost::alloc::string::String,
@@ -242,26 +246,39 @@ impl<'a, Q: cosmwasm_std::CustomQuery> AuthzQuerier<'a, Q> {
         msg_type_url: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryGrantsResponse, cosmwasm_std::StdError> {
-        QueryGrantsRequest {
+        let request = QueryGrantsRequest {
             granter,
             grantee,
             msg_type_url,
             pagination,
-        }
-        .query(self.querier)
+        };
+        self.querier.query::<QueryGrantsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+            path: "/cosmos.authz.v1beta1.Query/Grants".to_string(),
+            data: request.into(),
+        })
     }
     pub fn granter_grants(
         &self,
         granter: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryGranterGrantsResponse, cosmwasm_std::StdError> {
-        QueryGranterGrantsRequest { granter, pagination }.query(self.querier)
+        let request = QueryGranterGrantsRequest { granter, pagination };
+        self.querier
+            .query::<QueryGranterGrantsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.authz.v1beta1.Query/GranterGrants".to_string(),
+                data: request.into(),
+            })
     }
     pub fn grantee_grants(
         &self,
         grantee: ::prost::alloc::string::String,
         pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
     ) -> Result<QueryGranteeGrantsResponse, cosmwasm_std::StdError> {
-        QueryGranteeGrantsRequest { grantee, pagination }.query(self.querier)
+        let request = QueryGranteeGrantsRequest { grantee, pagination };
+        self.querier
+            .query::<QueryGranteeGrantsResponse>(&cosmwasm_std::QueryRequest::<Q>::Stargate {
+                path: "/cosmos.authz.v1beta1.Query/GranteeGrants".to_string(),
+                data: request.into(),
+            })
     }
 }

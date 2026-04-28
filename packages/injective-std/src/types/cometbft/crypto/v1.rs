@@ -67,7 +67,7 @@ pub struct ProofOps {
 #[proto_message(type_url = "/cometbft.crypto.v1.PublicKey")]
 pub struct PublicKey {
     /// The type of key.
-    #[prost(oneof = "public_key::Sum", tags = "1, 2, 3, 4")]
+    #[prost(oneof = "public_key::Sum", tags = "1, 2, 3")]
     pub sum: ::core::option::Option<public_key::Sum>,
 }
 /// Nested message and enum types in `PublicKey`.
@@ -82,7 +82,5 @@ pub mod public_key {
         Secp256k1(::prost::alloc::vec::Vec<u8>),
         #[prost(bytes, tag = "3")]
         Bls12381(::prost::alloc::vec::Vec<u8>),
-        #[prost(bytes, tag = "4")]
-        Secp256k1eth(::prost::alloc::vec::Vec<u8>),
     }
 }
