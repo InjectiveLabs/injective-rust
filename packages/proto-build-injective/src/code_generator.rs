@@ -170,59 +170,55 @@ impl CodeGenerator {
 
             println!("\nPath to ./proto/: {:?}\n", proto_path);
 
-            let mut cmd = Command::new("buf");
-            cmd.arg("generate")
-                .arg(buf_root.to_string_lossy().to_string())
-                .arg("--template")
-                .arg(buf_gen_template.to_string_lossy().to_string())
-                .arg("--output")
-                .arg(self.tmp_namespaced_dir().to_string_lossy().to_string());
+            let include_mod_groups = split_include_mod_groups(&project.include_mods);
 
-            if !project.include_mods.is_empty() {
-                for include_mod in project.include_mods.clone() {
-                    cmd.arg("--path").arg(proto_path.join(project.name.clone()).join(include_mod));
+            for (group_idx, include_mods) in include_mod_groups.iter().enumerate() {
+                let mut cmd = Command::new("buf");
+                cmd.arg("generate")
+                    .arg(buf_root.to_string_lossy().to_string())
+                    .arg("--template")
+                    .arg(buf_gen_template.to_string_lossy().to_string())
+                    .arg("--output")
+                    .arg(self.tmp_namespaced_dir().to_string_lossy().to_string());
+
+                append_include_paths(&mut cmd, proto_path, &project.name, include_mods);
+
+                println!("\ncmd {:?}\n", cmd);
+
+                let exit_status = cmd.spawn().unwrap().wait().unwrap();
+
+                if !exit_status.success() {
+                    panic!("unable to generate with: {:?}", cmd.get_args().collect::<Vec<_>>());
                 }
-            }
 
-            println!("\ncmd {:?}\n", cmd);
+                let mut cmd = Command::new("tree");
+                cmd.arg("-L").arg("3").arg(self.tmp_namespaced_dir());
+                cmd.spawn().unwrap().wait().unwrap();
 
-            let exit_status = cmd.spawn().unwrap().wait().unwrap();
+                let descriptor_file = descriptor_file_path(self.tmp_namespaced_dir(), &project.name, group_idx, include_mod_groups.len());
 
-            if !exit_status.success() {
-                panic!("unable to generate with: {:?}", cmd.get_args().collect::<Vec<_>>());
-            }
+                // generate descriptor file with `buf build buf.yaml --as-file-descriptor-set -o {descriptor_file}`
+                let mut cmd = Command::new("buf");
+                cmd.arg("build")
+                    .arg(buf_root.to_string_lossy().to_string())
+                    .arg("--as-file-descriptor-set")
+                    .arg("-o")
+                    .arg(descriptor_file.to_string_lossy().to_string());
 
-            let mut cmd = Command::new("tree");
-            cmd.arg("-L").arg("3").arg(self.tmp_namespaced_dir());
-            cmd.spawn().unwrap().wait().unwrap();
+                append_include_paths(&mut cmd, proto_path, &project.name, include_mods);
 
-            let descriptor_file = self.tmp_namespaced_dir().join(format!("descriptor_{}.bin", project.name));
+                println!("\ncmd {:?}", cmd);
 
-            // generate descriptor file with `buf build buf.yaml --as-file-descriptor-set -o {descriptor_file}`
-            let mut cmd = Command::new("buf");
-            cmd.arg("build")
-                .arg(buf_root.to_string_lossy().to_string())
-                .arg("--as-file-descriptor-set")
-                .arg("-o")
-                .arg(descriptor_file.to_string_lossy().to_string());
+                let exit_status = cmd.spawn().unwrap().wait().unwrap();
 
-            if !project.include_mods.is_empty() {
-                for include_mod in project.include_mods {
-                    cmd.arg("--path").arg(proto_path.join(project.name.clone()).join(include_mod));
+                if !exit_status.success() {
+                    panic!("unable to build with: {:?}", cmd.get_args().collect::<Vec<_>>());
                 }
+
+                let mut cmd = Command::new("tree");
+                cmd.arg("-L").arg("3").arg(self.tmp_namespaced_dir());
+                cmd.spawn().unwrap().wait().unwrap();
             }
-
-            println!("\ncmd {:?}", cmd);
-
-            cmd.spawn().unwrap().wait().unwrap();
-
-            if !exit_status.success() {
-                panic!("unable to build with: {:?}", cmd.get_args().collect::<Vec<_>>());
-            }
-
-            let mut cmd = Command::new("tree");
-            cmd.arg("-L").arg("3").arg(self.tmp_namespaced_dir());
-            cmd.spawn().unwrap().wait().unwrap();
         }
 
         info!("✨  [{}] Types from protobuf definitions is compiled successfully!", self.project.name);
@@ -263,10 +259,89 @@ fn output_version_file(project_name: &str, versions: &str, out_dir: &Path) {
     fs::write(path, versions).unwrap();
 }
 
+fn split_include_mod_groups(include_mods: &[String]) -> Vec<Vec<String>> {
+    if include_mods.is_empty() {
+        return vec![vec![]];
+    }
+
+    let (file_mods, dir_mods): (Vec<String>, Vec<String>) = include_mods.iter().cloned().partition(|include_mod| include_mod.ends_with(".proto"));
+
+    let mut groups = Vec::new();
+    if !dir_mods.is_empty() {
+        groups.push(dir_mods);
+    }
+    if !file_mods.is_empty() {
+        groups.push(file_mods);
+    }
+    groups
+}
+
+fn append_include_paths(cmd: &mut Command, proto_path: &Path, project_name: &str, include_mods: &[String]) {
+    for include_mod in include_mods {
+        cmd.arg("--path").arg(proto_path.join(project_name).join(include_mod));
+    }
+}
+
+fn descriptor_file_path(tmp_namespaced_dir: PathBuf, project_name: &str, group_idx: usize, group_count: usize) -> PathBuf {
+    if group_count == 1 {
+        tmp_namespaced_dir.join(format!("descriptor_{}.bin", project_name))
+    } else {
+        tmp_namespaced_dir.join(format!("descriptor_{}_{}.bin", project_name, group_idx))
+    }
+}
+
 fn find_cargo_toml(path: &Path) -> PathBuf {
     if path.join("Cargo.toml").exists() {
         path.to_path_buf().join("Cargo.toml")
     } else {
         find_cargo_toml(path.parent().expect("Cargo.toml not found"))
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::split_include_mod_groups;
+
+    #[test]
+    fn split_include_mod_groups_separates_proto_files_from_directory_paths() {
+        let include_mods = vec![
+            "auction".to_string(),
+            "common/vouchers/v1/vouchers.proto".to_string(),
+            "exchange".to_string(),
+        ];
+
+        let groups = split_include_mod_groups(&include_mods);
+
+        assert_eq!(
+            groups,
+            vec![
+                vec!["auction".to_string(), "exchange".to_string()],
+                vec!["common/vouchers/v1/vouchers.proto".to_string()],
+            ]
+        );
+    }
+
+    #[test]
+    fn split_include_mod_groups_keeps_proto_files_in_one_group() {
+        let include_mods = vec![
+            "auth".to_string(),
+            "staking/v1beta1/genesis.proto".to_string(),
+            "staking/v1beta1/staking.proto".to_string(),
+            "staking/v1beta1/tx.proto".to_string(),
+        ];
+
+        let groups = split_include_mod_groups(&include_mods);
+
+        assert_eq!(
+            groups,
+            vec![
+                vec!["auth".to_string()],
+                vec![
+                    "staking/v1beta1/genesis.proto".to_string(),
+                    "staking/v1beta1/staking.proto".to_string(),
+                    "staking/v1beta1/tx.proto".to_string(),
+                ],
+            ]
+        );
     }
 }
