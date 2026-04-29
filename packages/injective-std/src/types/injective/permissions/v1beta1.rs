@@ -2,13 +2,37 @@ use injective_std_derive::CosmwasmExt;
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.EventSetVoucher")]
 pub struct EventSetVoucher {
+    /// The bech32 address of the voucher holder.
     #[prost(string, tag = "1")]
     pub addr: ::prost::alloc::string::String,
+    /// The new voucher amount. A zero coin signals voucher deletion.
     #[prost(message, optional, tag = "2")]
     pub voucher: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
-/// Params defines the parameters for the permissions module.
+/// EnforcedRestrictionsContract defines an EVM contract with its pause,
+/// blacklist and unblacklist event signatures
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.permissions.v1beta1.EnforcedRestrictionsEVMContract")]
+pub struct EnforcedRestrictionsEvmContract {
+    /// EVM address of the contract
+    #[prost(string, tag = "1")]
+    pub contract_address: ::prost::alloc::string::String,
+    /// Pause event signature for the contract (e.g. "Pause()")
+    #[prost(string, tag = "2")]
+    pub pause_event_signature: ::prost::alloc::string::String,
+    /// Unpause event signature for the contract (e.g. "Unpause()")
+    #[prost(string, tag = "3")]
+    pub unpause_event_signature: ::prost::alloc::string::String,
+    /// Blacklist event signature for the contract (e.g. Blacklisted(address)")
+    #[prost(string, tag = "4")]
+    pub blacklist_event_signature: ::prost::alloc::string::String,
+    /// UnBlacklist event signature for the contract (e.g.
+    /// "UnBlacklisted(address)")
+    #[prost(string, tag = "5")]
+    pub unblacklist_event_signature: ::prost::alloc::string::String,
+}
+/// Params defines the parameters for the permissions module.
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.Params")]
 pub struct Params {
     /// Max amount of gas allowed for contract hook queries
@@ -18,9 +42,16 @@ pub struct Params {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub contract_hook_max_gas: u64,
+    /// DEPRECATED in favor of enforced_restrictions_evm_contracts, but left
+    /// for compatibility and upgrade purposes
+    ///
     /// EVM addresses of contracts that will not bypass module-to-module transfers
     #[prost(string, repeated, tag = "2")]
-    pub enforced_restrictions_contracts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub deprecated_enforced_restrictions_contracts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// EVM Contracts that module will be listening to sync permissions stored
+    /// inside namespace on every update inside smart contract state
+    #[prost(message, repeated, tag = "3")]
+    pub enforced_restrictions_evm_contracts: ::prost::alloc::vec::Vec<EnforcedRestrictionsEvmContract>,
 }
 /// Namespace defines a permissions namespace
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -141,17 +172,6 @@ pub struct RoleIDs {
     #[serde(alias = "roleIDs")]
     pub role_ids: ::prost::alloc::vec::Vec<u32>,
 }
-/// AddressVoucher is used to represent a voucher for a specific address
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
-#[proto_message(type_url = "/injective.permissions.v1beta1.AddressVoucher")]
-pub struct AddressVoucher {
-    /// The Injective address that the voucher is for
-    #[prost(string, tag = "1")]
-    pub address: ::prost::alloc::string::String,
-    /// The voucher amount
-    #[prost(message, optional, tag = "2")]
-    pub voucher: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
-}
 /// each Action enum value should be a power of two
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -254,7 +274,7 @@ pub struct GenesisState {
     pub namespaces: ::prost::alloc::vec::Vec<Namespace>,
     /// vouchers defines the vouchers of the module
     #[prost(message, repeated, tag = "3")]
-    pub vouchers: ::prost::alloc::vec::Vec<AddressVoucher>,
+    pub vouchers: ::prost::alloc::vec::Vec<super::super::common::vouchers::v1::AddressVoucher>,
 }
 /// QueryParamsRequest is the request type for the Query/Params RPC method.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -265,7 +285,7 @@ pub struct GenesisState {
 )]
 pub struct QueryParamsRequest {}
 /// QueryParamsResponse is the response type for the Query/Params RPC method.
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryParamsResponse")]
 pub struct QueryParamsResponse {
     /// params defines the parameters of the module.
@@ -485,9 +505,9 @@ pub struct QueryVouchersRequest {
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryVouchersResponse")]
 pub struct QueryVouchersResponse {
-    /// List of vouchers
+    /// List of outstanding vouchers matching the request filter.
     #[prost(message, repeated, tag = "1")]
-    pub vouchers: ::prost::alloc::vec::Vec<AddressVoucher>,
+    pub vouchers: ::prost::alloc::vec::Vec<super::super::common::vouchers::v1::AddressVoucher>,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.QueryVoucherRequest")]
@@ -528,7 +548,7 @@ pub struct QueryModuleStateResponse {
     #[prost(message, optional, tag = "1")]
     pub state: ::core::option::Option<GenesisState>,
 }
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.permissions.v1beta1.MsgUpdateParams")]
 pub struct MsgUpdateParams {
     /// authority is the address of the governance account.

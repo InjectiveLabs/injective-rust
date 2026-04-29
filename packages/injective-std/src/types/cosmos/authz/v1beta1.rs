@@ -212,16 +212,20 @@ pub struct MsgRevoke {
 #[proto_message(type_url = "/cosmos.authz.v1beta1.MsgRevokeResponse")]
 pub struct MsgRevokeResponse {}
 /// MsgExecCompatResponse defines the Msg/MsgExecCompatResponse response type.
+/// Deprecated: This message is deprecated and will be removed in a future version.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.authz.v1beta1.MsgExecCompatResponse")]
+#[deprecated]
 pub struct MsgExecCompatResponse {
     #[prost(bytes = "vec", repeated, tag = "1")]
     pub results: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// MsgExecCompat supports legacy amino codec for frontend metamask signing
 /// Functions are same as MsgExec, but input for msgs is array of strings
+/// Deprecated: This message is deprecated and will be removed in a future version.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/cosmos.authz.v1beta1.MsgExecCompat")]
+#[deprecated]
 pub struct MsgExecCompat {
     #[prost(string, tag = "1")]
     pub grantee: ::prost::alloc::string::String,

@@ -786,15 +786,18 @@ pub struct RateLimit {
     /// the notional USD limit imposed on all outgoing traffic (per token)
     #[prost(string, tag = "5")]
     pub rate_limit_usd: ::prost::alloc::string::String,
-    /// the absolute amount of tokens that can be minted on Injective
+    /// \[DEPRECATED\] the absolute amount of tokens that can be minted on Injective
+    #[deprecated]
     #[prost(string, tag = "6")]
     pub absolute_mint_limit: ::prost::alloc::string::String,
     /// transfers that occurred within the sliding window
+    #[deprecated]
     #[prost(message, repeated, tag = "7")]
     pub transfers: ::prost::alloc::vec::Vec<BridgeTransfer>,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.peggy.v1.BridgeTransfer")]
+#[deprecated]
 pub struct BridgeTransfer {
     /// quantity that was bridged (chain format)
     #[prost(string, tag = "1")]
@@ -809,6 +812,43 @@ pub struct BridgeTransfer {
     /// type of transfer (withdrawal/deposit)
     #[prost(bool, tag = "3")]
     pub is_deposit: bool,
+}
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.peggy.v1.RateLimitTransfers")]
+pub struct RateLimitTransfers {
+    /// contract address of the erc20 on Ethereum
+    #[prost(string, tag = "1")]
+    pub token: ::prost::alloc::string::String,
+    /// records of deposit transfers across blocks
+    #[prost(message, repeated, tag = "2")]
+    pub inflows: ::prost::alloc::vec::Vec<BlockTransferRecord>,
+    /// records of withdrawal transfers across blocks
+    #[prost(message, repeated, tag = "3")]
+    pub outflows: ::prost::alloc::vec::Vec<BlockTransferRecord>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.peggy.v1.BlockTransferRecord")]
+pub struct BlockTransferRecord {
+    /// block number at which the transfers occurred
+    #[prost(uint64, tag = "1")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub block_number: u64,
+    /// sum amount of transfers that happened in that block
+    #[prost(string, tag = "2")]
+    pub amount: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.peggy.v1.MintAmount")]
+pub struct MintAmount {
+    /// address of the erc20 bridged in
+    #[prost(string, tag = "1")]
+    pub token: ::prost::alloc::string::String,
+    /// amount currently minted on chain
+    #[prost(string, tag = "2")]
+    pub amount: ::prost::alloc::string::String,
 }
 /// MsgSetOrchestratorAddresses
 /// this message allows validators to delegate their voting responsibilities
@@ -1198,6 +1238,7 @@ pub struct MsgCreateRateLimit {
     #[prost(string, tag = "5")]
     pub rate_limit_usd: ::prost::alloc::string::String,
     /// the absolute amount of tokens that can be minted on Injective
+    #[deprecated]
     #[prost(string, tag = "6")]
     pub absolute_mint_limit: ::prost::alloc::string::String,
     /// length of the sliding window in which inbound (outbound) traffic is
@@ -1306,6 +1347,10 @@ pub struct GenesisState {
     pub ethereum_blacklist: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(message, repeated, tag = "16")]
     pub rate_limits: ::prost::alloc::vec::Vec<RateLimit>,
+    #[prost(message, repeated, tag = "17")]
+    pub rate_limit_transfers: ::prost::alloc::vec::Vec<RateLimitTransfers>,
+    #[prost(message, repeated, tag = "18")]
+    pub mint_amounts: ::prost::alloc::vec::Vec<MintAmount>,
 }
 /// IDSet represents a set of IDs
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]

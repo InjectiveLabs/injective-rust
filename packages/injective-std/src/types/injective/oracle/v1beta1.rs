@@ -6,8 +6,6 @@ pub struct Params {
     pub pyth_contract: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
     pub chainlink_verifier_proxy_contract: ::prost::alloc::string::String,
-    #[prost(bool, tag = "3")]
-    pub accept_unverified_chainlink_data_streams_reports: bool,
     #[prost(uint64, tag = "4")]
     #[serde(
         serialize_with = "crate::serde::as_str::serialize",
@@ -26,6 +24,7 @@ pub struct OracleInfo {
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.ChainlinkPriceState")]
+#[deprecated]
 pub struct ChainlinkPriceState {
     #[prost(string, tag = "1")]
     #[serde(alias = "feedID")]
@@ -220,6 +219,12 @@ pub struct ChainlinkDataStreamsPriceState {
     pub observations_timestamp: u64,
     #[prost(message, optional, tag = "5")]
     pub price_state: ::core::option::Option<PriceState>,
+    #[prost(uint64, tag = "6")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub expires_at: u64,
 }
 /// DEPRECATED! Oracle price from Band is no longer supported
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -579,8 +584,10 @@ impl OracleType {
         }
     }
 }
+/// Deprecated: Do not use.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.SetChainlinkPriceEvent")]
+#[deprecated]
 pub struct SetChainlinkPriceEvent {
     #[prost(string, tag = "1")]
     #[serde(alias = "feedID")]
@@ -594,9 +601,10 @@ pub struct SetChainlinkPriceEvent {
     )]
     pub timestamp: u64,
 }
-/// Event type upon set ref
+/// Deprecated: Do not use.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.SetBandPriceEvent")]
+#[deprecated]
 pub struct SetBandPriceEvent {
     #[prost(string, tag = "1")]
     pub relayer: ::prost::alloc::string::String,
@@ -618,8 +626,10 @@ pub struct SetBandPriceEvent {
     )]
     pub request_id: u64,
 }
+/// Deprecated: Do not use.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.SetBandIBCPriceEvent")]
+#[deprecated]
 pub struct SetBandIbcPriceEvent {
     #[prost(string, tag = "1")]
     pub relayer: ::prost::alloc::string::String,
@@ -648,8 +658,10 @@ pub struct SetBandIbcPriceEvent {
     )]
     pub client_id: i64,
 }
+/// Deprecated: Do not use.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.EventBandIBCAckSuccess")]
+#[deprecated]
 pub struct EventBandIbcAckSuccess {
     #[prost(string, tag = "1")]
     pub ack_result: ::prost::alloc::string::String,
@@ -661,8 +673,10 @@ pub struct EventBandIbcAckSuccess {
     )]
     pub client_id: i64,
 }
+/// Deprecated: Do not use.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.EventBandIBCAckError")]
+#[deprecated]
 pub struct EventBandIbcAckError {
     #[prost(string, tag = "1")]
     pub ack_error: ::prost::alloc::string::String,
@@ -674,8 +688,10 @@ pub struct EventBandIbcAckError {
     )]
     pub client_id: i64,
 }
+/// Deprecated: Do not use.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.EventBandIBCResponseTimeout")]
+#[deprecated]
 pub struct EventBandIbcResponseTimeout {
     #[prost(int64, tag = "1")]
     #[serde(alias = "clientID")]
@@ -787,6 +803,7 @@ pub struct GenesisState {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub band_ibc_latest_request_id: u64,
+    #[deprecated]
     #[prost(message, repeated, tag = "12")]
     pub chainlink_price_states: ::prost::alloc::vec::Vec<ChainlinkPriceState>,
     #[prost(message, repeated, tag = "13")]

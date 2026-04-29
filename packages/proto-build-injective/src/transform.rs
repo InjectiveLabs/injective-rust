@@ -107,6 +107,8 @@ fn append(items: Vec<Item>, src: &Path, descriptor: &FileDescriptorSet, nested_m
 }
 
 fn transform_items(items: Vec<Item>, src: &Path, ancestors: &[String], descriptor: &FileDescriptorSet) -> Vec<Item> {
+    let non_eq_types = transformers::find_non_eq_type_names(&items);
+
     // TODO: Remove this temporary hack when cosmos & tendermint code gen is supported
     let remove_struct_fields_that_depends_on_tendermint_proto = |i: Item| match i.clone() {
         Item::Struct(s) => {
@@ -134,7 +136,7 @@ fn transform_items(items: Vec<Item>, src: &Path, ancestors: &[String], descripto
         .into_iter()
         .map(|i| match i {
             Item::Struct(s) => Item::Struct({
-                let s = transformers::add_derive_eq_struct(&s);
+                let s = transformers::add_derive_eq_struct(&s, &non_eq_types);
                 let s = transformers::append_attrs_struct(src, &s, descriptor);
                 let s = transformers::serde_alias_id_with_uppercased(s);
                 let s = transformers::serde_alias_is_perpetual(s);
@@ -143,7 +145,7 @@ fn transform_items(items: Vec<Item>, src: &Path, ancestors: &[String], descripto
             }),
 
             Item::Enum(e) => Item::Enum({
-                let e = transformers::add_derive_eq_enum(&e);
+                let e = transformers::add_derive_eq_enum(&e, &non_eq_types);
                 transformers::append_attrs_enum(src, &e, descriptor)
             }),
 

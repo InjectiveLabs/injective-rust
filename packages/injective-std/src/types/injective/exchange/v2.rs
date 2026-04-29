@@ -1142,7 +1142,10 @@ pub struct Params {
     /// List of addresses that are allowed to perform exchange admin operations
     #[prost(string, repeated, tag = "27")]
     pub exchange_admins: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// inj_auction_max_cap defines the maximum cap for INJ sent to auction
+    /// inj_auction_max_cap defines the maximum cap for INJ sent to auction.
+    /// Deprecated: the cap is now driven by the auction module's InjBasketMaxCap;
+    /// this field is ignored.
+    #[deprecated]
     #[prost(string, tag = "28")]
     pub inj_auction_max_cap: ::prost::alloc::string::String,
     /// fixed_gas_enabled indicates if msg server will consume fixed gas amount for
@@ -1180,10 +1183,19 @@ pub struct Params {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub post_only_mode_blocks_amount_after_downtime: u64,
+    /// DEPRECATED, left for upgrade purposes
     /// Contracts that exchange will be listening to pause markets denominated in
     /// respective erc20: denoms, with their pause event signatures
     #[prost(message, repeated, tag = "36")]
-    pub enforced_restrictions_contracts: ::prost::alloc::vec::Vec<EnforcedRestrictionsContract>,
+    pub deprecated_enforced_restrictions_contracts: ::prost::alloc::vec::Vec<EnforcedRestrictionsContract>,
+    /// white_knight_liquidators defines addresses that can liquidate positions
+    /// with a dedicated white-knight reward share in positive payout liquidations
+    #[prost(string, repeated, tag = "37")]
+    pub white_knight_liquidators: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// white_knight_liquidator_reward_share_rate defines the ratio of the split of
+    /// the surplus collateral that goes to a white knight liquidator
+    #[prost(string, tag = "38")]
+    pub white_knight_liquidator_reward_share_rate: ::prost::alloc::string::String,
 }
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.NextFundingTimestamp")]
@@ -5039,10 +5051,6 @@ pub struct QuerySpotOrdersByHashesResponse {
 /// Query/TraderSpotOrders RPC method.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTraderSpotOrdersRequest")]
-#[proto_query(
-    path = "/injective.exchange.v2.Query/TraderSpotOrders",
-    response_type = QueryTraderSpotOrdersResponse
-)]
 pub struct QueryTraderSpotOrdersRequest {
     /// Market ID for the market
     #[prost(string, tag = "1")]
@@ -5262,10 +5270,6 @@ pub struct QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
 /// Query/TraderDerivativeOrders RPC method.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTraderDerivativeOrdersRequest")]
-#[proto_query(
-    path = "/injective.exchange.v2.Query/TraderDerivativeOrders",
-    response_type = QueryTraderDerivativeOrdersResponse
-)]
 pub struct QueryTraderDerivativeOrdersRequest {
     /// Market ID for the market
     #[prost(string, tag = "1")]
@@ -5744,10 +5748,6 @@ pub struct QueryPositionsResponse {
 /// Query/TradeRewardPoints RPC method.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.QueryTradeRewardPointsRequest")]
-#[proto_query(
-    path = "/injective.exchange.v2.Query/TradeRewardPoints",
-    response_type = QueryTradeRewardPointsResponse
-)]
 pub struct QueryTradeRewardPointsRequest {
     #[prost(string, repeated, tag = "1")]
     pub accounts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -6628,13 +6628,6 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
         }
         .query(self.querier)
     }
-    pub fn trader_spot_orders(
-        &self,
-        market_id: ::prost::alloc::string::String,
-        subaccount_id: ::prost::alloc::string::String,
-    ) -> Result<QueryTraderSpotOrdersResponse, cosmwasm_std::StdError> {
-        QueryTraderSpotOrdersRequest { market_id, subaccount_id }.query(self.querier)
-    }
     pub fn account_address_spot_orders(
         &self,
         market_id: ::prost::alloc::string::String,
@@ -6662,13 +6655,6 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
     ) -> Result<QuerySubaccountOrdersResponse, cosmwasm_std::StdError> {
         QuerySubaccountOrdersRequest { subaccount_id, market_id }.query(self.querier)
     }
-    pub fn trader_spot_transient_orders(
-        &self,
-        market_id: ::prost::alloc::string::String,
-        subaccount_id: ::prost::alloc::string::String,
-    ) -> Result<QueryTraderSpotOrdersResponse, cosmwasm_std::StdError> {
-        QueryTraderSpotOrdersRequest { market_id, subaccount_id }.query(self.querier)
-    }
     pub fn spot_mid_price_and_tob(
         &self,
         market_id: ::prost::alloc::string::String,
@@ -6694,13 +6680,6 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
         }
         .query(self.querier)
     }
-    pub fn trader_derivative_orders(
-        &self,
-        market_id: ::prost::alloc::string::String,
-        subaccount_id: ::prost::alloc::string::String,
-    ) -> Result<QueryTraderDerivativeOrdersResponse, cosmwasm_std::StdError> {
-        QueryTraderDerivativeOrdersRequest { market_id, subaccount_id }.query(self.querier)
-    }
     pub fn account_address_derivative_orders(
         &self,
         market_id: ::prost::alloc::string::String,
@@ -6720,13 +6699,6 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
             order_hashes,
         }
         .query(self.querier)
-    }
-    pub fn trader_derivative_transient_orders(
-        &self,
-        market_id: ::prost::alloc::string::String,
-        subaccount_id: ::prost::alloc::string::String,
-    ) -> Result<QueryTraderDerivativeOrdersResponse, cosmwasm_std::StdError> {
-        QueryTraderDerivativeOrdersRequest { market_id, subaccount_id }.query(self.querier)
     }
     pub fn derivative_markets(
         &self,
@@ -6808,28 +6780,6 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
         subaccount_id: ::prost::alloc::string::String,
     ) -> Result<QuerySubaccountOrderMetadataResponse, cosmwasm_std::StdError> {
         QuerySubaccountOrderMetadataRequest { subaccount_id }.query(self.querier)
-    }
-    pub fn trade_reward_points(
-        &self,
-        accounts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-        pending_pool_timestamp: i64,
-    ) -> Result<QueryTradeRewardPointsResponse, cosmwasm_std::StdError> {
-        QueryTradeRewardPointsRequest {
-            accounts,
-            pending_pool_timestamp,
-        }
-        .query(self.querier)
-    }
-    pub fn pending_trade_reward_points(
-        &self,
-        accounts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-        pending_pool_timestamp: i64,
-    ) -> Result<QueryTradeRewardPointsResponse, cosmwasm_std::StdError> {
-        QueryTradeRewardPointsRequest {
-            accounts,
-            pending_pool_timestamp,
-        }
-        .query(self.querier)
     }
     pub fn trade_reward_campaign(&self) -> Result<QueryTradeRewardCampaignResponse, cosmwasm_std::StdError> {
         QueryTradeRewardCampaignRequest {}.query(self.querier)

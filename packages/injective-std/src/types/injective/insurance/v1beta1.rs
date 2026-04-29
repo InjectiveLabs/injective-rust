@@ -82,6 +82,24 @@ pub struct RedemptionSchedule {
     pub redemption_amount: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.insurance.v1beta1.FailedRedemptionSchedule")]
+pub struct FailedRedemptionSchedule {
+    /// id of the failed redemption
+    #[prost(uint64, tag = "1")]
+    #[serde(alias = "ID")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub id: u64,
+    /// the original redemption schedule that failed to execute
+    #[prost(message, optional, tag = "2")]
+    pub schedule: ::core::option::Option<RedemptionSchedule>,
+    /// the error message from the failed withdrawal attempt
+    #[prost(string, tag = "3")]
+    pub err: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.insurance.v1beta1.EventInsuranceFundUpdate")]
 pub struct EventInsuranceFundUpdate {
     #[prost(message, optional, tag = "1")]
@@ -102,6 +120,16 @@ pub struct EventWithdrawRedemption {
     /// redeem coin amount in base_currency
     #[prost(message, optional, tag = "2")]
     pub redeem_coin: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.insurance.v1beta1.EventWithdrawRedemptionFailed")]
+pub struct EventWithdrawRedemptionFailed {
+    /// redemption schedule that failed to withdraw
+    #[prost(message, optional, tag = "1")]
+    pub schedule: ::core::option::Option<RedemptionSchedule>,
+    /// error produced while processing the redemption withdrawal
+    #[prost(string, tag = "2")]
+    pub withdraw_err: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.insurance.v1beta1.EventUnderwrite")]
@@ -130,6 +158,16 @@ pub struct EventInsuranceWithdraw {
     pub market_ticker: ::prost::alloc::string::String,
     #[prost(message, optional, tag = "3")]
     pub withdrawal: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.insurance.v1beta1.EventSetVoucher")]
+pub struct EventSetVoucher {
+    /// The bech32 address of the voucher holder.
+    #[prost(string, tag = "1")]
+    pub addr: ::prost::alloc::string::String,
+    /// The new voucher amount. A zero coin signals voucher deletion.
+    #[prost(message, optional, tag = "2")]
+    pub voucher: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
 }
 /// GenesisState defines the insurance module's genesis state.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -163,6 +201,22 @@ pub struct GenesisState {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub next_redemption_schedule_id: u64,
+    /// failed_redemption_schedules describes redemptions that failed during
+    /// settlement and are preserved for manual resolution
+    #[prost(message, repeated, tag = "6")]
+    pub failed_redemption_schedules: ::prost::alloc::vec::Vec<FailedRedemptionSchedule>,
+    /// next_failed_redemption_schedule_id describes the next id for failed
+    /// redemption schedules, incremented by 1 per failed settlement
+    #[prost(uint64, tag = "7")]
+    #[serde(alias = "next_failed_redemption_scheduleID")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub next_failed_redemption_schedule_id: u64,
+    /// outstanding vouchers (failed redemption deliveries)
+    #[prost(message, repeated, tag = "8")]
+    pub vouchers: ::prost::alloc::vec::Vec<super::super::common::vouchers::v1::AddressVoucher>,
 }
 /// QueryInsuranceParamsRequest is the request type for the Query/InsuranceParams
 /// RPC method.
@@ -283,6 +337,62 @@ pub struct QueryModuleStateResponse {
     #[prost(message, optional, tag = "1")]
     pub state: ::core::option::Option<GenesisState>,
 }
+/// QueryFailedRedemptionsRequest is the request type for the
+/// Query/FailedRedemptions RPC method.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.insurance.v1beta1.QueryFailedRedemptionsRequest")]
+#[proto_query(
+    path = "/injective.insurance.v1beta1.Query/FailedRedemptions",
+    response_type = QueryFailedRedemptionsResponse
+)]
+pub struct QueryFailedRedemptionsRequest {}
+/// QueryFailedRedemptionsResponse is the response type for the
+/// Query/FailedRedemptions RPC method.
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.insurance.v1beta1.QueryFailedRedemptionsResponse")]
+pub struct QueryFailedRedemptionsResponse {
+    #[prost(message, repeated, tag = "1")]
+    pub schedules: ::prost::alloc::vec::Vec<FailedRedemptionSchedule>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.insurance.v1beta1.QueryVouchersRequest")]
+#[proto_query(
+    path = "/injective.insurance.v1beta1.Query/Vouchers",
+    response_type = QueryVouchersResponse
+)]
+pub struct QueryVouchersRequest {
+    /// denom filter; empty string returns all vouchers
+    #[prost(string, tag = "1")]
+    pub denom: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.insurance.v1beta1.QueryVouchersResponse")]
+pub struct QueryVouchersResponse {
+    /// List of outstanding vouchers matching the request filter.
+    #[prost(message, repeated, tag = "1")]
+    pub vouchers: ::prost::alloc::vec::Vec<super::super::common::vouchers::v1::AddressVoucher>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.insurance.v1beta1.QueryVoucherRequest")]
+#[proto_query(
+    path = "/injective.insurance.v1beta1.Query/Voucher",
+    response_type = QueryVoucherResponse
+)]
+pub struct QueryVoucherRequest {
+    /// Required. The token denom to look up.
+    #[prost(string, tag = "1")]
+    pub denom: ::prost::alloc::string::String,
+    /// Required. The bech32 address of the voucher holder.
+    #[prost(string, tag = "2")]
+    pub address: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.insurance.v1beta1.QueryVoucherResponse")]
+pub struct QueryVoucherResponse {
+    /// The outstanding voucher coin for the requested denom and address.
+    #[prost(message, optional, tag = "1")]
+    pub voucher: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
+}
 /// MsgCreateInsuranceFund a message to create an insurance fund for a derivative
 /// market.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -377,6 +487,20 @@ pub struct MsgUpdateParams {
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.insurance.v1beta1.MsgUpdateParamsResponse")]
 pub struct MsgUpdateParamsResponse {}
+/// MsgClaimVoucher defines a message for claiming an outstanding voucher
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.insurance.v1beta1.MsgClaimVoucher")]
+pub struct MsgClaimVoucher {
+    /// The sender's Injective address.
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+    /// The token denom of the voucher to claim.
+    #[prost(string, tag = "2")]
+    pub denom: ::prost::alloc::string::String,
+}
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.insurance.v1beta1.MsgClaimVoucherResponse")]
+pub struct MsgClaimVoucherResponse {}
 pub struct InsuranceQuerier<'a, Q: cosmwasm_std::CustomQuery> {
     querier: &'a cosmwasm_std::QuerierWrapper<'a, Q>,
 }
@@ -409,5 +533,18 @@ impl<'a, Q: cosmwasm_std::CustomQuery> InsuranceQuerier<'a, Q> {
     }
     pub fn insurance_module_state(&self) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
         QueryModuleStateRequest {}.query(self.querier)
+    }
+    pub fn failed_redemptions(&self) -> Result<QueryFailedRedemptionsResponse, cosmwasm_std::StdError> {
+        QueryFailedRedemptionsRequest {}.query(self.querier)
+    }
+    pub fn vouchers(&self, denom: ::prost::alloc::string::String) -> Result<QueryVouchersResponse, cosmwasm_std::StdError> {
+        QueryVouchersRequest { denom }.query(self.querier)
+    }
+    pub fn voucher(
+        &self,
+        denom: ::prost::alloc::string::String,
+        address: ::prost::alloc::string::String,
+    ) -> Result<QueryVoucherResponse, cosmwasm_std::StdError> {
+        QueryVoucherRequest { denom, address }.query(self.querier)
     }
 }
