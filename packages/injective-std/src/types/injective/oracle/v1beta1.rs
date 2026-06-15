@@ -12,6 +12,54 @@ pub struct Params {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub chainlink_data_streams_verification_gas_limit: u64,
+    /// EVM hex address of the PythLazer verifier contract deployed on Injective.
+    /// Must be set via governance before PythPro price relaying is active.
+    /// (optional)
+    #[prost(string, tag = "5")]
+    pub pyth_pro_verifier_contract: ::prost::alloc::string::String,
+    /// Gas cap for the eth_call used in PythPro update verification. Defaults to
+    /// 500000.
+    #[prost(uint64, tag = "6")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub pyth_pro_verification_gas_limit: u64,
+    /// Fee in wei passed as msg.value to the PythLazer verifyUpdate call.
+    /// Update via governance if the on-chain contract fee changes. Defaults to 1.
+    #[prost(uint64, tag = "7")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub pyth_pro_verification_fee: u64,
+    /// seda_fast_params groups all SEDA Fast oracle configuration. An empty
+    /// public_key disables MsgRelaySedaFastPrices handling until set via
+    /// MsgUpdateParams.
+    #[prost(message, optional, tag = "8")]
+    pub seda_fast_params: ::core::option::Option<SedaFastParams>,
+}
+/// SedaFastParams holds the on-chain configuration for the SEDA Fast oracle.
+/// See
+/// <https://docs.seda.xyz/home/for-developers/define-your-delivery-method/seda-fast>
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.SedaFastParams")]
+pub struct SedaFastParams {
+    /// SEC1 secp256k1 public key published by SEDA Fast at GET /info.
+    /// Compressed (33 B, 0x02/0x03 prefix) or uncompressed (65 B, 0x04 prefix).
+    /// Empty value disables all MsgRelaySedaFastPrices handling.
+    #[prost(bytes = "vec", tag = "1")]
+    pub public_key: ::prost::alloc::vec::Vec<u8>,
+    /// Allowlist of execProgramIds whose dataResult.result payload is an ASCII
+    /// decimal string (e.g. "384.48255"), parsed as LegacyDec.
+    #[prost(string, repeated, tag = "2")]
+    #[serde(alias = "simple_programIDs")]
+    pub simple_program_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Allowlist of execProgramIds whose dataResult.result payload is a UTF-8
+    /// JSON object containing {price:{mantissa,expo},...}.
+    #[prost(string, repeated, tag = "3")]
+    #[serde(alias = "json_programIDs")]
+    pub json_program_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.OracleInfo")]
@@ -505,6 +553,51 @@ pub struct ChainlinkReport {
     )]
     pub observations_timestamp: u64,
 }
+/// PythProPriceState holds the verified price state for a single PythPro feed.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.PythProPriceState")]
+pub struct PythProPriceState {
+    /// feed_id is the uint32 Pyth Lazer feed identifier.
+    #[prost(uint32, tag = "1")]
+    #[serde(alias = "feedID")]
+    pub feed_id: u32,
+    /// timestamp is the price timestamp extracted from the verified payload
+    /// (microseconds from epoch).
+    #[prost(uint64, tag = "2")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub timestamp: u64,
+    /// price_state holds the verified price, cumulative price, and block
+    /// timestamp.
+    #[prost(message, optional, tag = "3")]
+    pub price_state: ::core::option::Option<PriceState>,
+}
+/// SedaFastPriceState holds the verified price state for a single SEDA Fast
+/// feed.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.SedaFastPriceState")]
+pub struct SedaFastPriceState {
+    /// feed_id is the hex-encoded execInputs string from the SEDA Fast
+    /// dataRequest. It is the stable on-chain identity of the feed, invariant
+    /// across relayer restarts and per-execution result IDs.
+    #[prost(string, tag = "1")]
+    #[serde(alias = "feedID")]
+    pub feed_id: ::prost::alloc::string::String,
+    /// timestamp is the dataResult.blockTimestamp value (milliseconds from
+    /// epoch) extracted from the verified SEDA Fast response.
+    #[prost(uint64, tag = "2")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub timestamp: u64,
+    /// price_state holds the verified price, cumulative price, and block
+    /// timestamp.
+    #[prost(message, optional, tag = "3")]
+    pub price_state: ::core::option::Option<PriceState>,
+}
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
@@ -539,6 +632,16 @@ pub enum OracleType {
     Stork = 12,
     #[serde(rename = "ChainlinkDataStreams")]
     ChainlinkDataStreams = 13,
+    /// PythPro uses the Pyth Lazer high-frequency feed, verified via an on-chain
+    /// EVM contract.
+    #[serde(rename = "PythPro")]
+    PythPro = 14,
+    /// SedaFast relays prices from the SEDA Fast WebSocket stream, verified
+    /// on-chain via secp256k1 ECDSA over keccak256(dataResultId).
+    /// See
+    /// <https://docs.seda.xyz/home/for-developers/define-your-delivery-method/seda-fast>
+    #[serde(rename = "SedaFast")]
+    SedaFast = 15,
 }
 impl OracleType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -561,6 +664,8 @@ impl OracleType {
             Self::Provider => "Provider",
             Self::Stork => "Stork",
             Self::ChainlinkDataStreams => "ChainlinkDataStreams",
+            Self::PythPro => "PythPro",
+            Self::SedaFast => "SedaFast",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -580,6 +685,8 @@ impl OracleType {
             "Provider" => Some(Self::Provider),
             "Stork" => Some(Self::Stork),
             "ChainlinkDataStreams" => Some(Self::ChainlinkDataStreams),
+            "PythPro" => Some(Self::PythPro),
+            "SedaFast" => Some(Self::SedaFast),
             _ => None,
         }
     }
@@ -758,6 +865,26 @@ pub struct EventSetChainlinkDataStreamsPrices {
     #[prost(message, repeated, tag = "1")]
     pub prices: ::prost::alloc::vec::Vec<ChainlinkDataStreamsPriceState>,
 }
+/// EventOraclePriceUpdate is a generic price update event emitted for oracle
+/// types that adopt the new event format. Intended to replace type-specific
+/// events for all oracle types going forward.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.EventOraclePriceUpdate")]
+pub struct EventOraclePriceUpdate {
+    /// oracle_type identifies which oracle source emitted this price update.
+    #[prost(enumeration = "OracleType", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<OracleType, _>")]
+    pub oracle_type: i32,
+    /// id identifies the price feed within the oracle type (e.g. feedId for
+    /// PythPro).
+    #[prost(string, tag = "2")]
+    #[serde(alias = "ID")]
+    pub id: ::prost::alloc::string::String,
+    /// price_state contains the verified price, cumulative price, and block
+    /// timestamp.
+    #[prost(message, optional, tag = "3")]
+    pub price_state: ::core::option::Option<PriceState>,
+}
 /// GenesisState defines the oracle module's genesis state.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.GenesisState")]
@@ -818,6 +945,14 @@ pub struct GenesisState {
     pub stork_publishers: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(message, repeated, tag = "18")]
     pub chainlink_data_streams_price_states: ::prost::alloc::vec::Vec<ChainlinkDataStreamsPriceState>,
+    /// pyth_pro_price_states defines the persisted PythPro feed price states at
+    /// genesis.
+    #[prost(message, repeated, tag = "19")]
+    pub pyth_pro_price_states: ::prost::alloc::vec::Vec<PythProPriceState>,
+    /// seda_fast_price_states defines the persisted SEDA Fast feed price states
+    /// at genesis, keyed by feed_id (hex-encoded execInputs).
+    #[prost(message, repeated, tag = "20")]
+    pub seda_fast_price_states: ::prost::alloc::vec::Vec<SedaFastPriceState>,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.CalldataRecord")]
@@ -1108,6 +1243,40 @@ pub struct QueryPythPriceStatesResponse {
     #[prost(message, repeated, tag = "1")]
     pub price_states: ::prost::alloc::vec::Vec<PythPriceState>,
 }
+/// QueryPythProPriceStatesRequest is the request type for the
+/// Query/PythProPriceStates RPC method.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.QueryPythProPriceStatesRequest")]
+#[proto_query(
+    path = "/injective.oracle.v1beta1.Query/PythProPriceStates",
+    response_type = QueryPythProPriceStatesResponse
+)]
+pub struct QueryPythProPriceStatesRequest {}
+/// QueryPythProPriceStatesResponse is the response type for the
+/// Query/PythProPriceStates RPC method.
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.QueryPythProPriceStatesResponse")]
+pub struct QueryPythProPriceStatesResponse {
+    #[prost(message, repeated, tag = "1")]
+    pub price_states: ::prost::alloc::vec::Vec<PythProPriceState>,
+}
+/// QuerySedaFastPriceStatesRequest is the request type for the
+/// Query/SedaFastPriceStates RPC method.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.QuerySedaFastPriceStatesRequest")]
+#[proto_query(
+    path = "/injective.oracle.v1beta1.Query/SedaFastPriceStates",
+    response_type = QuerySedaFastPriceStatesResponse
+)]
+pub struct QuerySedaFastPriceStatesRequest {}
+/// QuerySedaFastPriceStatesResponse is the response type for the
+/// Query/SedaFastPriceStates RPC method.
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.QuerySedaFastPriceStatesResponse")]
+pub struct QuerySedaFastPriceStatesResponse {
+    #[prost(message, repeated, tag = "1")]
+    pub price_states: ::prost::alloc::vec::Vec<SedaFastPriceState>,
+}
 /// QueryStorkPriceStatesRequest is the request type for the
 /// Query/StorkPriceStates RPC method.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -1395,6 +1564,29 @@ pub struct MsgRelayPriceFeedPrice {
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.MsgRelayPriceFeedPriceResponse")]
 pub struct MsgRelayPriceFeedPriceResponse {}
+/// Deprecated: Band oracle support was removed. This message is kept for
+/// backward compatibility to decode historical transactions.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.MsgRelayBandRates")]
+#[deprecated]
+pub struct MsgRelayBandRates {
+    #[prost(string, tag = "1")]
+    pub relayer: ::prost::alloc::string::String,
+    #[prost(string, repeated, tag = "2")]
+    pub symbols: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(uint64, repeated, tag = "3")]
+    pub rates: ::prost::alloc::vec::Vec<u64>,
+    #[prost(uint64, repeated, tag = "4")]
+    pub resolve_times: ::prost::alloc::vec::Vec<u64>,
+    #[prost(uint64, repeated, tag = "5")]
+    pub request_i_ds: ::prost::alloc::vec::Vec<u64>,
+}
+/// Deprecated: Band oracle support was removed. This message is kept for
+/// backward compatibility to decode historical transactions.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.MsgRelayBandRatesResponse")]
+#[deprecated]
+pub struct MsgRelayBandRatesResponse {}
 /// MsgRelayCoinbaseMessages defines a SDK message for relaying price messages
 /// from Coinbase API.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -1423,6 +1615,28 @@ pub struct MsgRelayStorkPrices {
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.MsgRelayStorkPricesResponse")]
 pub struct MsgRelayStorkPricesResponse {}
+/// Deprecated: BandIBC oracle support was removed. This message is kept for
+/// backward compatibility to decode historical transactions.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.MsgRequestBandIBCRates")]
+#[deprecated]
+pub struct MsgRequestBandIbcRates {
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+    #[prost(uint64, tag = "2")]
+    #[serde(alias = "requestID")]
+    #[serde(
+        serialize_with = "crate::serde::as_str::serialize",
+        deserialize_with = "crate::serde::as_str::deserialize"
+    )]
+    pub request_id: u64,
+}
+/// Deprecated: BandIBC oracle support was removed. This message is kept for
+/// backward compatibility to decode historical transactions.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.MsgRequestBandIBCRatesResponse")]
+#[deprecated]
+pub struct MsgRequestBandIbcRatesResponse {}
 /// MsgRelayPythPrices defines a SDK message for updating Pyth prices
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.MsgRelayPythPrices")]
@@ -1451,6 +1665,46 @@ pub struct MsgRelayChainlinkPrices {
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.MsgRelayChainlinkPricesResponse")]
 pub struct MsgRelayChainlinkPricesResponse {}
+/// MsgRelayPythProPrices defines a SDK message for relaying Pyth Pro (Lazer)
+/// price update blobs. Each update is an opaque bytes blob received from the
+/// Pyth Lazer WebSocket and verified on-chain via the PythLazer EVM contract.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.MsgRelayPythProPrices")]
+pub struct MsgRelayPythProPrices {
+    /// sender is the relayer address broadcasting the update. Any address may
+    /// relay; security is enforced by the PythLazer EVM contract.
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+    /// updates contains one or more Pyth Lazer update blobs; each blob is passed
+    /// to a single verifyUpdate EVM call.
+    #[prost(bytes = "vec", repeated, tag = "2")]
+    pub updates: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
+}
+/// MsgRelayPythProPricesResponse defines the Msg/RelayPythProPrices response
+/// type.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.MsgRelayPythProPricesResponse")]
+pub struct MsgRelayPythProPricesResponse {}
+/// MsgRelaySedaFastPrices defines a SDK message for relaying SEDA Fast price
+/// update envelopes. Each update is the raw UTF-8 JSON of the top-level
+/// "result" field of a feed.result / feed.execute WebSocket message (or a
+/// POST /execute REST response). The chain parses the JSON, verifies the
+/// secp256k1 signature, and decodes the price on-chain.
+/// Individual entry size is capped at 8 KiB; at most 64 entries per Msg.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.MsgRelaySedaFastPrices")]
+pub struct MsgRelaySedaFastPrices {
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+    /// updates contains one or more SEDA Fast result JSON envelopes.
+    #[prost(bytes = "vec", repeated, tag = "2")]
+    pub updates: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
+}
+/// MsgRelaySedaFastPricesResponse defines the Msg/RelaySedaFastPrices response
+/// type.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.oracle.v1beta1.MsgRelaySedaFastPricesResponse")]
+pub struct MsgRelaySedaFastPricesResponse {}
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.oracle.v1beta1.MsgUpdateParams")]
 pub struct MsgUpdateParams {
@@ -1493,6 +1747,12 @@ impl<'a, Q: cosmwasm_std::CustomQuery> OracleQuerier<'a, Q> {
     }
     pub fn pyth_price_states(&self) -> Result<QueryPythPriceStatesResponse, cosmwasm_std::StdError> {
         QueryPythPriceStatesRequest {}.query(self.querier)
+    }
+    pub fn pyth_pro_price_states(&self) -> Result<QueryPythProPriceStatesResponse, cosmwasm_std::StdError> {
+        QueryPythProPriceStatesRequest {}.query(self.querier)
+    }
+    pub fn seda_fast_price_states(&self) -> Result<QuerySedaFastPriceStatesResponse, cosmwasm_std::StdError> {
+        QuerySedaFastPriceStatesRequest {}.query(self.querier)
     }
     pub fn stork_price_states(&self) -> Result<QueryStorkPriceStatesResponse, cosmwasm_std::StdError> {
         QueryStorkPriceStatesRequest {}.query(self.querier)

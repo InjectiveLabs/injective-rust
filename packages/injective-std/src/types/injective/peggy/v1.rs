@@ -726,12 +726,16 @@ pub struct Params {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub average_ethereum_block_time: u64,
+    #[deprecated]
     #[prost(bytes = "vec", tag = "11")]
     pub slash_fraction_valset: ::prost::alloc::vec::Vec<u8>,
+    #[deprecated]
     #[prost(bytes = "vec", tag = "12")]
     pub slash_fraction_batch: ::prost::alloc::vec::Vec<u8>,
+    #[deprecated]
     #[prost(bytes = "vec", tag = "13")]
     pub slash_fraction_claim: ::prost::alloc::vec::Vec<u8>,
+    #[deprecated]
     #[prost(bytes = "vec", tag = "14")]
     pub slash_fraction_conflicting_claim: ::prost::alloc::vec::Vec<u8>,
     #[prost(uint64, tag = "15")]
@@ -740,12 +744,14 @@ pub struct Params {
         deserialize_with = "crate::serde::as_str::deserialize"
     )]
     pub unbond_slashing_valsets_window: u64,
+    #[deprecated]
     #[prost(bytes = "vec", tag = "16")]
     pub slash_fraction_bad_eth_signature: ::prost::alloc::vec::Vec<u8>,
     #[prost(string, tag = "17")]
     pub cosmos_coin_denom: ::prost::alloc::string::String,
     #[prost(string, tag = "18")]
     pub cosmos_coin_erc20_contract: ::prost::alloc::string::String,
+    #[deprecated]
     #[prost(bool, tag = "19")]
     pub claim_slashing_enabled: bool,
     #[prost(uint64, tag = "20")]

@@ -1536,6 +1536,17 @@ pub struct EventLostFundsFromLiquidation {
     #[prost(string, tag = "4")]
     pub lost_funds_from_order_cancels: ::prost::alloc::string::String,
 }
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v1beta1.EventLostFundsFromCrossPoolLiquidation")]
+pub struct EventLostFundsFromCrossPoolLiquidation {
+    #[prost(bytes = "vec", tag = "1")]
+    #[serde(alias = "subaccountID")]
+    pub subaccount_id: ::prost::alloc::vec::Vec<u8>,
+    #[prost(string, tag = "2")]
+    pub quote_denom: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub lost_funds_from_available_during_payout: ::prost::alloc::string::String,
+}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v1beta1.EventBatchDerivativePosition")]
 pub struct EventBatchDerivativePosition {

@@ -433,6 +433,11 @@ pub struct DerivativeMarket {
     /// set when status == ForcePaused
     #[prost(message, optional, tag = "24")]
     pub force_paused_info: ::core::option::Option<ForcePausedInfo>,
+    /// cross_margin_eligible marks the market as eligible for cross-margin
+    /// pool participation. Default false means markets are ineligible until
+    /// explicitly enabled at launch or toggled via governance proposal.
+    #[prost(bool, tag = "25")]
+    pub cross_margin_eligible: bool,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeMarketSettlementInfo")]
@@ -444,6 +449,10 @@ pub struct DerivativeMarketSettlementInfo {
     /// settlement_price defines the settlement price
     #[prost(string, tag = "2")]
     pub settlement_price: ::prost::alloc::string::String,
+    /// is_forced_settlement indicates whether the settlement was explicitly
+    /// scheduled by admin or governance force-settlement.
+    #[prost(bool, tag = "3")]
+    pub is_forced_settlement: bool,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MarketVolume")]
@@ -1196,6 +1205,46 @@ pub struct Params {
     /// the surplus collateral that goes to a white knight liquidator
     #[prost(string, tag = "38")]
     pub white_knight_liquidator_reward_share_rate: ::prost::alloc::string::String,
+    /// cross_margin_params groups all cross-margin related parameters.
+    #[prost(message, optional, tag = "39")]
+    pub cross_margin_params: ::core::option::Option<CrossMarginParams>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.CrossMarginParams")]
+pub struct CrossMarginParams {
+    /// positive_upnl_haircut_rate defines the haircut applied to
+    /// positive unrealized PnL for cross-margin admission checks.
+    #[prost(string, tag = "1")]
+    pub positive_upnl_haircut_rate: ::prost::alloc::string::String,
+    /// fees_buffer defines a fixed notional buffer (quote-denom
+    /// units) subtracted from cross-margin equity calculations.
+    #[prost(string, tag = "2")]
+    pub fees_buffer: ::prost::alloc::string::String,
+    /// enabled_quote_denoms defines the quote denoms that are
+    /// eligible for cross-margin pools.
+    #[prost(string, repeated, tag = "3")]
+    pub enabled_quote_denoms: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// perpetual_enabled defines whether perpetual derivative markets
+    /// are eligible for cross margin.
+    #[prost(bool, tag = "4")]
+    pub perpetual_enabled: bool,
+    /// expiry_enabled defines whether expiry futures derivative
+    /// markets are eligible for cross margin.
+    #[prost(bool, tag = "5")]
+    pub expiry_enabled: bool,
+    /// max_active_derivative_markets_per_pool defines the maximum
+    /// number of active derivative markets (positions or orders) a cross-margin
+    /// subaccount may have within a single quote-denom pool.
+    #[prost(uint32, tag = "6")]
+    pub max_active_derivative_markets_per_pool: u32,
+    /// emergency_paused defines whether cross margin is in emergency
+    /// pause mode. When true:
+    /// - All cross-margin orders (including reduce-only) are blocked
+    /// - Profile switching involving cross mode is blocked
+    /// - Liquidations are still allowed
+    /// - Withdrawals are allowed up to isolated-margin maintenance level
+    #[prost(bool, tag = "7")]
+    pub emergency_paused: bool,
 }
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.NextFundingTimestamp")]
@@ -1642,6 +1691,20 @@ pub struct DenomMinNotional {
     #[prost(string, tag = "2")]
     pub min_notional: ::prost::alloc::string::String,
 }
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.SubaccountRiskProfile")]
+pub struct SubaccountRiskProfile {
+    #[prost(enumeration = "RiskMode", tag = "1")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<RiskMode, _>")]
+    pub mode: i32,
+    #[prost(enumeration = "ReservationPolicy", tag = "2")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<ReservationPolicy, _>")]
+    pub reservation_policy: i32,
+    /// credit_line_id is reserved for future use and currently must be empty.
+    #[prost(string, tag = "3")]
+    #[serde(alias = "credit_lineID")]
+    pub credit_line_id: ::prost::alloc::string::String,
+}
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
@@ -1699,6 +1762,75 @@ impl ExecutionType {
         }
     }
 }
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+#[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+pub enum RiskMode {
+    Unspecified = 0,
+    Isolated = 1,
+    Cross = 2,
+    /// reserved for future use (not implemented)
+    Portfolio = 3,
+}
+impl RiskMode {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Unspecified => "RISK_MODE_UNSPECIFIED",
+            Self::Isolated => "RISK_MODE_ISOLATED",
+            Self::Cross => "RISK_MODE_CROSS",
+            Self::Portfolio => "RISK_MODE_PORTFOLIO",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "RISK_MODE_UNSPECIFIED" => Some(Self::Unspecified),
+            "RISK_MODE_ISOLATED" => Some(Self::Isolated),
+            "RISK_MODE_CROSS" => Some(Self::Cross),
+            "RISK_MODE_PORTFOLIO" => Some(Self::Portfolio),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+#[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+pub enum ReservationPolicy {
+    Unspecified = 0,
+    FullHold = 1,
+    /// reserved for future use (not implemented)
+    PartialHold = 2,
+    /// reserved for future use (not implemented)
+    NoHold = 3,
+}
+impl ReservationPolicy {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Unspecified => "RESERVATION_POLICY_UNSPECIFIED",
+            Self::FullHold => "RESERVATION_POLICY_FULL_HOLD",
+            Self::PartialHold => "RESERVATION_POLICY_PARTIAL_HOLD",
+            Self::NoHold => "RESERVATION_POLICY_NO_HOLD",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "RESERVATION_POLICY_UNSPECIFIED" => Some(Self::Unspecified),
+            "RESERVATION_POLICY_FULL_HOLD" => Some(Self::FullHold),
+            "RESERVATION_POLICY_PARTIAL_HOLD" => Some(Self::PartialHold),
+            "RESERVATION_POLICY_NO_HOLD" => Some(Self::NoHold),
+            _ => None,
+        }
+    }
+}
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventBatchSpotExecution")]
 pub struct EventBatchSpotExecution {
@@ -1745,6 +1877,17 @@ pub struct EventLostFundsFromLiquidation {
     pub lost_funds_from_available_during_payout: ::prost::alloc::string::String,
     #[prost(string, tag = "4")]
     pub lost_funds_from_order_cancels: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.EventLostFundsFromCrossPoolLiquidation")]
+pub struct EventLostFundsFromCrossPoolLiquidation {
+    #[prost(bytes = "vec", tag = "1")]
+    #[serde(alias = "subaccountID")]
+    pub subaccount_id: ::prost::alloc::vec::Vec<u8>,
+    #[prost(string, tag = "2")]
+    pub quote_denom: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub lost_funds_from_available_during_payout: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventBatchDerivativePosition")]
@@ -1923,6 +2066,19 @@ pub struct EventSubaccountBalanceTransfer {
     pub dst_subaccount_id: ::prost::alloc::string::String,
     #[prost(message, optional, tag = "3")]
     pub amount: ::core::option::Option<super::super::super::cosmos::base::v1beta1::Coin>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.EventSubaccountRiskProfileUpdated")]
+pub struct EventSubaccountRiskProfileUpdated {
+    #[prost(string, tag = "1")]
+    #[serde(alias = "subaccountID")]
+    pub subaccount_id: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "2")]
+    pub previous_profile: ::core::option::Option<SubaccountRiskProfile>,
+    #[prost(message, optional, tag = "3")]
+    pub new_profile: ::core::option::Option<SubaccountRiskProfile>,
+    #[prost(bool, tag = "4")]
+    pub is_default: bool,
 }
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EventBatchDepositUpdate")]
@@ -2490,6 +2646,9 @@ pub struct PerpetualMarketLaunchProposal {
     /// open_notional_cap defines the maximum open notional for the market
     #[prost(message, optional, tag = "18")]
     pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
+    /// cross_margin_eligible marks the market as eligible for cross-margin
+    #[prost(bool, tag = "19")]
+    pub cross_margin_eligible: bool,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.BinaryOptionsMarketLaunchProposal")]
@@ -2629,6 +2788,9 @@ pub struct ExpiryFuturesMarketLaunchProposal {
     /// open_notional_cap defines the maximum open notional for the market
     #[prost(message, optional, tag = "19")]
     pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
+    /// cross_margin_eligible marks the market as eligible for cross-margin
+    #[prost(bool, tag = "20")]
+    pub cross_margin_eligible: bool,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.DerivativeMarketParamUpdateProposal")]
@@ -2699,6 +2861,11 @@ pub struct DerivativeMarketParamUpdateProposal {
     #[prost(enumeration = "DisableMinimalProtocolFeeUpdate", tag = "20")]
     #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<DisableMinimalProtocolFeeUpdate, _>")]
     pub has_disabled_minimal_protocol_fee: i32,
+    /// cross_margin_eligibility controls whether the market can participate in
+    /// cross-margin pools
+    #[prost(enumeration = "CrossMarginEligibility", tag = "21")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<CrossMarginEligibility, _>")]
+    pub cross_margin_eligibility: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.AdminInfo")]
@@ -2961,6 +3128,49 @@ impl DisableMinimalProtocolFeeUpdate {
         }
     }
 }
+/// CrossMarginEligibility is a tri-state enum used in
+/// DerivativeMarketParamUpdateProposal to control per-market cross-margin
+/// eligibility. UNSPECIFIED means "no update" (the market's current value is
+/// preserved), following the same pattern as DisableMinimalProtocolFeeUpdate.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+#[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
+pub enum CrossMarginEligibility {
+    /// no update — preserves existing value
+    #[serde(rename = "CM_ELIGIBILITY_UNSPECIFIED")]
+    #[serde(alias = "CmEligibilityUnspecified")]
+    CmEligibilityUnspecified = 0,
+    /// market can participate in cross-margin pools
+    #[serde(rename = "CM_ELIGIBILITY_ELIGIBLE")]
+    #[serde(alias = "CmEligibilityEligible")]
+    CmEligibilityEligible = 1,
+    /// market is excluded from cross-margin pools
+    #[serde(rename = "CM_ELIGIBILITY_INELIGIBLE")]
+    #[serde(alias = "CmEligibilityIneligible")]
+    CmEligibilityIneligible = 2,
+}
+impl CrossMarginEligibility {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::CmEligibilityUnspecified => "CM_ELIGIBILITY_UNSPECIFIED",
+            Self::CmEligibilityEligible => "CM_ELIGIBILITY_ELIGIBLE",
+            Self::CmEligibilityIneligible => "CM_ELIGIBILITY_INELIGIBLE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "CM_ELIGIBILITY_UNSPECIFIED" => Some(Self::CmEligibilityUnspecified),
+            "CM_ELIGIBILITY_ELIGIBLE" => Some(Self::CmEligibilityEligible),
+            "CM_ELIGIBILITY_INELIGIBLE" => Some(Self::CmEligibilityIneligible),
+            _ => None,
+        }
+    }
+}
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
@@ -3057,6 +3267,12 @@ pub struct MsgUpdateDerivativeMarket {
     /// (optional) updated value for open_notional_cap
     #[prost(message, optional, tag = "10")]
     pub new_open_notional_cap: ::core::option::Option<OpenNotionalCap>,
+    /// (optional) tri-state toggle for cross-margin eligibility. Direct message
+    /// updates are exchange-admin-only and may set either ELIGIBLE or INELIGIBLE.
+    /// UNSPECIFIED is a no-op (preserves current value).
+    #[prost(enumeration = "CrossMarginEligibility", tag = "11")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<CrossMarginEligibility, _>")]
+    pub cross_margin_eligibility: i32,
 }
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgUpdateDerivativeMarketResponse")]
@@ -3117,6 +3333,27 @@ pub struct MsgWithdraw {
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgWithdrawResponse")]
 pub struct MsgWithdrawResponse {}
+/// MsgUpdateSubaccountRiskProfile defines a SDK message for updating a
+/// subaccount's risk profile (e.g. opting into cross-margin).
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgUpdateSubaccountRiskProfile")]
+pub struct MsgUpdateSubaccountRiskProfile {
+    /// the sender's Injective address
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+    /// the subaccount ID to update the risk profile for
+    #[prost(string, tag = "2")]
+    #[serde(alias = "subaccountID")]
+    pub subaccount_id: ::prost::alloc::string::String,
+    /// the requested risk profile (subject to eligibility & safety gates)
+    #[prost(message, optional, tag = "3")]
+    pub risk_profile: ::core::option::Option<SubaccountRiskProfile>,
+}
+/// MsgUpdateSubaccountRiskProfileResponse defines the
+/// Msg/UpdateSubaccountRiskProfile response type.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgUpdateSubaccountRiskProfileResponse")]
+pub struct MsgUpdateSubaccountRiskProfileResponse {}
 /// MsgCreateSpotLimitOrder defines a SDK message for creating a new spot limit
 /// order.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
@@ -3263,6 +3500,9 @@ pub struct MsgInstantPerpetualMarketLaunch {
     /// open_notional_cap defines the cap on the open notional
     #[prost(message, optional, tag = "16")]
     pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
+    /// cross_margin_eligible marks the market as eligible for cross-margin
+    #[prost(bool, tag = "17")]
+    pub cross_margin_eligible: bool,
 }
 /// MsgInstantPerpetualMarketLaunchResponse defines the
 /// Msg/InstantPerpetualMarketLaunchResponse response type.
@@ -3408,6 +3648,9 @@ pub struct MsgInstantExpiryFuturesMarketLaunch {
     /// open_notional_cap defines the cap on the open notional
     #[prost(message, optional, tag = "17")]
     pub open_notional_cap: ::core::option::Option<OpenNotionalCap>,
+    /// cross_margin_eligible marks the market as eligible for cross-margin
+    #[prost(bool, tag = "18")]
+    pub cross_margin_eligible: bool,
 }
 /// MsgInstantExpiryFuturesMarketLaunchResponse defines the
 /// Msg/InstantExpiryFuturesMarketLaunch response type.
@@ -3905,6 +4148,60 @@ pub struct MsgLiquidatePosition {
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgLiquidatePositionResponse")]
 pub struct MsgLiquidatePositionResponse {}
+/// LiquidatePositionData contains per-position liquidation input fields.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.LiquidatePositionData")]
+pub struct LiquidatePositionData {
+    /// the subaccount ID the position belongs to
+    #[prost(string, tag = "1")]
+    #[serde(alias = "subaccountID")]
+    pub subaccount_id: ::prost::alloc::string::String,
+    /// the position's market ID
+    #[prost(string, tag = "2")]
+    #[serde(alias = "marketID")]
+    pub market_id: ::prost::alloc::string::String,
+    /// optional order to provide for liquidation
+    #[prost(message, optional, tag = "3")]
+    pub order: ::core::option::Option<DerivativeOrder>,
+}
+/// A Cosmos-SDK MsgBatchLiquidatePositions
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgBatchLiquidatePositions")]
+pub struct MsgBatchLiquidatePositions {
+    /// the sender's Injective address
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+    /// the positions to liquidate
+    #[prost(message, repeated, tag = "2")]
+    pub liquidations: ::prost::alloc::vec::Vec<LiquidatePositionData>,
+}
+/// LiquidatePositionResult contains the liquidation outcome for an item.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.LiquidatePositionResult")]
+pub struct LiquidatePositionResult {
+    /// the subaccount ID the position belongs to
+    #[prost(string, tag = "1")]
+    #[serde(alias = "subaccountID")]
+    pub subaccount_id: ::prost::alloc::string::String,
+    /// the position's market ID
+    #[prost(string, tag = "2")]
+    #[serde(alias = "marketID")]
+    pub market_id: ::prost::alloc::string::String,
+    /// whether the liquidation succeeded
+    #[prost(bool, tag = "3")]
+    pub success: bool,
+    /// failure reason when success is false
+    #[prost(string, tag = "4")]
+    pub error: ::prost::alloc::string::String,
+}
+/// MsgBatchLiquidatePositionsResponse defines the
+/// Msg/BatchLiquidatePositions response type.
+#[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgBatchLiquidatePositionsResponse")]
+pub struct MsgBatchLiquidatePositionsResponse {
+    #[prost(message, repeated, tag = "1")]
+    pub results: ::prost::alloc::vec::Vec<LiquidatePositionResult>,
+}
 /// A Cosmos-SDK MsgOffsetPosition
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgOffsetPosition")]
@@ -4337,6 +4634,25 @@ pub struct MsgAtomicMarketOrderFeeMultiplierSchedule {
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgAtomicMarketOrderFeeMultiplierScheduleResponse")]
 pub struct MsgAtomicMarketOrderFeeMultiplierScheduleResponse {}
+/// Deprecated: Delegation transfer receiver support was removed. This message
+/// is kept for backward compatibility to decode historical transactions.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgSetDelegationTransferReceivers")]
+#[deprecated]
+pub struct MsgSetDelegationTransferReceivers {
+    /// the sender's Injective address (must be exchange admin)
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+    /// list of receiver addresses to set as delegation transfer receivers
+    #[prost(string, repeated, tag = "2")]
+    pub receivers: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// Deprecated: Delegation transfer receiver support was removed. This message
+/// is kept for backward compatibility to decode historical transactions.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgSetDelegationTransferReceiversResponse")]
+#[deprecated]
+pub struct MsgSetDelegationTransferReceiversResponse {}
 /// MsgCancelPostOnlyMode defines a message for canceling post-only mode
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgCancelPostOnlyMode")]
@@ -4366,6 +4682,28 @@ pub struct MsgActivatePostOnlyMode {
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.MsgActivatePostOnlyModeResponse")]
 pub struct MsgActivatePostOnlyModeResponse {}
+/// MsgLiquidateCrossMarginPool atomically closes all positions in a
+/// cross-margin pool, netting surplus from profitable positions against deficits
+/// before touching the insurance fund.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgLiquidateCrossMarginPool")]
+pub struct MsgLiquidateCrossMarginPool {
+    /// the liquidator's Injective address
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+    /// the cross-margin subaccount to liquidate
+    #[prost(string, tag = "2")]
+    #[serde(alias = "subaccountID")]
+    pub subaccount_id: ::prost::alloc::string::String,
+    /// identifies which cross-margin pool (by quote denom)
+    #[prost(string, tag = "3")]
+    pub quote_denom: ::prost::alloc::string::String,
+}
+/// MsgLiquidateCrossMarginPoolResponse defines the
+/// Msg/LiquidateCrossMarginPool response type.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.MsgLiquidateCrossMarginPoolResponse")]
+pub struct MsgLiquidateCrossMarginPoolResponse {}
 /// GenesisState defines the exchange module's genesis state.
 #[derive(Clone, PartialEq, Eq, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.GenesisState")]
@@ -4488,6 +4826,8 @@ pub struct GenesisState {
     pub active_grants: ::prost::alloc::vec::Vec<FullActiveGrant>,
     #[prost(message, repeated, tag = "37")]
     pub denom_min_notionals: ::prost::alloc::vec::Vec<DenomMinNotional>,
+    #[prost(message, repeated, tag = "38")]
+    pub subaccount_risk_profiles: ::prost::alloc::vec::Vec<SubaccountRiskProfileRecord>,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.OrderbookSequence")]
@@ -4584,6 +4924,15 @@ pub struct FullActiveGrant {
     pub grantee: ::prost::alloc::string::String,
     #[prost(message, optional, tag = "2")]
     pub active_grant: ::core::option::Option<ActiveGrant>,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.SubaccountRiskProfileRecord")]
+pub struct SubaccountRiskProfileRecord {
+    #[prost(string, tag = "1")]
+    #[serde(alias = "subaccountID")]
+    pub subaccount_id: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "2")]
+    pub risk_profile: ::core::option::Option<SubaccountRiskProfile>,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.Subaccount")]
@@ -5607,6 +5956,12 @@ pub struct QuerySubaccountPositionsResponse {
 pub struct QuerySubaccountPositionInMarketResponse {
     #[prost(message, optional, tag = "1")]
     pub state: ::core::option::Option<Position>,
+    /// The risk mode of the subaccount (ISOLATED or CROSS).
+    /// For CROSS mode, the position's margin is an accounting value; actual
+    /// collateral is pooled. Use CrossMarginPoolSnapshot for pool-level health.
+    #[prost(enumeration = "RiskMode", tag = "2")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<RiskMode, _>")]
+    pub risk_mode: i32,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
 #[proto_message(type_url = "/injective.exchange.v2.EffectivePosition")]
@@ -5631,6 +5986,12 @@ pub struct EffectivePosition {
 pub struct QuerySubaccountEffectivePositionInMarketResponse {
     #[prost(message, optional, tag = "1")]
     pub state: ::core::option::Option<EffectivePosition>,
+    /// The risk mode of the subaccount (ISOLATED or CROSS).
+    /// For CROSS mode, effective_margin reflects position value but liquidation
+    /// is determined at pool level. Use CrossMarginPoolSnapshot for pool health.
+    #[prost(enumeration = "RiskMode", tag = "2")]
+    #[serde(deserialize_with = "crate::serde::enum_i32::deserialize::<RiskMode, _>")]
+    pub risk_mode: i32,
 }
 /// QueryPerpetualMarketInfoRequest is the request type for the
 /// Query/PerpetualMarketInfo RPC method.
@@ -5710,6 +6071,104 @@ pub struct QuerySubaccountOrderMetadataResponse {
 pub struct QuerySubaccountTradeNonceResponse {
     #[prost(uint32, tag = "1")]
     pub nonce: u32,
+}
+/// QuerySubaccountRiskProfileRequest is the request type for the
+/// Query/SubaccountRiskProfile RPC method.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountRiskProfileRequest")]
+#[proto_query(
+    path = "/injective.exchange.v2.Query/SubaccountRiskProfile",
+    response_type = QuerySubaccountRiskProfileResponse
+)]
+pub struct QuerySubaccountRiskProfileRequest {
+    /// 32-byte hex string, consistent with existing exchange queries.
+    #[prost(string, tag = "1")]
+    #[serde(alias = "subaccountID")]
+    pub subaccount_id: ::prost::alloc::string::String,
+}
+/// QuerySubaccountRiskProfileResponse is the response type for the
+/// Query/SubaccountRiskProfile RPC method.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.QuerySubaccountRiskProfileResponse")]
+pub struct QuerySubaccountRiskProfileResponse {
+    #[prost(message, optional, tag = "1")]
+    pub profile: ::core::option::Option<SubaccountRiskProfile>,
+    /// True if the profile was not explicitly stored and defaults were returned.
+    #[prost(bool, tag = "2")]
+    pub is_default: bool,
+}
+/// QueryCrossMarginPoolSnapshotRequest is the request type for the
+/// Query/CrossMarginPoolSnapshot RPC method.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.QueryCrossMarginPoolSnapshotRequest")]
+#[proto_query(
+    path = "/injective.exchange.v2.Query/CrossMarginPoolSnapshot",
+    response_type = QueryCrossMarginPoolSnapshotResponse
+)]
+pub struct QueryCrossMarginPoolSnapshotRequest {
+    /// 32-byte hex string identifying the subaccount.
+    #[prost(string, tag = "1")]
+    #[serde(alias = "subaccountID")]
+    pub subaccount_id: ::prost::alloc::string::String,
+    /// The quote denom of the cross-margin pool (e.g., "USDC").
+    #[prost(string, tag = "2")]
+    pub quote_denom: ::prost::alloc::string::String,
+}
+/// QueryCrossMarginPoolSnapshotResponse is the response type for the
+/// Query/CrossMarginPoolSnapshot RPC method.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message, ::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema, CosmwasmExt)]
+#[proto_message(type_url = "/injective.exchange.v2.QueryCrossMarginPoolSnapshotResponse")]
+pub struct QueryCrossMarginPoolSnapshotResponse {
+    /// The quote denom of the pool.
+    #[prost(string, tag = "1")]
+    pub quote_denom: ::prost::alloc::string::String,
+    /// Available quote balance in the pool (human-readable notional units).
+    #[prost(string, tag = "2")]
+    pub quote_balance: ::prost::alloc::string::String,
+    /// Total margin held in positions.
+    #[prost(string, tag = "3")]
+    pub position_margin_total: ::prost::alloc::string::String,
+    /// Raw unrealised PnL across all positions in the pool.
+    #[prost(string, tag = "4")]
+    pub unrealized_pnl: ::prost::alloc::string::String,
+    /// Effective unrealised PnL after applying positive uPnL haircut.
+    #[prost(string, tag = "5")]
+    pub unrealized_pnl_effective: ::prost::alloc::string::String,
+    /// Equity used for order admission checks (quote_balance + position_margin +
+    /// uPnL_eff - fees_buffer).
+    #[prost(string, tag = "6")]
+    pub equity_admission: ::prost::alloc::string::String,
+    /// Equity used for liquidation checks (uses raw uPnL, not haircutted).
+    #[prost(string, tag = "7")]
+    pub equity_liquidation: ::prost::alloc::string::String,
+    /// Sum of initial margin requirements for existing positions only.
+    #[prost(string, tag = "8")]
+    pub initial_margin_total: ::prost::alloc::string::String,
+    /// Sum of maintenance margin requirements for existing positions.
+    #[prost(string, tag = "9")]
+    pub maintenance_margin_total: ::prost::alloc::string::String,
+    /// Initial margin using worst-case net exposure (q + B, q - S) across all
+    /// markets.
+    #[prost(string, tag = "10")]
+    pub initial_margin_with_orders_total: ::prost::alloc::string::String,
+    /// Sum of entry losses for all open orders.
+    #[prost(string, tag = "11")]
+    pub entry_loss_total: ::prost::alloc::string::String,
+    /// Sum of fee reserves for all open orders.
+    #[prost(string, tag = "12")]
+    pub fee_reserve_total: ::prost::alloc::string::String,
+    /// Order Lock Requirement = IM_with_orders + entry_loss + fee_reserve.
+    /// Orders may be cancelled if equity_admission < order_lock_requirement.
+    #[prost(string, tag = "13")]
+    pub order_lock_requirement: ::prost::alloc::string::String,
+    /// The positive uPnL haircut rate applied (e.g., 0.5 = 50%).
+    #[prost(string, tag = "14")]
+    pub positive_upnl_haircut_rate: ::prost::alloc::string::String,
+    /// Health factor = equity_liquidation / maintenance_margin_total.
+    /// When < 1, the account is liquidatable. When < 1.5, the account is in a
+    /// warning state. Empty if maintenance_margin_total is zero (no positions).
+    #[prost(string, tag = "15")]
+    pub health_factor: ::prost::alloc::string::String,
 }
 /// QueryModuleStateRequest is the request type for the Query/ExchangeModuleState
 /// RPC method.
@@ -6727,6 +7186,19 @@ impl<'a, Q: cosmwasm_std::CustomQuery> ExchangeQuerier<'a, Q> {
         subaccount_id: ::prost::alloc::string::String,
     ) -> Result<QuerySubaccountTradeNonceResponse, cosmwasm_std::StdError> {
         QuerySubaccountTradeNonceRequest { subaccount_id }.query(self.querier)
+    }
+    pub fn subaccount_risk_profile(
+        &self,
+        subaccount_id: ::prost::alloc::string::String,
+    ) -> Result<QuerySubaccountRiskProfileResponse, cosmwasm_std::StdError> {
+        QuerySubaccountRiskProfileRequest { subaccount_id }.query(self.querier)
+    }
+    pub fn cross_margin_pool_snapshot(
+        &self,
+        subaccount_id: ::prost::alloc::string::String,
+        quote_denom: ::prost::alloc::string::String,
+    ) -> Result<QueryCrossMarginPoolSnapshotResponse, cosmwasm_std::StdError> {
+        QueryCrossMarginPoolSnapshotRequest { subaccount_id, quote_denom }.query(self.querier)
     }
     pub fn exchange_module_state(&self) -> Result<QueryModuleStateResponse, cosmwasm_std::StdError> {
         QueryModuleStateRequest {}.query(self.querier)
