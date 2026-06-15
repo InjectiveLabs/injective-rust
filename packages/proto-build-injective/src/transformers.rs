@@ -419,11 +419,19 @@ fn get_enum_value_renames(src: &Path, ident: &Ident, descriptor: &FileDescriptor
 
     let enum_desc = enum_desc?;
     let mut renames = HashMap::new();
+    let enum_prefix = format!("{}_", target.to_snake_case().to_uppercase());
+    let strip_enum_prefix = type_path == "injective.exchange.v2" && matches!(target.as_str(), "RiskMode" | "ReservationPolicy");
 
     for value in enum_desc.value {
         let proto_name = value.name.unwrap();
         let rust_name = proto_name.to_upper_camel_case();
-        renames.insert(rust_name, proto_name);
+        renames.insert(rust_name, proto_name.clone());
+
+        if strip_enum_prefix {
+            if let Some(stripped_name) = proto_name.strip_prefix(&enum_prefix) {
+                renames.insert(stripped_name.to_upper_camel_case(), proto_name);
+            }
+        }
     }
 
     Some(renames)

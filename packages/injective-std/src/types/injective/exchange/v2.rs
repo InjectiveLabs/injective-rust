@@ -1766,10 +1766,18 @@ impl ExecutionType {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum RiskMode {
+    #[serde(rename = "RISK_MODE_UNSPECIFIED")]
+    #[serde(alias = "Unspecified")]
     Unspecified = 0,
+    #[serde(rename = "RISK_MODE_ISOLATED")]
+    #[serde(alias = "Isolated")]
     Isolated = 1,
+    #[serde(rename = "RISK_MODE_CROSS")]
+    #[serde(alias = "Cross")]
     Cross = 2,
     /// reserved for future use (not implemented)
+    #[serde(rename = "RISK_MODE_PORTFOLIO")]
+    #[serde(alias = "Portfolio")]
     Portfolio = 3,
 }
 impl RiskMode {
@@ -1800,11 +1808,19 @@ impl RiskMode {
 #[repr(i32)]
 #[derive(::serde::Serialize, ::serde::Deserialize, ::schemars::JsonSchema)]
 pub enum ReservationPolicy {
+    #[serde(rename = "RESERVATION_POLICY_UNSPECIFIED")]
+    #[serde(alias = "Unspecified")]
     Unspecified = 0,
+    #[serde(rename = "RESERVATION_POLICY_FULL_HOLD")]
+    #[serde(alias = "FullHold")]
     FullHold = 1,
     /// reserved for future use (not implemented)
+    #[serde(rename = "RESERVATION_POLICY_PARTIAL_HOLD")]
+    #[serde(alias = "PartialHold")]
     PartialHold = 2,
     /// reserved for future use (not implemented)
+    #[serde(rename = "RESERVATION_POLICY_NO_HOLD")]
+    #[serde(alias = "NoHold")]
     NoHold = 3,
 }
 impl ReservationPolicy {
