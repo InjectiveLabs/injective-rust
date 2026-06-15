@@ -11,12 +11,12 @@ use proto_build_injective::{
 };
 
 /// The Cosmos SDK commit or tag to be cloned and used to build the proto files
-const COSMOS_SDK_REV: &str = "v0.50.14-inj.9";
+const COSMOS_SDK_REV: &str = "v0.50.14-inj.10";
 const WASMD_REV: &str = "v0.53.3-inj.3";
-const COMET_BFT_REV: &str = "v1.0.1-inj.7";
+const COMET_BFT_REV: &str = "v1.0.1-inj.v1.19.0-rollback";
 
 /// The injective-core commit or tag to be cloned and used to build the proto files
-const INJECTIVE_REV: &str = "v1.19.0";
+const INJECTIVE_REV: &str = "v1.20.0";
 
 // All paths must end with a / and either be absolute or include a ./ to reference the current
 // working directory.
@@ -40,6 +40,8 @@ pub fn generate() {
     if args.iter().any(|arg| arg == "--update-deps") {
         git::update_submodule(COSMOS_SDK_DIR, COSMOS_SDK_REV);
         git::update_submodule(INJECTIVE_DIR, INJECTIVE_REV);
+        git::update_submodule(WASMD_DIR, WASMD_REV);
+        git::update_submodule(COMET_BFT_DIR, COMET_BFT_REV);
     }
 
     let tmp_build_dir: PathBuf = TMP_BUILD_DIR.parse().unwrap();

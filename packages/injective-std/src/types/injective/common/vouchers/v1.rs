@@ -8,5 +8,5 @@ pub struct AddressVoucher {
     pub address: ::prost::alloc::string::String,
     /// The outstanding voucher coin.
     #[prost(message, optional, tag = "2")]
-    pub voucher: ::core::option::Option<crate::types::cosmos::base::v1beta1::Coin>,
+    pub voucher: ::core::option::Option<super::super::super::super::cosmos::base::v1beta1::Coin>,
 }
